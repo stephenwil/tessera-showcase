@@ -176,11 +176,24 @@
   // --- 3. Player Modal Actions ---
   function openPlayer(cart) {
     activeCart = cart;
-    playerTitle.textContent = cart.title;
-    playerAuthor.textContent = `by ${cart.author}`;
-    
-    // Direct URL to load cart inside standalone player
-    playerIframe.src = `tessera.html?cart=${encodeURIComponent(cart.cartFile)}`;
+    playerTitle.textContent = cart.title || 'Tessera High-Res';
+    if (!cart.author) {
+      playerAuthor.textContent = '';
+    } else if (cart.isConsole) {
+      playerAuthor.textContent = cart.author;
+    } else {
+      playerAuthor.textContent = `by ${cart.author}`;
+    }
+
+    if (cart.cartFile) {
+      playerIframe.src = `tessera.html?cart=${encodeURIComponent(cart.cartFile)}`;
+      playerBtnDownload.style.display = '';
+      playerBtnSource.style.display = '';
+    } else {
+      playerIframe.src = 'tessera.html';
+      playerBtnDownload.style.display = 'none';
+      playerBtnSource.style.display = 'none';
+    }
     
     playerModal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
@@ -320,11 +333,11 @@
     // Header buttons
     btnBootClean.addEventListener('click', () => {
       openPlayer({
-        title: 'Tessera High-Res Console',
-        author: 'Clean Machine Boot',
+        title: 'Tessera High-Res',
+        author: 'Built-in Cartridge Picker',
+        isConsole: true,
         cartFile: ''
       });
-      playerIframe.src = 'tessera.html';
     });
 
     btnOpenSubmit.addEventListener('click', openSubmit);
@@ -349,7 +362,8 @@
 
     playerBtnEmbed.addEventListener('click', () => {
       if (!activeCart) return;
-      const embedUrl = new URL(`tessera.html?cart=${encodeURIComponent(activeCart.cartFile)}`, location.href).href;
+      const param = activeCart.cartFile ? `?cart=${encodeURIComponent(activeCart.cartFile)}` : '';
+      const embedUrl = new URL(`tessera.html${param}`, location.href).href;
       const snippet = `<iframe src="${embedUrl}" width="768" height="432" frameborder="0" allow="autoplay; gamepad" allowfullscreen></iframe>`;
       navigator.clipboard.writeText(snippet);
       showToast('📋 Embed snippet copied to clipboard!');
