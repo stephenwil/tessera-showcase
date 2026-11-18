@@ -1,0 +1,820 @@
+tessera cart v1
+__meta__
+title=Relic Shifter
+author=fx / GPT-5.2
+version=1.0
+players=1
+id=relicshifter
+__pal__
+1 0f1016
+2 232634
+3 3a3f54
+4 8e8a7f
+5 d9d1c2
+6 f3ead6
+7 ffd86b
+8 4be6d4
+9 ff4d5a
+10 5ff27a
+11 b56cff
+12 6bb0ff
+13 9aa6b2
+14 2f2a24
+15 ffffff
+20 1a2a46
+30 f2a26a
+__lua__
+-- Relic Shifter
+-- 3D Spatial Puzzle / Sokoban + Optical mechanics
+--
+-- Controls
+--  d-pad: move (relative to camera yaw so Up is always "forward" on screen)
+--  A: rotate view 90° (and confirm on menus)
+--  B: undo last move
+
+-- ============================================================
+-- Utilities
+-- ============================================================
+local function clamp(a, x, b) return mid(a, x, b) end
+
+local function deepcopy_blocks(bs)
+  local out = {}
+  for i = 1, #bs do
+    local b = bs[i]
+    out[i] = {
+      kind = b.kind,
+      x = b.x, y = b.y,
+      mirror = b.mirror,
+    }
+  end
+  return out
+end
+
+local function key_of(x, y) return x .. "," .. y end
+
+-- dirs: 0 up, 1 right, 2 down, 3 left (in world grid)
+local function dxdy(dir)
+  if dir == 0 then return 0, -1 end
+  if dir == 1 then return 1, 0 end
+  if dir == 2 then return 0, 1 end
+  return -1, 0
+end
+
+local function rot_dir(dir, yawStep)
+  return (dir + yawStep) % 4
+end
+
+-- map input (btn 0..3) into a world dir taking camera yaw into account.
+local function input_dir(yawStep)
+  -- btn: 0 left, 1 right, 2 up, 3 down
+  if btnp(2) then return rot_dir(0, yawStep) end
+  if btnp(1) then return rot_dir(1, yawStep) end
+  if btnp(3) then return rot_dir(2, yawStep) end
+  if btnp(0) then return rot_dir(3, yawStep) end
+  return nil
+end
+
+-- ============================================================
+-- Level definitions
+-- ============================================================
+-- Legend:
+--  # wall
+--  . floor
+--  P player start
+--  S stone (slides)
+--  A anvil (heavy)
+--  / prism mirror type 0
+--  \ prism mirror type 1
+--  T pressure target
+--  ^ v < > laser emitter (direction)
+--  R rune receptor (must be lit by laser)
+
+local LEVELS = {
+  {
+    name = "Chamber 1: The First Shift",
+    map = {
+      "#########",
+      "#.......#",
+      "#..P....#",
+      "#..S..T.#",
+      "#.......#",
+      "#.......#",
+      "#########",
+    },
+  },
+  {
+    name = "Chamber 2: Sunline",
+    map = {
+      "#########",
+      "#P....R.#",
+      "#..#....#",
+      "#..#>...#",
+      "#..#../.#",
+      "#..S..T.#",
+      "#########",
+    },
+  },
+  {
+    name = "Chamber 3: Weight of Memory",
+    map = {
+      "#########",
+      "#P......#",
+      "#..###..#",
+      "#..A..T.#",
+      "#..S....#",
+      "#..^..R.#",
+      "#########",
+    },
+  },
+  {
+    name = "Chamber 4: Relic Prism",
+    map = {
+      "###########",
+      "#P...R....#",
+      "#..#####..#",
+      "#..#...#..#",
+      "#..#>..#T.#",
+      "#..#...#..#",
+      "#..#####..#",
+      "#..S.A..\\.#",
+      "#....../R.#",
+      "#...T....R#",
+      "###########",
+    },
+  },
+}
+
+-- ============================================================
+-- Game state
+-- ============================================================
+local STATE_TITLE = 0
+local STATE_SELECT = 1
+local STATE_PLAY = 2
+local STATE_SOLVED = 3
+local STATE_COMPLETE = 4
+
+local state = STATE_TITLE
+
+local unlocked = 1
+local level_i = 1
+
+local yawStep = 0
+local yaw = 0
+local zoom = 1.15
+
+local grid = {
+  w = 0, h = 0,
+  wall = {},
+  target = {},
+  receptor = {},
+  emitter = {},
+}
+
+local player = { x = 0, y = 0 }
+local blocks = {}
+
+local move_count = 0
+local history = {}
+
+-- momentum: consecutive empty steps in the same dir (used for anvils)
+local last_dir = nil
+local streak = 0
+
+-- cached objective counts
+local targets_total = 0
+local receptors_total = 0
+
+-- voxel layout
+local TS = 12           -- tile size in voxels
+local FLOOR_Z = 10      -- world floor height in voxels
+local WALL_H = 16
+local LASER_Z = FLOOR_Z + 10
+
+local origin_x, origin_y = 0, 0
+local center_x, center_y = 128, 128
+
+-- colors (palette indices)
+local C_FLOOR_A = 5
+local C_FLOOR_B = 6
+local C_WALL = 4
+local C_WALL_DARK = 14
+local C_GLYPH = 7
+local C_GLOW = 8
+local C_STONE = 3
+local C_PRISM = 12
+local C_ANVIL = 2
+local C_PLAYER = 10
+local C_PLAYER_DARK = 1
+local C_LASER = 9
+local C_RECEPTOR = 11
+
+-- ============================================================
+-- World building
+-- ============================================================
+local function cell_to_world(x, y)
+  local wx0 = origin_x + x * TS
+  local wy0 = origin_y + y * TS
+  return wx0, wy0
+end
+
+local function is_wall(x, y)
+  if x < 0 or y < 0 or x >= grid.w or y >= grid.h then return true end
+  return grid.wall[key_of(x, y)] == true
+end
+
+local function is_target(x, y)
+  return grid.target[key_of(x, y)] == true
+end
+
+local function is_receptor(x, y)
+  return grid.receptor[key_of(x, y)] == true
+end
+
+local function block_at(x, y)
+  for i = 1, #blocks do
+    local b = blocks[i]
+    if b.x == x and b.y == y then return b, i end
+  end
+  return nil, nil
+end
+
+local function rebuild_static_map()
+  mclear(0)
+
+  -- floating temple base slab (slightly larger than the puzzle)
+  local slab_pad = 2
+  local x0 = origin_x - slab_pad * TS
+  local y0 = origin_y - slab_pad * TS
+  local x1 = origin_x + (grid.w + slab_pad) * TS - 1
+  local y1 = origin_y + (grid.h + slab_pad) * TS - 1
+  mbox(x0, y0, FLOOR_Z - 6, x1, y1, FLOOR_Z - 3, C_WALL_DARK)
+
+  -- floor tiles + walls
+  for y = 0, grid.h - 1 do
+    for x = 0, grid.w - 1 do
+      local wx0, wy0 = cell_to_world(x, y)
+      local wx1, wy1 = wx0 + TS - 1, wy0 + TS - 1
+
+      if is_wall(x, y) then
+        mbox(wx0, wy0, FLOOR_Z - 2, wx1, wy1, FLOOR_Z + WALL_H, C_WALL)
+        mbox(wx0 + 2, wy0 + 2, FLOOR_Z + 2, wx1 - 2, wy1 - 2, FLOOR_Z + WALL_H - 2, C_WALL_DARK)
+      else
+        local c = (((x + y) % 2) == 0) and C_FLOOR_A or C_FLOOR_B
+        mbox(wx0, wy0, FLOOR_Z - 2, wx1, wy1, FLOOR_Z, c)
+
+        -- target slots are sunken
+        if is_target(x, y) then
+          mbox(wx0 + 2, wy0 + 2, FLOOR_Z - 1, wx1 - 2, wy1 - 2, FLOOR_Z - 1, C_GLYPH)
+          mbox(wx0 + 3, wy0 + 3, FLOOR_Z - 1, wx1 - 3, wy1 - 3, FLOOR_Z - 1, C_WALL_DARK)
+        end
+
+        -- receptors engraved
+        if is_receptor(x, y) then
+          mbox(wx0 + 3, wy0 + 3, FLOOR_Z - 1, wx1 - 3, wy1 - 3, FLOOR_Z - 1, C_RECEPTOR)
+        end
+      end
+    end
+  end
+
+  -- decorative rune pylons at the corners
+  local function pylon(px, py)
+    mbox(px - 2, py - 2, FLOOR_Z - 6, px + 2, py + 2, FLOOR_Z + 18, C_WALL)
+    mbox(px - 1, py - 1, FLOOR_Z + 2, px + 1, py + 1, FLOOR_Z + 16, C_GLYPH)
+  end
+  pylon(origin_x - TS, origin_y - TS)
+  pylon(origin_x + grid.w * TS + (TS - 1), origin_y - TS)
+  pylon(origin_x - TS, origin_y + grid.h * TS + (TS - 1))
+  pylon(origin_x + grid.w * TS + (TS - 1), origin_y + grid.h * TS + (TS - 1))
+end
+
+local function parse_level(i)
+  local L = LEVELS[i]
+  local rows = L.map
+  grid.h = #rows
+  grid.w = #rows[1]
+  grid.wall = {}
+  grid.target = {}
+  grid.receptor = {}
+  grid.emitter = {}
+  blocks = {}
+
+  move_count = 0
+  history = {}
+  last_dir = nil
+  streak = 0
+
+  targets_total = 0
+  receptors_total = 0
+
+  for y = 1, grid.h do
+    local row = rows[y]
+    for x = 1, grid.w do
+      local ch = row:sub(x, x)
+      local gx, gy = x - 1, y - 1
+      if ch == "#" then
+        grid.wall[key_of(gx, gy)] = true
+      elseif ch == "P" then
+        player.x, player.y = gx, gy
+      elseif ch == "S" then
+        blocks[#blocks + 1] = { kind = "stone", x = gx, y = gy }
+      elseif ch == "A" then
+        blocks[#blocks + 1] = { kind = "anvil", x = gx, y = gy }
+      elseif ch == "/" then
+        blocks[#blocks + 1] = { kind = "prism", x = gx, y = gy, mirror = 0 }
+      elseif ch == "\\" then
+        blocks[#blocks + 1] = { kind = "prism", x = gx, y = gy, mirror = 1 }
+      elseif ch == "T" then
+        grid.target[key_of(gx, gy)] = true
+        targets_total = targets_total + 1
+      elseif ch == "R" then
+        grid.receptor[key_of(gx, gy)] = true
+        receptors_total = receptors_total + 1
+      elseif ch == ">" or ch == "<" or ch == "^" or ch == "v" then
+        local dir = 1
+        if ch == "^" then dir = 0
+        elseif ch == ">" then dir = 1
+        elseif ch == "v" then dir = 2
+        elseif ch == "<" then dir = 3 end
+        grid.emitter[#grid.emitter + 1] = { x = gx, y = gy, dir = dir }
+      end
+    end
+  end
+
+  origin_x = 128 - flr(grid.w * TS / 2)
+  origin_y = 128 - flr(grid.h * TS / 2)
+  center_x = origin_x + flr(grid.w * TS / 2)
+  center_y = origin_y + flr(grid.h * TS / 2)
+
+  rebuild_static_map()
+end
+
+-- ============================================================
+-- Gameplay: movement + undo
+-- ============================================================
+local function snapshot()
+  return {
+    px = player.x, py = player.y,
+    blocks = deepcopy_blocks(blocks),
+    move_count = move_count,
+    last_dir = last_dir,
+    streak = streak,
+  }
+end
+
+local function restore(s)
+  player.x, player.y = s.px, s.py
+  blocks = deepcopy_blocks(s.blocks)
+  move_count = s.move_count
+  last_dir = s.last_dir
+  streak = s.streak
+end
+
+local function push_history()
+  history[#history + 1] = snapshot()
+  if #history > 200 then table.remove(history, 1) end
+end
+
+local function pop_history()
+  if #history <= 0 then return false end
+  local s = history[#history]
+  history[#history] = nil
+  restore(s)
+  return true
+end
+
+local function slide_to(x, y, dir)
+  local dx, dy = dxdy(dir)
+  local cx, cy = x, y
+  while true do
+    local nx, ny = cx + dx, cy + dy
+    if is_wall(nx, ny) then break end
+    if block_at(nx, ny) then break end
+    cx, cy = nx, ny
+    if is_target(cx, cy) then break end
+  end
+  return cx, cy
+end
+
+local function attempt_move(dir)
+  local dx, dy = dxdy(dir)
+  local nx, ny = player.x + dx, player.y + dy
+
+  if is_wall(nx, ny) then
+    tone("noise", 140, 80, 0.06, 0.18, 3)
+    last_dir = nil
+    streak = 0
+    return false
+  end
+
+  local b = block_at(nx, ny)
+  push_history()
+
+  if not b then
+    player.x, player.y = nx, ny
+    move_count = move_count + 1
+
+    if last_dir == dir then streak = streak + 1 else streak = 1 end
+    last_dir = dir
+
+    tone("triangle", 330, 330, 0.04, 0.12, 2)
+    return true
+  end
+
+  -- push logic
+  if b.kind == "stone" or b.kind == "prism" then
+    local tx, ty = slide_to(b.x, b.y, dir)
+    if tx == b.x and ty == b.y then
+      pop_history()
+      tone("noise", 180, 80, 0.08, 0.22, 3)
+      last_dir = nil
+      streak = 0
+      return false
+    end
+
+    b.x, b.y = tx, ty
+    player.x, player.y = nx, ny
+    move_count = move_count + 1
+    tone("square", 220, 160, 0.07, 0.18, 2)
+
+    last_dir = nil
+    streak = 0
+    return true
+  end
+
+  if b.kind == "anvil" then
+    -- Only moves when pushed with "momentum": 2 consecutive empty steps in same dir beforehand.
+    if streak < 2 then
+      pop_history()
+      tone("noise", 110, 50, 0.12, 0.28, 3)
+      last_dir = nil
+      streak = 0
+      return false
+    end
+
+    local ax, ay = b.x + dx, b.y + dy
+    if is_wall(ax, ay) or block_at(ax, ay) then
+      pop_history()
+      tone("noise", 130, 60, 0.10, 0.26, 3)
+      last_dir = nil
+      streak = 0
+      return false
+    end
+
+    b.x, b.y = ax, ay
+    player.x, player.y = nx, ny
+    move_count = move_count + 1
+
+    tone("saw", 120, 80, 0.10, 0.22, 2)
+    last_dir = nil
+    streak = 0
+    return true
+  end
+
+  pop_history()
+  return false
+end
+
+-- ============================================================
+-- Lasers
+-- ============================================================
+local function mirror_turn(dir, mirror)
+  -- mirror 0 = '/', mirror 1 = '\\'
+  if mirror == 0 then
+    if dir == 0 then return 1 end
+    if dir == 1 then return 0 end
+    if dir == 2 then return 3 end
+    return 2
+  else
+    if dir == 0 then return 3 end
+    if dir == 3 then return 0 end
+    if dir == 2 then return 1 end
+    return 2
+  end
+end
+
+local function compute_lasers()
+  local lit = {}
+  local segs = {}
+
+  for ei = 1, #grid.emitter do
+    local e = grid.emitter[ei]
+    local cx, cy, dir = e.x, e.y, e.dir
+
+    local dx, dy = dxdy(dir)
+    local sx, sy = cx, cy
+
+    local steps = 0
+    while steps < 256 do
+      steps = steps + 1
+      local nx, ny = cx + dx, cy + dy
+      if is_wall(nx, ny) then
+        segs[#segs + 1] = { sx, sy, cx, cy }
+        break
+      end
+
+      local b = block_at(nx, ny)
+      if b and b.kind == "prism" then
+        segs[#segs + 1] = { sx, sy, nx, ny }
+        dir = mirror_turn(dir, b.mirror or 0)
+        dx, dy = dxdy(dir)
+        cx, cy = nx, ny
+        sx, sy = cx, cy
+      else
+        cx, cy = nx, ny
+        if is_receptor(cx, cy) then lit[key_of(cx, cy)] = true end
+      end
+
+      -- if we hit a non-prism block, lasers stop
+      if b and b.kind ~= "prism" then
+        segs[#segs + 1] = { sx, sy, cx, cy }
+        break
+      end
+
+      if cx < 0 or cy < 0 or cx >= grid.w or cy >= grid.h then
+        segs[#segs + 1] = { sx, sy, cx, cy }
+        break
+      end
+    end
+  end
+
+  return segs, lit
+end
+
+-- ============================================================
+-- Win condition
+-- ============================================================
+local function count_remaining(lit)
+  local on_targets = 0
+  for k, _ in pairs(grid.target) do
+    local comma = k:find(",")
+    local x = tonumber(k:sub(1, comma - 1))
+    local y = tonumber(k:sub(comma + 1))
+    if x and y and block_at(x, y) then on_targets = on_targets + 1 end
+  end
+
+  local lit_count = 0
+  for k, _ in pairs(grid.receptor) do
+    if lit[k] then lit_count = lit_count + 1 end
+  end
+
+  local rem = (targets_total - on_targets) + (receptors_total - lit_count)
+  return rem, on_targets, lit_count
+end
+
+local function victory_chime()
+  tone("triangle", 440, 660, 0.12, 0.5, 0)
+  tone("triangle", 660, 880, 0.14, 0.5, 1)
+  tone("triangle", 880, 990, 0.16, 0.5, 2)
+end
+
+-- ============================================================
+-- Drawing helpers
+-- ============================================================
+local function draw_player()
+  local wx0, wy0 = cell_to_world(player.x, player.y)
+  local x0 = wx0 + 3
+  local y0 = wy0 + 3
+  local x1 = wx0 + TS - 4
+  local y1 = wy0 + TS - 4
+
+  box(x0, y0, FLOOR_Z + 1, x1, y1, FLOOR_Z + 7, C_PLAYER)
+  box(x0 + 1, y0 + 1, FLOOR_Z + 2, x1 - 1, y1 - 1, FLOOR_Z + 6, C_PLAYER_DARK, true)
+  sphere((x0 + x1) * 0.5, (y0 + y1) * 0.5, FLOOR_Z + 10, 3, C_PLAYER)
+end
+
+local function draw_block(b)
+  local wx0, wy0 = cell_to_world(b.x, b.y)
+  local x0 = wx0 + 2
+  local y0 = wy0 + 2
+  local x1 = wx0 + TS - 3
+  local y1 = wy0 + TS - 3
+
+  if b.kind == "stone" then
+    box(x0, y0, FLOOR_Z + 1, x1, y1, FLOOR_Z + 9, C_STONE)
+    box(x0 + 1, y0 + 1, FLOOR_Z + 2, x1 - 1, y1 - 1, FLOOR_Z + 8, C_WALL_DARK, true)
+  elseif b.kind == "prism" then
+    box(x0, y0, FLOOR_Z + 1, x1, y1, FLOOR_Z + 10, C_PRISM, true)
+    box(x0 + 1, y0 + 1, FLOOR_Z + 2, x1 - 1, y1 - 1, FLOOR_Z + 9, C_GLOW, true)
+  elseif b.kind == "anvil" then
+    box(x0, y0, FLOOR_Z + 1, x1, y1, FLOOR_Z + 6, C_ANVIL)
+    box(x0 + 1, y0 + 1, FLOOR_Z + 2, x1 - 1, y1 - 1, FLOOR_Z + 5, C_WALL_DARK, true)
+    box(wx0 + 4, wy0 + 4, FLOOR_Z + 7, wx0 + TS - 5, wy0 + TS - 5, FLOOR_Z + 9, C_ANVIL)
+  end
+
+  if is_target(b.x, b.y) then
+    box(wx0 + 2, wy0 + 2, FLOOR_Z + 0.5, wx0 + TS - 3, wy0 + TS - 3, FLOOR_Z + 1.5, C_GLOW, true)
+  end
+end
+
+local function draw_emitters()
+  for i = 1, #grid.emitter do
+    local e = grid.emitter[i]
+    local wx0, wy0 = cell_to_world(e.x, e.y)
+    box(wx0 + 3, wy0 + 3, FLOOR_Z + 1, wx0 + TS - 4, wy0 + TS - 4, FLOOR_Z + 12, C_WALL_DARK)
+    box(wx0 + 4, wy0 + 4, FLOOR_Z + 3, wx0 + TS - 5, wy0 + TS - 5, FLOOR_Z + 11, C_GLYPH, true)
+  end
+end
+
+local function draw_lasers(segs, lit)
+  for i = 1, #segs do
+    local s = segs[i]
+    local ax, ay = s[1], s[2]
+    local bx, by = s[3], s[4]
+    local awx, awy = cell_to_world(ax, ay)
+    local bwx, bwy = cell_to_world(bx, by)
+    local aox = awx + TS * 0.5
+    local aoy = awy + TS * 0.5
+    local boxx = bwx + TS * 0.5
+    local boy = bwy + TS * 0.5
+    line3d(aox, aoy, LASER_Z, boxx, boy, LASER_Z, C_LASER)
+    line3d(aox, aoy, LASER_Z + 1, boxx, boy, LASER_Z + 1, C_LASER)
+  end
+
+  for k, _ in pairs(grid.receptor) do
+    local comma = k:find(",")
+    local x = tonumber(k:sub(1, comma - 1))
+    local y = tonumber(k:sub(comma + 1))
+    if x and y then
+      local wx0, wy0 = cell_to_world(x, y)
+      if lit[k] then
+        box(wx0 + 3, wy0 + 3, FLOOR_Z + 1, wx0 + TS - 4, wy0 + TS - 4, FLOOR_Z + 2, C_RECEPTOR)
+        box(wx0 + 2, wy0 + 2, FLOOR_Z + 2, wx0 + TS - 3, wy0 + TS - 3, FLOOR_Z + 3, C_GLOW, true)
+      else
+        box(wx0 + 4, wy0 + 4, FLOOR_Z + 1, wx0 + TS - 5, wy0 + TS - 5, FLOOR_Z + 1, C_WALL_DARK)
+      end
+    end
+  end
+end
+
+local function draw_hud(rem)
+  -- HUD space is 384x216 in the engine; stay within it for compatibility.
+  rectfill(0, 0, 384, 18, 1)
+  rectfill(0, 18, 384, 19, 3)
+
+  local chamber = "Chamber " .. level_i .. "/" .. #LEVELS
+  print(chamber, 6, 5, 15)
+
+  local mc = "Moves: " .. move_count
+  print(mc, 150, 5, 15)
+
+  local tr = "Left: " .. rem
+  print(tr, 270, 5, 15)
+
+  local prompt = "[A] Rotate  [B] Undo"
+  print(prompt, 6, 24, 13)
+end
+
+-- ============================================================
+-- Lifecycle
+-- ============================================================
+function _init()
+  sky(20, 30)
+  sun(0.5, -0.6, 0.8, 1.0)
+  fog(20, 0.0006)
+
+  unlocked = dget("rs_unlocked") or 1
+  if unlocked < 1 then unlocked = 1 end
+  if unlocked > #LEVELS then unlocked = #LEVELS end
+
+  level_i = clamp(1, dget("rs_level") or 1, #LEVELS)
+  yawStep = (dget("rs_yaw") or 0) % 4
+  yaw = yawStep * (math.pi / 2)
+
+  parse_level(level_i)
+  camera(center_x, center_y, FLOOR_Z + 14, zoom, yaw)
+
+  state = STATE_TITLE
+end
+
+function _update()
+  if btnp(4) then
+    if state == STATE_PLAY then
+      yawStep = (yawStep + 1) % 4
+      yaw = yawStep * (math.pi / 2)
+      dset("rs_yaw", yawStep)
+      tone("triangle", 220, 330, 0.08, 0.25, 1)
+    elseif state == STATE_TITLE then
+      state = STATE_SELECT
+      tone("triangle", 330, 440, 0.12, 0.35, 1)
+    elseif state == STATE_SELECT then
+      state = STATE_PLAY
+      parse_level(level_i)
+      tone("triangle", 440, 660, 0.16, 0.4, 1)
+    elseif state == STATE_SOLVED then
+      level_i = level_i + 1
+      if level_i > #LEVELS then
+        state = STATE_COMPLETE
+      else
+        parse_level(level_i)
+        state = STATE_PLAY
+      end
+      tone("triangle", 660, 880, 0.14, 0.45, 1)
+    elseif state == STATE_COMPLETE then
+      state = STATE_SELECT
+      tone("triangle", 330, 220, 0.14, 0.35, 1)
+    end
+  end
+
+  if state == STATE_SELECT then
+    if btnp(0) or btnp(2) then
+      level_i = clamp(1, level_i - 1, unlocked)
+      tone("triangle", 220, 220, 0.06, 0.2, 2)
+    elseif btnp(1) or btnp(3) then
+      level_i = clamp(1, level_i + 1, unlocked)
+      tone("triangle", 220, 220, 0.06, 0.2, 2)
+    end
+    dset("rs_level", level_i)
+  end
+
+  if state ~= STATE_PLAY then return end
+
+  if btnp(5) then
+    if pop_history() then
+      tone("triangle", 250, 180, 0.12, 0.25, 1)
+    else
+      tone("noise", 120, 80, 0.08, 0.16, 3)
+    end
+    return
+  end
+
+  local dir = input_dir(yawStep)
+  if dir ~= nil then attempt_move(dir) end
+
+  local _, lit = compute_lasers()
+  local rem = count_remaining(lit)
+  if rem == 0 then
+    state = STATE_SOLVED
+    if unlocked < level_i + 1 then
+      unlocked = math.min(#LEVELS, level_i + 1)
+      dset("rs_unlocked", unlocked)
+    end
+    victory_chime()
+  end
+end
+
+function _draw()
+  cls()
+  camera(center_x, center_y, FLOOR_Z + 14, zoom, yaw)
+
+  if rnd(1) < 0.35 then
+    local cx = center_x + (rnd(200) - 100)
+    local cy = center_y + (rnd(200) - 100)
+    particle(cx, cy, FLOOR_Z - 14 - rnd(6), 13, 1.4)
+  end
+
+  local segs, lit = compute_lasers()
+  draw_emitters()
+  draw_lasers(segs, lit)
+
+  for i = 1, #blocks do draw_block(blocks[i]) end
+  draw_player()
+
+  local rem, on_t, lit_r = count_remaining(lit)
+
+  if state == STATE_TITLE then
+    rectfill(0, 0, 384, 216, 1)
+    print("RELIC SHIFTER", 120, 56, 15)
+    print("Stone + Light in a Sky Temple", 78, 74, 13)
+    print("[A] Start", 148, 98, 15)
+    print("[D-PAD] Navigate   [B] Undo (in puzzles)", 36, 126, 13)
+    return
+  end
+
+  if state == STATE_SELECT then
+    rectfill(0, 0, 384, 216, 1)
+    print("Select Chamber", 120, 38, 15)
+    for i = 1, unlocked do
+      local y = 64 + (i - 1) * 14
+      local c = (i == level_i) and 15 or 13
+      print((i == level_i and "> " or "  ") .. "Chamber " .. i, 92, y, c)
+    end
+    print("[A] Play   [D-PAD] Choose", 86, 188, 13)
+    return
+  end
+
+  if state == STATE_PLAY then
+    draw_hud(rem)
+    return
+  end
+
+  if state == STATE_SOLVED then
+    draw_hud(0)
+    rectfill(70, 70, 314, 156, 1)
+    rect(70, 70, 314, 156, 8)
+    print("CHAMBER CLEARED!", 104, 84, 15)
+    print("Moves: " .. move_count, 128, 102, 13)
+    print("Targets: " .. on_t .. "/" .. targets_total, 92, 118, 13)
+    print("Runes: " .. lit_r .. "/" .. receptors_total, 92, 132, 13)
+    print("[A] Continue", 124, 146, 15)
+    return
+  end
+
+  if state == STATE_COMPLETE then
+    rectfill(0, 0, 384, 216, 1)
+    print("THE TEMPLE AWAKENS", 84, 72, 15)
+    print("All chambers restored.", 100, 92, 13)
+    print("Thank you for playing.", 102, 112, 13)
+    print("[A] Return to Select", 92, 150, 15)
+    return
+  end
+end

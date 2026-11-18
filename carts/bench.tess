@@ -1,0 +1,82 @@
+tessera cart v1
+__meta__
+title=Bench
+author=Tessera
+version=1
+players=1
+__pal__
+1 3c6fd0
+2 e8a33d
+3 5fbf6a
+__lua__
+-- Tessera benchmark. Four scenes, 5 s of console time each. Prints stat(1), stat(2), stat(3) and fps on
+-- screen and one BENCH JSON line per scene via printh.
+--   a: 200 model() calls per frame at random rotations
+--   b: 5,000 vset calls per frame
+--   c: mclear() + a full terrain rebuild (2,304 mbox columns) every frame
+--   d: 10,000 trivial API calls (vget) per tick, reported as µs per call
+local DUR = 5
+local scenes = { "a", "b", "c", "d" }
+local si, t0, n = 1, nil, 0
+local sum = { u = 0, d = 0, c = 0, f = 0 }
+done = false
+
+function _init()
+  newmodel("blob", 6, 6, 6)
+  for x = 0, 5 do for y = 0, 5 do for z = 0, 5 do
+    local dx, dy, dz = x - 2.5, y - 2.5, z - 2.5
+    if dx * dx + dy * dy + dz * dz <= 9 then mpset("blob", x, y, z, 1 + (x + y + z) % 3) end
+  end end end
+  camera(128, 128, 16, 1)
+end
+
+local function report()
+  local s = scenes[si]
+  local k = math.max(n, 1)
+  local u, d, c, f = sum.u / k, sum.d / k, sum.c / k, sum.f / k
+  local extra = ""
+  if s == "d" then extra = string.format(',"us_per_call":%.3f', u * 1000 / 10000) end
+  printh(string.format('BENCH {"scene":"%s","update_ms":%.3f,"draw_ms":%.3f,"composite_ms":%.3f,"fps":%.2f%s}', s, u, d, c, f, extra))
+  si = si + 1
+  t0, n = nil, 0
+  sum.u, sum.d, sum.c, sum.f = 0, 0, 0, 0
+  if si > #scenes then done = true end
+end
+
+function _update()
+  if done then return end
+  if not t0 then t0 = t() end
+  if scenes[si] == "d" then
+    local s = 0
+    for i = 1, 10000 do s = s + vget(i % 256, 10, 10) end
+  end
+end
+
+function _draw()
+  if done then
+    cls(); print("BENCH done", 8, 8, 15); return
+  end
+  local s = scenes[si]
+  if s == "c" then
+    mclear()
+    for x = 0, 47 do for y = 0, 47 do
+      local h = 1 + flr(noise3(x * 0.1, y * 0.1, t()) * 12)
+      mbox(40 + x, 40 + y, 0, 40 + x, 40 + y, h, 3)
+    end end
+  end
+  cls()
+  if s == "a" then
+    for i = 1, 200 do model("blob", 16 + (i * 7) % 224, 16 + (i * 13) % 224, 20 + i % 40, rnd(6.2832)) end
+  elseif s == "b" then
+    for i = 1, 5000 do vset(rnd(256), rnd(256), rnd(80), 2) end
+  end
+  -- accumulate the previous frame's stats (skip the first frames of each scene)
+  n = n + 1
+  if n > 5 then
+    sum.u = sum.u + stat(1); sum.d = sum.d + stat(2); sum.c = sum.c + stat(3); sum.f = sum.f + stat(0)
+  end
+  local a1, a2, a3, a0 = stat(1), stat(2), stat(3), stat(0)
+  print("scene " .. s .. "  fps " .. string.format("%.1f", a0), 8, 8, 15)
+  print(string.format("update %.2f draw %.2f comp %.2f ms", a1, a2, a3), 8, 28, 15)
+  if t0 and t() - t0 >= DUR then n = math.max(n - 5, 1); report() end
+end

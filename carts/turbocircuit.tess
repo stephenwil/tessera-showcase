@@ -1,0 +1,944 @@
+tessera cart v1
+__meta__
+title=Turbo Circuit
+author=Antigravity
+version=1.0
+players=1
+id=turbocircuit
+__pal__
+200 1c202a
+201 2b3140
+202 d8343c
+203 f0f4f8
+204 449e48
+205 2e7d32
+206 1b5e20
+207 1976d2
+208 00e5ff
+209 fbc02d
+210 ff6d00
+211 9c27b0
+212 607d8b
+213 37474f
+214 90a4ae
+215 12151c
+216 00c853
+217 ff8a80
+218 ffd54f
+219 e0e0e0
+220 bcaaa4
+221 e8d8a8
+52  5d4037
+__models__
+car 9x5x3 pivot=4,2,0
+.. d7 .. .. .. .. d7 .. ..
+.. 01 01 01 01 01 01 01 ..
+.. 01 01 01 01 01 01 01 ca
+.. 01 01 01 01 01 01 01 ..
+.. d7 .. .. .. .. d7 .. ..
+
+ca ca ca ca ca ca ca ca ..
+ca ca ca ca ca ca ca ca ca
+ca cb cb cb cb cb cb ca ca
+ca ca ca ca ca ca ca ca ca
+ca ca ca ca ca ca ca ca ..
+
+ca .. .. .. .. .. .. .. ..
+.. .. .. d0 d0 .. .. .. ..
+cb .. .. d0 d1 .. .. .. ..
+.. .. .. d0 d0 .. .. .. ..
+ca .. .. .. .. .. .. .. ..
+
+pine 7x7x12 pivot=3,3,0
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. 34 34 34 .. ..
+.. .. 34 34 34 .. ..
+.. .. 34 34 34 .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. 34 34 34 .. ..
+.. .. 34 34 34 .. ..
+.. .. 34 34 34 .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. 34 34 34 .. ..
+.. .. 34 34 34 .. ..
+.. .. 34 34 34 .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+
+.. cc cc cc cc cc ..
+cc cc cd cd cd cc cc
+cc cd cd ce cd cd cc
+cc cd ce ce ce cd cc
+cc cd cd ce cd cd cc
+cc cc cd cd cd cc cc
+.. cc cc cc cc cc ..
+
+.. cc cc cc cc cc ..
+cc cc cd cd cd cc cc
+cc cd cd ce cd cd cc
+cc cd ce ce ce cd cc
+cc cd cd ce cd cd cc
+cc cc cd cd cd cc cc
+.. cc cc cc cc cc ..
+
+.. cc cc cc cc cc ..
+cc cc cd cd cd cc cc
+cc cd cd ce cd cd cc
+cc cd ce ce ce cd cc
+cc cd cd ce cd cd cc
+cc cc cd cd cd cc cc
+.. cc cc cc cc cc ..
+
+.. .. .. .. .. .. ..
+.. cc cc cc cc .. ..
+.. cc cd ce cc .. ..
+.. cc ce ce cc .. ..
+.. cc cd ce cc .. ..
+.. cc cc cc cc .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. cc cc cc cc .. ..
+.. cc cd ce cc .. ..
+.. cc ce ce cc .. ..
+.. cc cd ce cc .. ..
+.. cc cc cc cc .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. cc cc cc .. ..
+.. .. cc cd cc .. ..
+.. .. cc cc cc .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. cc cc cc .. ..
+.. .. cc cd cc .. ..
+.. .. cc cc cc .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. cc .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. cc .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+
+trophy 7x7x9 pivot=3,3,0
+.. .. .. .. .. .. ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. d1 d1 d1 .. ..
+.. .. d1 d1 d1 .. ..
+.. .. d1 d1 d1 .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. d1 d1 d1 .. ..
+.. .. d1 d1 d1 .. ..
+.. .. d1 d1 d1 .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. d1 d1 d1 .. ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. .. d1 d1 d1 .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. d1 d1 d1 .. ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. d1 d1 d1 d1 d1 ..
+.. .. d1 d1 d1 .. ..
+.. .. .. .. .. .. ..
+
+d1 .. .. .. .. .. d1
+d1 d1 d1 d1 d1 d1 d1
+.. d1 cb cb cb d1 ..
+.. d1 cb cb cb d1 ..
+.. d1 cb cb cb d1 ..
+d1 d1 d1 d1 d1 d1 d1
+d1 .. .. .. .. .. d1
+
+d1 .. .. .. .. .. d1
+d1 d1 d1 d1 d1 d1 d1
+.. d1 cb cb cb d1 ..
+.. d1 cb cb cb d1 ..
+.. d1 cb cb cb d1 ..
+d1 d1 d1 d1 d1 d1 d1
+d1 .. .. .. .. .. d1
+
+d1 .. .. .. .. .. d1
+d1 d1 d1 d1 d1 d1 d1
+.. d1 cb cb cb d1 ..
+.. d1 cb cb cb d1 ..
+.. d1 cb cb cb d1 ..
+d1 d1 d1 d1 d1 d1 d1
+d1 .. .. .. .. .. d1
+__lua__
+
+-- =========================================================================
+-- TURBO CIRCUIT: OVERPASS GRAND PRIX
+-- High-Res 768x432 Voxel Arcade Racer
+-- =========================================================================
+
+-- Game state (globals for test mode access)
+STATE_TITLE     = 0
+STATE_COUNTDOWN = 1
+STATE_RACE      = 2
+STATE_FINISH    = 3
+
+state = STATE_TITLE
+cam_mode = 0 -- 0: Dynamic Chase, 1: Isometric Diorama, 2: Overhead Bird's Eye
+cars = {}
+player = nil
+local WPS = {
+  {x=128, y=45,  z=2},  -- 1: Start / Finish Line (Main Straight)
+  {x=170, y=45,  z=2},  -- 2: Main Straight East
+  {x=210, y=55,  z=2},  -- 3: Turn 1 Entry
+  {x=225, y=90,  z=2},  -- 4: Turn 1 Sweeper
+  {x=215, y=130, z=3},  -- 5: Turn 2 Exit, climb begins
+  {x=185, y=140, z=8},  -- 6: Approaching Overpass Bridge
+  {x=155, y=140, z=14}, -- 7: Bridge East Crest
+  {x=128, y=140, z=15}, -- 8: OVERPASS BRIDGE SUMMIT (crosses over x=128, y=140 at z=15!)
+  {x=100, y=140, z=14}, -- 9: Bridge West Crest
+  {x=70,  y=145, z=8},  -- 10: Bridge Descent
+  {x=48,  y=165, z=3},  -- 11: Hairpin Entry
+  {x=40,  y=195, z=2},  -- 12: Infield Hairpin Apex
+  {x=65,  y=220, z=2},  -- 13: Hairpin Exit (Boost Zone 1)
+  {x=110, y=225, z=2},  -- 14: Back Straight West
+  {x=165, y=225, z=2},  -- 15: Back Straight East (Boost Zone 2)
+  {x=205, y=205, z=2},  -- 16: Turn 4 into Underpass Chute
+  {x=175, y=175, z=2},  -- 17: Underpass Approach
+  {x=128, y=165, z=2},  -- 18: UNDERPASS TUNNEL ENTRY (passes under Bridge at y=140)
+  {x=128, y=115, z=2},  -- 19: UNDERPASS TUNNEL EXIT
+  {x=110, y=80,  z=2},  -- 20: Final S-Chicane
+  {x=120, y=55,  z=2},  -- 21: Onto Main Straight
+}
+
+local TRACK = {}
+local TOTAL_LEN = 0
+local countdown_t0 = 0
+local best_record = 18.50
+local finish_t0 = 0
+local cam = {x=128, y=45, z=16, yaw=0, zoom=1.1}
+
+-- Helper math
+local function catmull(p0, p1, p2, p3, t)
+  local t2, t3 = t*t, t*t*t
+  local f0 = -0.5*t3 + t2 - 0.5*t
+  local f1 = 1.5*t3 - 2.5*t2 + 1.0
+  local f2 = -1.5*t3 + 2.0*t2 + 0.5*t
+  local f3 = 0.5*t3 - 0.5*t2
+  return {
+    x = p0.x*f0 + p1.x*f1 + p2.x*f2 + p3.x*f3,
+    y = p0.y*f0 + p1.y*f1 + p2.y*f2 + p3.y*f3,
+    z = p0.z*f0 + p1.z*f1 + p2.z*f2 + p3.z*f3,
+  }
+end
+
+local function angle_diff(a, b)
+  return (a - b + math.pi) % (2 * math.pi) - math.pi
+end
+
+local function format_time(sec)
+  if not sec or sec <= 0 then return "00:00.00" end
+  local m = flr(sec / 60)
+  local s = sec % 60
+  return string.format("%02d:%05.2f", m, s)
+end
+
+-- Track generation on map layer
+local function build_world()
+  -- 1. Lush grass base
+  mclear() -- 0 = empty air
+  mbox(0, 0, 0, 255, 255, 1, 204) -- ground grass layer
+
+  -- 2. Infield Lake / Pond
+  mbox(77, 72, 1, 108, 98, 1, 221) -- sand beach rim
+  mbox(80, 75, 1, 105, 95, 1, 207) -- blue lake water
+
+  -- 3. Mountain Rock at Hairpin Apex
+  for z = 0, 16 do
+    local r = 16 - z
+    mbox(35 - r, 190 - r, z, 35 + r, 190 + r, z, 213)
+  end
+
+  -- 4. Track Road & Curbs
+  local halfW = 6
+  for i = 1, #TRACK do
+    local pt = TRACK[i]
+    local rz = flr(pt.z)
+    local is_bridge = (pt.x >= 114 and pt.x <= 142 and pt.y >= 132 and pt.y <= 148 and rz >= 13)
+    for w = -halfW, halfW do
+      local rx = flr(pt.x + pt.nx * w + 0.5)
+      local ry = flr(pt.y + pt.ny * w + 0.5)
+      if rx >= 0 and rx <= 255 and ry >= 0 and ry <= 255 then
+        if w == -halfW or w == halfW then
+          -- Curb / Parapet
+          local curbCol = ((flr(pt.dist / 3) % 2) == 0) and 202 or 203
+          if is_bridge then
+            mbox(rx, ry, rz - 2, rx, ry, rz + 2, 212)
+          else
+            local botZ = math.max(0, rz - 3)
+            mbox(rx, ry, botZ, rx, ry, rz + 1, curbCol)
+          end
+        else
+          -- Asphalt road surface
+          local roadCol = 200
+          if w == 0 and (flr(pt.dist / 6) % 2 == 0) then
+            roadCol = 203 -- dashed center stripe
+          end
+          if is_bridge then
+            mbox(rx, ry, rz - 2, rx, ry, rz, roadCol)
+          else
+            local botZ = math.max(0, rz - 3)
+            mbox(rx, ry, botZ, rx, ry, rz, roadCol)
+          end
+        end
+      end
+    end
+  end
+
+  -- 5. Bridge Massive Stone Support Pillars
+  mbox(116, 133, 0, 118, 147, 13, 212)
+  mbox(138, 133, 0, 140, 147, 13, 212)
+
+  -- 6. Checkered Start / Finish Line at (128, 45)
+  for w = -halfW + 1, halfW - 1 do
+    local col = (w % 2 == 0) and 203 or 200
+    mbox(128, 45 + w, 2, 129, 45 + w, 2, col)
+  end
+
+  -- 7. Starting Gantry Support Arches
+  mbox(127, 37, 0, 129, 39, 13, 214)
+  mbox(127, 51, 0, 129, 53, 13, 214)
+  mbox(127, 37, 13, 129, 53, 14, 214) -- overhead crossbar
+
+  -- 8. Grandstand along the Main Straight
+  mbox(115, 26, 0, 165, 34, 1, 212)
+  for step = 1, 4 do
+    mbox(115, 35 - step * 2, 1, 165, 35 - step * 2 + 1, 1 + step, 214)
+  end
+  -- Spectators in grandstand
+  for sx = 120, 160, 4 do
+    for row = 1, 3 do
+      local sc = ((sx + row) % 4 == 0) and 202 or (((sx + row) % 3 == 0) and 207 or 209)
+      mbox(sx, 35 - row * 2, 2 + row, sx + 1, 35 - row * 2 + 1, 4 + row, sc)
+    end
+  end
+
+  -- 9. Pine Trees across the infield and mountainside
+  local tree_coords = {
+    {60, 60}, {75, 50}, {90, 60}, {140, 70}, {160, 80}, {180, 95},
+    {195, 115}, {85, 120}, {65, 130}, {95, 150}, {150, 180}, {180, 190},
+    {130, 205}, {90, 205}, {110, 185}, {45, 140}, {30, 160}, {25, 210},
+    {80, 240}, {140, 240}, {220, 170}, {230, 140}, {235, 70}, {190, 30}
+  }
+  for _, tc in ipairs(tree_coords) do
+    local tz = mheight(tc[1], tc[2])
+    if tz >= 1 then
+      mmodel("pine", tc[1], tc[2], tz + 1)
+    end
+  end
+end
+
+-- Find closest track point for a car
+local function update_nearest(c)
+  local bestD = 999999
+  local bestI = c.nearest_idx or 1
+  local startI = math.max(1, bestI - 12)
+  local endI = bestI + 28
+  for i = startI, endI do
+    local idx = (i - 1) % #TRACK + 1
+    local pt = TRACK[idx]
+    local d = (c.x - pt.x)^2 + (c.y - pt.y)^2
+    if d < bestD then
+      bestD = d
+      bestI = idx
+    end
+  end
+
+  -- Lap completion check (forward crossing over finish line)
+  if c.nearest_idx and c.nearest_idx > #TRACK - 25 and bestI < 25 then
+    if state == STATE_RACE then
+      local lap_time = t() - c.lap_start_t
+      if not c.best_lap or lap_time < c.best_lap then
+        c.best_lap = lap_time
+      end
+      c.lap_start_t = t()
+      c.lap = c.lap + 1
+
+      if not c.is_ai then
+        if c.lap <= 3 then
+          tone("triangle", 523, 659, 0.15, 0.4, 1)
+        else
+          -- Player finished race!
+          c.total_time = t() - c.race_start_t
+          state = STATE_FINISH
+          finish_t0 = t()
+          if not best_record or c.best_lap < best_record then
+            best_record = c.best_lap
+            dset("best_lap", best_record)
+          end
+          tone("triangle", 523, 784, 0.3, 0.5, 1)
+        end
+      end
+    end
+  end
+
+  c.nearest_idx = bestI
+  c.progress = (c.lap - 1) * TOTAL_LEN + TRACK[bestI].dist
+  return TRACK[bestI]
+end
+
+-- Reset positions for a new race
+local function reset_grid()
+  cars[1] = {
+    name = "YOU", is_ai = false, color_primary = 202,
+    x = 120, y = 43, z = 2, vz = 0, ang = 0, spd = 0, slip = 0,
+    turbo = 0, boost_timer = 0, lap = 1, nearest_idx = 1,
+    lap_start_t = t(), race_start_t = t(), best_lap = nil, total_time = nil, rank = 4
+  }
+  cars[2] = {
+    name = "BLAZE", is_ai = true, color_primary = 207, ai_offset = -2.5,
+    x = 136, y = 43, z = 2, vz = 0, ang = 0, spd = 0, slip = 0,
+    turbo = 0, boost_timer = 0, lap = 1, nearest_idx = 1,
+    lap_start_t = t(), race_start_t = t(), best_lap = nil, total_time = nil, rank = 1
+  }
+  cars[3] = {
+    name = "VIPER", is_ai = true, color_primary = 216, ai_offset = 2.5,
+    x = 130, y = 47, z = 2, vz = 0, ang = 0, spd = 0, slip = 0,
+    turbo = 0, boost_timer = 0, lap = 1, nearest_idx = 1,
+    lap_start_t = t(), race_start_t = t(), best_lap = nil, total_time = nil, rank = 2
+  }
+  cars[4] = {
+    name = "COMET", is_ai = true, color_primary = 209, ai_offset = 0.0,
+    x = 124, y = 47, z = 2, vz = 0, ang = 0, spd = 0, slip = 0,
+    turbo = 0, boost_timer = 0, lap = 1, nearest_idx = 1,
+    lap_start_t = t(), race_start_t = t(), best_lap = nil, total_time = nil, rank = 3
+  }
+  player = cars[1]
+  for _, c in ipairs(cars) do update_nearest(c) end
+end
+
+-- =========================================================================
+-- LIFECYCLE: _init()
+-- =========================================================================
+function _init()
+  -- Default view
+  camera(128, 45, 16, 1.1, 0.35)
+  sun(-0.45, -0.65, 0.75, 1.25)
+  sky(207, 203)
+  fog(207, 0.0008)
+
+  -- Precompute track spline
+  local nw = #WPS
+  local cumDist = 0
+  for i = 1, nw do
+    local p0 = WPS[(i - 2 + nw) % nw + 1]
+    local p1 = WPS[i]
+    local p2 = WPS[i % nw + 1]
+    local p3 = WPS[(i + 1) % nw + 1]
+    for s = 0, 19 do
+      local pt = catmull(p0, p1, p2, p3, s / 20)
+      if #TRACK > 0 then
+        local prev = TRACK[#TRACK]
+        cumDist = cumDist + math.sqrt((pt.x - prev.x)^2 + (pt.y - prev.y)^2)
+      end
+      pt.dist = cumDist
+      TRACK[#TRACK + 1] = pt
+    end
+  end
+  TOTAL_LEN = cumDist
+
+  -- Normals, tangents, headings
+  for i = 1, #TRACK do
+    local pt = TRACK[i]
+    local nxt = TRACK[i % #TRACK + 1]
+    local dx, dy = nxt.x - pt.x, nxt.y - pt.y
+    local len = math.max(0.001, math.sqrt(dx * dx + dy * dy))
+    pt.tx, pt.ty = dx / len, dy / len
+    pt.nx, pt.ny = -pt.ty, pt.tx
+    pt.heading = math.atan(dy, dx)
+  end
+
+  -- Build static 3D world into map layer
+  build_world()
+
+  -- Load persistent high score
+  local saved = dget("best_lap")
+  if saved and saved > 5 then best_record = saved end
+
+  reset_grid()
+  state = STATE_TITLE
+end
+
+-- =========================================================================
+-- LIFECYCLE: _update()
+-- =========================================================================
+function _update()
+  -- Cycle camera views anytime with B button
+  if btnp(5) then
+    cam_mode = (cam_mode + 1) % 3
+  end
+
+  -- State machine
+  if state == STATE_TITLE then
+    -- Attract mode: AI drives player car
+    player.spd = 1.35
+    local look = (player.nearest_idx + 14 - 1) % #TRACK + 1
+    local tgt = TRACK[look]
+    local want = math.atan(tgt.y - player.y, tgt.x - player.x)
+    player.ang = player.ang + mid(-0.08, angle_diff(want, player.ang) * 0.35, 0.08)
+    player.x = player.x + math.cos(player.ang) * player.spd
+    player.y = player.y + math.sin(player.ang) * player.spd
+    local pt = update_nearest(player)
+    player.z = pt.z
+
+    if btnp(4) or btnp(0) or btnp(1) or btnp(2) or btnp(3) then
+      reset_grid()
+      state = STATE_COUNTDOWN
+      countdown_t0 = t()
+      tone("triangle", 330, 330, 0.15, 0.4, 1)
+    end
+    return
+  end
+
+  if state == STATE_COUNTDOWN then
+    local elapsed = t() - countdown_t0
+    if elapsed >= 3.0 then
+      state = STATE_RACE
+      player.race_start_t = t()
+      player.lap_start_t = t()
+      for _, c in ipairs(cars) do
+        c.race_start_t = t()
+        c.lap_start_t = t()
+      end
+      tone("triangle", 659, 880, 0.4, 0.5, 1)
+    elseif elapsed >= 2.0 and elapsed < 2.05 then
+      tone("triangle", 330, 330, 0.15, 0.4, 1)
+    elseif elapsed >= 1.0 and elapsed < 1.05 then
+      tone("triangle", 330, 330, 0.15, 0.4, 1)
+    end
+    -- Keep cars in grid during countdown
+    return
+  end
+
+  if state == STATE_FINISH then
+    -- Confetti particles at finish line
+    if rnd(1) < 0.4 then
+      local cx = 128 + (rnd(16) - 8)
+      local cy = 45 + (rnd(16) - 8)
+      local cz = 12 + rnd(8)
+      local col = (rnd(3) < 1) and 209 or ((rnd(2) < 1) and 208 or 202)
+      particle(cx, cy, cz, col, 1.2)
+    end
+    -- Slowly decelerate cars
+    for _, c in ipairs(cars) do
+      c.spd = c.spd * 0.95
+      c.x = c.x + math.cos(c.ang) * c.spd
+      c.y = c.y + math.sin(c.ang) * c.spd
+      update_nearest(c)
+    end
+    if t() - finish_t0 > 2.0 and (btnp(4) or btnp(5)) then
+      reset_grid()
+      state = STATE_COUNTDOWN
+      countdown_t0 = t()
+      tone("triangle", 330, 330, 0.15, 0.4, 1)
+    end
+    return
+  end
+
+  -- ==================== ACTIVE RACE STATE ====================
+  -- 1. Player Input & Controls
+  local steer = 0
+  if btn(0) or axis(0) < -0.3 then steer = steer - 1 end
+  if btn(1) or axis(0) > 0.3 then steer = steer + 1 end
+  local gas = btn(2) or btn(4) or (axis(1) > 0.3)
+  local brake = btn(3) or (axis(1) < -0.3)
+  local drift_press = btn(4)
+
+  -- Turn rate scaled with speed
+  local turn_rate = 0.075 * (0.35 + 0.65 * math.min(player.spd / 1.0, 1.0))
+  player.ang = player.ang + steer * turn_rate
+
+  -- Drifting mechanics
+  local is_drifting = (drift_press or math.abs(steer) > 0.5) and (player.spd > 0.9)
+  if is_drifting then
+    player.slip = player.slip + steer * 0.04
+    player.slip = mid(-0.35, player.slip, 0.35)
+    player.turbo = math.min(1.0, player.turbo + 0.025)
+    -- Smoke particles from rear tires
+    if rnd(1) < 0.75 then
+      local rx = player.x - math.cos(player.ang) * 4
+      local ry = player.y - math.sin(player.ang) * 4
+      particle(rx, ry, player.z + 1, 203, 0.35)
+    end
+    if flr(t() * 30) % 5 == 0 then
+      tone("noise", 380, 220, 0.06, 0.14, 2)
+    end
+  else
+    if player.turbo >= 0.65 then
+      -- Trigger Mini-Turbo speed burst!
+      player.boost_timer = 24
+      player.spd = math.min(2.2, player.spd + 0.6)
+      tone("saw", 300, 750, 0.25, 0.4, 1)
+      for k = 1, 6 do
+        particle(player.x - math.cos(player.ang) * 4, player.y - math.sin(player.ang) * 4, player.z + 1, 208, 0.5)
+      end
+    end
+    player.turbo = 0
+    player.slip = player.slip * 0.82
+  end
+
+  -- Nearest track point & road surface
+  local pt = update_nearest(player)
+  local lat = (player.x - pt.x) * pt.nx + (player.y - pt.y) * pt.ny
+  local offroad = math.abs(lat) > 5.5
+
+  -- Boost Pads collision
+  -- Boost Pad 1: Back Straight (135, 225), Boost Pad 2: Hairpin Exit (75, 220)
+  local d_boost1 = (player.x - 135)^2 + (player.y - 225)^2
+  local d_boost2 = (player.x - 75)^2 + (player.y - 220)^2
+  if (d_boost1 < 25 or d_boost2 < 25) and player.boost_timer <= 0 then
+    player.boost_timer = 35
+    player.spd = 2.3
+    tone("saw", 220, 880, 0.3, 0.45, 1)
+  end
+
+  -- Speed acceleration / braking
+  if player.boost_timer > 0 then
+    player.boost_timer = player.boost_timer - 1
+    player.spd = math.min(2.35, player.spd + 0.1)
+    if rnd(1) < 0.8 then
+      particle(player.x - math.cos(player.ang) * 4, player.y - math.sin(player.ang) * 4, player.z + 1, 210, 0.4)
+    end
+  elseif gas then
+    local max_spd = offroad and 0.88 or 1.68
+    player.spd = math.min(max_spd, player.spd + 0.04)
+    if offroad and rnd(1) < 0.5 then
+      particle(player.x, player.y, player.z + 0.5, 205, 0.3)
+    end
+  elseif brake then
+    player.spd = math.max(-0.4, player.spd - 0.08)
+  else
+    player.spd = player.spd * (offroad and 0.94 or 0.98)
+  end
+
+  -- Movement integration
+  local drive_ang = player.ang - player.slip
+  player.x = player.x + math.cos(drive_ang) * player.spd
+  player.y = player.y + math.sin(drive_ang) * player.spd
+
+  -- Elevation and airtime
+  local target_z = pt.z
+  if player.z > target_z then
+    player.vz = player.vz - 0.25
+    player.z = player.z + player.vz
+    if player.z <= target_z then
+      player.z = target_z
+      player.vz = 0
+    end
+  else
+    player.z = target_z
+  end
+
+  -- Track barrier collision (elastic pushback)
+  if math.abs(lat) > 8.0 then
+    local push = (lat > 0) and -1 or 1
+    player.x = player.x + pt.nx * push * 0.8
+    player.y = player.y + pt.ny * push * 0.8
+    player.spd = player.spd * 0.75
+    tone("noise", 140, 60, 0.08, 0.2, 3)
+  end
+
+  -- 2. AI Opponents Update
+  for i = 2, 4 do
+    local ai = cars[i]
+    local ai_pt = update_nearest(ai)
+    local look = (ai.nearest_idx + 14 - 1) % #TRACK + 1
+    local tgt = TRACK[look]
+    local tx = tgt.x + tgt.nx * ai.ai_offset
+    local ty = tgt.y + tgt.ny * ai.ai_offset
+    local want = math.atan(ty - ai.y, tx - ai.x)
+    local diff = angle_diff(want, ai.ang)
+    ai.ang = ai.ang + mid(-0.09, diff * 0.38, 0.09)
+
+    -- Boost pads for AI
+    local d_b1 = (ai.x - 135)^2 + (ai.y - 225)^2
+    local d_b2 = (ai.x - 75)^2 + (ai.y - 220)^2
+    if (d_b1 < 25 or d_b2 < 25) and ai.boost_timer <= 0 then
+      ai.boost_timer = 30
+      ai.spd = 2.2
+    end
+
+    if ai.boost_timer > 0 then
+      ai.boost_timer = ai.boost_timer - 1
+      ai.spd = math.min(2.2, ai.spd + 0.1)
+    else
+      local target_spd = (math.abs(diff) > 0.35) and 1.15 or (1.45 + (i * 0.06))
+      if ai.spd < target_spd then
+        ai.spd = math.min(target_spd, ai.spd + 0.035)
+      else
+        ai.spd = math.max(target_spd, ai.spd - 0.05)
+      end
+    end
+
+    ai.x = ai.x + math.cos(ai.ang) * ai.spd
+    ai.y = ai.y + math.sin(ai.ang) * ai.spd
+    ai.z = ai_pt.z
+  end
+
+  -- 3. Car-to-Car Collisions
+  for i = 1, 3 do
+    for j = i + 1, 4 do
+      local ci, cj = cars[i], cars[j]
+      local dx, dy = cj.x - ci.x, cj.y - ci.y
+      local d2 = dx * dx + dy * dy
+      if d2 < 18 then
+        local dist = math.sqrt(math.max(0.1, d2))
+        local nx, ny = dx / dist, dy / dist
+        local overlap = (4.25 - dist) * 0.5
+        ci.x = ci.x - nx * overlap
+        ci.y = ci.y - ny * overlap
+        cj.x = cj.x + nx * overlap
+        cj.y = cj.y + ny * overlap
+        tone("noise", 160, 60, 0.06, 0.18, 3)
+      end
+    end
+  end
+
+  -- 4. Calculate Race Positions
+  local sorted = {cars[1], cars[2], cars[3], cars[4]}
+  table.sort(sorted, function(a, b) return a.progress > b.progress end)
+  for rank, c in ipairs(sorted) do c.rank = rank end
+
+  -- 5. Audio: Engine sound
+  if flr(t() * 30) % 4 == 0 then
+    local engine_f = 50 + (player.spd / 1.7) * 115
+    tone("saw", engine_f, engine_f, 0.1, 0.12, 0)
+  end
+end
+
+-- =========================================================================
+-- LIFECYCLE: _draw()
+-- =========================================================================
+function _draw()
+  cls()
+
+  -- Camera positioning based on mode
+  if cam_mode == 0 then
+    -- Dynamic Smooth Chase Cam
+    local target_yaw = player.ang - math.pi / 2
+    cam.yaw = cam.yaw + angle_diff(target_yaw, cam.yaw) * 0.12
+    cam.x = cam.x + (player.x - cam.x) * 0.15
+    cam.y = cam.y + (player.y - cam.y) * 0.15
+    cam.z = cam.z + (player.z + 12 - cam.z) * 0.15
+    camera(cam.x, cam.y, cam.z, 1.25, cam.yaw)
+  elseif cam_mode == 1 then
+    -- Isometric Diorama View
+    cam.x = cam.x + (player.x - cam.x) * 0.15
+    cam.y = cam.y + (player.y - cam.y) * 0.15
+    camera(cam.x, cam.y, player.z + 14, 1.0, 0.4)
+  else
+    -- High Bird's Eye Overview
+    camera(128, 128, 20, 0.65, 0.0)
+  end
+
+  -- Animated Boost Pads (Pulsing Chevron Lights)
+  local pulse = (flr(t() * 10) % 2 == 0) and 208 or 203
+  box(133, 223, 2, 137, 227, 2, pulse)
+  box(73, 218, 2, 77, 222, 2, pulse)
+
+  -- Starting Gate Traffic Lights (during countdown)
+  if state == STATE_COUNTDOWN then
+    local el = t() - countdown_t0
+    local c1 = (el >= 0.0) and 202 or 215
+    local c2 = (el >= 1.0) and 202 or 215
+    local c3 = (el >= 2.0) and 202 or 215
+    local c4 = (el >= 3.0) and 204 or 215
+    box(128, 41, 12, 128, 42, 13, c1)
+    box(128, 44, 12, 128, 45, 13, c2)
+    box(128, 47, 12, 128, 48, 13, c3)
+    box(128, 50, 12, 128, 51, 13, c4)
+  end
+
+  -- Draw Cars
+  for i, c in ipairs(cars) do
+    if c == player then
+      model("car", c.x, c.y, c.z, c.ang)
+    else
+      pswap(202, c.color_primary)
+      model("car", c.x, c.y, c.z, c.ang)
+      pswap()
+    end
+
+    -- Floating 3D world tags above rivals
+    if state == STATE_RACE then
+      local sx, sy = project(c.x, c.y, c.z + 5)
+      if sx > 10 and sx < 758 and sy > 10 and sy < 422 then
+        if c == player then
+          print("YOU", sx - 9, sy, 203, true, 1)
+        else
+          print(c.name, sx - textw(c.name) / 2, sy, c.color_primary, true, 1)
+        end
+      end
+    end
+  end
+
+  -- ==================== 2D HUD OVERLAY (768 x 432) ====================
+  if state == STATE_TITLE then
+    -- Attract / Title Screen
+    rectfill(150, 50, 618, 175, 200)
+    rect(150, 50, 618, 175, 203)
+    print("TURBO CIRCUIT", 195, 70, 202, true, 4)
+    print("OVERPASS GRAND PRIX", 270, 120, 209, true, 2)
+    print("768x432 VOXEL RAYMARCHING ENGINE", 240, 150, 208, true, 1)
+
+    if (flr(t() * 2) % 2) == 0 then
+      print("PRESS A / SPACE TO RACE", 255, 230, 203, true, 2)
+    end
+    print("TRACK RECORD: " .. format_time(best_record), 280, 275, 218, true, 1)
+
+    rectfill(190, 320, 578, 395, 201)
+    rect(190, 320, 578, 395, 214)
+    print("CONTROLS", 345, 328, 203, true, 1)
+    print("ARROWS / WASD : STEER, GAS & REVERSE", 240, 346, 203, true, 1)
+    print("BUTTON A / Z   : DRIFT & MINI-TURBO BOOST", 240, 362, 203, true, 1)
+    print("BUTTON B / X   : CYCLE 3 CAMERA MODES", 240, 378, 203, true, 1)
+    return
+  end
+
+  if state == STATE_COUNTDOWN then
+    local el = t() - countdown_t0
+    if el < 1.0 then
+      print("3", 370, 150, 202, true, 4)
+    elseif el < 2.0 then
+      print("2", 370, 150, 202, true, 4)
+    elseif el < 3.0 then
+      print("1", 370, 150, 202, true, 4)
+    else
+      print("GO!", 330, 150, 204, true, 4)
+    end
+  end
+
+  -- Top-Left: Race Position Badge
+  local rank_str = (player.rank == 1 and "1ST") or (player.rank == 2 and "2ND") or (player.rank == 3 and "3RD") or "4TH"
+  local rank_col = (player.rank == 1 and 218) or (player.rank == 2 and 219) or (player.rank == 3 and 220) or 201
+  rectfill(28, 20, 108, 64, rank_col)
+  rect(28, 20, 108, 64, 203)
+  print(rank_str, 38, 30, 200, false, 3)
+
+  -- Lap Counter
+  local lap_display = math.min(3, player.lap)
+  local lap_str = (lap_display == 3 and "FINAL LAP!") or ("LAP " .. lap_display .. "/3")
+  local lap_col = (lap_display == 3 and 202) or 203
+  print(lap_str, 120, 30, lap_col, true, 2)
+
+  -- Top-Center: Timers
+  local cur_lap_time = t() - player.lap_start_t
+  print("TIME  " .. format_time(cur_lap_time), 305, 22, 203, true, 2)
+  print("BEST  " .. format_time(best_record), 325, 46, 209, true, 1)
+
+  -- Bottom-Left: Speedometer & Turbo Meter
+  local mph = flr(player.spd * 48)
+  print(mph .. " MPH", 28, 385, 203, true, 2)
+
+  -- Mini-Turbo Charge Bar
+  rect(28, 368, 168, 376, 201)
+  local fillW = flr(player.turbo * 138)
+  if fillW > 0 then
+    local barCol = (player.turbo >= 0.65) and 209 or 208
+    rectfill(29, 369, 29 + fillW, 375, barCol)
+  end
+  if player.boost_timer > 0 then
+    print("★ BOOST! ★", 95, 388, 210, true, 1)
+  elseif player.turbo >= 0.65 then
+    print("TURBO READY!", 95, 388, 209, true, 1)
+  end
+
+  -- Top-Right: Circuit Minimap
+  local mx, my = 670, 75
+  local scale = 0.35
+  for i = 1, #TRACK, 8 do
+    local pt = TRACK[i]
+    local sx = mx + (pt.x - 128) * scale
+    local sy = my + (pt.y - 128) * scale
+    circfill(sx, sy, 2, 201)
+  end
+  for _, c in ipairs(cars) do
+    local cx = mx + (c.x - 128) * scale
+    local cy = my + (c.y - 128) * scale
+    if c == player then
+      circfill(cx, cy, 3, 202)
+    else
+      circfill(cx, cy, 2, c.color_primary)
+    end
+  end
+
+  -- Finish / Podium Screen
+  if state == STATE_FINISH then
+    rectfill(180, 80, 588, 350, 200)
+    rect(180, 80, 588, 350, 203)
+    print("GRAND PRIX FINISH!", 250, 100, 218, true, 3)
+
+    local sorted = {cars[1], cars[2], cars[3], cars[4]}
+    table.sort(sorted, function(a, b) return (a.total_time or 999) < (b.total_time or 999) end)
+
+    for rank, c in ipairs(sorted) do
+      local rcol = (rank == 1 and 218) or (rank == 2 and 219) or (rank == 3 and 220) or 203
+      local line = string.format("%d. %-6s  %s", rank, c.name, format_time(c.total_time or (c.race_start_t and (t() - c.race_start_t))))
+      print(line, 240, 150 + rank * 28, rcol, true, 2)
+    end
+
+    if player.best_lap and player.best_lap <= best_record then
+      print("★ NEW TRACK RECORD! ★", 260, 280, 218, true, 2)
+    end
+
+    print("PRESS A TO RACE AGAIN · B FOR TITLE", 225, 318, 204, true, 1)
+  end
+end

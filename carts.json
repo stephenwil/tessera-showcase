@@ -1,0 +1,251 @@
+[
+  {
+    "id": "bastionsiege",
+    "title": "Bastion Siege",
+    "author": "Antigravity",
+    "version": "1.0",
+    "players": 1,
+    "genre": "Strategy & Tactics",
+    "tags": [
+      "tactics",
+      "tower-defense",
+      "combat",
+      "particles"
+    ],
+    "description": "Defend your mountain fortress from blocky voxel invaders by placing defensive turrets, tracking attack waves, and deploying aerial strikes.",
+    "featured": true,
+    "cartFile": "carts/bastionsiege.tess",
+    "pictureFile": "carts/bastionsiege.tess.png",
+    "stats": {
+      "codeLines": 558,
+      "fileSizeBytes": 17100,
+      "pngSizeBytes": 14155,
+      "modelsCount": 4
+    }
+  },
+  {
+    "id": "crypt",
+    "title": "Crypt of the Voxel",
+    "author": "Claude",
+    "version": "1.0",
+    "players": 1,
+    "genre": "Adventure",
+    "tags": [
+      "dungeon",
+      "crawler",
+      "lighting",
+      "torches",
+      "keys"
+    ],
+    "description": "Atmospheric 3D dungeon crawler with dynamic torchlight illumination, door keys, hidden passages, and underground voxel traps.",
+    "featured": true,
+    "cartFile": "carts/crypt.tess",
+    "pictureFile": "carts/crypt.tess.png",
+    "stats": {
+      "codeLines": 1325,
+      "fileSizeBytes": 160601,
+      "pngSizeBytes": 38900,
+      "modelsCount": 10
+    }
+  },
+  {
+    "id": "hatchase",
+    "title": "Hat Chase",
+    "author": "Stephen Wilson",
+    "version": "1",
+    "players": 1,
+    "genre": "Adventure",
+    "tags": [
+      "dogs",
+      "beach",
+      "open-world",
+      "3D",
+      "story"
+    ],
+    "description": "Steer Betsy or Sunday along the beach and catch the runaway hat across three rounds (midday, afternoon, sunset). Features heavy animated voxel ocean waves and terrain.",
+    "featured": true,
+    "cartFile": "carts/hatchase.tess",
+    "pictureFile": "carts/hatchase.tess.png",
+    "stats": {
+      "codeLines": 1156,
+      "fileSizeBytes": 528817,
+      "pngSizeBytes": 58498,
+      "modelsCount": 10
+    }
+  },
+  {
+    "id": "relicshifter",
+    "title": "Relic Shifter",
+    "author": "fx / GPT-5.2",
+    "version": "1.0",
+    "players": 1,
+    "genre": "Puzzle",
+    "tags": [
+      "puzzle",
+      "spatial",
+      "logic",
+      "blocks",
+      "switches"
+    ],
+    "description": "A spatial 3D puzzle challenge manipulating ancient magnetic voxel blocks, pressure plates, and mechanical gates.",
+    "featured": true,
+    "cartFile": "carts/relicshifter.tess",
+    "pictureFile": "carts/relicshifter.tess.png",
+    "stats": {
+      "codeLines": 794,
+      "fileSizeBytes": 21145,
+      "pngSizeBytes": 15290,
+      "modelsCount": 0
+    }
+  },
+  {
+    "id": "turbocircuit",
+    "title": "Turbo Circuit",
+    "author": "Antigravity",
+    "version": "1.0",
+    "players": 1,
+    "genre": "Arcade & Racing",
+    "tags": [
+      "racing",
+      "arcade",
+      "speed",
+      "sound-synth",
+      "checkpoints"
+    ],
+    "description": "High-speed 3D voxel arcade racer featuring banked curves, lap timing, collision detection, and procedural retro engine sound synthesis.",
+    "featured": true,
+    "cartFile": "carts/turbocircuit.tess",
+    "pictureFile": "carts/turbocircuit.tess.png",
+    "stats": {
+      "codeLines": 723,
+      "fileSizeBytes": 27695,
+      "pngSizeBytes": 20076,
+      "modelsCount": 3
+    }
+  },
+  {
+    "id": "voiddrifter",
+    "title": "Void Drifter",
+    "author": "Antigravity (Gemini)",
+    "version": "1.0",
+    "players": 1,
+    "genre": "Arcade & Racing",
+    "tags": [
+      "space",
+      "arcade",
+      "flight",
+      "procedural",
+      "asteroids"
+    ],
+    "description": "Fly a voxel starfighter through an endless, procedural 3D asteroid belt. Dodge space hazards, collect plasma cores, and fire particle lasers.",
+    "featured": true,
+    "cartFile": "carts/voiddrifter.tess",
+    "pictureFile": "carts/voiddrifter.tess.png",
+    "stats": {
+      "codeLines": 1168,
+      "fileSizeBytes": 40710,
+      "pngSizeBytes": 26447,
+      "modelsCount": 4
+    }
+  },
+  {
+    "id": "bench",
+    "title": "Bench",
+    "author": "Tessera",
+    "version": "1",
+    "players": 1,
+    "genre": "Demos & Benchmarks",
+    "tags": [
+      "benchmark",
+      "stress-test",
+      "stress",
+      "profiler",
+      "fps"
+    ],
+    "description": "Comprehensive hardware benchmark executing 200 model blits/frame, 5,000 vset operations, dynamic terrain rebuilds, and measuring Lua-to-host FFI costs.",
+    "featured": false,
+    "cartFile": "carts/bench.tess",
+    "pictureFile": "carts/bench.tess.png",
+    "stats": {
+      "codeLines": 71,
+      "fileSizeBytes": 2666,
+      "pngSizeBytes": 6467,
+      "modelsCount": 0
+    }
+  },
+  {
+    "id": "hello",
+    "title": "Hello",
+    "author": "Tessera Community",
+    "version": "1.0",
+    "players": 1,
+    "genre": "Demos & Benchmarks",
+    "tags": [
+      "starter",
+      "template",
+      "minimal",
+      "boilerplate",
+      "learning"
+    ],
+    "description": "The official minimal starter template displaying a centered voxel box and 2D text overlay. The perfect starting point for new creators.",
+    "featured": false,
+    "cartFile": "carts/hello.tess",
+    "pictureFile": "carts/hello.tess.png",
+    "stats": {
+      "codeLines": 5,
+      "fileSizeBytes": 154,
+      "pngSizeBytes": 4192,
+      "modelsCount": 0
+    }
+  },
+  {
+    "id": "moonlitgarden",
+    "title": "Moonlit Garden",
+    "author": "Tessera",
+    "version": "1",
+    "players": 1,
+    "genre": "Atmospheric & Diorama",
+    "tags": [
+      "zen",
+      "diorama",
+      "peaceful",
+      "night-sky",
+      "fireflies"
+    ],
+    "description": "A peaceful, interactive scenic garden diorama. Relax under the night sky gradient, watch glowing fireflies, and listen to the ambient synth.",
+    "featured": false,
+    "cartFile": "carts/moonlitgarden.tess",
+    "pictureFile": "carts/moonlitgarden.tess.png",
+    "stats": {
+      "codeLines": 205,
+      "fileSizeBytes": 5088,
+      "pngSizeBytes": 7935,
+      "modelsCount": 0
+    }
+  },
+  {
+    "id": "prismrelay",
+    "title": "Prism Relay",
+    "author": "Tessera",
+    "version": "1",
+    "players": 1,
+    "genre": "Puzzle",
+    "tags": [
+      "lasers",
+      "optics",
+      "mirrors",
+      "color",
+      "puzzle"
+    ],
+    "description": "Redirect colored laser beams through reflective voxel prisms to charge crystalline power pylons in 3D space.",
+    "featured": false,
+    "cartFile": "carts/prismrelay.tess",
+    "pictureFile": "carts/prismrelay.tess.png",
+    "stats": {
+      "codeLines": 265,
+      "fileSizeBytes": 6845,
+      "pngSizeBytes": 8977,
+      "modelsCount": 0
+    }
+  }
+]

@@ -1,0 +1,1320 @@
+tessera cart v1
+__meta__
+title=Void Drifter
+author=Antigravity (Gemini)
+version=1.0
+players=1
+id=voiddrifter
+__pal__
+1 020308
+2 050916
+3 1b2234
+4 364156
+5 606d85
+6 a4b0c5
+7 eef4ff
+8 00e5ff
+9 0091ea
+10 70ffff
+11 ff3d00
+12 ff1744
+13 ff9100
+14 ffd600
+15 4e4844
+16 70665e
+17 94877c
+18 5c4238
+19 7a594c
+20 39ff14
+21 b388ff
+22 252e42
+23 ff6e40
+24 ffff8d
+__models__
+ship 13x9x5 pivot=6,4,2
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. 04 04 .. .. .. .. .. .. .. ..
+.. .. 04 05 05 04 .. .. .. .. .. .. ..
+.. 03 04 05 06 05 04 04 .. .. .. .. ..
+.. .. 03 04 05 05 05 05 04 04 .. .. ..
+.. 03 04 05 06 05 04 04 .. .. .. .. ..
+.. .. 04 05 05 04 .. .. .. .. .. .. ..
+.. .. .. 04 04 .. .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+
+.. .. 08 07 07 06 .. .. .. .. .. .. ..
+.. .. 04 06 07 07 06 .. .. .. .. .. ..
+.. .. 04 06 07 07 07 06 05 .. .. .. ..
+.. 09 04 05 06 07 07 06 06 05 .. .. ..
+.. 03 04 06 07 07 07 07 07 07 07 06 ..
+.. 09 04 05 06 07 07 06 06 05 .. .. ..
+.. .. 04 06 07 07 07 06 05 .. .. .. ..
+.. .. 04 06 07 07 06 .. .. .. .. .. ..
+.. .. 08 07 07 06 .. .. .. .. .. .. ..
+
+.. .. 0a 07 07 07 06 08 .. .. .. .. ..
+.. .. .. 05 07 07 06 .. .. .. .. .. ..
+.. .. 04 06 07 07 07 06 .. .. .. .. ..
+09 09 0b 05 07 07 07 07 06 06 .. .. ..
+03 04 06 07 07 07 07 07 07 07 07 07 0a
+09 09 0b 05 07 07 07 07 06 06 .. .. ..
+.. .. 04 06 07 07 07 06 .. .. .. .. ..
+.. .. .. 05 07 07 06 .. .. .. .. .. ..
+.. .. 0a 07 07 07 06 08 .. .. .. .. ..
+
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. 05 06 06 .. .. .. .. .. .. ..
+.. .. 04 06 07 08 0a 08 06 .. .. .. ..
+.. .. 05 07 07 08 0a 0a 08 07 06 .. ..
+.. .. 04 06 07 08 0a 08 06 .. .. .. ..
+.. .. .. 05 06 06 .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. 0b 0b 06 06 08 0a 08 .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+.. .. .. .. .. .. .. .. .. .. .. .. ..
+
+drone 7x7x5 pivot=3,3,2
+.. .. .. 0b .. .. ..
+.. .. .. 03 .. .. ..
+.. .. .. .. .. .. ..
+0b 03 .. 04 .. 03 0b
+.. .. .. .. .. .. ..
+.. .. .. 03 .. .. ..
+.. .. .. 0b .. .. ..
+
+.. .. 03 04 03 .. ..
+.. 03 04 0b 04 03 ..
+03 04 0b 0c 0b 04 03
+04 0b 0c 0c 0c 0b 04
+03 04 0b 0c 0b 04 03
+.. 03 04 0b 04 03 ..
+.. .. 03 04 03 .. ..
+
+.. 04 05 05 05 04 ..
+04 05 0b 0c 0b 05 04
+05 0b 0c 07 0c 0b 05
+05 0c 0c 0c 0c 0c 05
+05 0b 0c 07 0c 0b 05
+04 05 0b 0c 0b 05 04
+.. 04 05 05 05 04 ..
+
+.. .. 03 04 03 .. ..
+.. 03 04 0b 04 03 ..
+03 04 0b 0c 0b 04 03
+04 0b 0c 0c 0c 0b 04
+03 04 0b 0c 0b 04 03
+.. 03 04 0b 04 03 ..
+.. .. 03 04 03 .. ..
+
+.. .. .. 0b .. .. ..
+.. .. .. 03 .. .. ..
+.. .. .. .. .. .. ..
+0b 03 .. 04 .. 03 0b
+.. .. .. .. .. .. ..
+.. .. .. 03 .. .. ..
+.. .. .. 0b .. .. ..
+
+warpore 3x3x3 pivot=1,1,1
+.. 09 ..
+09 08 09
+.. 09 ..
+
+09 08 09
+08 0a 08
+09 08 09
+
+.. 09 ..
+09 08 09
+.. 09 ..
+
+goldore 3x3x3 pivot=1,1,1
+.. 0d ..
+0d 0d 0d
+.. 0d ..
+
+0d 0e 0d
+0e 18 0e
+0d 0e 0d
+
+.. 0d ..
+0d 0e 0d
+.. 0d ..
+
+__lua__
+-- VOID DRIFTER — 3D Space Flight, Asteroid Mining & Combat
+-- Tessera Voxel Fantasy Console (256x256x128, 768x432 overlay)
+
+local STATE_TITLE    = 0
+local STATE_BRIEFING = 1
+local STATE_PLAY     = 2
+local STATE_VICTORY  = 3
+local STATE_GAMEOVER = 4
+
+local STATION_X, STATION_Y, STATION_Z = 128, 128, 64
+local GOAL_CRYSTALS = 25
+local CARGO_MAX = 20
+local NUM_ASTEROIDS = 18
+local MAX_DRONES = 5
+
+state = STATE_TITLE
+tick_count = 0
+
+ship = {
+  x = 128, y = 88, z = 64,
+  vx = 0, vy = 0, vz = 0,
+  yaw = math.pi / 2,
+  pitch = 0,
+  spd = 0,
+  shield = 100, max_shield = 100,
+  hull = 100, max_hull = 100,
+  shield_regen_cd = 0,
+  fire_cd = 0,
+  invuln = 0,
+  thrusting = false,
+  dock_flash = 0
+}
+
+cam = { x = 128, y = 108, z = 66, yaw = 0, shake = 0 }
+
+cargo_warp = 0
+cargo_gold = 0
+crystals_delivered = 0
+credits = 0
+best_credits = 0
+asteroids_mined = 0
+drones_destroyed = 0
+mission_time = 0
+victory_timer = 0
+hud_msg = ""
+hud_msg_t = 0
+hud_msg_col = 8
+
+asteroids = {}
+drones = {}
+lasers = {}
+ores = {}
+explosions = {}
+dust = {}
+
+local function angle_diff(a, b)
+  local d = (a - b) % (math.pi * 2)
+  if d > math.pi then d = d - math.pi * 2 end
+  return d
+end
+
+local function dist3(x1, y1, z1, x2, y2, z2)
+  local dx, dy, dz = x1 - x2, y1 - y2, z1 - z2
+  return math.sqrt(dx * dx + dy * dy + dz * dz)
+end
+
+local function show_msg(txt, col, dur)
+  hud_msg = txt
+  hud_msg_col = col or 8
+  hud_msg_t = dur or 90
+end
+
+local function spawn_explosion(x, y, z, r, c1, c2, count)
+  table.insert(explosions, { x = x, y = y, z = z, r = r, max_r = r + 3, life = 10, max_life = 10, c1 = c1, c2 = c2 })
+  for i = 1, (count or 14) do
+    local a = rnd(math.pi * 2)
+    local b = (rnd() - 0.5) * math.pi
+    local sp = 0.5 + rnd(1.5)
+    local px = x + math.cos(a) * math.cos(b) * sp * 2
+    local py = y + math.sin(a) * math.cos(b) * sp * 2
+    local pz = z + math.sin(b) * sp * 2
+    particle(px, py, pz, (i % 2 == 0) and c1 or c2, 0.4 + rnd(0.5))
+  end
+end
+
+-- Build deep starry void + Orbital Refinery Station Alpha onto persistent map layer
+local function build_space_sector()
+  mclear(0)
+
+  -- 1. Natural 3D Starfield (deep floor & high ceiling planes, zero edge curtains)
+  local star_cols = { 7, 7, 24, 8, 21, 14 }
+  for i = 1, 420 do
+    local sx = 4 + flr(rnd(248))
+    local sy = 4 + flr(rnd(248))
+    local sz = (i <= 280) and (1 + flr(rnd(4))) or (123 + flr(rnd(4)))
+    local col = star_cols[1 + flr(rnd(#star_cols))]
+    mset(sx, sy, sz, col)
+    if i % 29 == 0 and sx > 6 and sx < 249 and sy > 6 and sy < 249 then
+      mset(sx + 1, sy, sz, 9)
+    end
+  end
+
+  -- 2. Orbital Refinery & Docking Station Alpha at (128, 128, 64)
+  local cx, cy, cz = STATION_X, STATION_Y, STATION_Z
+
+  -- Central vertical spine & reactor core
+  mbox(cx - 4, cy - 4, cz - 14, cx + 4, cy + 4, cz + 14, 22)
+  mbox(cx - 5, cy - 5, cz - 8,  cx + 5, cy + 5, cz + 8,  4)
+  mbox(cx - 7, cy - 7, cz - 4,  cx + 7, cy + 7, cz + 4,  5)
+  -- Glowing cyan reactor band
+  mbox(cx - 8, cy - 8, cz - 1,  cx + 8, cy + 8, cz + 1,  8)
+  mbox(cx - 3, cy - 3, cz - 16, cx + 3, cy + 3, cz + 16, 6)
+  -- Spire antenna & golden docking beacon cap
+  mbox(cx - 1, cy - 1, cz + 17, cx + 1, cy + 1, cz + 22, 6)
+  mset(cx, cy, cz + 23, 14)
+  mbox(cx - 1, cy - 1, cz - 20, cx + 1, cy + 1, cz - 17, 6)
+  mset(cx, cy, cz - 21, 8)
+
+  -- Four structural docking arms & solar/refinery wings
+  -- East / West Solar Arrays
+  mbox(cx + 8,  cy - 1, cz - 1, cx + 24, cy + 1, cz + 1, 5)
+  mbox(cx - 24, cy - 1, cz - 1, cx - 8,  cy + 1, cz + 1, 5)
+  mbox(cx + 12, cy - 5, cz,     cx + 22, cy + 5, cz,     9)
+  mbox(cx - 22, cy - 5, cz,     cx - 12, cy + 5, cz,     9)
+  -- Wing trim
+  mbox(cx + 12, cy - 5, cz, cx + 22, cy - 5, cz, 6)
+  mbox(cx + 12, cy + 5, cz, cx + 22, cy + 5, cz, 6)
+  mbox(cx - 22, cy - 5, cz, cx - 12, cy - 5, cz, 6)
+  mbox(cx - 22, cy + 5, cz, cx - 12, cy + 5, cz, 6)
+
+  -- North / South Refinery Tanks & Docking Gantries
+  mbox(cx - 1, cy + 8,  cz - 1, cx + 1, cy + 20, cz + 1, 5)
+  mbox(cx - 1, cy - 20, cz - 1, cx + 1, cy - 8,  cz + 1, 5)
+  mbox(cx - 4, cy + 12, cz - 3, cx + 4, cy + 17, cz + 3, 22)
+  mbox(cx - 4, cy - 17, cz - 3, cx + 4, cy - 12, cz + 3, 22)
+  mbox(cx - 2, cy + 13, cz - 4, cx + 2, cy + 16, cz + 4, 14)
+  mbox(cx - 2, cy - 16, cz - 4, cx + 2, cy - 13, cz + 4, 14)
+end
+
+-- Sculpt a single destructible 3D voxel asteroid model with embedded mineral veins
+local function sculpt_asteroid(ast, idx)
+  local mid_id = "ast_" .. idx
+  local s = ast.size -- odd diameter, e.g. 13 or 15
+  local half = (s - 1) / 2
+  newmodel(mid_id, s, s, s, 1)
+  ast.model_id = mid_id
+  ast.half = half
+  ast.voxels = 0
+  ast.crystals_left = 0
+
+  local seed_x = ast.seed * 13.7
+  local seed_y = ast.seed * 7.3
+  local seed_z = ast.seed * 19.1
+  local r_base = half - 1.2
+  local rock_a = ast.warm and 18 or 15
+  local rock_b = ast.warm and 19 or 16
+  local rock_c = 17
+
+  for z = 0, s - 1 do
+    for y = 0, s - 1 do
+      for x = 0, s - 1 do
+        local dx, dy, dz = x - half, y - half, z - half
+        local d = math.sqrt(dx * dx + dy * dy + dz * dz)
+        local n = noise3((x + seed_x) * 0.28, (y + seed_y) * 0.28, (z + seed_z) * 0.28)
+        local rad = r_base + n * 2.2
+        if d <= rad then
+          local c = rock_a
+          if n > 0.12 then
+            c = rock_b
+          elseif dz > 1.2 and n > -0.1 then
+            c = rock_c
+          end
+          -- Embedded mineral veins (warp crystals or gold ore)
+          local vn = noise3((x + seed_x) * 0.55 + 40, (y + seed_y) * 0.55, (z + seed_z) * 0.55)
+          if vn > 0.34 then
+            if ast.rich_warp then
+              c = (vn > 0.45) and 10 or 8
+              ast.crystals_left = ast.crystals_left + 1
+            else
+              c = (vn > 0.45) and 14 or 13
+            end
+          end
+          mpset(mid_id, x, y, z, c, 0)
+          ast.voxels = ast.voxels + 1
+        end
+      end
+    end
+  end
+
+  -- Protruding glowing crystal spires on warp-rich asteroids so players spot them in 3D space
+  if ast.rich_warp then
+    local spire_x = flr(half)
+    local spire_y = flr(half)
+    for k = flr(half + r_base - 1), s - 1 do
+      mpset(mid_id, spire_x, spire_y, k, (k == s - 1) and 10 or 8, 0)
+      mpset(mid_id, spire_x + 1, spire_y, k - 1, 8, 0)
+    end
+  end
+  ast.max_voxels = math.max(1, ast.voxels)
+end
+
+local function spawn_asteroid(idx, min_dist)
+  local ax, ay, az
+  for attempt = 1, 30 do
+    local ang = rnd(math.pi * 2)
+    local rad = (min_dist or 46) + rnd(50)
+    ax = mid(28, STATION_X + math.cos(ang) * rad, 228)
+    ay = mid(28, STATION_Y + math.sin(ang) * rad, 228)
+    az = 30 + rnd(68)
+    if dist3(ax, ay, az, STATION_X, STATION_Y, STATION_Z) > 42 and dist3(ax, ay, az, ship.x, ship.y, ship.z) > 36 then
+      break
+    end
+  end
+  local sizes = { 11, 13, 13, 15 }
+  local sz = sizes[1 + flr(rnd(#sizes))]
+  local ast = {
+    id = idx,
+    x = ax, y = ay, z = az,
+    vx = (rnd() - 0.5) * 0.04,
+    vy = (rnd() - 0.5) * 0.04,
+    vz = (rnd() - 0.5) * 0.02,
+    size = sz,
+    radius = sz * 0.44,
+    hp = 6 + flr(sz / 3),
+    max_hp = 6 + flr(sz / 3),
+    seed = rnd(100),
+    warm = (idx % 3 == 0),
+    rich_warp = (idx % 4 ~= 0),
+    hit_flash = 0,
+    alive = true
+  }
+  sculpt_asteroid(ast, idx)
+  return ast
+end
+
+local function spawn_drone(far_from_player)
+  local ang = rnd(math.pi * 2)
+  local rad = (far_from_player and 68 or 52) + rnd(34)
+  local dx = mid(26, STATION_X + math.cos(ang) * rad, 230)
+  local dy = mid(26, STATION_Y + math.sin(ang) * rad, 230)
+  local dz = 32 + rnd(64)
+  table.insert(drones, {
+    x = dx, y = dy, z = dz,
+    vx = 0, vy = 0, vz = 0,
+    yaw = rnd(math.pi * 2),
+    hp = 3, max_hp = 3,
+    fire_cd = 45 + flr(rnd(45)),
+    patrol_ang = ang,
+    patrol_dir = (rnd() < 0.5) and 1 or -1,
+    hit_flash = 0
+  })
+end
+
+local function spawn_ore(x, y, z, kind)
+  local a = rnd(math.pi * 2)
+  table.insert(ores, {
+    x = x, y = y, z = z,
+    vx = math.cos(a) * (0.25 + rnd(0.35)),
+    vy = math.sin(a) * (0.25 + rnd(0.35)),
+    vz = (rnd() - 0.5) * 0.35,
+    kind = kind, -- "warp" or "gold"
+    life = 900,
+    bob = rnd(6.28)
+  })
+end
+
+local function reset_game()
+  ship.x = 78
+  ship.y = 78
+  ship.z = STATION_Z
+  ship.vx = 0; ship.vy = 0; ship.vz = 0
+  ship.yaw = 0.785
+  ship.pitch = 0
+  ship.spd = 0
+  ship.shield = 100
+  ship.hull = 100
+  ship.shield_regen_cd = 0
+  ship.fire_cd = 0
+  ship.invuln = 30
+  ship.thrusting = false
+  ship.dock_flash = 0
+
+  cam.x = ship.x + math.cos(ship.yaw) * 20
+  cam.y = ship.y + math.sin(ship.yaw) * 20
+  cam.z = ship.z + 2
+  cam.yaw = math.pi / 2 - ship.yaw
+  cam.shake = 0
+
+  cargo_warp = 0
+  cargo_gold = 0
+  crystals_delivered = 0
+  credits = 0
+  asteroids_mined = 0
+  drones_destroyed = 0
+  mission_time = 0
+  victory_timer = 0
+  hud_msg = ""
+  hud_msg_t = 0
+
+  asteroids = {}
+  for i = 1, NUM_ASTEROIDS do
+    asteroids[i] = spawn_asteroid(i, 44)
+  end
+
+  drones = {}
+  for i = 1, 4 do
+    spawn_drone(true)
+  end
+
+  lasers = {}
+  ores = {}
+  explosions = {}
+end
+
+function _init()
+  sun(0.5, -0.4, 0.75, 1.1)
+  sky(1, 2)
+  fog(1, 0)
+  best_credits = dget("best_cr") or 0
+  build_space_sector()
+  reset_game()
+
+  -- Initial space dust motes
+  dust = {}
+  for i = 1, 32 do
+    dust[i] = {
+      x = 20 + rnd(216),
+      y = 20 + rnd(216),
+      z = 16 + rnd(96),
+      c = (i % 3 == 0) and 8 or 7
+    }
+  end
+end
+
+local function fire_twin_lasers()
+  local fx, fy = math.cos(ship.yaw), math.sin(ship.yaw)
+  local px, py = -fy, fx
+  local vz_aim = ship.pitch * 0.45
+  local speed = 4.6
+  local norm = math.sqrt(fx * fx + fy * fy + vz_aim * vz_aim)
+  local dx, dy, dz = fx / norm, fy / norm, vz_aim / norm
+
+  for side = -1, 1, 2 do
+    table.insert(lasers, {
+      x = ship.x + fx * 5 + px * (side * 3.0),
+      y = ship.y + fy * 5 + py * (side * 3.0),
+      z = ship.z + dz * 2,
+      vx = dx * speed + ship.vx * 0.35,
+      vy = dy * speed + ship.vy * 0.35,
+      vz = dz * speed,
+      dx = dx, dy = dy, dz = dz,
+      friendly = true,
+      life = 28
+    })
+  end
+  tone("triangle", 1200, 300, 0.08, 0.24, 1)
+end
+
+local function damage_ship(amt)
+  if ship.invuln > 0 then return end
+  ship.invuln = 18
+  ship.shield_regen_cd = 120 -- 4 sec before shields recharge
+  cam.shake = math.max(cam.shake, 3.0)
+
+  if ship.shield > 0 then
+    local absorbed = math.min(ship.shield, amt)
+    ship.shield = ship.shield - absorbed
+    local rem = amt - absorbed
+    if rem > 0 then
+      ship.hull = math.max(0, ship.hull - rem)
+    end
+    tone("noise", 320, 110, 0.14, 0.32, 2)
+    if ship.shield == 0 then
+      show_msg("WARNING: SHIELDS DEPLETED!", 12, 75)
+    end
+  else
+    ship.hull = math.max(0, ship.hull - amt)
+    tone("noise", 190, 55, 0.22, 0.4, 2)
+    show_msg("HULL BREACH! REPAIR AT STATION!", 12, 75)
+  end
+
+  if ship.hull <= 0 then
+    spawn_explosion(ship.x, ship.y, ship.z, 7, 11, 14, 26)
+    tone("noise", 220, 40, 0.55, 0.45, 2)
+    state = STATE_GAMEOVER
+  end
+end
+
+-- Carve a 3D crater out of a destructible asteroid model at world hit point (hx, hy, hz)
+local function carve_asteroid(ast, hx, hy, hz)
+  local lx = flr(hx - ast.x + ast.half + 0.5)
+  local ly = flr(hy - ast.y + ast.half + 0.5)
+  local lz = flr(hz - ast.z + ast.half + 0.5)
+  local r = 2
+  local carved_any = false
+
+  for dz = -r, r do
+    for dy = -r, r do
+      for dx = -r, r do
+        if dx * dx + dy * dy + dz * dz <= 5 then
+          local vx, vy, vz = lx + dx, ly + dy, lz + dz
+          if vx >= 0 and vx < ast.size and vy >= 0 and vy < ast.size and vz >= 0 and vz < ast.size then
+            mpset(ast.model_id, vx, vy, vz, 0, 0)
+            carved_any = true
+          end
+        end
+      end
+    end
+  end
+
+  if carved_any then
+    ast.hp = ast.hp - 1
+    ast.hit_flash = 4
+    -- Chip particles
+    for k = 1, 6 do
+      particle(
+        hx + (rnd() - 0.5) * 3,
+        hy + (rnd() - 0.5) * 3,
+        hz + (rnd() - 0.5) * 3,
+        (k % 2 == 0) and 8 or 16,
+        0.35 + rnd(0.3)
+      )
+    end
+    tone("noise", 420, 140, 0.06, 0.18, 3)
+
+    -- Release floating ore on every 2nd chip hit
+    if ast.hp % 2 == 0 then
+      local kind = ast.rich_warp and "warp" or "gold"
+      spawn_ore(hx, hy, hz, kind)
+    end
+
+    -- Destroy asteroid when fractured
+    if ast.hp <= 0 then
+      ast.alive = false
+      asteroids_mined = asteroids_mined + 1
+      credits = credits + 50
+      spawn_explosion(ast.x, ast.y, ast.z, 5, 16, ast.rich_warp and 8 or 14, 20)
+      tone("noise", 260, 65, 0.28, 0.35, 3)
+      local drops = ast.rich_warp and 4 or 3
+      for d = 1, drops do
+        spawn_ore(
+          ast.x + (rnd() - 0.5) * 5,
+          ast.y + (rnd() - 0.5) * 5,
+          ast.z + (rnd() - 0.5) * 4,
+          (d <= 2 or ast.rich_warp) and "warp" or "gold"
+        )
+      end
+      -- Respawn a fresh asteroid on the outer rim so belt never runs dry
+      asteroids[ast.id] = spawn_asteroid(ast.id, 62)
+    end
+  end
+end
+
+local function update_play()
+  mission_time = mission_time + 1 / 30
+  if hud_msg_t > 0 then hud_msg_t = hud_msg_t - 1 end
+  if ship.invuln > 0 then ship.invuln = ship.invuln - 1 end
+  if ship.fire_cd > 0 then ship.fire_cd = ship.fire_cd - 1 end
+  if ship.dock_flash > 0 then ship.dock_flash = ship.dock_flash - 1 end
+
+  -- 1. Ship Controls & 3D Flight Physics
+  if btn(0) then ship.yaw = ship.yaw + 0.075 end
+  if btn(1) then ship.yaw = ship.yaw - 0.075 end
+
+  local pitch_in = 0
+  if btn(2) then pitch_in = pitch_in + 1 end
+  if btn(3) then pitch_in = pitch_in - 1 end
+  ship.pitch = ship.pitch + (pitch_in - ship.pitch) * 0.25
+  ship.vz = ship.vz * 0.86 + pitch_in * 0.22
+
+  local fx, fy = math.cos(ship.yaw), math.sin(ship.yaw)
+  ship.thrusting = btn(4)
+  if ship.thrusting then
+    ship.vx = ship.vx + fx * 0.16
+    ship.vy = ship.vy + fy * 0.16
+    -- Thruster exhaust particles
+    local ex = ship.x - fx * 5.2
+    local ey = ship.y - fy * 5.2
+    local px, py = -fy * 1.1, fx * 1.1
+    particle(ex + px + (rnd() - 0.5) * 0.8, ey + py + (rnd() - 0.5) * 0.8, ship.z + (rnd() - 0.5) * 0.6, (tick_count % 2 == 0) and 8 or 9, 0.35)
+    particle(ex - px + (rnd() - 0.5) * 0.8, ey - py + (rnd() - 0.5) * 0.8, ship.z + (rnd() - 0.5) * 0.6, (tick_count % 2 == 0) and 10 or 13, 0.30)
+    if tick_count % 3 == 0 then
+      local f_eng = 90 + ship.spd * 65
+      tone("saw", f_eng, f_eng * 1.12, 0.11, 0.10, 0)
+    end
+  end
+
+  -- Drag & max speed cap
+  ship.vx = ship.vx * 0.945
+  ship.vy = ship.vy * 0.945
+  local hspd = math.sqrt(ship.vx * ship.vx + ship.vy * ship.vy)
+  if hspd > 2.35 then
+    ship.vx = ship.vx / hspd * 2.35
+    ship.vy = ship.vy / hspd * 2.35
+    hspd = 2.35
+  end
+  ship.spd = math.sqrt(ship.vx * ship.vx + ship.vy * ship.vy + ship.vz * ship.vz)
+
+  ship.x = ship.x + ship.vx
+  ship.y = ship.y + ship.vy
+  ship.z = ship.z + ship.vz
+
+  -- Soft sector boundary containment
+  if ship.x < 18 then ship.x = 18; ship.vx = math.abs(ship.vx) * 0.5; show_msg("SECTOR EDGE — TURNING BACK", 13, 45) end
+  if ship.x > 238 then ship.x = 238; ship.vx = -math.abs(ship.vx) * 0.5; show_msg("SECTOR EDGE — TURNING BACK", 13, 45) end
+  if ship.y < 18 then ship.y = 18; ship.vy = math.abs(ship.vy) * 0.5; show_msg("SECTOR EDGE — TURNING BACK", 13, 45) end
+  if ship.y > 238 then ship.y = 238; ship.vy = -math.abs(ship.vy) * 0.5; show_msg("SECTOR EDGE — TURNING BACK", 13, 45) end
+  if ship.z < 18 then ship.z = 18; ship.vz = math.abs(ship.vz) * 0.3 end
+  if ship.z > 110 then ship.z = 110; ship.vz = -math.abs(ship.vz) * 0.3 end
+
+  -- Weapons: Twin Plasma Lasers (Button B)
+  if btn(5) and ship.fire_cd == 0 then
+    ship.fire_cd = 6
+    fire_twin_lasers()
+  end
+
+  -- Shield passive regen
+  if ship.shield_regen_cd > 0 then
+    ship.shield_regen_cd = ship.shield_regen_cd - 1
+  elseif ship.shield < ship.max_shield and tick_count % 6 == 0 then
+    ship.shield = math.min(ship.max_shield, ship.shield + 1)
+  end
+
+  -- 2. Space Station Core Collision & Docking Ring Mechanic
+  local d_st_xy = math.sqrt((ship.x - STATION_X)^2 + (ship.y - STATION_Y)^2)
+  local d_st_z = math.abs(ship.z - STATION_Z)
+  local d_st_3d = dist3(ship.x, ship.y, ship.z, STATION_X, STATION_Y, STATION_Z)
+
+  -- Solid central refinery core deflection
+  if d_st_xy < 11 and d_st_z < 14 then
+    local nx = (ship.x - STATION_X) / math.max(0.1, d_st_xy)
+    local ny = (ship.y - STATION_Y) / math.max(0.1, d_st_xy)
+    ship.x = STATION_X + nx * 11.2
+    ship.y = STATION_Y + ny * 11.2
+    ship.vx = nx * 0.8
+    ship.vy = ny * 0.8
+  end
+
+  -- Docking Ring Beacon Zone (radius 13..29 around station at z +/- 14)
+  if d_st_3d >= 12 and d_st_3d <= 29 and d_st_z <= 14 then
+    local need_service = (cargo_warp > 0 or cargo_gold > 0 or ship.shield < ship.max_shield or ship.hull < ship.max_hull)
+    if need_service then
+      local earned = cargo_warp * 120 + cargo_gold * 65
+      local delivered_now = cargo_warp
+      crystals_delivered = crystals_delivered + cargo_warp
+      credits = credits + earned
+      if credits > best_credits then
+        best_credits = credits
+        dset("best_cr", best_credits)
+      end
+      cargo_warp = 0
+      cargo_gold = 0
+      ship.shield = ship.max_shield
+      ship.hull = ship.max_hull
+      ship.dock_flash = 30
+
+      -- Docking chime!
+      tone("triangle", 523, 659, 0.10, 0.30, 3)
+      tone("triangle", 659, 1046, 0.22, 0.30, 2)
+
+      if crystals_delivered >= GOAL_CRYSTALS then
+        state = STATE_VICTORY
+        victory_timer = 0
+        tone("triangle", 523, 1046, 0.35, 0.35, 1)
+        show_msg("MISSION COMPLETE! ALL WARP CRYSTALS REFINED!", 20, 240)
+        return
+      elseif delivered_now > 0 then
+        show_msg("DOCKED! +" .. delivered_now .. " CRYSTALS  +" .. earned .. " CR  SHIELDS FULL", 20, 120)
+      else
+        show_msg("DOCKED! SHIELDS & HULL RESTORED", 8, 90)
+      end
+    end
+  end
+
+  -- 3. Asteroids Update & Ship Collision
+  for _, ast in ipairs(asteroids) do
+    if ast.alive then
+      if ast.hit_flash > 0 then ast.hit_flash = ast.hit_flash - 1 end
+      ast.x = ast.x + ast.vx
+      ast.y = ast.y + ast.vy
+      ast.z = ast.z + ast.vz
+      if ast.x < 24 or ast.x > 232 then ast.vx = -ast.vx end
+      if ast.y < 24 or ast.y > 232 then ast.vy = -ast.vy end
+      if ast.z < 24 or ast.z > 106 then ast.vz = -ast.vz end
+
+      local da = dist3(ship.x, ship.y, ship.z, ast.x, ast.y, ast.z)
+      if da < ast.radius + 3.2 then
+        local nx = (ship.x - ast.x) / math.max(0.1, da)
+        local ny = (ship.y - ast.y) / math.max(0.1, da)
+        local nz = (ship.z - ast.z) / math.max(0.1, da)
+        ship.x = ast.x + nx * (ast.radius + 3.5)
+        ship.y = ast.y + ny * (ast.radius + 3.5)
+        ship.z = mid(18, ast.z + nz * (ast.radius + 3.5), 110)
+        ship.vx = nx * 1.1
+        ship.vy = ny * 1.1
+        ship.vz = nz * 0.8
+        damage_ship(12)
+      end
+    end
+  end
+
+  -- 4. Lasers Update & Hit Detection
+  for i = #lasers, 1, -1 do
+    local l = lasers[i]
+    l.x = l.x + l.vx
+    l.y = l.y + l.vy
+    l.z = l.z + l.vz
+    l.life = l.life - 1
+    local hit = (l.life <= 0 or l.x < 2 or l.x > 253 or l.y < 2 or l.y > 253 or l.z < 2 or l.z > 125)
+
+    if not hit then
+      if l.friendly then
+        -- Check asteroids
+        for _, ast in ipairs(asteroids) do
+          if ast.alive and dist3(l.x, l.y, l.z, ast.x, ast.y, ast.z) <= ast.radius + 1.2 then
+            carve_asteroid(ast, l.x, l.y, l.z)
+            hit = true
+            break
+          end
+        end
+        -- Check drones
+        if not hit then
+          for j = #drones, 1, -1 do
+            local dr = drones[j]
+            if dist3(l.x, l.y, l.z, dr.x, dr.y, dr.z) <= 4.5 then
+              dr.hp = dr.hp - 1
+              dr.hit_flash = 5
+              hit = true
+              if dr.hp <= 0 then
+                spawn_explosion(dr.x, dr.y, dr.z, 5, 11, 14, 22)
+                tone("noise", 240, 50, 0.25, 0.35, 2)
+                credits = credits + 250
+                drones_destroyed = drones_destroyed + 1
+                spawn_ore(dr.x + 1, dr.y, dr.z, "warp")
+                spawn_ore(dr.x - 1, dr.y, dr.z, "warp")
+                table.remove(drones, j)
+                show_msg("SENTRY DRONE DESTROYED! +250 CR", 14, 75)
+              else
+                tone("square", 320, 180, 0.05, 0.2, 2)
+                particle(l.x, l.y, l.z, 11, 0.25)
+              end
+              break
+            end
+          end
+        end
+      else
+        -- Enemy red plasma bolt hitting player
+        if dist3(l.x, l.y, l.z, ship.x, ship.y, ship.z) <= 4.2 then
+          damage_ship(16)
+          hit = true
+        end
+      end
+    end
+
+    if hit then
+      table.remove(lasers, i)
+    end
+  end
+
+  -- 5. Rogue Drone Sentries AI
+  if #drones < MAX_DRONES and tick_count % 240 == 0 then
+    spawn_drone(true)
+  end
+  for _, dr in ipairs(drones) do
+    if dr.hit_flash > 0 then dr.hit_flash = dr.hit_flash - 1 end
+    local d_pl = dist3(dr.x, dr.y, dr.z, ship.x, ship.y, ship.z)
+    if d_pl < 82 and d_st_3d > 30 then
+      -- Pursue & strafe player
+      local tx, ty, tz = ship.x - dr.x, ship.y - dr.y, ship.z - dr.z
+      local len = math.max(0.1, d_pl)
+      dr.yaw = math.atan(ty, tx)
+      local desired = (d_pl > 32) and 0.65 or -0.25
+      dr.vx = dr.vx * 0.9 + (tx / len) * desired * 0.1
+      dr.vy = dr.vy * 0.9 + (ty / len) * desired * 0.1
+      dr.vz = dr.vz * 0.9 + (tz / len) * 0.08
+      dr.fire_cd = dr.fire_cd - 1
+      if dr.fire_cd <= 0 and d_pl < 72 then
+        dr.fire_cd = 65 + flr(rnd(30))
+        local dx, dy, dz = tx / len, ty / len, tz / len
+        table.insert(lasers, {
+          x = dr.x + dx * 4, y = dr.y + dy * 4, z = dr.z + dz * 4,
+          vx = dx * 2.5, vy = dy * 2.5, vz = dz * 2.5,
+          dx = dx, dy = dy, dz = dz,
+          friendly = false,
+          life = 38
+        })
+        tone("saw", 620, 210, 0.09, 0.16, 2)
+      end
+    else
+      -- Orbit asteroid belt
+      dr.patrol_ang = dr.patrol_ang + 0.012 * dr.patrol_dir
+      local gx = STATION_X + math.cos(dr.patrol_ang) * 75
+      local gy = STATION_Y + math.sin(dr.patrol_ang) * 75
+      local tx, ty = gx - dr.x, gy - dr.y
+      local len = math.max(0.1, math.sqrt(tx * tx + ty * ty))
+      dr.yaw = math.atan(ty, tx)
+      dr.vx = dr.vx * 0.92 + (tx / len) * 0.06
+      dr.vy = dr.vy * 0.92 + (ty / len) * 0.06
+      dr.vz = dr.vz * 0.92
+    end
+    dr.x = mid(20, dr.x + dr.vx, 236)
+    dr.y = mid(20, dr.y + dr.vy, 236)
+    dr.z = mid(20, dr.z + dr.vz, 108)
+
+    if d_pl < 5.5 then
+      damage_ship(14)
+      dr.vx = -dr.vx * 2
+      dr.vy = -dr.vy * 2
+    end
+  end
+
+  -- 6. Collectible Ore Cubes & Tractor Magnetism
+  local cargo_total = cargo_warp + cargo_gold
+  for i = #ores, 1, -1 do
+    local o = ores[i]
+    o.life = o.life - 1
+    o.bob = o.bob + 0.12
+    o.vx = o.vx * 0.96
+    o.vy = o.vy * 0.96
+    o.vz = o.vz * 0.96
+    o.x = mid(20, o.x + o.vx, 236)
+    o.y = mid(20, o.y + o.vy, 236)
+    o.z = mid(20, o.z + o.vz, 108)
+
+    local do_pl = dist3(o.x, o.y, o.z, ship.x, ship.y, ship.z)
+    if do_pl < 19 and cargo_total < CARGO_MAX then
+      local pull = 0.85
+      o.x = o.x + (ship.x - o.x) / math.max(0.5, do_pl) * pull
+      o.y = o.y + (ship.y - o.y) / math.max(0.5, do_pl) * pull
+      o.z = o.z + (ship.z - o.z) / math.max(0.5, do_pl) * pull
+      if tick_count % 3 == 0 then
+        particle(o.x, o.y, o.z, (o.kind == "warp") and 10 or 14, 0.2)
+      end
+    end
+
+    if do_pl < 5.2 then
+      if cargo_total < CARGO_MAX then
+        if o.kind == "warp" then
+          cargo_warp = cargo_warp + 1
+          tone("triangle", 660, 1180, 0.08, 0.25, 3)
+        else
+          cargo_gold = cargo_gold + 1
+          tone("triangle", 520, 880, 0.08, 0.22, 3)
+        end
+        cargo_total = cargo_warp + cargo_gold
+        if cargo_total >= CARGO_MAX then
+          show_msg("CARGO HOLD FULL! RETURN TO STATION TO UNLOAD!", 14, 120)
+        end
+        table.remove(ores, i)
+      else
+        if tick_count % 30 == 0 then
+          show_msg("CARGO FULL! DOCK AT STATION ALPHA!", 14, 60)
+        end
+      end
+    elseif o.life <= 0 then
+      table.remove(ores, i)
+    end
+  end
+
+  -- 7. Explosions
+  for i = #explosions, 1, -1 do
+    local ex = explosions[i]
+    ex.life = ex.life - 1
+    if ex.life <= 0 then table.remove(explosions, i) end
+  end
+end
+
+function _update()
+  tick_count = tick_count + 1
+
+  -- Animate space dust parallax motes
+  for _, d in ipairs(dust) do
+    if state == STATE_PLAY then
+      d.x = d.x - ship.vx * 0.4
+      d.y = d.y - ship.vy * 0.4
+      if d.x < 16 then d.x = d.x + 224 elseif d.x > 240 then d.x = d.x - 224 end
+      if d.y < 16 then d.y = d.y + 224 elseif d.y > 240 then d.y = d.y - 224 end
+    end
+  end
+
+  if state == STATE_TITLE then
+    if btnp(4) or btnp(5) then
+      state = STATE_BRIEFING
+      tone("triangle", 440, 660, 0.12, 0.28, 1)
+    end
+    return
+  elseif state == STATE_BRIEFING then
+    if btnp(4) or btnp(5) then
+      reset_game()
+      state = STATE_PLAY
+      tone("triangle", 523, 1046, 0.18, 0.30, 1)
+      show_msg("LAUNCHED! BLAST ASTEROIDS TO MINE WARP CRYSTALS", 8, 120)
+    end
+    return
+  elseif state == STATE_VICTORY then
+    victory_timer = victory_timer + 1
+    if victory_timer % 12 == 0 then
+      spawn_explosion(
+        STATION_X + (rnd() - 0.5) * 32,
+        STATION_Y + (rnd() - 0.5) * 32,
+        STATION_Z + 10 + rnd(16),
+        2.5, 8, 20, 10
+      )
+    end
+    for i = #explosions, 1, -1 do
+      explosions[i].life = explosions[i].life - 1
+      if explosions[i].life <= 0 then table.remove(explosions, i) end
+    end
+    if victory_timer > 30 and btnp(4) then
+      reset_game()
+      state = STATE_PLAY
+      tone("triangle", 523, 880, 0.15, 0.3, 1)
+    end
+    return
+  elseif state == STATE_GAMEOVER then
+    for i = #explosions, 1, -1 do
+      explosions[i].life = explosions[i].life - 1
+      if explosions[i].life <= 0 then table.remove(explosions, i) end
+    end
+    if btnp(4) then
+      reset_game()
+      state = STATE_PLAY
+      tone("triangle", 440, 660, 0.15, 0.3, 1)
+    end
+    return
+  end
+
+  update_play()
+end
+
+local function draw_station_beacons()
+  -- Animated rotating emerald/cyan docking beacon ring around Station Alpha
+  local ring_col = (ship.dock_flash > 0 and (tick_count % 4 < 2)) and 20 or ((tick_count % 20 < 10) and 8 or 20)
+  local rot_off = t() * 1.1
+  for k = 0, 15 do
+    local a = rot_off + (k / 16) * math.pi * 2
+    local bx = STATION_X + math.cos(a) * 23
+    local by = STATION_Y + math.sin(a) * 23
+    local c = (k % 2 == 0) and ring_col or 10
+    vset(bx, by, STATION_Z, c)
+    vset(bx, by, STATION_Z + 1, c)
+  end
+  -- 4 vertical beacon pylons marking docking approach
+  for k = 0, 3 do
+    local a = (k / 4) * math.pi * 2 + 0.785
+    local px = STATION_X + math.cos(a) * 25
+    local py = STATION_Y + math.sin(a) * 25
+    local col = ((flr(t() * 6) + k) % 2 == 0) and 20 or 14
+    box(px, py, STATION_Z - 5, px, py, STATION_Z + 5, col)
+  end
+end
+
+local function draw_world_entities()
+  -- Space dust 3D motes
+  for _, d in ipairs(dust) do
+    vset(d.x, d.y, d.z, d.c)
+  end
+
+  draw_station_beacons()
+
+  -- Destructible voxel asteroids
+  for _, ast in ipairs(asteroids) do
+    if ast.alive then
+      if ast.hit_flash > 0 then
+        pswap(15, 7); pswap(16, 7); pswap(18, 7); pswap(19, 7)
+      end
+      model(ast.model_id, ast.x, ast.y, ast.z - ast.half, 0)
+      if ast.hit_flash > 0 then pswap() end
+    end
+  end
+
+  -- Collectible Ore Cubes
+  for _, o in ipairs(ores) do
+    local bz = o.z + math.sin(o.bob) * 0.9
+    if o.kind == "warp" then
+      model("warpore", o.x, o.y, bz, o.bob)
+    else
+      model("goldore", o.x, o.y, bz, o.bob)
+    end
+  end
+
+  -- Rogue Drone Sentries
+  for _, dr in ipairs(drones) do
+    if dr.hit_flash > 0 then
+      pswap(4, 7); pswap(5, 7); pswap(12, 7)
+    end
+    model("drone", dr.x, dr.y, dr.z, dr.yaw)
+    if dr.hit_flash > 0 then pswap() end
+  end
+
+  -- Player Starfighter + live thruster glow
+  if state ~= STATE_GAMEOVER then
+    if ship.invuln > 0 and (tick_count % 4 < 2) then
+      pswap(5, 8); pswap(6, 10)
+    end
+    model("ship", ship.x, ship.y, ship.z, ship.yaw)
+    if ship.invuln > 0 then pswap() end
+    if ship.thrusting then
+      local fx, fy = math.cos(ship.yaw), math.sin(ship.yaw)
+      local px, py = -fy * 1.5, fx * 1.5
+      local fc = (tick_count % 2 == 0) and 10 or 13
+      line3d(ship.x - fx * 6 + px, ship.y - fy * 6 + py, ship.z, ship.x - fx * 10 + px, ship.y - fy * 10 + py, ship.z, fc)
+      line3d(ship.x - fx * 6 - px, ship.y - fy * 6 - py, ship.z, ship.x - fx * 10 - px, ship.y - fy * 10 - py, ship.z, fc)
+    end
+  end
+
+  -- Laser Beams (crisp 9-voxel plasma streaks)
+  for _, l in ipairs(lasers) do
+    local tx = l.x - l.dx * 9
+    local ty = l.y - l.dy * 9
+    local tz = l.z - l.dz * 9
+    if l.friendly then
+      line3d(tx, ty, tz, l.x, l.y, l.z, 8)
+      vset(l.x, l.y, l.z, 10)
+      vset(l.x - l.dx, l.y - l.dy, l.z - l.dz, 7)
+    else
+      line3d(tx, ty, tz, l.x, l.y, l.z, 12)
+      vset(l.x, l.y, l.z, 13)
+    end
+  end
+
+  -- Explosions
+  for _, ex in ipairs(explosions) do
+    local frac = ex.life / ex.max_life
+    local rad = math.max(1, ex.r * (1.2 - frac * 0.5))
+    sphere(ex.x, ex.y, ex.z, rad, (ex.life % 2 == 0) and ex.c1 or ex.c2)
+  end
+end
+
+local function draw_radar()
+  local rx, ry = 696, 74
+  local rad = 52
+  rectfill(rx - rad - 4, ry - rad - 4, rx + rad + 4, ry + rad + 4, 1)
+  rect(rx - rad - 4, ry - rad - 4, rx + rad + 4, ry + rad + 4, 5)
+  circfill(rx, ry, rad, 3)
+
+  -- Rotate radar relative to ship heading so UP = straight ahead
+  -- Forward = (cos(yaw), sin(yaw)), Right = (sin(yaw), -cos(yaw))
+  local fx, fy = math.cos(ship.yaw), math.sin(ship.yaw)
+  local rgt_x, rgt_y = fy, -fx
+  local scale = 0.48
+
+  local function plot_blip(wx, wy, col, size)
+    local dx, dy = wx - ship.x, wy - ship.y
+    local sx = (dx * rgt_x + dy * rgt_y) * scale
+    local sy = -(dx * fx + dy * fy) * scale
+    local d = math.sqrt(sx * sx + sy * sy)
+    if d > rad - 3 then
+      sx = sx / d * (rad - 3)
+      sy = sy / d * (rad - 3)
+    end
+    circfill(rx + sx, ry + sy, size, col)
+  end
+
+  -- Asteroids
+  for _, ast in ipairs(asteroids) do
+    if ast.alive then
+      plot_blip(ast.x, ast.y, ast.rich_warp and 9 or 16, 1)
+    end
+  end
+  -- Floating Ores
+  for _, o in ipairs(ores) do
+    plot_blip(o.x, o.y, (o.kind == "warp") and 10 or 14, 1)
+  end
+  -- Rogue Drones
+  for _, dr in ipairs(drones) do
+    plot_blip(dr.x, dr.y, 12, 2)
+  end
+  -- Station Alpha (pulsing green/cyan)
+  plot_blip(STATION_X, STATION_Y, (tick_count % 16 < 8) and 20 or 8, 3)
+
+  -- Player center triangle dot
+  circfill(rx, ry, 2, 7)
+
+  -- Station bearing & altitude guidance text under radar
+  local d_st = flr(dist3(ship.x, ship.y, ship.z, STATION_X, STATION_Y, STATION_Z))
+  local dz = flr(STATION_Z - ship.z)
+  local alt_hint = (dz > 4 and ("UP +" .. dz)) or (dz < -4 and ("DN " .. dz)) or "LVL"
+  print("STN " .. d_st .. "M  " .. alt_hint, rx - 50, ry + rad + 8, 20, true, 1)
+end
+
+local function draw_hud()
+  -- Top-Left: Shields & Hull bars
+  rectfill(14, 12, 214, 62, 1)
+  rect(14, 12, 214, 62, 4)
+  print("SHIELD", 22, 19, 8, true, 1)
+  rect(70, 19, 174, 28, 4)
+  local sw = flr((ship.shield / ship.max_shield) * 102)
+  if sw > 0 then
+    local sc = (ship.shield > 30) and 8 or ((tick_count % 8 < 4) and 12 or 13)
+    rectfill(71, 20, 71 + sw, 27, sc)
+  end
+  print(flr(ship.shield) .. "%", 180, 19, 7, true, 1)
+
+  print("HULL", 22, 38, 6, true, 1)
+  rect(70, 38, 174, 47, 4)
+  local hw = flr((ship.hull / ship.max_hull) * 102)
+  if hw > 0 then
+    local hc = (ship.hull > 40) and 20 or ((ship.hull > 20) and 14 or 12)
+    rectfill(71, 39, 71 + hw, 46, hc)
+  end
+  print(flr(ship.hull) .. "%", 180, 38, 7, true, 1)
+
+  -- Top-Center: Mission Progress & Credits
+  local obj_s = string.format("WARP CRYSTALS: %d / %d", crystals_delivered, GOAL_CRYSTALS)
+  print(obj_s, 384 - textw(obj_s), 14, 10, true, 2)
+  local cr_s = string.format("CREDITS: $%d   MINED: %d", credits, asteroids_mined)
+  print(cr_s, 384 - textw(cr_s) / 2, 36, 14, true, 1)
+
+  -- Alert Banner
+  if hud_msg_t > 0 then
+    print(hud_msg, 384 - textw(hud_msg) / 2, 66, hud_msg_col, true, 1)
+  elseif cargo_warp + cargo_gold >= CARGO_MAX then
+    if tick_count % 24 < 16 then
+      local full_s = "CARGO FULL! FLY INTO STATION ALPHA GREEN RING"
+      print(full_s, 384 - textw(full_s) / 2, 66, 20, true, 1)
+    end
+  end
+
+  -- Top-Right: Radar
+  draw_radar()
+
+  -- 3D Projected World Waypoint on Station Alpha
+  local st_sx, st_sy = project(STATION_X, STATION_Y, STATION_Z + 12)
+  if st_sx >= 16 and st_sx <= 752 and st_sy >= 16 and st_sy <= 416 then
+    rect(st_sx - 6, st_sy - 6, st_sx + 6, st_sy + 6, 20)
+    print("STATION", st_sx - 21, st_sy - 16, 20, true, 1)
+  end
+
+  -- Bottom-Left: Cargo Hold & Altitude
+  rectfill(14, 372, 224, 420, 1)
+  rect(14, 372, 224, 420, 4)
+  local cargo_tot = cargo_warp + cargo_gold
+  print(string.format("CARGO %02d/%02d  (W:%d G:%d)", cargo_tot, CARGO_MAX, cargo_warp, cargo_gold), 22, 380, 7, true, 1)
+  rect(22, 394, 214, 402, 4)
+  local xcur = 23
+  local w_px = flr((cargo_warp / CARGO_MAX) * 190)
+  local g_px = flr((cargo_gold / CARGO_MAX) * 190)
+  if w_px > 0 then
+    rectfill(xcur, 395, xcur + w_px, 401, 8)
+    xcur = xcur + w_px
+  end
+  if g_px > 0 then
+    rectfill(xcur, 395, math.min(213, xcur + g_px), 401, 14)
+  end
+  print("ALT " .. flr(ship.z) .. "M", 22, 407, 6, true, 1)
+
+  -- Bottom-Right: Speedometer & Thrust Gauge
+  rectfill(580, 380, 754, 420, 1)
+  rect(580, 380, 754, 420, 4)
+  local kms = flr(ship.spd * 120)
+  print(string.format("%03d KM/S", kms), 590, 388, 7, true, 2)
+  if ship.thrusting then
+    print("BOOST", 698, 392, 13, true, 1)
+  else
+    print("CRUISE", 698, 392, 5, true, 1)
+  end
+end
+
+function _draw()
+  cls()
+
+  if state == STATE_TITLE then
+    local orbit = t() * 0.25
+    camera(STATION_X, STATION_Y, STATION_Z + 4, 1.15, orbit)
+    draw_world_entities()
+
+    rectfill(144, 48, 624, 178, 1)
+    rect(144, 48, 624, 178, 8)
+    print("VOID DRIFTER", 204, 68, 10, true, 5)
+    print("3D SPACE MINING & COMBAT", 240, 122, 14, true, 2)
+    print("TESSERA 256x256x128 VOXEL ENGINE", 272, 152, 6, true, 1)
+
+    if (tick_count % 36) < 26 then
+      print("PRESS A / SPACE TO LAUNCH", 234, 240, 20, true, 2)
+    end
+    if best_credits > 0 then
+      local bs = "HIGH SCORE: $" .. best_credits .. " CR"
+      print(bs, 384 - textw(bs) / 2, 272, 14, true, 1)
+    end
+
+    rectfill(164, 308, 604, 406, 1)
+    rect(164, 308, 604, 406, 4)
+    print("FLIGHT CONTROLS", 336, 318, 8, true, 1)
+    print("LEFT / RIGHT : YAW STEERING", 224, 336, 7, true, 1)
+    print("UP / DOWN    : CLIMB & DIVE ALTITUDE", 224, 352, 7, true, 1)
+    print("BUTTON A (Z / SPACE) : PLASMA THRUST BOOST", 224, 368, 13, true, 1)
+    print("BUTTON B (X / E)     : TWIN PLASMA LASERS", 224, 384, 10, true, 1)
+    return
+  end
+
+  if state == STATE_BRIEFING then
+    local orbit = t() * 0.35
+    camera(STATION_X, STATION_Y, STATION_Z + 4, 1.32, orbit)
+    draw_world_entities()
+
+    rectfill(110, 74, 658, 358, 1)
+    rect(110, 74, 658, 358, 8)
+    print("MISSION BRIEFING", 240, 96, 10, true, 3)
+    print("PILOT! ORBITAL REFINERY ALPHA NEEDS WARP FUEL.", 168, 148, 7, true, 1)
+    print("OBJECTIVE: MINE 25 WARP CRYSTALS & RETURN TO STATION!", 150, 174, 14, true, 1)
+    print("1. BLAST ASTEROIDS WITH TWIN LASERS (B) TO CHIP", 168, 212, 8, true, 1)
+    print("   GLOWING CYAN WARP CRYSTALS & GOLDEN ORE.", 168, 228, 8, true, 1)
+    print("2. FLY NEAR FLOATING CUBES TO TRACTOR INTO CARGO.", 168, 252, 7, true, 1)
+    print("3. DOCK INSIDE THE STATION GREEN BEACON RING TO", 168, 276, 20, true, 1)
+    print("   UNLOAD CARGO, EARN CREDITS & RECHARGE SHIELDS.", 168, 292, 20, true, 1)
+    if (tick_count % 36) < 26 then
+      print("PRESS A / SPACE TO ENGAGE THRUSTERS!", 186, 326, 20, true, 2)
+    end
+    return
+  end
+
+  if state == STATE_VICTORY then
+    local orbit = t() * 0.5
+    camera(STATION_X, STATION_Y, STATION_Z + 4, 1.42, orbit)
+    draw_world_entities()
+
+    rectfill(150, 72, 618, 360, 1)
+    rect(150, 72, 618, 360, 20)
+    print("DOCKING COMPLETE!", 234, 96, 20, true, 3)
+    print("25 WARP CRYSTALS DELIVERED TO ALPHA", 238, 140, 10, true, 1)
+    print(string.format("TOTAL CREDITS   : $%d CR", credits), 240, 182, 14, true, 2)
+    print(string.format("FLIGHT TIME     : %.1f SEC", mission_time), 240, 212, 7, true, 2)
+    print(string.format("ASTEROIDS MINED : %d", asteroids_mined), 240, 242, 8, true, 2)
+    print(string.format("DRONES DESTROYED: %d", drones_destroyed), 240, 272, 11, true, 2)
+    if (tick_count % 36) < 26 then
+      print("PRESS A / SPACE TO LAUNCH NEW SORTIE", 214, 322, 20, true, 1)
+    end
+    return
+  end
+
+  -- Active Flight / Game Over Chase Camera
+  local fx, fy = math.cos(ship.yaw), math.sin(ship.yaw)
+  local tgt_x = ship.x + fx * 24
+  local tgt_y = ship.y + fy * 24
+  local tgt_z = ship.z + 2
+  local tgt_yaw = math.pi / 2 - ship.yaw
+
+  cam.x = cam.x + (tgt_x - cam.x) * 0.22
+  cam.y = cam.y + (tgt_y - cam.y) * 0.22
+  cam.z = cam.z + (tgt_z - cam.z) * 0.22
+  cam.yaw = cam.yaw + angle_diff(tgt_yaw, cam.yaw) * 0.20
+
+  local sx_off, sy_off = 0, 0
+  if cam.shake > 0.1 then
+    sx_off = (rnd() - 0.5) * cam.shake
+    sy_off = (rnd() - 0.5) * cam.shake
+    cam.shake = cam.shake * 0.82
+  end
+
+  camera(cam.x + sx_off, cam.y + sy_off, cam.z, 1.48, cam.yaw)
+  draw_world_entities()
+
+  if state == STATE_GAMEOVER then
+    rectfill(170, 100, 598, 326, 1)
+    rect(170, 100, 598, 326, 12)
+    print("SHIP DESTROYED", 246, 124, 12, true, 3)
+    print("HULL INTEGRITY FAILED IN THE VOID", 252, 168, 7, true, 1)
+    print(string.format("CRYSTALS DELIVERED: %d / %d", crystals_delivered, GOAL_CRYSTALS), 240, 204, 10, true, 2)
+    print(string.format("CREDITS EARNED    : $%d", credits), 240, 234, 14, true, 2)
+    if (tick_count % 36) < 26 then
+      print("PRESS A / SPACE TO RELAUNCH", 224, 286, 20, true, 2)
+    end
+    return
+  end
+
+  draw_hud()
+end

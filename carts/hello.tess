@@ -1,0 +1,11 @@
+tessera cart v1
+__meta__
+title=Hello
+__pal__
+10 3c6fd0
+__lua__
+function _draw()
+  cls()
+  box(120,120,0,135,135,7,10)
+  print("hello tessera",8,8,15)
+end

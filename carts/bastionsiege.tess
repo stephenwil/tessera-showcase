@@ -1,0 +1,758 @@
+tessera cart v1
+__meta__
+title=Bastion Siege
+author=Antigravity
+version=1.0
+players=1
+id=bastionsiege
+__pal__
+10 1a1820
+11 424555
+12 7d849b
+13 00e5ff
+14 a7f3d0
+15 ffffff
+16 2b1518
+17 ff5722
+18 ffb300
+19 5c4d43
+20 8d6e63
+21 2979ff
+22 8e24aa
+23 76ff03
+24 263238
+25 ff3d00
+26 ffd600
+27 18ffff
+28 d50000
+29 1565c0
+30 ffea00
+__models__
+wizard 5x5x7 pivot=2,2,0
+.. 1d 1d 1d ..
+1d 1d 1d 1d 1d
+1d 1d 1d 1d 1d
+1d 1d 1d 1d 1d
+.. 1d 1d 1d ..
+
+.. 1d 1d 1d ..
+1d 1d 1d 1d 1d
+1d 1d 1d 1d 1d
+1d 1d 1d 1d 1d
+.. 1d 1d 1d ..
+
+.. .. .. .. ..
+.. 1d 1d 1d ..
+.. 1d 1d 1d ..
+.. 1d 1d 1d ..
+.. .. .. .. ..
+
+.. .. .. .. ..
+.. 1d 1d 1d ..
+.. 1d 1d 1d ..
+.. 1d 1d 1d ..
+.. .. .. .. ..
+
+.. .. .. .. ..
+.. 1e 1e 1e ..
+.. 1e 15 1e ..
+.. 1e 1e 1e ..
+.. .. .. .. ..
+
+1d 1d 1d 1d 1d
+1d 1d 1d 1d 1d
+1d 1d 1e 1d 1d
+1d 1d 1d 1d 1d
+1d 1d 1d 1d 1d
+
+.. .. .. .. ..
+.. .. .. .. ..
+.. .. 1e .. ..
+.. .. .. .. ..
+.. .. .. .. ..
+
+crawler 5x5x3 pivot=2,2,0
+16 .. .. .. 16
+.. 16 .. 16 ..
+.. .. 16 .. ..
+.. 16 .. 16 ..
+16 .. .. .. 16
+
+.. 16 16 16 ..
+16 16 16 16 16
+16 16 16 16 16
+16 16 16 16 16
+.. 16 16 16 ..
+
+.. .. 17 .. ..
+.. 17 17 17 ..
+.. 17 17 17 ..
+.. 17 17 17 ..
+.. .. .. .. ..
+
+golem 7x7x8 pivot=3,3,0
+18 18 .. .. .. 18 18
+18 18 .. .. .. 18 18
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+18 18 .. .. .. 18 18
+18 18 .. .. .. 18 18
+
+18 18 .. .. .. 18 18
+18 18 .. .. .. 18 18
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+.. .. .. .. .. .. ..
+18 18 .. .. .. 18 18
+18 18 .. .. .. 18 18
+
+.. 18 18 18 18 18 ..
+18 18 18 18 18 18 18
+18 18 19 19 19 18 18
+18 18 19 19 19 18 18
+18 18 19 19 19 18 18
+18 18 18 18 18 18 18
+.. 18 18 18 18 18 ..
+
+.. 18 18 18 18 18 ..
+18 18 18 18 18 18 18
+18 18 19 19 19 18 18
+18 18 19 19 19 18 18
+18 18 19 19 19 18 18
+18 18 18 18 18 18 18
+.. 18 18 18 18 18 ..
+
+.. 18 18 18 18 18 ..
+18 18 18 18 18 18 18
+18 18 19 19 19 18 18
+18 18 19 19 19 18 18
+18 18 19 19 19 18 18
+18 18 18 18 18 18 18
+.. 18 18 18 18 18 ..
+
+.. 18 18 18 18 18 ..
+18 18 18 18 18 18 18
+18 18 19 19 19 18 18
+18 18 19 19 19 18 18
+18 18 19 19 19 18 18
+18 18 18 18 18 18 18
+.. 18 18 18 18 18 ..
+
+.. .. .. .. .. .. ..
+.. .. 18 18 18 .. ..
+.. 18 19 19 19 18 ..
+.. 18 19 19 19 18 ..
+.. 18 19 19 19 18 ..
+.. .. 18 18 18 .. ..
+.. .. .. .. .. .. ..
+
+.. .. .. .. .. .. ..
+.. .. 18 18 18 .. ..
+.. 18 19 19 19 18 ..
+.. 18 19 19 19 18 ..
+.. 18 19 19 19 18 ..
+.. .. 18 18 18 .. ..
+.. .. .. .. .. .. ..
+
+turret 5x5x7 pivot=2,2,0
+15 15 15 15 15
+15 15 15 15 15
+15 15 15 15 15
+15 15 15 15 15
+15 15 15 15 15
+
+15 15 15 15 15
+15 15 15 15 15
+15 15 15 15 15
+15 15 15 15 15
+15 15 15 15 15
+
+.. .. .. .. ..
+.. 15 15 15 ..
+.. 15 15 15 ..
+.. 15 15 15 ..
+.. .. .. .. ..
+
+.. .. .. .. ..
+.. 15 15 15 ..
+.. 15 15 15 ..
+.. 15 15 15 ..
+.. .. .. .. ..
+
+.. .. .. .. ..
+.. .. 0d .. ..
+.. 0d 0d 0d ..
+.. .. 0d .. ..
+.. .. .. .. ..
+
+.. .. .. .. ..
+.. .. 0d .. ..
+.. 0d 0d 0d ..
+.. .. 0d .. ..
+.. .. .. .. ..
+
+.. .. .. .. ..
+.. .. .. .. ..
+.. .. 0e .. ..
+.. .. .. .. ..
+.. .. .. .. ..
+__lua__
+
+-- =========================================================================
+-- BASTION SIEGE: VOXEL ARENA DEFENSE
+-- High-Res 768x432 Voxel Rampart & Wave Survival
+-- =========================================================================
+
+STATE_TITLE = 0
+STATE_PLAY = 1
+STATE_GAMEOVER = 2
+STATE_VICTORY = 3
+
+state = STATE_TITLE
+core_hp = 100
+max_core_hp = 100
+scrap = 40
+wave = 1
+max_waves = 5
+wave_timer = 0
+wave_active = false
+enemies_to_spawn = 0
+spawn_timer = 0
+
+player = {
+  x = 128,
+  y = 115,
+  z = 5,
+  vx = 0,
+  vy = 0,
+  facing_x = 0,
+  facing_y = 1,
+  speed = 1.4,
+  attack_cd = 0,
+  build_cd = 0,
+  hp = 100,
+  max_hp = 100
+}
+
+enemies = {}
+projectiles = {}
+turrets = {}
+particles = {}
+collectibles = {}
+core_flash = 0
+shake = 0
+
+-- Build permanent Citadel Ramparts into Map layer in _init()
+function build_fortress_map()
+  mclear(0)
+  -- 1. Dark Volcanic Ground Base
+  mbox(0, 0, 0, 255, 255, 1, 16)
+
+  -- Magma trenches on outer perimeters
+  mbox(10, 10, 0, 245, 18, 1, 17)
+  mbox(10, 237, 0, 245, 245, 1, 17)
+  mbox(10, 10, 0, 18, 245, 1, 17)
+  mbox(237, 10, 0, 245, 245, 1, 17)
+
+  -- 2. Raised Fortress Plateau: (88..168) at z=2..4
+  mbox(88, 88, 2, 168, 168, 4, 11)
+
+  -- Courtyard paved floor at z=4
+  mbox(92, 92, 4, 164, 164, 4, 12)
+
+  -- 3. Outer Stone Rampart Walls: z=5..9
+  -- North Wall (gap at 122..134 for gate)
+  mbox(88, 164, 5, 121, 168, 9, 11)
+  mbox(135, 164, 5, 168, 168, 9, 11)
+
+  -- South Wall (gap at 122..134 for gate)
+  mbox(88, 88, 5, 121, 92, 9, 11)
+  mbox(135, 88, 5, 168, 92, 9, 11)
+
+  -- West Wall (gap at 122..134 for gate)
+  mbox(88, 88, 5, 92, 121, 9, 11)
+  mbox(88, 135, 5, 92, 168, 9, 11)
+
+  -- East Wall (gap at 122..134 for gate)
+  mbox(164, 88, 5, 168, 121, 9, 11)
+  mbox(164, 135, 5, 168, 168, 9, 11)
+
+  -- Crenellations / Battlements along tops
+  for x = 88, 168, 4 do
+    mbox(x, 164, 10, x+1, 168, 11, 12)
+    mbox(x, 88, 10, x+1, 92, 11, 12)
+  end
+  for y = 88, 168, 4 do
+    mbox(88, y, 10, 92, y+1, 11, 12)
+    mbox(164, y, 10, 168, y+1, 11, 12)
+  end
+
+  -- Central Core Pedestal at (124..132, 124..132, 5..7)
+  mbox(124, 124, 5, 132, 132, 7, 10)
+  mbox(125, 125, 7, 131, 131, 8, 11)
+
+  -- Pathway cobblestones from gates to edges
+  mbox(122, 18, 1, 134, 88, 1, 19)
+  mbox(122, 168, 1, 134, 237, 1, 19)
+  mbox(18, 122, 1, 88, 134, 1, 19)
+  mbox(168, 122, 1, 237, 134, 1, 19)
+end
+
+function _init()
+  build_fortress_map()
+  camera(128, 96, 75, 0.95, 0)
+  sun(0.4, -0.6, 0.8, 1.0)
+  sky(10, 16)
+  fog(10, 0.002)
+end
+
+function start_game()
+  state = STATE_PLAY
+  core_hp = 100
+  scrap = 50
+  wave = 1
+  enemies = {}
+  projectiles = {}
+  turrets = {}
+  particles = {}
+  collectibles = {}
+  player.x = 128
+  player.y = 115
+  player.z = 5
+  player.hp = 100
+  start_wave(1)
+end
+
+function start_wave(w)
+  wave = w
+  wave_active = true
+  wave_timer = 0
+  if w == 1 then
+    enemies_to_spawn = 10
+  elseif w == 2 then
+    enemies_to_spawn = 16
+  elseif w == 3 then
+    enemies_to_spawn = 22
+  elseif w == 4 then
+    enemies_to_spawn = 30
+  else
+    enemies_to_spawn = 40
+  end
+  spawn_timer = 30
+  tone("triangle", 330, 440, 0.15, 0.4)
+  tone("triangle", 440, 660, 0.25, 0.4)
+end
+
+function spawn_enemy()
+  local side = flr(rnd(4))
+  local ex, ey, ez
+  if side == 0 then
+    ex = 128 + rnd(12) - 6; ey = 24; ez = 2
+  elseif side == 1 then
+    ex = 128 + rnd(12) - 6; ey = 232; ez = 2
+  elseif side == 2 then
+    ex = 24; ey = 128 + rnd(12) - 6; ez = 2
+  else
+    ex = 232; ey = 128 + rnd(12) - 6; ez = 2
+  end
+
+  local is_golem = (wave >= 2 and rnd() < (0.2 + wave * 0.05))
+  table.insert(enemies, {
+    x = ex,
+    y = ey,
+    z = ez,
+    type = is_golem and "golem" or "crawler",
+    hp = is_golem and (28 + wave * 8) or (8 + wave * 2),
+    max_hp = is_golem and (28 + wave * 8) or (8 + wave * 2),
+    speed = is_golem and 0.45 or 0.85,
+    damage = is_golem and 15 or 5,
+    attack_cd = 0,
+    hit_flash = 0
+  })
+end
+
+function add_particles(px, py, pz, color, count)
+  for i = 1, count do
+    table.insert(particles, {
+      x = px,
+      y = py,
+      z = pz,
+      vx = (rnd() - 0.5) * 1.5,
+      vy = (rnd() - 0.5) * 1.5,
+      vz = rnd() * 1.5 + 0.5,
+      color = color,
+      life = 20 + flr(rnd(15))
+    })
+  end
+end
+
+function _update()
+  if state == STATE_TITLE then
+    if btnp(4) then
+      start_game()
+    end
+    return
+  elseif state == STATE_GAMEOVER or state == STATE_VICTORY then
+    if btnp(4) then
+      start_game()
+    end
+    return
+  end
+
+  -- Player Movement
+  local dx = 0
+  local dy = 0
+  if btn(0) then dx = dx - 1 end
+  if btn(1) then dx = dx + 1 end
+  if btn(2) then dy = dy + 1 end
+  if btn(3) then dy = dy - 1 end
+
+  if dx ~= 0 or dy ~= 0 then
+    local len = (dx*dx + dy*dy) ^ 0.5
+    dx = dx / len
+    dy = dy / len
+    player.facing_x = dx
+    player.facing_y = dy
+
+    local nx = player.x + dx * player.speed
+    local ny = player.y + dy * player.speed
+    -- Keep within playable fortress/courtyard bounds
+    if nx >= 94 and nx <= 162 then player.x = nx end
+    if ny >= 94 and ny <= 162 then player.y = ny end
+  end
+
+  -- Attack (Button A)
+  if player.attack_cd > 0 then
+    player.attack_cd = player.attack_cd - 1
+  elseif btnp(4) or (btn(4) and player.attack_cd == 0) then
+    player.attack_cd = 12
+    table.insert(projectiles, {
+      x = player.x + player.facing_x * 4,
+      y = player.y + player.facing_y * 4,
+      z = player.z + 2,
+      vx = player.facing_x * 2.8,
+      vy = player.facing_y * 2.8,
+      vz = 0,
+      life = 45,
+      damage = 10
+    })
+    tone("saw", 700, 250, 0.08, 0.25)
+  end
+
+  -- Build / Deploy Turret (Button B)
+  if player.build_cd > 0 then
+    player.build_cd = player.build_cd - 1
+  elseif btnp(5) then
+    if scrap >= 25 then
+      scrap = scrap - 25
+      player.build_cd = 20
+      table.insert(turrets, {
+        x = flr(player.x),
+        y = flr(player.y),
+        z = player.z,
+        fire_cd = 0,
+        hp = 50
+      })
+      tone("triangle", 220, 110, 0.15, 0.5)
+      add_particles(player.x, player.y, player.z + 3, 21, 15)
+    else
+      -- Cannot afford tone
+      tone("noise", 150, 80, 0.08, 0.2)
+    end
+  end
+
+  -- Turret Logic
+  for _, t in ipairs(turrets) do
+    if t.fire_cd > 0 then
+      t.fire_cd = t.fire_cd - 1
+    else
+      -- Find nearest enemy within 45 voxels
+      local closest = nil
+      local min_dist = 45
+      for _, e in ipairs(enemies) do
+        local dist = ((e.x - t.x)^2 + (e.y - t.y)^2)^0.5
+        if dist < min_dist then
+          min_dist = dist
+          closest = e
+        end
+      end
+      if closest then
+        t.fire_cd = 22
+        local edx = closest.x - t.x
+        local edy = closest.y - t.y
+        local d = (edx*edx + edy*edy)^0.5
+        table.insert(projectiles, {
+          x = t.x,
+          y = t.y,
+          z = t.z + 5,
+          vx = (edx / d) * 3.2,
+          vy = (edy / d) * 3.2,
+          vz = ((closest.z - (t.z + 5)) / d) * 3.2,
+          life = 40,
+          damage = 12
+        })
+        tone("triangle", 880, 440, 0.06, 0.2)
+      end
+    end
+  end
+
+  -- Projectile Updates
+  for i = #projectiles, 1, -1 do
+    local p = projectiles[i]
+    p.x = p.x + p.vx
+    p.y = p.y + p.vy
+    p.z = p.z + p.vz
+    p.life = p.life - 1
+
+    local hit = false
+    for _, e in ipairs(enemies) do
+      local dist = ((e.x - p.x)^2 + (e.y - p.y)^2 + (e.z - p.z)^2)^0.5
+      if dist < (e.type == "golem" and 5 or 3.2) then
+        e.hp = e.hp - p.damage
+        e.hit_flash = 4
+        hit = true
+        add_particles(p.x, p.y, p.z, 27, 8)
+        tone("saw", 300, 120, 0.06, 0.2)
+        break
+      end
+    end
+
+    if hit or p.life <= 0 or p.x < 10 or p.x > 245 or p.y < 10 or p.y > 245 then
+      table.remove(projectiles, i)
+    end
+  end
+
+  -- Spawning & Wave Management
+  if wave_active then
+    spawn_timer = spawn_timer - 1
+    if spawn_timer <= 0 and enemies_to_spawn > 0 then
+      spawn_enemy()
+      enemies_to_spawn = enemies_to_spawn - 1
+      spawn_timer = 45 - wave * 4
+    end
+
+    if enemies_to_spawn <= 0 and #enemies == 0 then
+      wave_active = false
+      wave_timer = 120 -- break before next wave
+      scrap = scrap + 20 + wave * 5
+      tone("triangle", 440, 660, 0.15, 0.3)
+      tone("triangle", 660, 880, 0.3, 0.3)
+    end
+  else
+    wave_timer = wave_timer - 1
+    if wave_timer <= 0 then
+      if wave >= max_waves then
+        state = STATE_VICTORY
+        tone("triangle", 523, 659, 0.2, 0.5)
+        tone("triangle", 659, 784, 0.35, 0.5)
+      else
+        start_wave(wave + 1)
+      end
+    end
+  end
+
+  -- Enemy Updates & AI
+  for i = #enemies, 1, -1 do
+    local e = enemies[i]
+    if e.hit_flash > 0 then e.hit_flash = e.hit_flash - 1 end
+
+    -- Move towards the Central Core at (128, 128)
+    local target_x = 128
+    local target_y = 128
+    local cdx = target_x - e.x
+    local cdy = target_y - e.y
+    local dist_core = (cdx*cdx + cdy*cdy)^0.5
+
+    if dist_core > 7 then
+      e.x = e.x + (cdx / dist_core) * e.speed
+      e.y = e.y + (cdy / dist_core) * e.speed
+      -- Ramp elevation as approaching fortress
+      if dist_core < 45 and e.z < 5 then
+        e.z = e.z + 0.15
+      end
+    else
+      -- Attack Central Core!
+      if e.attack_cd > 0 then
+        e.attack_cd = e.attack_cd - 1
+      else
+        e.attack_cd = 40
+        core_hp = core_hp - e.damage
+        core_flash = 8
+        shake = 4
+        tone("square", 750, 300, 0.12, 0.5)
+        if core_hp <= 0 then
+          core_hp = 0
+          state = STATE_GAMEOVER
+          tone("noise", 180, 50, 0.6, 0.8)
+        end
+      end
+    end
+
+    -- Check if enemy defeated
+    if e.hp <= 0 then
+      local reward = (e.type == "golem" and 15 or 5)
+      table.insert(collectibles, {
+        x = e.x,
+        y = e.y,
+        z = e.z + 1,
+        value = reward,
+        life = 360
+      })
+      add_particles(e.x, e.y, e.z + 2, (e.type == "golem" and 17 or 22), 20)
+      tone("noise", 220, 80, 0.15, 0.35)
+      table.remove(enemies, i)
+    end
+  end
+
+  -- Collectibles Updates
+  for i = #collectibles, 1, -1 do
+    local c = collectibles[i]
+    c.life = c.life - 1
+    local pdist = ((player.x - c.x)^2 + (player.y - c.y)^2)^0.5
+    if pdist < 6 then
+      scrap = scrap + c.value
+      tone("triangle", 600, 950, 0.08, 0.25)
+      table.remove(collectibles, i)
+    elseif c.life <= 0 then
+      table.remove(collectibles, i)
+    end
+  end
+
+  -- Particles Updates
+  for i = #particles, 1, -1 do
+    local pt = particles[i]
+    pt.x = pt.x + pt.vx
+    pt.y = pt.y + pt.vy
+    pt.z = pt.z + pt.vz
+    pt.vz = pt.vz - 0.08
+    pt.life = pt.life - 1
+    if pt.life <= 0 or pt.z < 1 then
+      table.remove(particles, i)
+    end
+  end
+
+  if core_flash > 0 then core_flash = core_flash - 1 end
+  if shake > 0 then shake = shake - 1 end
+end
+
+function _draw()
+  cls()
+
+  -- Camera setup
+  local cx = 128
+  local cy = 96
+  if shake > 0 then
+    cx = cx + (rnd(2) - 1) * 1.5
+    cy = cy + (rnd(2) - 1) * 1.5
+  end
+  camera(cx, cy, 75, 0.95, 0)
+
+  -- Dynamic Central Core Crystal
+  local core_c = (core_flash > 0) and 28 or 13
+  local pulse = flr(mid(0, (flr(t() * 12) % 3), 2))
+  box(126 - pulse, 126 - pulse, 8, 130 + pulse, 130 + pulse, 15 + pulse, core_c)
+  box(127, 127, 16 + pulse, 129, 129, 18 + pulse, 14)
+
+  -- Draw Turrets
+  for _, t in ipairs(turrets) do
+    model("turret", t.x, t.y, t.z)
+  end
+
+  -- Draw Collectibles (glowing floating cubes)
+  for _, c in ipairs(collectibles) do
+    local bob = flr((flr(t() * 8) % 2))
+    box(c.x - 1, c.y - 1, c.z + bob, c.x + 1, c.y + 1, c.z + bob + 2, 26)
+  end
+
+  -- Draw Enemies
+  for _, e in ipairs(enemies) do
+    local cmod = e.hit_flash > 0 and 15 or nil
+    if cmod then pswap(e.type == "golem" and 18 or 16, 15) end
+
+    if e.type == "golem" then
+      model("golem", e.x, e.y, e.z)
+    else
+      model("crawler", e.x, e.y, e.z)
+    end
+
+    if cmod then pswap() end
+  end
+
+  -- Draw Player
+  model("wizard", player.x, player.y, player.z)
+
+  -- Draw Projectiles
+  for _, p in ipairs(projectiles) do
+    sphere(p.x, p.y, p.z, 1.4, 27)
+  end
+
+  -- Draw Particles
+  for _, pt in ipairs(particles) do
+    vset(flr(pt.x), flr(pt.y), flr(pt.z), pt.color)
+  end
+
+  -- 2D HUD OVERLAY (768 x 432)
+  if state == STATE_TITLE then
+    rectfill(160, 100, 608, 332, 10)
+    rect(160, 100, 608, 332, 13)
+    rect(164, 104, 604, 328, 11)
+
+    print("BASTION SIEGE", 270, 130, 13)
+    print("VOXEL CITADEL DEFENSE", 260, 175, 12)
+
+    print("The Nexus Core is under assault by volcanic abominations!", 180, 215, 15)
+    print("Defend the citadel walls and vanquish all waves.", 200, 235, 15)
+
+    print("CONTROLS:", 210, 265, 14)
+    print("Arrows / WASD  : Move Engineer", 210, 280, 15)
+    print("Z / Space (A)  : Magic Arcane Blast", 210, 295, 15)
+    print("X / E (B)      : Deploy Sentinel Turret (25 Scrap)", 210, 310, 15)
+
+    local blink = (flr(t() * 3) % 2 == 0)
+    if blink then
+      print(">> PRESS A TO DEFEND CITADEL <<", 240, 350, 13)
+    end
+    return
+  end
+
+  -- Top HUD Bar
+  rectfill(0, 0, 768, 42, 10)
+  rect(0, 42, 768, 44, 11)
+
+  -- Core Health Bar
+  print("NEXUS CORE", 20, 14, 13)
+  rect(120, 12, 320, 28, 11)
+  local hp_w = flr((core_hp / max_core_hp) * 198)
+  local hp_color = (core_hp > 50 and 13) or (core_hp > 25 and 18) or 28
+  if hp_w > 0 then
+    rectfill(121, 13, 121 + hp_w, 27, hp_color)
+  end
+  print(tostring(core_hp) .. "%", 210, 15, 15)
+
+  -- Wave & Scrap HUD
+  print("WAVE: " .. tostring(wave) .. "/" .. tostring(max_waves), 360, 14, 14)
+  print("SCRAP: " .. tostring(scrap), 500, 14, 26)
+  print("TURRETS: " .. tostring(#turrets), 640, 14, 21)
+
+  -- Wave Banner
+  if not wave_active and state == STATE_PLAY then
+    local s = "NEXT WAVE IN " .. tostring(flr(wave_timer / 30) + 1) .. "s"
+    print(s, 310, 60, 18)
+  end
+
+  -- Game Over & Victory Screens
+  if state == STATE_GAMEOVER then
+    rectfill(200, 140, 568, 290, 10)
+    rect(200, 140, 568, 290, 28)
+    print("THE NEXUS CORE HAS FALLEN", 245, 175, 28)
+    print("Surviving Waves: " .. tostring(wave - 1), 295, 215, 15)
+    print("PRESS A TO RESTART", 290, 255, 14)
+  elseif state == STATE_VICTORY then
+    rectfill(200, 140, 568, 290, 10)
+    rect(200, 140, 568, 290, 13)
+    print("CITADEL VICTORY!", 305, 175, 13)
+    print("All Waves Repelled Successfully!", 255, 215, 15)
+    print("PRESS A TO PLAY AGAIN", 280, 255, 14)
+  end
+end

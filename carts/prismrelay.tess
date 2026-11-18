@@ -1,0 +1,295 @@
+tessera cart v1
+__meta__
+id=prismrelay
+title=Prism Relay
+author=Tessera
+version=1
+players=1
+__pal__
+1 070a12
+2 101b2e
+3 1b2f49
+4 2c4a63
+5 4b6b7a
+6 88a9a6
+7 d4f0e8
+8 ffffff
+9 ff4d6d
+10 ff8c42
+11 ffd166
+12 6ee7ff
+13 4aa3ff
+14 b388ff
+15 2ee59d
+16 3a2a4d
+__sfx__
+0 triangle 660>990 0.06 0.16
+1 square 330>165 0.16 0.16
+2 triangle 880>1320 0.12 0.22
+3 noise 0>0 0.12 0.22
+__lua__
+-- Prism Relay
+-- Light all prism pylons before the sky clock runs out.
+-- Move: arrows/WASD or gamepad stick/D-pad
+-- A: start / retry
+-- B: back to title
+
+local mode = "title"
+local px, py = 128, 128
+local score = 0
+local start_time = 0
+local time_limit = 55
+local invuln = 0
+local hit_flash = 0
+local wobble = 0
+
+local pylons = {
+  {  64,  64, false },
+  { 192,  64, false },
+  {  64, 192, false },
+  { 192, 192, false },
+  { 128, 128, false },
+}
+
+local sentries = {
+  { r = 52, s =  0.55, p = 0.2 },
+  { r = 76, s = -0.42, p = 2.6 },
+  { r = 94, s =  0.33, p = 4.3 },
+}
+
+local function paint_pylon(i, lit)
+  local p = pylons[i]
+  local x, y = p[1], p[2]
+  local core = lit and 12 or 6
+  local crown = lit and 15 or 5
+
+  -- Base plinth.
+  mbox(x - 9, y - 9, 3, x + 9, y + 9, 6, 16)
+  mbox(x - 8, y - 8, 4, x + 8, y + 8, 6, 4)
+
+  -- Prism column.
+  mbox(x - 3, y - 3, 6, x + 3, y + 3, 20, core)
+  mbox(x - 1, y - 1, 6, x + 1, y + 1, 22, 8)
+
+  -- Crown plate.
+  mbox(x - 6, y - 6, 20, x + 6, y + 6, 22, crown)
+end
+
+local function build_arena()
+  mclear()
+
+  -- Ground slab.
+  mbox(0, 0, 0, 255, 255, 2, 2)
+  mbox(8, 8, 0, 247, 247, 2, 3)
+
+  -- Low border walls.
+  mbox(0, 0, 0, 255, 10, 8, 4)
+  mbox(0, 245, 0, 255, 255, 8, 4)
+  mbox(0, 0, 0, 10, 255, 8, 4)
+  mbox(245, 0, 0, 255, 255, 8, 4)
+
+  -- Faint "circuit" inlays to hint the routes.
+  for i = 24, 232, 16 do
+    mbox(i, 20, 1, i + 2, 236, 1, 5)
+    mbox(20, i, 1, 236, i + 2, 1, 5)
+  end
+
+  -- Corner notches.
+  mbox(16, 16, 0, 28, 28, 5, 1)
+  mbox(227, 16, 0, 239, 28, 5, 1)
+  mbox(16, 227, 0, 28, 239, 5, 1)
+  mbox(227, 227, 0, 239, 239, 5, 1)
+
+  -- Place dormant pylons on the persistent map (cheap to render).
+  for i = 1, #pylons do
+    paint_pylon(i, false)
+  end
+end
+
+local function count_lit()
+  local n = 0
+  for i = 1, #pylons do
+    if pylons[i][3] then n = n + 1 end
+  end
+  return n
+end
+
+local function unlight_one()
+  -- Remove the most recently lit pylon (deterministic, feels fair).
+  for i = #pylons, 1, -1 do
+    if pylons[i][3] then
+      pylons[i][3] = false
+      paint_pylon(i, false)
+      return true
+    end
+  end
+  return false
+end
+
+local function reset()
+  px, py = 128, 208
+  score = 0
+  start_time = t()
+  invuln = 0
+  hit_flash = 0
+  wobble = 0
+  for i = 1, #pylons do
+    pylons[i][3] = false
+    paint_pylon(i, false)
+  end
+  mode = "play"
+  sfx(0)
+end
+
+function _init()
+  build_arena()
+  camera(128, 128, 74, 1.02, 0)
+  sky(1, 2)
+  fog(1, 0.0018)
+end
+
+function _update()
+  if mode == "title" then
+    if btnp(0) or btnp(2) or btnp(4) then reset() end
+    return
+  end
+
+  if mode == "won" or mode == "lost" then
+    if btnp(0) or btnp(4) then reset() end
+    if btnp(1) or btnp(5) then mode = "title" end
+    return
+  end
+
+  -- Play mode.
+  local elapsed = t() - start_time
+  local remaining = time_limit - elapsed
+  if remaining <= 0 then
+    mode = "lost"
+    sfx(3)
+    return
+  end
+
+  if invuln > 0 then invuln = math.max(0, invuln - (1 / 30)) end
+  hit_flash = math.max(0, hit_flash - 0.06)
+
+  local dx, dy = 0, 0
+  if btn(0) then dx = dx - 1 end
+  if btn(1) then dx = dx + 1 end
+  if btn(2) then dy = dy - 1 end
+  if btn(3) then dy = dy + 1 end
+
+  local ax = axis(0)
+  local ay = axis(1)
+  if math.abs(ax) > 0.15 then dx = ax end
+  if math.abs(ay) > 0.15 then dy = ay end
+
+  if dx ~= 0 or dy ~= 0 then
+    local len = math.sqrt(dx * dx + dy * dy)
+    dx = dx / len
+    dy = dy / len
+    px = mid(18, px + dx * 44 * (1 / 30), 238)
+    py = mid(18, py + dy * 44 * (1 / 30), 238)
+    wobble = wobble + 0.1
+  end
+
+  -- Light pylons.
+  for i = 1, #pylons do
+    local p = pylons[i]
+    if not p[3] then
+      local qx, qy = p[1] - px, p[2] - py
+      if qx * qx + qy * qy < 11 * 11 then
+        p[3] = true
+        paint_pylon(i, true)
+        score = count_lit()
+        hit_flash = 0.35
+        sfx(0)
+      end
+    end
+  end
+
+  -- Sentry collisions (time penalty + one pylon darkens).
+  for i = 1, #sentries do
+    local s = sentries[i]
+    local sx = 128 + math.cos(t() * s.s + s.p) * s.r
+    local sy = 128 + math.sin(t() * s.s + s.p) * s.r
+    local qx, qy = sx - px, sy - py
+    if qx * qx + qy * qy < 10 * 10 and invuln <= 0 then
+      invuln = 1.0
+      hit_flash = 1
+      sfx(1)
+      if unlight_one() then score = count_lit() end
+      start_time = start_time - 4
+    end
+  end
+
+  if score == #pylons then
+    mode = "won"
+    sfx(2)
+  end
+end
+
+local function draw_sentry(x, y)
+  -- Simple "ring drone" (boxes only: cheap for headless swiftshader).
+  box(x - 6, y - 6, 15, x + 6, y + 6, 17, 9)
+  box(x - 4, y - 4, 17, x + 4, y + 4, 19, 10)
+  box(x - 2, y - 2, 19, x + 2, y + 2, 20, 8)
+end
+
+local function draw_player(x, y)
+  local bob = 0.5 + math.sin(wobble) * 0.4
+  box(x - 4, y - 4, 13 + bob, x + 4, y + 4, 17 + bob, 13)
+  box(x - 2, y - 2, 17 + bob, x + 2, y + 2, 19 + bob, 12)
+  box(x - 10, y - 2, 14 + bob, x - 6, y + 2, 16 + bob, 7)
+  box(x + 6, y - 2, 14 + bob, x + 10, y + 2, 16 + bob, 7)
+  if hit_flash > 0 then
+    box(x - 6, y - 6, 12, x + 6, y + 6, 18, 9)
+  end
+end
+
+function _draw()
+  cls()
+  camera(128, 128, 74, 1.02 + hit_flash * 0.02, math.sin(t() * 0.11) * 0.01)
+
+  -- Sentries.
+  for i = 1, #sentries do
+    local s = sentries[i]
+    local sx = 128 + math.cos(t() * s.s + s.p) * s.r
+    local sy = 128 + math.sin(t() * s.s + s.p) * s.r
+    draw_sentry(sx, sy)
+  end
+
+  -- Player.
+  if mode ~= "title" then
+    draw_player(px, py)
+  end
+
+  -- Overlay UI.
+  if mode == "title" then
+    rectfill(214, 132, 554, 310, 1)
+    print("PRISM RELAY", 22, 18, 12, 2, 1)
+    print("Light every pylon", 22, 56, 8)
+    print("Avoid the orbit sentries", 22, 76, 8)
+    print("Each hit dims one pylon", 22, 96, 6)
+    print("and steals 4 seconds", 22, 112, 6)
+    print("Z / A  -  begin", 22, 144, 11)
+    print("X / B  -  title", 22, 162, 7)
+  else
+    local remaining = math.max(0, flr(time_limit - (t() - start_time)))
+    print("PYLONS " .. score .. "/" .. #pylons, 18, 18, 12)
+    print("SKY CLOCK " .. remaining, 18, 38, 11)
+
+    if mode == "won" then
+      rectfill(214, 140, 554, 298, 1)
+      print("RELAY COMPLETE", 22, 20, 15, 2, 1)
+      print("All prisms singing", 22, 64, 8)
+      print("Z / A  -  again", 22, 96, 11)
+      print("X / B  -  title", 22, 114, 7)
+    elseif mode == "lost" then
+      rectfill(214, 140, 554, 298, 1)
+      print("CLOCK WENT DARK", 22, 20, 9, 2, 1)
+      print("Pylons lit: " .. score .. "/" .. #pylons, 22, 64, 8)
+      print("Z / A  -  retry", 22, 96, 11)
+      print("X / B  -  title", 22, 114, 7)
+    end
+  end
+end

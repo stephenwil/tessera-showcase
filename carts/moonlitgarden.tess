@@ -1,0 +1,233 @@
+tessera cart v1
+__meta__
+id=moonlitgarden
+title=Moonlit Garden
+author=Tessera
+version=1
+players=1
+__pal__
+1 07152f
+2 10284a
+3 164d63
+4 1f6b67
+5 2a8d72
+6 58b78a
+7 9bd49e
+8 d7f2bd
+9 f6df84
+10 fff5b7
+11 6e4b79
+12 3d315a
+13 b8a4d4
+14 c66d67
+15 ffffff
+__sfx__
+0 square 880>1320 0.08 0.18
+1 square 330>165 0.18 0.14
+2 triangle 660>990 0.22 0.16
+__lua__
+-- Moonlit Garden
+-- Collect all twelve glowbloom moths before the lantern fades.
+-- Move: arrows/WASD or gamepad stick/D-pad
+-- A: start/restart
+-- B: quiet restart
+
+local mode = "title"
+local px, py = 128, 128
+local score = 0
+local remaining = 45
+local start_time = 0
+local flash = 0
+
+local blooms = {
+  {76,76,false}, {180,76,false}, {128,58,false},
+  {96,112,false}, {160,112,false}, {68,144,false},
+  {188,144,false}, {112,178,false}, {148,178,false},
+  {52,104,false}, {204,104,false}, {128,204,false}
+}
+
+local enemies = {
+  {x=82,y=128,r=25,s=0.55,p=0},
+  {x=174,y=128,r=25,s=-0.48,p=1.8},
+  {x=128,y=82,r=22,s=0.72,p=3.1},
+  {x=128,y=174,r=22,s=-0.62,p=5.2}
+}
+
+local function reset()
+  px, py = 128, 128
+  score = 0
+  remaining = 45
+  start_time = t()
+  flash = 0
+  for i = 1, #blooms do blooms[i][3] = false end
+  mode = "play"
+  tone("triangle", 440, 660, 0.12, 0.16, 2)
+end
+
+local function build_garden()
+  mclear()
+  mbox(0,0,0,255,255,1,1)
+  mbox(44,44,0,212,212,4,2)
+  mbox(48,48,0,208,208,5,5)
+
+  -- Four clipped garden beds.
+  mbox(58,58,5,94,94,8,4)
+  mbox(162,58,5,198,94,8,4)
+  mbox(58,162,5,94,198,8,4)
+  mbox(162,162,5,198,198,8,4)
+
+  -- Pale stepping stones.
+  for i = 0, 9 do
+    mbox(125+i*2,58+i*9,6,131+i*2,64+i*9,7,8)
+  end
+
+  -- Broken edging marks.
+  for i = 52, 204, 12 do
+    mbox(i,42,5,i+5,47,7,7)
+    mbox(i,209,5,i+5,214,7,7)
+  end
+  for i = 52, 204, 12 do
+    mbox(42,i,5,47,i+5,7,7)
+    mbox(209,i,5,214,i+5,7,7)
+  end
+end
+
+function _init()
+  build_garden()
+  camera(128,128,58,1.05,0)
+  sky(1,2)
+  fog(1,0.002)
+end
+
+function _update()
+  if mode == "title" then
+    if btnp(0) or btnp(2) or btnp(4) then reset() end
+    return
+  end
+
+  if mode == "won" or mode == "lost" then
+    if btnp(0) or btnp(4) then reset() end
+    if btnp(1) or btnp(5) then mode = "title" end
+    return
+  end
+
+  remaining = 45 - (t() - start_time)
+  if remaining <= 0 then
+    remaining = 0
+    mode = "lost"
+    sfx(1)
+  end
+
+  local dx, dy = 0, 0
+  if btn(0) then dx = dx - 1 end
+  if btn(1) then dx = dx + 1 end
+  if btn(2) then dy = dy - 1 end
+  if btn(3) then dy = dy + 1 end
+
+  local ax = axis(0)
+  local ay = axis(1)
+  if math.abs(ax) > 0.15 then dx = ax end
+  if math.abs(ay) > 0.15 then dy = ay end
+
+  if dx ~= 0 or dy ~= 0 then
+    local length = math.sqrt(dx*dx + dy*dy)
+    dx = dx / length
+    dy = dy / length
+    px = mid(50, px + dx * 16 * (1/30), 206)
+    py = mid(50, py + dy * 16 * (1/30), 206)
+  end
+
+  flash = math.max(0, flash - 0.04)
+
+  for i = 1, #blooms do
+    local b = blooms[i]
+    if not b[3] then
+      local qx, qy = b[1]-px, b[2]-py
+      if qx*qx + qy*qy < 9*9 then
+        b[3] = true
+        score = score + 1
+        flash = 1
+        sfx(0)
+      end
+    end
+  end
+
+  for i = 1, #enemies do
+    local e = enemies[i]
+    e.x = 128 + math.cos(t()*e.s + e.p)*e.r
+    e.y = 128 + math.sin(t()*e.s + e.p)*e.r
+    local qx, qy = e.x-px, e.y-py
+    if qx*qx + qy*qy < 8*8 then
+      mode = "lost"
+      sfx(1)
+    end
+  end
+
+  if score == #blooms then
+    mode = "won"
+    sfx(2)
+  end
+end
+
+local function draw_flower(x,y,z)
+  sphere(x,y,z+4,3,10)
+  box(x-1,y-1,z,x+1,y+1,z+4,6)
+  sphere(x-4,y,z+3,2,9)
+  sphere(x+4,y,z+3,2,9)
+  sphere(x,y-4,z+3,2,9)
+  sphere(x,y+4,z+3,2,9)
+end
+
+function _draw()
+  cls()
+  camera(128,128,58,1.05 + flash*0.025, math.sin(t()*0.12)*0.015)
+
+  -- Glowing borders make the moonlit route readable above the terrain.
+  for i = 44, 212, 8 do
+    box(i,44,6,i+3,47,7,7)
+    box(i,209,6,i+3,212,7,7)
+  end
+
+  for i = 1, #blooms do
+    local b = blooms[i]
+    if not b[3] then
+      draw_flower(b[1],b[2],7)
+    end
+  end
+
+  -- Lantern beetle.
+  if mode == "title" or mode == "play" or mode == "won" or mode == "lost" then
+    sphere(px,py,11,5,12)
+    sphere(px,py,14,3,10)
+    box(px-6,py-2,8,px-3,py+2,12,15)
+    box(px+3,py-2,8,px+6,py+2,12,15)
+  end
+
+  -- Slow roaming snails.
+  for i = 1, #enemies do
+    local e = enemies[i]
+    box(e.x-5,e.y-3,7,e.x+5,e.y+3,9,11)
+    sphere(e.x+2,e.y,11,4,14)
+  end
+
+  if mode == "title" then
+    rectfill(238,150,530,282,1)
+    print("MOONLIT GARDEN",18,20,10,2,1)
+    print("Collect all glowblooms",18,48,15)
+    print("Avoid the moon snails",18,68,15)
+    print("Z / A  -  begin",18,96,9)
+  elseif mode == "play" then
+    print("GLOWBLOOMS "..score.."/"..#blooms,18,18,10)
+    print("LANTERN "..math.max(0,flr(remaining)),18,38,15)
+  elseif mode == "won" then
+    rectfill(238,150,530,282,1)
+    print("GARDEN GLOWING",18,20,10,2,1)
+    print("All bloom sparks found",18,52,15)
+    print("Z / A  -  garden again",18,80,9)
+  elseif mode == "lost" then
+    rectfill(238,150,530,282,1)
+    print("LANTERN FADED",18,20,14,2,1)
+    print("Glowblooms "..score.."/"..#blooms,18,52,15)
+    print("Z / A  -  try again",18,80,9)
+  end
+end
