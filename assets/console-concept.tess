@@ -1,0 +1,110 @@
+tessera cart v1
+__meta__
+title=Tessera Console Concept
+__pal__
+1 0e1117
+2 12151c
+3 1c202a
+4 2b3142
+5 3a4258
+6 4f5975
+7 8a93ad
+8 c9cfdd
+9 00e5ff
+10 fbc02d
+11 9c27b0
+12 00c853
+13 ff5252
+14 0a0c11
+15 f4f6fb
+16 e14d8a
+17 3c6fd0
+__lua__
+local CX, CY = 128, 128
+function build()
+  mclear(0)
+  -- body: 120 x 76 x 16, rounded-ish by chamfering top edges
+  local x0, x1, y0, y1 = CX-60, CX+59, CY-38, CY+37
+  mbox(x0, y0, 1, x1, y1, 14, 4)
+  mbox(x0+1, y0+1, 15, x1-1, y1-1, 15, 5)      -- top chamfer
+  mbox(x0+3, y0+3, 16, x1-3, y1-3, 16, 5)      -- top panel
+  -- dark base strip (feet shadow line)
+  mbox(x0+2, y0+2, 0, x1-2, y1-2, 0, 14)
+  -- front face accent stripe (front = low y)
+  for x = x0+4, x1-4 do mset(x, y0, 6, 3) mset(x, y0, 7, 3) end
+  -- mosaic logo (4x4 tiles) on top-left of panel
+  local cols = {9, 10, 11, 12, 17, 16, 9, 10, 12, 17, 10, 11, 16, 9, 12, 10}
+  local lx, ly = x0+10, y0+10
+  for i = 0, 15 do
+    local tx, ty = i % 4, i // 4
+    mbox(lx + tx*5, ly + ty*5, 17, lx + tx*5 + 3, ly + ty*5 + 3, 17, cols[i+1])
+  end
+  -- cartridge slot (back half), recess
+  local sx0, sx1, sy0, sy1 = CX-24, CX+24, CY+8, CY+18
+  for x = sx0, sx1 do for y = sy0, sy1 do mset(x, y, 16, 14) mset(x, y, 15, 14) end end
+  mbox(sx0-2, sy0-2, 17, sx1+2, sy0-1, 18, 6)  -- slot lip front
+  mbox(sx0-2, sy1+1, 17, sx1+2, sy1+2, 18, 6)  -- slot lip back
+  -- picture cart sticking up: 44 wide, 6 deep, 40 tall
+  local cx0, cx1, cy0, cy1 = CX-21, CX+21, CY+10, CY+16
+  mbox(cx0, cy0, 15, cx1, cy1, 56, 8)
+  mbox(cx0+1, cy0, 54, cx1-1, cy1, 56, 7)       -- grip ridge
+  -- label pixels on the cart front face (y = cy0-1): noisy mosaic picture
+  for x = cx0+3, cx1-3 do
+    for z = 22, 50 do
+      local n = noise3(x*0.11, z*0.13, 3.7)
+      local c
+      if z > 44 then c = 15
+      elseif n > 0.25 then c = 9 elseif n > 0.05 then c = 17
+      elseif n > -0.15 then c = 11 elseif n > -0.35 then c = 16 else c = 10 end
+      if (x + z) % 7 == 0 and z < 44 then c = 12 end
+      mset(x, cy0-1, z, c)
+    end
+  end
+  -- power button + LED (front right top)
+  mbox(x1-22, y0+8, 17, x1-12, y0+18, 18, 13)
+  mbox(x1-34, y0+10, 17, x1-30, y0+14, 17, 9)
+  -- reset button
+  mbox(x1-22, y0+24, 17, x1-12, y0+30, 17, 6)
+  -- vent grooves on top right
+  for i = 0, 5 do mbox(x1-36, y0+40+i*5, 16, x1-10, y0+41+i*5, 16, 3) end
+  -- controller ports on the front face
+  for p = 0, 1 do
+    local px = x0 + 14 + p*20
+    mbox(px, y0-1, 4, px+11, y0-1, 9, 14)
+    mbox(px+2, y0-1, 5, px+9, y0-1, 8, 3)
+  end
+  -- controller in front
+  local gx, gy = CX-6, CY-82
+  mbox(gx-22, gy-9, 1, gx+22, gy+9, 6, 4)
+  mbox(gx-28, gy-6, 1, gx-20, gy+11, 6, 4)    -- left grip
+  mbox(gx+20, gy-6, 1, gx+28, gy+11, 6, 4)    -- right grip
+  mbox(gx-20, gy-7, 7, gx+20, gy+7, 7, 5)
+  -- d-pad
+  mbox(gx-17, gy-1, 8, gx-9, gy+1, 9, 14)
+  mbox(gx-14, gy-4, 8, gx-12, gy+4, 9, 14)
+  -- buttons
+  mbox(gx+10, gy-4, 8, gx+13, gy-1, 9, 9) mbox(gx+15, gy+1, 8, gx+18, gy+4, 9, 10)
+end
+function cable()
+  local x0, y0 = CX-60, CY-38
+  local gx, gy = CX-6, CY-82
+  local px, py, pz = x0+20, y0-2, 6
+  local ax, ay = gx, gy+10
+  local prevx, prevy = ax, ay
+  for i = 1, 24 do
+    local t = i/24
+    local bx = ax + (px-ax)*t + math.sin(t*3.14159)*18
+    local by = ay + (py-ay)*t
+    local bz = 2 + (pz-2)*t*t
+    for o = 0, 1 do line3d(prevx+o, prevy, 2, bx+o, by, bz, 5) line3d(prevx+o, prevy, 3, bx+o, by, bz+1, 5) end
+    prevx, prevy = bx, by
+  end
+end
+function _init() build() end
+function _draw()
+  cls()
+  sky(2, 3)
+  sun(-0.5, -0.8, 0.9, 1.0)
+  cable()
+  camera(CX+10, CY-28, 16, 1.6, 0.45)
+end

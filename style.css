@@ -182,6 +182,44 @@ body {
 .hero-inner {
   max-width: 1400px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-content {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.hero-figure {
+  flex: 0 1 520px;
+  margin: 0;
+}
+
+.hero-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md, 10px);
+  border: 1px solid var(--border);
+  image-rendering: pixelated;
+}
+
+.hero-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.hero-figure figcaption a {
+  color: var(--cyan);
+}
+
+@media (max-width: 960px) {
+  .hero-inner { flex-direction: column; align-items: stretch; }
+  .hero-figure { flex-basis: auto; }
 }
 
 .hero-title {
