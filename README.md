@@ -65,3 +65,11 @@ Have you made a 3D voxel cart for Tessera? We would love to feature it!
 1. Open a **[Cart Submission Issue](https://github.com/stephenwil/tessera-showcase/issues/new?template=submit-cart.yml)**.
 2. Paste your `.tess` code or attach your `.tess.png` picture cart.
 3. Once reviewed, your game will be added directly to the live showcase store!
+
+
+---
+
+## Documentation & Developer Guide
+
+Looking for full hardware specifications, memory architecture, and Lua 5.4 API documentation?
+- 📖 **[Console & API Developer Guide](https://stephenwil.github.io/tessera-showcase/guide.html)** — Comprehensive reference on voxel volumes, 3D coordinate frames, raymarching pipeline, and built-in API functions.
