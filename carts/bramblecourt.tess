@@ -1,0 +1,618 @@
+tessera cart v1
+__meta__
+id=bramblecourt
+title=Bramble Court
+author=Tessera
+version=1
+players=1
+quality=hq
+__pal__
+1 0b0e1a
+2 1a2140
+3 2f6b2a
+4 3f8a34
+5 58a83f
+6 6b4a2e
+7 4a3222
+8 9a9488
+9 c7c0ae
+10 6f6a62
+11 7a5232
+12 2f7d3a
+13 4fae45
+14 8fd65a
+15 ffffff
+16 f2a7c3
+17 ffd34d
+18 e8552f
+19 8a5a2b
+20 d9a066
+21 2a1e16
+22 3f7fc9
+23 8fd0ff
+24 2b3f8c
+25 6c8cf0
+26 a52a3a
+27 e8686a
+28 1d1d24
+29 ffb347
+30 7cf2a0
+31 c9a878
+32 9b7fd1
+__lua__
+-- Bramble Court
+-- Sprig the acorn keeps the walled garden safe from beetles crawling in
+-- through the gate and the gaps in the wall.
+-- Move: arrows/WASD or stick. Fire: A (Z/Space) - holding it keeps you facing one way.
+-- A starts a game; B (X) returns to the title after a game over.
+
+local FLOOR = 5                         -- z the actors stand on (grass top is z 4)
+local XMIN, XMAX, YMIN, YMAX = 69, 187, 79, 175
+local CAM_X, CAM_Y, CAM_Z, ZOOM = 128, 136, 19, 2.05
+
+local mode = "title"
+local tick = 0
+local px, py, fx, fy = 128, 110, 0, -1
+local walk = 0
+local hearts, invuln = 4, 0
+local score, hiscore, mult, streak = 0, 0, 1, 0
+local wave, to_spawn, spawn_t, banner = 0, 0, 0, 0
+local fire_cd = 0
+local shake = 0
+local seeds, bugs, berries, popups = {}, {}, {}, {}
+local obstacles = {}                    -- {x, y, r}: tree trunks and the pond
+
+local GATES = { {128, 172}, {72, 128}, {184, 128} }
+
+-- ---------------------------------------------------------------- helpers
+local function dist(ax, ay, bx, by) local dx, dy = ax - bx, ay - by return math.sqrt(dx * dx + dy * dy) end
+local function clamp(v, a, b) return v < a and a or (v > b and b or v) end
+local function pick(t) return t[flr(rnd(#t)) + 1] end
+
+local function msphere(cx, cy, cz, r, colour_at)
+  for z = flr(cz - r), flr(cz + r) do
+    for y = flr(cy - r), flr(cy + r) do
+      for x = flr(cx - r), flr(cx + r) do
+        local dx, dy, dz = x - cx, y - cy, (z - cz) * 1.15
+        if dx * dx + dy * dy + dz * dz <= r * r then mset(x, y, z, colour_at(x, y, z)) end
+      end
+    end
+  end
+end
+
+-- An ellipsoid of voxels inside a model frame; colour_at returns a palette index, or nil to leave a voxel empty.
+local function mellipsoid(id, frame, cx, cy, cz, rx, ry, rz, colour_at)
+  local w, d, h = msize(id)
+  for z = 0, h - 1 do for y = 0, d - 1 do for x = 0, w - 1 do
+    local ex, ey, ez = (x - cx) / rx, (y - cy) / ry, (z - cz) / rz
+    if ex * ex + ey * ey + ez * ez <= 1 then
+      local c = colour_at(x, y, z) -- nil leaves the voxel empty
+      if c then mpset(id, x, y, z, c, frame) end
+    end
+  end end end
+end
+
+-- ---------------------------------------------------------------- models
+local function build_sprig()
+  newmodel("sprig", 11, 11, 15, 2)
+  for f = 0, 1 do
+    -- legs (frame 1 lifts alternate feet)
+    local l, r = f == 0 and 0 or 1, f == 0 and 1 or 0
+    for z = l, l + 2 do mpset("sprig", 3, 5, z, 21, f) mpset("sprig", 4, 5, z, 21, f) end
+    for z = r, r + 2 do mpset("sprig", 6, 5, z, 21, f) mpset("sprig", 7, 5, z, 21, f) end
+    -- the nut: tan, a shade lighter towards the front and top
+    mellipsoid("sprig", f, 5, 5, 6.5, 4.4, 4.2, 4.4, function(x, y, z)
+      if z > 8 and (x + y) % 3 == 0 then return 31 end
+      return 20
+    end)
+    -- the cap: a checked brown dome with a stalk and a leaf
+    mellipsoid("sprig", f, 5, 5, 10.2, 5.4, 5.4, 2.6, function(x, y, z)
+      if z < 9 then return nil end
+      return ((x + y + z) % 2 == 0) and 19 or 11
+    end)
+    mpset("sprig", 5, 5, 13, 11, f) mpset("sprig", 5, 5, 14, 11, f)
+    mpset("sprig", 6, 5, 14, 13, f) mpset("sprig", 7, 5, 14, 14, f) mpset("sprig", 7, 6, 14, 13, f)
+    -- face on the front (-y) side: eyes, cheeks, a small mouth
+    local face = { {3, 7, 21}, {7, 7, 21}, {2, 6, 16}, {8, 6, 16}, {5, 5, 21} }
+    for _, p in ipairs(face) do
+      local x, z, c = p[1], p[2], p[3]
+      for y = 0, 10 do
+        -- first voxel of the column from the front
+        local hit = false
+        local ex, ey, ez = (x - 5) / 4.4, (y - 5) / 4.2, (z - 6.5) / 4.4
+        if ex * ex + ey * ey + ez * ez <= 1 then mpset("sprig", x, y, z, c, f) hit = true end
+        if hit then break end
+      end
+    end
+  end
+end
+
+local function build_bug(id, w, d, h, shell, shine, jaws)
+  newmodel(id, w, d, h, 2)
+  local cx, cy = (w - 1) / 2, (d - 1) / 2 + 1
+  for f = 0, 1 do
+    -- legs, three a side, alternating between frames
+    for i = 0, 2 do
+      local ly = 3 + i * flr((d - 4) / 3)
+      local up = ((i + f) % 2 == 0) and 1 or 0
+      mpset(id, 0, ly, up, 28, f) mpset(id, 1, ly, up + 1, 28, f)
+      mpset(id, w - 1, ly, 1 - up, 28, f) mpset(id, w - 2, ly, 2 - up, 28, f)
+    end
+    -- shell: domed, with a light stripe down the middle and a seam
+    mellipsoid(id, f, cx, cy, 1.2, cx + 0.2, cy - 0.6, h - 1.4, function(x, y, z)
+      if z == 0 then return 28 end
+      if x == flr(cx) or x == math.ceil(cx) then return (z >= h - 3) and 28 or shell end
+      if z >= h - 3 and (x == flr(cx) - 2 or x == math.ceil(cx) + 2) then return shine end
+      return shell
+    end)
+    -- head and feelers at the front (-y)
+    for x = flr(cx) - 1, math.ceil(cx) + 1 do for z = 1, 2 do mpset(id, x, 1, z, 28, f) mpset(id, x, 2, z, 28, f) end end
+    mpset(id, flr(cx) - 1, 1, 3, 15, f) mpset(id, math.ceil(cx) + 1, 1, 3, 15, f)
+    if jaws then
+      mpset(id, flr(cx) - 2, 0, 2, 28, f) mpset(id, flr(cx) - 2, 0, 3, 28, f)
+      mpset(id, math.ceil(cx) + 2, 0, 2, 28, f) mpset(id, math.ceil(cx) + 2, 0, 3, 28, f)
+      mpset(id, flr(cx) - 1, 0, 3 + f, 28, f) mpset(id, math.ceil(cx) + 1, 0, 3 + f, 28, f)
+    else
+      mpset(id, flr(cx) - 1, 0, 3 + f, 28, f) mpset(id, math.ceil(cx) + 1, 0, 4 - f, 28, f)
+    end
+  end
+end
+
+-- ---------------------------------------------------------------- the court
+local function tree(x, y, r)
+  -- roots and trunk
+  mbox(x - 2, y - 2, 4, x + 2, y + 2, 20, 11)
+  mbox(x - 4, y, 4, x + 4, y, 5, 11) mbox(x, y - 4, 4, x, y + 4, 5, 11)
+  mbox(x - 1, y - 1, 21, x + 1, y + 1, 24, 11)
+  -- canopy: a few overlapping blobs, lighter towards the top, dotted with fruit
+  local blobs = { {0, 0, 28, r}, {-6, 3, 25, r * 0.7}, {6, 2, 26, r * 0.72}, {1, -5, 24, r * 0.66}, {0, 4, 32, r * 0.6} }
+  for _, b in ipairs(blobs) do
+    msphere(x + b[1], y + b[2], b[3], b[4], function(vx, vy, vz)
+      local n = noise3(vx * 0.3, vy * 0.3, vz * 0.3)
+      if rnd() < 0.035 then return 18 end
+      if vz > 30 + n * 3 then return 14 end
+      if vz > 25 + n * 4 then return 13 end
+      return 12
+    end)
+  end
+  obstacles[#obstacles + 1] = { x, y, 5 }
+end
+
+local function pond(x, y, r)
+  for vy = y - r - 2, y + r + 2 do for vx = x - r - 2, x + r + 2 do
+    local d = dist(vx, vy, x, y)
+    if d <= r then
+      mset(vx, vy, 4, 0) mset(vx, vy, 3, d > r - 2 and 22 or 22)
+      if rnd() < 0.08 then mset(vx, vy, 3, 23) end
+    elseif d <= r + 2 then
+      mset(vx, vy, 5, (vx + vy) % 3 == 0 and 9 or 8)
+    end
+  end end
+  -- lily pads
+  for i = 1, 4 do
+    local a = rnd(6.283)
+    local lx, ly = flr(x + math.cos(a) * r * 0.5), flr(y + math.sin(a) * r * 0.5)
+    mbox(lx - 1, ly - 1, 4, lx + 1, ly + 1, 4, 13)
+    if i == 1 then mset(lx, ly, 5, 16) end
+  end
+  obstacles[#obstacles + 1] = { x, y, r + 2 }
+end
+
+local function flower(x, y)
+  local c = pick({ 16, 17, 15, 32, 18 })
+  mset(x, y, 5, 3)
+  mset(x, y, 6, c) mset(x - 1, y, 6, c) mset(x + 1, y, 6, c) mset(x, y - 1, 6, c) mset(x, y + 1, 6, c)
+  mset(x, y, 7, c == 17 and 18 or 17)
+end
+
+local function wall(x0, y0, x1, y1, top)
+  mbox(x0, y0, 4, x1, y1, top, 8)
+  -- courses of darker stone and a pale cap
+  for z = 5, top, 3 do
+    for x = x0, x1 do for y = y0, y1 do
+      if (x + y + z) % 7 == 0 then mset(x, y, z, 10) end
+    end end
+  end
+  mbox(x0, y0, top + 1, x1, y1, top + 1, 9)
+  for x = x0, x1 do for y = y0, y1 do
+    if rnd() < 0.12 then mset(x, y, top + 2, pick({ 12, 13 })) end
+  end end
+end
+
+local function build_court()
+  mclear(0)
+  -- earth plinth and grass
+  mbox(58, 68, 0, 198, 188, 3, 7)
+  mbox(58, 68, 1, 198, 188, 1, 6)
+  for y = 68, 188 do for x = 58, 198 do
+    local n = noise3(x * 0.09, y * 0.09, 1.5) + rnd(0.25)
+    mset(x, y, 4, n > 0.62 and 5 or (n > 0.32 and 4 or 3))
+  end end
+  -- a sandy path from the gate to the middle, a ring of it in the centre
+  for y = 112, 180 do for x = 122, 134 do
+    if y > 138 or dist(x, y, 128, 124) > 9 then mset(x, y, 4, (x * 7 + y * 3) % 5 == 0 and 9 or 31) end
+  end end
+  for y = 106, 142 do for x = 110, 146 do
+    local d = dist(x, y, 128, 124)
+    if d > 13 and d < 17 then mset(x, y, 4, (x + y) % 6 == 0 and 9 or 31) end
+  end end
+
+  -- walls: low at the front so the court stays in view, gaps left and right
+  wall(58, 68, 198, 71, 6)
+  wall(58, 68, 61, 120, 12) wall(58, 136, 61, 188, 12)
+  wall(195, 68, 198, 120, 12) wall(195, 136, 198, 188, 12)
+  wall(58, 185, 116, 188, 14) wall(140, 185, 198, 188, 14)
+  -- gap posts with little lanterns
+  for _, g in ipairs({ {58, 116}, {58, 136}, {195, 116}, {195, 136} }) do
+    mbox(g[1], g[2], 4, g[1] + 3, g[2] + 3, 16, 9)
+    mbox(g[1] + 1, g[2] + 1, 17, g[1] + 2, g[2] + 2, 18, 17)
+  end
+
+  -- the gate: two pillars and a stepped lintel, mossy on top
+  mbox(110, 182, 4, 117, 189, 30, 8) mbox(139, 182, 4, 146, 189, 30, 8)
+  for z = 6, 28, 4 do mbox(110, 182, z, 117, 182, z, 10) mbox(139, 182, z, 146, 182, z, 10) end
+  mbox(108, 181, 31, 148, 190, 34, 9)
+  mbox(112, 181, 35, 144, 190, 36, 8)
+  mbox(118, 181, 27, 138, 190, 30, 9)
+  for x = 108, 148 do for y = 181, 190 do
+    if rnd() < 0.3 then mset(x, y, 37, pick({ 12, 13, 14 })) end
+  end end
+  mbox(112, 180, 37, 114, 180, 39, 17) mbox(142, 180, 37, 144, 180, 39, 17)
+  -- steps down from the gate
+  mbox(118, 176, 4, 138, 181, 5, 9) mbox(119, 178, 6, 137, 181, 6, 8)
+
+  obstacles = {}
+  tree(80, 164, 9.5)
+  tree(177, 162, 10)
+  pond(86, 94, 7)
+  -- a stone basin in the front-right corner
+  mbox(170, 86, 4, 180, 96, 7, 9) mbox(172, 88, 6, 178, 94, 7, 22) mbox(174, 90, 8, 176, 92, 11, 8)
+  mset(175, 91, 12, 23)
+  obstacles[#obstacles + 1] = { 175, 91, 7 }
+
+  -- bushes against the walls
+  for _, b in ipairs({ {68, 112, 4}, {68, 142, 4}, {188, 110, 4}, {188, 146, 4}, {100, 178, 4}, {156, 178, 4} }) do
+    msphere(b[1], b[2], 6, b[3], function(x, y, z) return rnd() < 0.08 and 16 or (z > 7 and 13 or 12) end)
+  end
+
+  -- flowers dotted about, kept off the path and away from the pond
+  local placed = 0
+  while placed < 70 do
+    local x, y = flr(68 + rnd(120)), flr(78 + rnd(98))
+    local ok = mget(x, y, 4) ~= 31 and mget(x, y, 5) == 0 and dist(x, y, 128, 124) > 18
+    for _, o in ipairs(obstacles) do if dist(x, y, o[1], o[2]) < o[3] + 3 then ok = false end end
+    if ok then flower(x, y) placed = placed + 1 end
+  end
+end
+
+-- ---------------------------------------------------------------- game
+local function blocked(x, y, r)
+  for _, o in ipairs(obstacles) do
+    local d = dist(x, y, o[1], o[2])
+    if d < o[3] + r then return o, d end
+  end
+  return nil
+end
+
+local function push_out(x, y, r)
+  for _, o in ipairs(obstacles) do
+    local dx, dy = x - o[1], y - o[2]
+    local d = math.sqrt(dx * dx + dy * dy)
+    local min = o[3] + r
+    if d < min then
+      if d < 0.01 then dx, dy, d = 1, 0, 1 end
+      x, y = o[1] + dx / d * min, o[2] + dy / d * min
+    end
+  end
+  return x, y
+end
+
+local function start_wave()
+  wave = wave + 1
+  to_spawn = 5 + wave * 3
+  spawn_t = 40
+  banner = 75
+  tone("triangle", 392, 784, 0.35, 0.18)
+end
+
+local function new_game()
+  px, py, fx, fy = 128, 110, 0, -1
+  hearts, invuln = 4, 0
+  score, mult, streak = 0, 1, 0
+  wave = 0
+  seeds, bugs, berries, popups = {}, {}, {}, {}
+  mode = "play"
+  start_wave()
+end
+
+local function spawn_bug()
+  local g = pick(GATES)
+  local stag = wave >= 2 and rnd() < math.min(0.15 * wave, 0.5)
+  local b = {
+    x = g[1] + rnd(6) - 3, y = g[2] + rnd(6) - 3,
+    kind = stag and "stag" or "beetle",
+    hp = stag and 3 or 1,
+    speed = (stag and 0.4 or 0.52) + wave * 0.035 + rnd(0.1),
+    r = stag and 5 or 4,
+    fx = 0, fy = -1, flash = 0, wob = rnd(6.28),
+  }
+  bugs[#bugs + 1] = b
+  for i = 1, 10 do particle(b.x + rnd(8) - 4, b.y + rnd(8) - 4, FLOOR + rnd(4), pick({ 10, 9, 21 }), 0.5) end
+end
+
+local function add_score(n, x, y)
+  local pts = n * mult
+  score = score + pts
+  popups[#popups + 1] = { x = x, y = y, z = FLOOR + 8, text = "+" .. pts, life = 30 }
+end
+
+local function hurt_player(sx, sy)
+  hearts = hearts - 1
+  invuln = 50
+  shake = 8
+  mult, streak = 1, 0
+  local dx, dy = px - sx, py - sy
+  local d = math.max(0.01, math.sqrt(dx * dx + dy * dy))
+  px, py = clamp(px + dx / d * 8, XMIN, XMAX), clamp(py + dy / d * 8, YMIN, YMAX)
+  tone("saw", 220, 70, 0.3, 0.25)
+  for i = 1, 16 do particle(px + rnd(6) - 3, py + rnd(6) - 3, FLOOR + rnd(10), pick({ 20, 19, 15 }), 0.6) end
+  if hearts <= 0 then
+    mode = "over"
+    banner = 0
+    if score > hiscore then hiscore = score dset("hi", hiscore) end
+    tone("triangle", 330, 82, 0.9, 0.25)
+  end
+end
+
+local function update_player()
+  local mx, my = 0, 0
+  if btn(0) then mx = mx - 1 end
+  if btn(1) then mx = mx + 1 end
+  if btn(2) then my = my + 1 end
+  if btn(3) then my = my - 1 end
+  local ax, ay = axis(0), axis(1)
+  if math.abs(ax) > 0.25 or math.abs(ay) > 0.25 then mx, my = ax, ay end
+  local len = math.sqrt(mx * mx + my * my)
+  local firing = btn(4)
+  if len > 0.1 then
+    mx, my = mx / len, my / len
+    px = clamp(px + mx * 1.5, XMIN, XMAX)
+    py = clamp(py + my * 1.5, YMIN, YMAX)
+    px, py = push_out(px, py, 4)
+    if not firing then fx, fy = mx, my end
+    walk = walk + 1
+  end
+  if firing and fire_cd <= 0 then
+    seeds[#seeds + 1] = { x = px + fx * 6, y = py + fy * 6, dx = fx * 4, dy = fy * 4, life = 40 }
+    fire_cd = 5
+    tone("square", 990, 660, 0.05, 0.07)
+  end
+  fire_cd = fire_cd - 1
+  if invuln > 0 then invuln = invuln - 1 end
+end
+
+local function update_seeds()
+  for i = #seeds, 1, -1 do
+    local s = seeds[i]
+    s.x, s.y, s.life = s.x + s.dx, s.y + s.dy, s.life - 1
+    local dead = s.life <= 0 or s.x < XMIN - 6 or s.x > XMAX + 6 or s.y < YMIN - 6 or s.y > YMAX + 8 or blocked(s.x, s.y, 0)
+    if not dead then
+      for _, b in ipairs(bugs) do
+        if b.hp > 0 and dist(s.x, s.y, b.x, b.y) < b.r + 2 then
+          b.hp = b.hp - 1
+          b.flash = 4
+          b.x, b.y = b.x + s.dx * 0.6, b.y + s.dy * 0.6
+          dead = true
+          if b.hp <= 0 then
+            streak = streak + 1
+            if streak % 5 == 0 and mult < 8 then mult = mult + 1 end
+            add_score(b.kind == "stag" and 50 or 10, b.x, b.y)
+            shake = math.max(shake, 2)
+            tone("noise", 600, 120, 0.18, 0.18)
+            local cols = b.kind == "stag" and { 26, 27, 28, 15 } or { 24, 25, 28, 15 }
+            for k = 1, 22 do particle(b.x + rnd(8) - 4, b.y + rnd(8) - 4, FLOOR + rnd(6), pick(cols), 0.4 + rnd(0.5)) end
+            if rnd() < 0.14 then berries[#berries + 1] = { x = b.x, y = b.y, life = 300 } end
+          else
+            tone("square", 440, 330, 0.06, 0.1)
+          end
+          break
+        end
+      end
+    end
+    if dead then
+      for k = 1, 3 do particle(s.x, s.y, FLOOR + 3, 29, 0.25) end
+      table.remove(seeds, i)
+    elseif s.life % 2 == 0 then
+      particle(s.x - s.dx * 0.5, s.y - s.dy * 0.5, FLOOR + 3, 17, 0.15)
+    end
+  end
+end
+
+local function update_bugs()
+  for i = #bugs, 1, -1 do
+    local b = bugs[i]
+    if b.hp <= 0 then table.remove(bugs, i) else
+      local dx, dy = px - b.x, py - b.y
+      local d = math.max(0.01, math.sqrt(dx * dx + dy * dy))
+      -- head for Sprig with a little weave, and keep clear of the others
+      b.wob = b.wob + 0.12
+      local sx, sy = dx / d + math.cos(b.wob) * 0.35 * dy / d, dy / d - math.cos(b.wob) * 0.35 * dx / d
+      for _, o in ipairs(bugs) do
+        if o ~= b then
+          local ox, oy = b.x - o.x, b.y - o.y
+          local od = ox * ox + oy * oy
+          if od < 100 and od > 0.01 then sx, sy = sx + ox / od * 3, sy + oy / od * 3 end
+        end
+      end
+      local sl = math.max(0.01, math.sqrt(sx * sx + sy * sy))
+      b.fx, b.fy = sx / sl, sy / sl
+      b.x = clamp(b.x + b.fx * b.speed, XMIN - 4, XMAX + 4)
+      b.y = clamp(b.y + b.fy * b.speed, YMIN, YMAX + 4)
+      b.x, b.y = push_out(b.x, b.y, b.r)
+      if b.flash > 0 then b.flash = b.flash - 1 end
+      if invuln == 0 and mode == "play" and d < b.r + 3 then hurt_player(b.x, b.y) end
+    end
+  end
+end
+
+local function update_berries()
+  for i = #berries, 1, -1 do
+    local b = berries[i]
+    b.life = b.life - 1
+    if dist(px, py, b.x, b.y) < 7 then
+      if hearts < 4 then hearts = hearts + 1 else add_score(25, b.x, b.y) end
+      tone("triangle", 660, 1320, 0.2, 0.16)
+      for k = 1, 10 do particle(b.x + rnd(4) - 2, b.y + rnd(4) - 2, FLOOR + rnd(8), pick({ 30, 15, 18 }), 0.5) end
+      table.remove(berries, i)
+    elseif b.life <= 0 then
+      table.remove(berries, i)
+    end
+  end
+end
+
+-- HQ graphics: the meta line above starts in hq; X on the title screen toggles it and the choice is saved
+-- (dget "quality": 0 = never chosen, 1 = hq, 2 = standard).
+local function toggle_quality()
+  local now = quality(quality() == "hq" and "standard" or "hq")
+  if now == "hq" or now == "standard" then dset("quality", now == "hq" and 1 or 2) end
+end
+
+function _init()
+  hiscore = dget("hi")
+  local q = dget("quality")
+  if q == 1 then quality("hq") elseif q == 2 then quality("standard") end
+  build_sprig()
+  build_bug("beetle", 9, 11, 6, 24, 25, false)
+  build_bug("stag", 11, 13, 7, 26, 27, true)
+  build_court()
+  sky(1, 2)
+  fog(0, 0)
+  sun(-0.45, -0.55, 0.75, 1)
+end
+
+function _update()
+  tick = tick + 1
+  if shake > 0 then shake = shake - 1 end
+  for i = #popups, 1, -1 do
+    local p = popups[i]
+    p.z, p.life = p.z + 0.4, p.life - 1
+    if p.life <= 0 then table.remove(popups, i) end
+  end
+
+  if mode == "title" then
+    if btnp(4) then new_game() end
+    if btnp(5) then toggle_quality() end
+    -- Sprig potters about the middle of the court
+    fx, fy = math.cos(tick * 0.02), math.sin(tick * 0.02)
+    walk = walk + 1
+    return
+  end
+
+  if mode == "over" then
+    update_bugs()
+    if btnp(5) or (btnp(4) and banner > 30) then mode = "title" bugs = {} seeds = {} berries = {} end
+    banner = banner + 1
+    return
+  end
+
+  update_player()
+  update_seeds()
+  update_bugs()
+  update_berries()
+
+  if banner > 0 then banner = banner - 1 end
+  if to_spawn > 0 then
+    spawn_t = spawn_t - 1
+    if spawn_t <= 0 then
+      spawn_bug()
+      to_spawn = to_spawn - 1
+      spawn_t = math.max(10, 38 - wave * 3) + flr(rnd(12))
+    end
+  elseif #bugs == 0 and mode == "play" then
+    start_wave()
+  end
+end
+
+-- facing vector -> model rotation (models face -y at rot 0; rot is CCW radians)
+local function rot_for(dx, dy) return math.atan(dx, -dy) end
+
+local HEART = { ".XX.XX.", "XXXXXXX", "XXXXXXX", ".XXXXX.", "..XXX..", "...X..." }
+local function draw_heart(x, y, s, c)
+  for r, row in ipairs(HEART) do
+    for k = 1, #row do
+      if row:sub(k, k) == "X" then rectfill(x + (k - 1) * s, y + (r - 1) * s, x + k * s - 1, y + r * s - 1, c) end
+    end
+  end
+end
+
+local function centred(s, y, c, scale)
+  print(s, flr((768 - textw(s) * scale) / 2), y, c, true, scale)
+end
+
+function _draw()
+  cls()
+  local sx, sy = 0, 0
+  if shake > 0 then sx, sy = rnd(shake) - shake / 2, rnd(shake) - shake / 2 end
+  camera(CAM_X + sx * 0.3, CAM_Y + sy * 0.3, CAM_Z, ZOOM, 0)
+
+  -- Sprig (blinks while invulnerable)
+  if mode ~= "over" and (invuln == 0 or tick % 4 < 2) then
+    local frame = flr(walk / 6) % 2
+    model("sprig", flr(px), flr(py), FLOOR, rot_for(fx, fy), false, frame)
+  end
+
+  for _, b in ipairs(bugs) do
+    if b.flash > 0 then
+      pswap(24, 15) pswap(25, 15) pswap(26, 15) pswap(27, 15)
+    end
+    model(b.kind, flr(b.x), flr(b.y), FLOOR, rot_for(b.fx, b.fy), false, flr((tick + b.wob * 10) / 4) % 2)
+    if b.flash > 0 then pswap() end
+  end
+
+  for _, s in ipairs(seeds) do
+    box(flr(s.x) - 1, flr(s.y) - 1, FLOOR + 2, flr(s.x) + 1, flr(s.y) + 1, FLOOR + 4, 29)
+    vset(flr(s.x), flr(s.y), FLOOR + 5, 17)
+  end
+
+  for _, b in ipairs(berries) do
+    if b.life > 60 or tick % 6 < 3 then
+      local z = FLOOR + 3 + math.sin(tick * 0.15) * 1.5
+      sphere(flr(b.x), flr(b.y), flr(z), 2, 18)
+      vset(flr(b.x), flr(b.y), flr(z) + 3, 13)
+    end
+  end
+
+  -- HUD
+  print("SCORE " .. string.format("%06d", score), 24, 16, 15, true, 2)
+  local hi = "HI " .. string.format("%06d", math.max(hiscore, score))
+  print(hi, 768 - 24 - textw(hi) * 2, 16, 23, true, 2)
+  for i = 1, 4 do
+    draw_heart(24 + (i - 1) * 26, 40, 3, i <= hearts and 18 or 10)
+  end
+  if mode ~= "title" then
+    local w = "WAVE " .. wave .. "  x" .. mult
+    print(w, 768 - 24 - textw(w) * 2, 40, mult > 1 and 29 or 17, true, 2)
+  end
+
+  for _, p in ipairs(popups) do
+    local hx, hy = project(p.x, p.y, p.z)
+    print(p.text, flr(hx - textw(p.text) / 2), flr(hy), 17, true, 1)
+  end
+
+  if mode == "title" then
+    centred("BRAMBLE COURT", 150, 17, 5)
+    centred("KEEP THE BEETLES OUT OF THE GARDEN", 212, 15, 2)
+    if tick % 40 < 28 then centred("PRESS Z TO START", 250, 30, 2) end
+    centred("MOVE: ARROWS   FIRE: Z (HOLD TO STRAFE)", 392, 9, 1)
+    local q = quality()
+    local label = q == "hq" and "ON" or q == "standard" and "OFF" or "SET BY URL"
+    centred("X: HQ GRAPHICS " .. label, 376, q == "hq" and 30 or 9, 1)
+  elseif mode == "over" then
+    centred("THE GARDEN IS OVERRUN", 170, 18, 4)
+    centred("SCORE " .. score, 220, 15, 2)
+    if score >= hiscore and score > 0 then centred("NEW BEST!", 248, 17, 2) end
+    if banner > 30 then centred("PRESS Z FOR THE TITLE", 290, 9, 2) end
+  elseif banner > 0 then
+    centred("WAVE " .. wave, 180, 17, 4)
+  end
+end

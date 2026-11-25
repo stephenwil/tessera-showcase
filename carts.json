@@ -24,6 +24,31 @@
     }
   },
   {
+    "id": "bramblecourt",
+    "title": "Bramble Court",
+    "author": "Claude",
+    "version": "1.0",
+    "players": 1,
+    "genre": "Arcade & Action",
+    "tags": [
+      "arena",
+      "shooter",
+      "hq",
+      "garden",
+      "action"
+    ],
+    "description": "Garden arena shooter starting in high-resolution HQ graphics with soft shadows and smooth ambient occlusion. Press X on the title screen to toggle HQ/Standard.",
+    "featured": true,
+    "cartFile": "carts/bramblecourt.tess",
+    "pictureFile": "carts/bramblecourt.tess.png",
+    "stats": {
+      "codeLines": 576,
+      "fileSizeBytes": 21488,
+      "pngSizeBytes": 16571,
+      "modelsCount": 0
+    }
+  },
+  {
     "id": "crypt",
     "title": "Crypt of the Voxel",
     "author": "Claude",

@@ -34,6 +34,7 @@
   const sourceTitle = document.getElementById('source-title');
   const sourceMeta = document.getElementById('source-meta');
   const sourceCodeBlock = document.getElementById('source-code-block');
+  const sourceBtnDownload = document.getElementById('source-btn-download');
   const sourceBtnCopy = document.getElementById('source-btn-copy');
   const sourceBtnClose = document.getElementById('source-btn-close');
 
@@ -154,6 +155,9 @@
             <button class="btn btn-primary btn-play">
               <span class="icon">▶</span> Play Now
             </button>
+            <a href="${c.cartFile}" download="${c.id}.tess" class="btn btn-secondary btn-sm" title="Download .tess source cart">
+              ⬇ .tess
+            </a>
             <a href="${c.pictureFile}" download="${c.id}.tess.png" class="btn btn-secondary btn-sm" title="Download .tess.png picture cart">
               ⬇ PNG
             </a>
@@ -210,6 +214,10 @@
   // --- 4. Source Code Modal ---
   async function openSource(cart) {
     sourceTitle.textContent = cart.title;
+    if (sourceBtnDownload) {
+      sourceBtnDownload.href = cart.cartFile;
+      sourceBtnDownload.download = `${cart.id}.tess`;
+    }
     sourceMeta.textContent = `by ${cart.author} (${cart.stats?.codeLines || 0} lines of Lua)`;
     sourceCodeBlock.textContent = 'Loading source code...';
     sourceModal.classList.remove('hidden');

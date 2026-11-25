@@ -73,3 +73,18 @@ Have you made a 3D voxel cart for Tessera? We would love to feature it!
 
 Looking for full hardware specifications, memory architecture, and Lua 5.4 API documentation?
 - 📖 **[Console & API Developer Guide](https://stephenwil.github.io/tessera-showcase/guide.html)** — Comprehensive reference on voxel volumes, 3D coordinate frames, raymarching pipeline, and built-in API functions.
+
+---
+
+## Build Your Own Cart (npm & MCP)
+
+Develop locally with live reload, `.vox` import, `.tess.png` packing, offline HTML export, and an MCP server for AI coding agents:
+
+```sh
+npm create @stephenwil/tessera my-game
+cd my-game
+npm install
+npm run dev
+```
+
+Download any demo `.tess` or `.tess.png` from the [Showcase](https://stephenwil.github.io/tessera-showcase/) and open it directly with `npx @stephenwil/tessera dev path/to/cart.tess`.
