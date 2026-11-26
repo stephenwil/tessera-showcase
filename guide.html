@@ -384,7 +384,12 @@ npm install
 npm run dev    # live-reload console at http://localhost:3000
 npm run check  # validate manifest and Lua structure
 npm run pack   # emit dist/my-game.tess and dist/my-game.tess.png
-npm run build  # export standalone offline dist/my-game.html</code></pre>
+npm run build  # export standalone offline dist/my-game.html
+
+# Or list and start from any playable showcase cart
+npx @stephenwil/tessera@latest samples
+npx @stephenwil/tessera@latest pull bramblecourt --project my-arena
+npm create @stephenwil/tessera@latest my-arena -- --template bramblecourt</code></pre>
 <h3>Building carts with AI agents (MCP)</h3>
 <p>AI coding agents with terminal access can run the npm CLI directly. For tool-driven clients (Claude Desktop, Cursor, T3 Code), connect the built-in <b>Model Context Protocol (MCP)</b> server (<code>npx -y @stephenwil/tessera@latest mcp</code> or <code>npx -y @stephenwil/tessera-mcp@latest</code>) to expose 8 structured tools for scaffolding, syntax checking, MagicaVoxel palette budgeting, picture-cart packing, HTML export, and live API reference lookup.</p>
 </div>
