@@ -4,7 +4,7 @@
 
 Welcome to the **Tessera High-Res Cartridge Showcase & Community Store**!
 
-👉 **[Play Live in Browser (Zero Install)](https://stephenwil.github.io/tessera-showcase/)**
+👉 **[Browse & Play Live in Browser (Zero Install)](https://stephenwil.github.io/tessera-showcase/)** · 🌴 **[Play Grand Theft Voxel VI Directly](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/gtavoxel6.tess)**
 
 ![Tessera Showcase Banner](assets/tessera-banner.png)
 
@@ -17,22 +17,37 @@ Tessera is an original 3D voxel fantasy console:
 - **Volume:** 256×256×128 voxel volume (8 MiB composited frame)
 - **Renderer:** WebGL2 full-screen fragment raymarching
 - **Scripting:** Lua 5.4 in WebAssembly
-- **Sound:** Built-in 4-channel retro synthesizer
+- **Sound:** Built-in 4-channel retro synthesizer & tracker
 - **Cartridge Format:** Plain UTF-8 `.tess` text and steganographic `.tess.png` picture cartridges.
 
 ---
 
 ## Featured Cartridges in this Showcase
 
-1. **Hat Chase** (*Stephen Wilson*) — Open-world beach exploration and runaway hat chase across three times of day.
-2. **Turbo Circuit** — High-speed 3D arcade voxel racer with engine sound synth and lap timing.
-3. **Bastion Siege** — 3D tactical voxel fortress defense with projectile arcs and aerial strikes.
-4. **Crypt of the Voxel** — Atmospheric 3D dungeon crawler with dynamic torchlight shadows and keys.
-5. **Void Drifter** — 3D space flight dodging procedural voxel asteroids with particle thrusters.
-6. **Relic Shifter** — Spatial voxel puzzle challenge manipulating ancient magnetic stone blocks.
-7. **Moonlit Garden** — Peaceful scenic diorama with fireflies and ambient night synth.
-8. **Prism Relay** — 3D laser refraction puzzle using reflective voxel prisms.
-9. **Bench & Hello** — Hardware benchmarks and clean starter boilerplate.
+### 🌟 Spotlight: Grand Theft Voxel VI
+
+<a href="https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/gtavoxel6.tess"><img src="carts/gtavoxel6.tess.png" alt="Grand Theft Voxel VI picture cart" width="220" align="right"></a>
+
+*We got GTA VI on a voxel fantasy console before GTA VI!* Cruise neon Ocean Drive in Vice Blocks as Lucia or Jason, jack sports cars, pull Leonida bank heists, outrun 5-star VCPD chases + chopper, jump Gator Keys, and respray at Pay 'n' Voxel — complete with a multi-station 4-channel synthwave tracker radio, all packed inside a 61 KiB picture cart.
+
+- ▶ **[Play Grand Theft Voxel VI in Browser](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/gtavoxel6.tess)**
+- 🖼️ **[Download Picture Cart (`gtavoxel6.tess.png`)](carts/gtavoxel6.tess.png)** · 📄 **[View Source (`gtavoxel6.tess`)](carts/gtavoxel6.tess)**
+
+<br clear="right">
+
+### All Cartridges
+
+1. **[Grand Theft Voxel VI](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/gtavoxel6.tess)** — Open-world 3D voxel Vice Blocks caper with carjacking, nitro, 5-star VCPD chases, Pay 'n' Voxel, Gator Keys ramps, and synthwave radio.
+2. **[Hat Chase](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/hatchase.tess)** (*Stephen Wilson*) — Open-world beach exploration and runaway hat chase across three times of day.
+3. **[Bramble Court](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/bramblecourt.tess)** — Garden arena shooter showcasing HQ soft shadows and smooth ambient occlusion.
+4. **[Turbo Circuit](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/turbocircuit.tess)** — High-speed 3D arcade voxel racer with engine sound synth and lap timing.
+5. **[Bastion Siege](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/bastionsiege.tess)** — 3D tactical voxel fortress defense with projectile arcs and aerial strikes.
+6. **[Crypt of the Voxel](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/crypt.tess)** — Atmospheric 3D dungeon crawler with dynamic torchlight shadows and keys.
+7. **[Void Drifter](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/voiddrifter.tess)** — 3D space flight dodging procedural voxel asteroids with particle thrusters.
+8. **[Relic Shifter](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/relicshifter.tess)** — Spatial voxel puzzle challenge manipulating ancient magnetic stone blocks.
+9. **[Moonlit Garden](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/moonlitgarden.tess)** — Peaceful scenic diorama with fireflies and ambient night synth.
+10. **[Prism Relay](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/prismrelay.tess)** — 3D laser refraction puzzle using reflective voxel prisms.
+11. **[Bench](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/bench.tess) & [Hello](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/hello.tess)** — Hardware benchmarks and clean starter boilerplate.
 
 ---
 
@@ -65,7 +80,6 @@ Have you made a 3D voxel cart for Tessera? We would love to feature it!
 1. Open a **[Cart Submission Issue](https://github.com/stephenwil/tessera-showcase/issues/new?template=submit-cart.yml)**.
 2. Paste your `.tess` code or attach your `.tess.png` picture cart.
 3. Once reviewed, your game will be added directly to the live showcase store!
-
 
 ---
 
