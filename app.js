@@ -87,6 +87,9 @@
     }).sort((a, b) => {
       if (currentSort === 'featured') {
         if (a.featured !== b.featured) return b.featured ? 1 : -1;
+        const ra = a.featuredRank ?? Infinity;
+        const rb = b.featuredRank ?? Infinity;
+        if (ra !== rb) return ra - rb;
         return a.title.localeCompare(b.title);
       }
       if (currentSort === 'title-asc') return a.title.localeCompare(b.title);

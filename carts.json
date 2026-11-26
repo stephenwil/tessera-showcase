@@ -1,5 +1,31 @@
 [
   {
+    "id": "gtavoxel6",
+    "title": "Grand Theft Voxel VI",
+    "author": "Tessera",
+    "version": "1.0",
+    "players": 1,
+    "genre": "Action & Open World",
+    "tags": [
+      "gta",
+      "open-world",
+      "driving",
+      "parody",
+      "synthwave"
+    ],
+    "description": "We got GTA VI on a voxel fantasy console before GTA VI! Cruise neon Ocean Drive as Lucia or Jason, jack sports cars, pull Leonida bank heists, outrun 5-star VCPD chases, jump Gator Keys, and respray at Pay 'n' Voxel — complete with a multi-station synthwave tracker radio.",
+    "featured": true,
+    "featuredRank": 1,
+    "cartFile": "carts/gtavoxel6.tess",
+    "pictureFile": "carts/gtavoxel6.tess.png",
+    "stats": {
+      "codeLines": 1924,
+      "fileSizeBytes": 70411,
+      "pngSizeBytes": 61113,
+      "modelsCount": 0
+    }
+  },
+  {
     "id": "bastionsiege",
     "title": "Bastion Siege",
     "author": "Antigravity",
@@ -71,31 +97,6 @@
       "fileSizeBytes": 160601,
       "pngSizeBytes": 38900,
       "modelsCount": 10
-    }
-  },
-  {
-    "id": "gtavoxel6",
-    "title": "Grand Theft Voxel VI",
-    "author": "Tessera",
-    "version": "1.0",
-    "players": 1,
-    "genre": "Action & Open World",
-    "tags": [
-      "gta",
-      "open-world",
-      "driving",
-      "parody",
-      "synthwave"
-    ],
-    "description": "We got GTA VI on a voxel fantasy console before GTA VI! Cruise neon Ocean Drive as Lucia or Jason, jack sports cars, pull Leonida bank heists, outrun 5-star VCPD chases, jump Gator Keys, and respray at Pay 'n' Voxel — complete with a multi-station synthwave tracker radio.",
-    "featured": true,
-    "cartFile": "carts/gtavoxel6.tess",
-    "pictureFile": "carts/gtavoxel6.tess.png",
-    "stats": {
-      "codeLines": 1924,
-      "fileSizeBytes": 70411,
-      "pngSizeBytes": 61113,
-      "modelsCount": 0
     }
   },
   {
