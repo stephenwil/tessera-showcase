@@ -190,7 +190,8 @@
     }
 
     if (cart.cartFile) {
-      playerIframe.src = `tessera.html?cart=${encodeURIComponent(cart.cartFile)}`;
+      const cartUrl = new URL(cart.cartFile, location.href).href;
+      playerIframe.src = `tessera.html?cart=${encodeURIComponent(cartUrl)}`;
       playerBtnDownload.style.display = '';
       playerBtnSource.style.display = '';
     } else {
@@ -370,7 +371,8 @@
 
     playerBtnEmbed.addEventListener('click', () => {
       if (!activeCart) return;
-      const param = activeCart.cartFile ? `?cart=${encodeURIComponent(activeCart.cartFile)}` : '';
+      const cartUrl = activeCart.cartFile ? new URL(activeCart.cartFile, location.href).href : '';
+      const param = cartUrl ? `?cart=${encodeURIComponent(cartUrl)}` : '';
       const embedUrl = new URL(`tessera.html${param}`, location.href).href;
       const snippet = `<iframe src="${embedUrl}" width="768" height="432" frameborder="0" allow="autoplay; gamepad" allowfullscreen></iframe>`;
       navigator.clipboard.writeText(snippet);
