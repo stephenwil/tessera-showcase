@@ -81,10 +81,10 @@ Looking for full hardware specifications, memory architecture, and Lua 5.4 API d
 Develop locally with live reload, `.vox` import, `.tess.png` packing, offline HTML export, and an MCP server for AI coding agents:
 
 ```sh
-npm create @stephenwil/tessera my-game
+npm create @stephenwil/tessera@latest my-game
 cd my-game
 npm install
 npm run dev
 ```
 
-Download any demo `.tess` or `.tess.png` from the [Showcase](https://stephenwil.github.io/tessera-showcase/) and open it directly with `npx @stephenwil/tessera dev path/to/cart.tess`.
+Download any demo `.tess` or `.tess.png` from the [Showcase](https://stephenwil.github.io/tessera-showcase/) and open it directly with `npx @stephenwil/tessera@latest dev path/to/cart.tess`.

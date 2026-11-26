@@ -378,7 +378,7 @@ core.error;      // {line, message} for the Tessera error screen, or null</code>
 <div class="col stack">
 <h3>Starting outside the browser with npm</h3>
 <p>You can scaffold, develop, pack, and export a cart from your own editor without cloning the engine repo using the public npm packages <code>@stephenwil/create-tessera</code> and <code>@stephenwil/tessera</code>:</p>
-<pre><code>npm create @stephenwil/tessera my-game
+<pre><code>npm create @stephenwil/tessera@latest my-game
 cd my-game
 npm install
 npm run dev    # live-reload console at http://localhost:3000
@@ -386,7 +386,7 @@ npm run check  # validate manifest and Lua structure
 npm run pack   # emit dist/my-game.tess and dist/my-game.tess.png
 npm run build  # export standalone offline dist/my-game.html</code></pre>
 <h3>Building carts with AI agents (MCP)</h3>
-<p>AI coding agents with terminal access can run the npm CLI directly. For tool-driven clients (Claude Desktop, Cursor, T3 Code), connect the built-in <b>Model Context Protocol (MCP)</b> server (<code>npx -y @stephenwil/tessera mcp</code> or <code>npx -y @stephenwil/tessera-mcp</code>) to expose 8 structured tools for scaffolding, syntax checking, MagicaVoxel palette budgeting, picture-cart packing, HTML export, and live API reference lookup.</p>
+<p>AI coding agents with terminal access can run the npm CLI directly. For tool-driven clients (Claude Desktop, Cursor, T3 Code), connect the built-in <b>Model Context Protocol (MCP)</b> server (<code>npx -y @stephenwil/tessera@latest mcp</code> or <code>npx -y @stephenwil/tessera-mcp@latest</code>) to expose 8 structured tools for scaffolding, syntax checking, MagicaVoxel palette budgeting, picture-cart packing, HTML export, and live API reference lookup.</p>
 </div>
 </section>
 
