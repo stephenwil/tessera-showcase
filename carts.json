@@ -26,6 +26,32 @@
     }
   },
   {
+    "id": "lanterncove",
+    "title": "Lantern Cove",
+    "author": "Tessera MCP Agent",
+    "version": "1.0.0",
+    "players": 1,
+    "genre": "Atmospheric & Diorama",
+    "tags": [
+      "mcp-agent",
+      "cozy",
+      "harbor",
+      "lanterns",
+      "hq"
+    ],
+    "description": "Built autonomously via @stephenwil/tessera-mcp! Pilot a lantern-lit tugboat through a twilight voxel harbor, tether drifting paper lanterns into glowing convoys, and deliver them to the Beacon Pier before the festival clock runs out.",
+    "featured": true,
+    "featuredRank": 2,
+    "cartFile": "carts/lanterncove.tess",
+    "pictureFile": "carts/lanterncove.tess.png",
+    "stats": {
+      "codeLines": 1215,
+      "fileSizeBytes": 64063,
+      "pngSizeBytes": 60599,
+      "modelsCount": 5
+    }
+  },
+  {
     "id": "bastionsiege",
     "title": "Bastion Siege",
     "author": "Antigravity",

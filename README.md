@@ -38,16 +38,17 @@ Tessera is an original 3D voxel fantasy console:
 ### All Cartridges
 
 1. **[Grand Theft Voxel VI](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/gtavoxel6.tess)** — Open-world 3D voxel Vice Blocks caper with carjacking, nitro, 5-star VCPD chases, Pay 'n' Voxel, Gator Keys ramps, and synthwave radio.
-2. **[Hat Chase](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/hatchase.tess)** (*Stephen Wilson*) — Open-world beach exploration and runaway hat chase across three times of day.
-3. **[Bramble Court](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/bramblecourt.tess)** — Garden arena shooter showcasing HQ soft shadows and smooth ambient occlusion.
-4. **[Turbo Circuit](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/turbocircuit.tess)** — High-speed 3D arcade voxel racer with engine sound synth and lap timing.
-5. **[Bastion Siege](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/bastionsiege.tess)** — 3D tactical voxel fortress defense with projectile arcs and aerial strikes.
-6. **[Crypt of the Voxel](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/crypt.tess)** — Atmospheric 3D dungeon crawler with dynamic torchlight shadows and keys.
-7. **[Void Drifter](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/voiddrifter.tess)** — 3D space flight dodging procedural voxel asteroids with particle thrusters.
-8. **[Relic Shifter](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/relicshifter.tess)** — Spatial voxel puzzle challenge manipulating ancient magnetic stone blocks.
-9. **[Moonlit Garden](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/moonlitgarden.tess)** — Peaceful scenic diorama with fireflies and ambient night synth.
-10. **[Prism Relay](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/prismrelay.tess)** — 3D laser refraction puzzle using reflective voxel prisms.
-11. **[Bench](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/bench.tess) & [Hello](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/hello.tess)** — Hardware benchmarks and clean starter boilerplate.
+2. **[Lantern Cove](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/lanterncove.tess)** (*Built autonomously via `@stephenwil/tessera-mcp`*) — Cozy twilight 3D voxel harbor where you pilot a lantern-lit tugboat towing drifting paper lanterns to the Beacon Pier, with HQ lighting, 5 custom voxel models, and tracker lullaby.
+3. **[Hat Chase](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/hatchase.tess)** (*Stephen Wilson*) — Open-world beach exploration and runaway hat chase across three times of day.
+4. **[Bramble Court](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/bramblecourt.tess)** — Garden arena shooter showcasing HQ soft shadows and smooth ambient occlusion.
+5. **[Turbo Circuit](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/turbocircuit.tess)** — High-speed 3D arcade voxel racer with engine sound synth and lap timing.
+6. **[Bastion Siege](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/bastionsiege.tess)** — 3D tactical voxel fortress defense with projectile arcs and aerial strikes.
+7. **[Crypt of the Voxel](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/crypt.tess)** — Atmospheric 3D dungeon crawler with dynamic torchlight shadows and keys.
+8. **[Void Drifter](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/voiddrifter.tess)** — 3D space flight dodging procedural voxel asteroids with particle thrusters.
+9. **[Relic Shifter](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/relicshifter.tess)** — Spatial voxel puzzle challenge manipulating ancient magnetic stone blocks.
+10. **[Moonlit Garden](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/moonlitgarden.tess)** — Peaceful scenic diorama with fireflies and ambient night synth.
+11. **[Prism Relay](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/prismrelay.tess)** — 3D laser refraction puzzle using reflective voxel prisms.
+12. **[Bench](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/bench.tess) & [Hello](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/hello.tess)** — Hardware benchmarks and clean starter boilerplate.
 
 ---
 
