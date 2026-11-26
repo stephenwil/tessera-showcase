@@ -7427,16 +7427,104 @@ local function surface_z(x, y)
   return 6
 end
 
+local FOOT_RAD = 2.0
+local CAR_RAD = 4.2
+
 local function hits_building(x, y, rad)
   if x < 18 + rad or x > 250 - rad or y < 22 + rad or y > 238 - rad then
     return true
   end
   for _, b in ipairs(buildings) do
-    if x + rad > b.x0 and x - rad < b.x1 and y + rad > b.y0 and y - rad < b.y1 then
+    if x + rad > b.x0 and x - rad < b.x1 + 1 and y + rad > b.y0 and y - rad < b.y1 + 1 then
       return true
     end
   end
   return false
+end
+
+local function is_blocked(x, y, rad, avoid_water)
+  return hits_building(x, y, rad) or (avoid_water and is_deep_water(x, y))
+end
+
+-- Push (x, y) smoothly out of any overlapping building edge, corner, or map border.
+local function resolve_buildings(x, y, rad, avoid_water)
+  local hit = false
+  local min_x, max_x = 18 + rad, 250 - rad
+  local min_y, max_y = 22 + rad, 238 - rad
+  local eps = 0.05
+  for _ = 1, 6 do
+    local moved = false
+    if x < min_x then x = min_x + eps; hit = true; moved = true end
+    if x > max_x then x = max_x - eps; hit = true; moved = true end
+    if y < min_y then y = min_y + eps; hit = true; moved = true end
+    if y > max_y then y = max_y - eps; hit = true; moved = true end
+    for _, b in ipairs(buildings) do
+      local bx0, by0 = b.x0 - rad, b.y0 - rad
+      local bx1, by1 = b.x1 + 1 + rad, b.y1 + 1 + rad
+      if x > bx0 and x < bx1 and y > by0 and y < by1 then
+        local dl = x - bx0
+        local dr = bx1 - x
+        local db = y - by0
+        local dt = by1 - y
+        local m = math.min(dl, dr, db, dt)
+        if m == dl then
+          x = bx0 - eps
+        elseif m == dr then
+          x = bx1 + eps
+        elseif m == db then
+          y = by0 - eps
+        else
+          y = by1 + eps
+        end
+        hit = true
+        moved = true
+      end
+    end
+    if not moved then break end
+  end
+  -- Fallback spiral if wedged between two tight buildings or deep water
+  if is_blocked(x, y, rad, avoid_water) then
+    hit = true
+    for r = 1, 20 do
+      for i = 0, 15 do
+        local a = i * (math.pi / 8)
+        local tx = x + math.cos(a) * r
+        local ty = y + math.sin(a) * r
+        if not is_blocked(tx, ty, rad, avoid_water) then
+          return tx, ty, true
+        end
+      end
+    end
+  end
+  return x, y, hit
+end
+
+-- Axis-separated sliding movement that always depenetrates first so entities can never get stuck in a building edge.
+local function move_entity(x, y, dx, dy, rad, avoid_water)
+  if is_blocked(x, y, rad, avoid_water) then
+    x, y = resolve_buildings(x, y, rad, avoid_water)
+  end
+  local hit_x, hit_y = false, false
+  if dx ~= 0 then
+    local nx = x + dx
+    if not is_blocked(nx, y, rad, avoid_water) then
+      x = nx
+    else
+      hit_x = true
+    end
+  end
+  if dy ~= 0 then
+    local ny = y + dy
+    if not is_blocked(x, ny, rad, avoid_water) then
+      y = ny
+    else
+      hit_y = true
+    end
+  end
+  if is_blocked(x, y, rad, avoid_water) then
+    x, y = resolve_buildings(x, y, rad, avoid_water)
+  end
+  return x, y, hit_x, hit_y
 end
 
 -- -------------------------------------------------------------------------
@@ -8121,7 +8209,7 @@ end
 -- Game Lifecycle Helpers
 -- -------------------------------------------------------------------------
 local function reset_game()
-  player.x, player.y, player.z = 162, 74, 6
+  player.x, player.y, player.z = 163, 74, 6
   player.vx, player.vy, player.vz = 0, 0, 0
   player.ang = 0
   player.spd = 0
@@ -8178,15 +8266,16 @@ local function respawn_after_fail(was_busted)
     player.car = nil
   end
   local sp = was_busted and PRECINCT_POS or HOSPITAL_POS
-  player.x, player.y = sp.x, sp.y
-  player.z = surface_z(sp.x, sp.y)
+  player.x, player.y = resolve_buildings(sp.x, sp.y, FOOT_RAD, true)
+  player.z = surface_z(player.x, player.y)
   player.hp = 100
   player.stars = 0
   player.bust_t = 0
   player.cash = math.max(0, player.cash - 100)
   chopper.active = false
   -- Park a fresh getaway car nearby so player is never stranded
-  spawn_car("sports", sp.x + 12, sp.y - 6, 0, pick(CAR_COLORS), false, true)
+  local gx, gy = resolve_buildings(sp.x + 12, sp.y - 6, CAR_RAD, true)
+  spawn_car("sports", gx, gy, 0, pick(CAR_COLORS), false, true)
   if #cars > 14 then table.remove(cars, 1) end
   state = STATE_PLAY
   play_radio(radio_idx)
@@ -8199,11 +8288,26 @@ local function enter_or_exit_car()
   if player.in_car and player.car then
     local c = player.car
     c.parked = true
-    local ex = c.x - math.sin(c.ang) * 7
-    local ey = c.y + math.cos(c.ang) * 7
-    if hits_building(ex, ey, 2.5) then
-      ex = c.x + math.sin(c.ang) * 7
-      ey = c.y - math.cos(c.ang) * 7
+    local ca, sa = math.cos(c.ang), math.sin(c.ang)
+    local candidates = {
+      { c.x - sa * 6.5, c.y + ca * 6.5 },
+      { c.x + sa * 6.5, c.y - ca * 6.5 },
+      { c.x - sa * 5.0, c.y + ca * 5.0 },
+      { c.x + sa * 5.0, c.y - ca * 5.0 },
+      { c.x - ca * 8.0, c.y - sa * 8.0 },
+      { c.x + ca * 8.0, c.y + sa * 8.0 },
+      { c.x - (ca + sa) * 5.5, c.y + (ca - sa) * 5.5 },
+      { c.x + (ca - sa) * 5.5, c.y + (ca + sa) * 5.5 },
+    }
+    local ex, ey = nil, nil
+    for _, pt in ipairs(candidates) do
+      if not is_blocked(pt[1], pt[2], FOOT_RAD + 0.3, true) then
+        ex, ey = pt[1], pt[2]
+        break
+      end
+    end
+    if not ex then
+      ex, ey = resolve_buildings(c.x, c.y, FOOT_RAD, true)
     end
     player.x, player.y, player.z = ex, ey, surface_z(ex, ey)
     player.in_car = false
@@ -8223,6 +8327,9 @@ local function enter_or_exit_car()
   if best then
     local was_moving = not best.parked
     best.parked = false
+    if hits_building(best.x, best.y, CAR_RAD) then
+      best.x, best.y = resolve_buildings(best.x, best.y, CAR_RAD, false)
+    end
     player.in_car = true
     player.car = best
     player.x, player.y, player.z = best.x, best.y, best.z
@@ -8307,23 +8414,16 @@ local function update_player_car()
     end
   end
 
-  -- Velocity & axis-separated sliding collision
+  -- Velocity & axis-separated sliding collision (with automatic depenetration)
   local dx = math.cos(c.ang) * c.spd
   local dy = math.sin(c.ang) * c.spd
-  local nx, ny = c.x + dx, c.y + dy
-
-  local hit_wall = false
-  if not hits_building(nx, c.y, 4.2) then
-    c.x = nx
-  else
-    hit_wall = true
-    c.spd = c.spd * 0.35
-  end
-  if not hits_building(c.x, ny, 4.2) then
-    c.y = ny
-  else
-    hit_wall = true
-    c.spd = c.spd * 0.35
+  local hit_x, hit_y
+  c.x, c.y, hit_x, hit_y = move_entity(c.x, c.y, dx, dy, CAR_RAD, false)
+  local hit_wall = hit_x or hit_y
+  if hit_x and hit_y then
+    c.spd = c.spd * 0.25
+  elseif hit_wall then
+    c.spd = c.spd * 0.55
   end
 
   if hit_wall and math.abs(c.spd) > 0.45 then
@@ -8384,6 +8484,9 @@ local function update_player_car()
     if c.x >= 42 and c.x <= 86 and c.y >= 53 and c.y <= 85 then
       c.y = (c.y < 69) and 51 or 87
     end
+    if hits_building(c.x, c.y, CAR_RAD) then
+      c.x, c.y = resolve_buildings(c.x, c.y, CAR_RAD, true)
+    end
     c.spd = -c.spd * 0.4
   end
 
@@ -8441,18 +8544,14 @@ local function update_player_foot()
     local mag = math.sqrt(wx * wx + wy * wy)
     wx, wy = wx / mag, wy / mag
     local speed = sprinting and 1.15 or 0.78
-    local nx, ny = player.x + wx * speed, player.y + wy * speed
-
-    if not hits_building(nx, player.y, 2.2) and not is_deep_water(nx, player.y) then
-      player.x = nx
-    end
-    if not hits_building(player.x, ny, 2.2) and not is_deep_water(player.x, ny) then
-      player.y = ny
-    end
+    player.x, player.y = move_entity(player.x, player.y, wx * speed, wy * speed, FOOT_RAD, true)
     player.ang = math.atan(wy, wx)
     player.walk = player.walk + (sprinting and 0.35 or 0.22)
     player.spd = speed
   else
+    if is_blocked(player.x, player.y, FOOT_RAD, true) then
+      player.x, player.y = resolve_buildings(player.x, player.y, FOOT_RAD, true)
+    end
     player.spd = 0
   end
   player.z = surface_z(player.x, player.y)
@@ -8481,19 +8580,9 @@ local function update_npc_cars()
         local want_spd = (d > 14) and (1.45 + player.stars * 0.14) or 0.85
         c.spd = c.spd + (want_spd - c.spd) * 0.12
 
-        local nx = c.x + math.cos(c.ang) * c.spd
-        local ny = c.y + math.sin(c.ang) * c.spd
-        local blocked = false
-        if not hits_building(nx, c.y, 4.2) and not is_deep_water(nx, c.y) then
-          c.x = nx
-        else
-          blocked = true
-        end
-        if not hits_building(c.x, ny, 4.2) and not is_deep_water(c.x, ny) then
-          c.y = ny
-        else
-          blocked = true
-        end
+        local hit_x, hit_y
+        c.x, c.y, hit_x, hit_y = move_entity(c.x, c.y, math.cos(c.ang) * c.spd, math.sin(c.ang) * c.spd, CAR_RAD, true)
+        local blocked = hit_x or hit_y
         if blocked then
           -- Steer around building corner
           c.ang = c.ang + 0.32
@@ -8536,14 +8625,14 @@ local function update_npc_cars()
         c.z = surface_z(c.x, c.y)
       end
 
-      -- Vehicle-to-player collision!
+      -- Vehicle-to-player collision! (collision-safe so bumps never shove player into a building edge)
       local pd = dist(c.x, c.y, player.x, player.y)
       if player.in_car and pd < 8.5 then
         local push_ang = math.atan(player.y - c.y, player.x - c.x)
-        player.car.x = player.car.x + math.cos(push_ang) * 1.4
-        player.car.y = player.car.y + math.sin(push_ang) * 1.4
-        c.x = c.x - math.cos(push_ang) * 1.4
-        c.y = c.y - math.sin(push_ang) * 1.4
+        local px, py = math.cos(push_ang) * 1.4, math.sin(push_ang) * 1.4
+        player.car.x, player.car.y = move_entity(player.car.x, player.car.y, px, py, CAR_RAD, false)
+        player.x, player.y = player.car.x, player.car.y
+        c.x, c.y = move_entity(c.x, c.y, -px, -py, CAR_RAD, true)
         if math.abs(player.car.spd) > 0.6 or c.is_cop then
           sfx(3)
           shake = 3
@@ -8556,8 +8645,7 @@ local function update_npc_cars()
         end
       elseif not player.in_car and pd < 5.5 and c.spd > 0.4 then
         local push_ang = math.atan(player.y - c.y, player.x - c.x)
-        player.x = player.x + math.cos(push_ang) * 3.5
-        player.y = player.y + math.sin(push_ang) * 3.5
+        player.x, player.y = move_entity(player.x, player.y, math.cos(push_ang) * 3.5, math.sin(push_ang) * 3.5, FOOT_RAD, true)
         player.hp = player.hp - 12
         sfx(3)
         shake = 4
