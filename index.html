@@ -46,6 +46,9 @@
         <button id="btn-boot-clean" class="btn btn-secondary">
           <span class="icon">🕹️</span> Boot Console
         </button>
+        <button id="btn-open-mcp" class="btn btn-secondary">
+          <span class="icon">🤖</span> Build with MCP
+        </button>
         <button id="btn-open-submit" class="btn btn-primary">
           <span class="icon">✨</span> Submit Cart
         </button>
@@ -108,6 +111,7 @@
     <!-- Category Pills -->
     <div class="category-pills" id="category-pills">
       <button class="pill active" data-genre="all">All Carts (<span id="count-all">0</span>)</button>
+      <button class="pill pill-mcp" data-genre="mcp-agent">🤖 Built with MCP (<span id="count-mcp">0</span>)</button>
       <button class="pill" data-genre="Action & Open World">Action &amp; Open World</button>
       <button class="pill" data-genre="Adventure">Adventure</button>
       <button class="pill" data-genre="Arcade & Racing">Arcade & Racing</button>
@@ -242,6 +246,62 @@
             <a href="https://github.com/stephenwil/tessera-showcase/issues/new?template=submit-cart.yml" target="_blank" rel="noopener" class="btn btn-primary submit-action-btn">
               🚀 Open Cart Submission on GitHub
             </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal: Build with AI Agents (MCP Quickstart) -->
+  <div id="mcp-modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="mcp-backdrop"></div>
+    <div class="modal-dialog submit-dialog">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-badge mcp">MCP SERVER</span>
+          <h2 class="modal-title">Build Voxel Carts with AI Agents</h2>
+          <span class="modal-author">Connect Claude, Cursor, Codex, or T3 Code to @stephenwil/tessera-mcp</span>
+        </div>
+        <button id="mcp-btn-close" class="btn btn-sm btn-ghost">✕</button>
+      </div>
+      <div class="submit-body">
+        <div class="submit-step">
+          <div class="step-num">1</div>
+          <div class="step-desc">
+            <h3>Add the MCP Server Config (Zero Clone)</h3>
+            <p>Drop this into your MCP client config (Claude Desktop, Cursor, T3 Code, etc.):</p>
+            <div class="mcp-code-wrap">
+              <pre><code id="mcp-config-snippet">{
+  "mcpServers": {
+    "tessera": {
+      "command": "npx",
+      "args": ["-y", "@stephenwil/tessera-mcp@latest"]
+    }
+  }
+}</code></pre>
+              <button type="button" id="mcp-btn-copy" class="btn btn-sm btn-secondary mcp-copy-btn">📋 Copy JSON</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="submit-step">
+          <div class="step-num">2</div>
+          <div class="step-desc">
+            <h3>Closed Visual + Runtime Feedback Loop</h3>
+            <p>Agents get <strong>12 MCP tools</strong> &amp; <strong>3 guided prompts</strong> (<code>create-voxel-game</code>, <code>remix-showcase-cart</code>, <code>visual-polish-pass</code>) to scaffold projects, pull showcase carts, inspect 4-angle model turntables (<code>tessera_preview_model</code>), render live WebGL2 screenshots &amp; motion filmstrips (<code>tessera_render_preview</code>), and pack collector-grade <code>.tess.png</code> cartridges with automatic voxel cover art (<code>autoLabel: true</code>).</p>
+          </div>
+        </div>
+
+        <div class="submit-step">
+          <div class="step-num">3</div>
+          <div class="step-desc">
+            <h3>Explore Agent-Built Cartridges</h3>
+            <p>Every cart tagged <code>#mcp-agent</code> in this store was created end-to-end by an AI agent using only <code>@stephenwil/tessera-mcp</code>.</p>
+            <div class="mcp-modal-actions">
+              <button type="button" id="mcp-btn-filter" class="btn btn-primary">🤖 Browse MCP Carts</button>
+              <a href="https://github.com/stephenwil/tessera-kit" target="_blank" rel="noopener" class="btn btn-secondary">📦 tessera-kit on GitHub</a>
+            </div>
           </div>
         </div>
       </div>

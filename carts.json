@@ -52,6 +52,32 @@
     }
   },
   {
+    "id": "solaristemple",
+    "title": "Solaris Temple",
+    "author": "Tessera MCP Agent",
+    "version": "1.0.0",
+    "players": 1,
+    "genre": "Puzzle",
+    "tags": [
+      "mcp-agent",
+      "puzzle",
+      "optics",
+      "desert",
+      "hq"
+    ],
+    "description": "Remixed autonomously from Prism Relay via @stephenwil/tessera-mcp! Redirect golden solar and cyan lunar beams through rotating brass-and-crystal mirrors, prism splitters, and turquoise lunar arches across 5 sunlit desert oasis chambers.",
+    "featured": true,
+    "featuredRank": 3,
+    "cartFile": "carts/solaristemple.tess",
+    "pictureFile": "carts/solaristemple.tess.png",
+    "stats": {
+      "codeLines": 960,
+      "fileSizeBytes": 68833,
+      "pngSizeBytes": 56470,
+      "modelsCount": 5
+    }
+  },
+  {
     "id": "bastionsiege",
     "title": "Bastion Siege",
     "author": "Antigravity",
@@ -71,7 +97,7 @@
     "stats": {
       "codeLines": 558,
       "fileSizeBytes": 17100,
-      "pngSizeBytes": 14155,
+      "pngSizeBytes": 14456,
       "modelsCount": 4
     }
   },
@@ -96,7 +122,7 @@
     "stats": {
       "codeLines": 576,
       "fileSizeBytes": 21488,
-      "pngSizeBytes": 16571,
+      "pngSizeBytes": 45199,
       "modelsCount": 0
     }
   },
@@ -121,7 +147,7 @@
     "stats": {
       "codeLines": 1325,
       "fileSizeBytes": 160601,
-      "pngSizeBytes": 38900,
+      "pngSizeBytes": 52353,
       "modelsCount": 10
     }
   },
@@ -146,7 +172,7 @@
     "stats": {
       "codeLines": 1156,
       "fileSizeBytes": 528817,
-      "pngSizeBytes": 58498,
+      "pngSizeBytes": 74425,
       "modelsCount": 10
     }
   },
@@ -171,7 +197,7 @@
     "stats": {
       "codeLines": 794,
       "fileSizeBytes": 21145,
-      "pngSizeBytes": 15290,
+      "pngSizeBytes": 16927,
       "modelsCount": 0
     }
   },
@@ -196,7 +222,7 @@
     "stats": {
       "codeLines": 723,
       "fileSizeBytes": 27695,
-      "pngSizeBytes": 20076,
+      "pngSizeBytes": 34061,
       "modelsCount": 3
     }
   },
@@ -221,7 +247,7 @@
     "stats": {
       "codeLines": 1168,
       "fileSizeBytes": 40710,
-      "pngSizeBytes": 26447,
+      "pngSizeBytes": 33722,
       "modelsCount": 4
     }
   },
@@ -246,7 +272,7 @@
     "stats": {
       "codeLines": 71,
       "fileSizeBytes": 2666,
-      "pngSizeBytes": 6467,
+      "pngSizeBytes": 20910,
       "modelsCount": 0
     }
   },
@@ -271,7 +297,7 @@
     "stats": {
       "codeLines": 5,
       "fileSizeBytes": 154,
-      "pngSizeBytes": 4192,
+      "pngSizeBytes": 2426,
       "modelsCount": 0
     }
   },
@@ -296,7 +322,7 @@
     "stats": {
       "codeLines": 205,
       "fileSizeBytes": 5088,
-      "pngSizeBytes": 7935,
+      "pngSizeBytes": 12906,
       "modelsCount": 0
     }
   },
@@ -321,7 +347,7 @@
     "stats": {
       "codeLines": 265,
       "fileSizeBytes": 6845,
-      "pngSizeBytes": 8977,
+      "pngSizeBytes": 10051,
       "modelsCount": 0
     }
   }

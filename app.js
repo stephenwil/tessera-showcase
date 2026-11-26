@@ -14,6 +14,7 @@
   const categoryPills = document.getElementById('category-pills');
   const resultsCount = document.getElementById('results-count');
   const countAll = document.getElementById('count-all');
+  const countMcp = document.getElementById('count-mcp');
   const toastEl = document.getElementById('toast');
 
   // Player Modal
@@ -51,6 +52,13 @@
   // Global Drop Overlay
   const dropOverlay = document.getElementById('drop-overlay');
   const btnBootClean = document.getElementById('btn-boot-clean');
+  const btnOpenMcp = document.getElementById('btn-open-mcp');
+  const mcpModal = document.getElementById('mcp-modal');
+  const mcpBackdrop = document.getElementById('mcp-backdrop');
+  const mcpBtnClose = document.getElementById('mcp-btn-close');
+  const mcpBtnCopy = document.getElementById('mcp-btn-copy');
+  const mcpBtnFilter = document.getElementById('mcp-btn-filter');
+  const mcpConfigSnippet = document.getElementById('mcp-config-snippet');
 
   // --- 1. Init & Fetch Catalog ---
   async function init() {
@@ -59,6 +67,7 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       allCarts = await res.json();
       countAll.textContent = allCarts.length;
+      if (countMcp) countMcp.textContent = allCarts.filter(c => Array.isArray(c.tags) && c.tags.includes('mcp-agent')).length;
       render();
     } catch (err) {
       console.error('Failed to load carts.json:', err);
@@ -72,7 +81,9 @@
   function getFilteredCarts() {
     return allCarts.filter(c => {
       // Genre filter
-      if (currentGenre !== 'all' && c.genre !== currentGenre) return false;
+      if (currentGenre === 'mcp-agent') {
+        if (!Array.isArray(c.tags) || !c.tags.includes('mcp-agent')) return false;
+      } else if (currentGenre !== 'all' && c.genre !== currentGenre) return false;
       
       // Search query
       if (searchQuery) {
@@ -122,6 +133,7 @@
 
       const tagsHtml = (c.tags || []).slice(0, 4).map(t => `<span class="tag-badge">#${escapeHtml(t)}</span>`).join('');
       const featuredBadge = c.featured ? '<span class="badge-featured">★ Featured</span>' : '';
+      const mcpBadge = Array.isArray(c.tags) && c.tags.includes('mcp-agent') ? '<span class="badge-mcp">🤖 MCP</span>' : '';
       const kbSize = c.stats?.fileSizeBytes ? (c.stats.fileSizeBytes / 1024).toFixed(1) + ' KiB' : '';
 
       card.innerHTML = `
@@ -129,6 +141,7 @@
           <img src="${c.pictureFile}" alt="${escapeHtml(c.title)} cartridge label" class="card-label-img" loading="lazy">
           <div class="card-badge-row">
             <span class="badge-genre">${escapeHtml(c.genre)}</span>
+            ${mcpBadge}
             ${featuredBadge}
           </div>
           <div class="card-play-overlay">
@@ -354,6 +367,36 @@
 
     btnOpenSubmit.addEventListener('click', openSubmit);
 
+    if (btnOpenMcp && mcpModal) {
+      const closeMcp = () => {
+        mcpModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+      btnOpenMcp.addEventListener('click', () => {
+        mcpModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      });
+      mcpBtnClose?.addEventListener('click', closeMcp);
+      mcpBackdrop?.addEventListener('click', closeMcp);
+      mcpBtnCopy?.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(mcpConfigSnippet?.textContent || '');
+          showToast('Copied MCP server JSON config!');
+        } catch {
+          showToast('Copy failed — select JSON manually');
+        }
+      });
+      mcpBtnFilter?.addEventListener('click', () => {
+        closeMcp();
+        currentGenre = 'mcp-agent';
+        categoryPills.querySelectorAll('.pill').forEach(p => {
+          p.classList.toggle('active', p.dataset.genre === 'mcp-agent');
+        });
+        render();
+        document.getElementById('cards-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
     // Player modal events
     playerBtnClose.addEventListener('click', closePlayer);
     playerBackdrop.addEventListener('click', closePlayer);
@@ -458,6 +501,7 @@
     window.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         if (!sourceModal.classList.contains('hidden')) closeSource();
+        else if (mcpModal && !mcpModal.classList.contains('hidden')) { mcpModal.classList.add('hidden'); document.body.style.overflow = ''; }
         else if (!submitModal.classList.contains('hidden')) closeSubmit();
         else if (!playerModal.classList.contains('hidden')) closePlayer();
       }
