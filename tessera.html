@@ -6984,6 +6984,2136 @@ function _draw()
 end
 `,hr=`tessera cart v1
 __meta__
+id=gtavoxel6
+title=Grand Theft Voxel VI
+author=Tessera
+version=1.0
+players=1
+quality=standard
+desc=We got GTA VI on a voxel fantasy console before GTA VI. Cruise neon Ocean Drive, jack rides, pull heists, dodge VCPD, jump Gator Keys, and hit Pay 'n' Voxel in Vice Blocks, Leonida.
+tags=open-world,action,driving,parody,synthwave
+__pal__
+1 0d0b1a
+2 1e1838
+3 362a5c
+4 ffffff
+5 e2e6f0
+6 a8b0c2
+7 6e7588
+8 2b2f3c
+9 3a3f50
+10 151720
+11 ff2a85
+12 ff7db5
+13 ffc2dc
+14 00f0ff
+15 7ef8ff
+16 249ec2
+17 ff9a2e
+18 ffd24c
+19 fff0ad
+20 9d4edd
+21 5a2d82
+22 ff5252
+23 b81d2a
+24 2266ff
+25 162c6b
+26 0d6585
+27 189ab4
+28 4ad6d0
+29 d8f8f8
+30 f2d59b
+31 e0bc7a
+32 348c3c
+33 5ec25e
+34 1f5a26
+35 6d4c32
+36 91694a
+37 472f1e
+38 2f7d46
+39 104f58
+40 1b8488
+41 32d74b
+42 1c852e
+43 f5c49e
+44 d6966e
+45 8c5233
+46 ff6b35
+47 ffea00
+48 484e62
+49 b8c4d8
+50 c288ff
+51 3be0a8
+52 ff7744
+53 261242
+__sfx__
+0 square 180>90 0.09 0.25
+0 noise 400>180 0.06 0.15
+1 square 392>392 0.11 0.22
+1 square 494>494 0.14 0.20
+2 noise 280>1200 0.18 0.20
+2 saw 140>420 0.16 0.18
+3 noise 900>120 0.16 0.30
+3 square 120>55 0.12 0.22
+4 square 659>988 0.08 0.22
+4 square 988>1318 0.12 0.22
+5 saw 440>660 0.10 0.22
+5 saw 660>880 0.14 0.24
+6 square 620>920 0.18 0.16
+6 square 920>620 0.18 0.16
+7 square 523>523 0.11 0.25
+7 square 659>659 0.11 0.25
+7 square 784>784 0.11 0.25
+7 square 1046>1046 0.35 0.28
+8 noise 1800>600 0.22 0.18
+8 triangle 523>1046 0.22 0.22
+9 saw 220>880 0.28 0.24
+9 triangle 440>1320 0.22 0.18
+10 saw 180>45 0.55 0.32
+10 noise 350>80 0.45 0.24
+11 square 220>140 0.10 0.24
+11 square 310>180 0.12 0.22
+__music__
+inst 0 wave=sq25 adsr=0.006,0.10,0.55,0.08
+inst 1 wave=saw adsr=0.004,0.08,0.60,0.05
+inst 2 wave=tri adsr=0.008,0.12,0.45,0.10
+inst 3 wave=nse adsr=0.002,0.05,0.00,0.02
+inst 4 wave=sq12 adsr=0.005,0.09,0.50,0.07
+
+pat 0 speed=4 rows=32
+00 | A-4 0 vA | A-2 1 vB | E-4 2 v7 | C-5 3 v6
+01 | ...      | ...      | A-4 2 v6 | ...
+02 | ...      | A-2 1 v9 | C-5 2 v7 | C-6 3 v4
+03 | ...      | ...      | E-4 2 v6 | ...
+04 | C-5 0 vA | A-2 1 vB | A-4 2 v7 | G-4 3 v9
+05 | ...      | ...      | C-5 2 v6 | ...
+06 | B-4 0 v9 | A-2 1 v9 | E-4 2 v7 | C-6 3 v4
+07 | A-4 0 v9 | ...      | A-4 2 v6 | ...
+08 | G-4 0 vA | F-2 1 vB | C-4 2 v7 | C-5 3 v6
+09 | ...      | ...      | F-4 2 v6 | ...
+10 | E-4 0 v9 | F-2 1 v9 | A-4 2 v7 | C-6 3 v4
+11 | ...      | ...      | C-4 2 v6 | ...
+12 | F-4 0 vA | F-2 1 vB | F-4 2 v7 | G-4 3 v9
+13 | ...      | ...      | A-4 2 v6 | ...
+14 | G-4 0 vA | F-2 1 v9 | C-4 2 v7 | C-6 3 v4
+15 | ...      | ...      | F-4 2 v6 | ...
+16 | E-4 0 vA | C-3 1 vB | G-4 2 v7 | C-5 3 v6
+17 | ...      | ...      | C-5 2 v6 | ...
+18 | G-4 0 vA | C-3 1 v9 | E-5 2 v7 | C-6 3 v4
+19 | ...      | ...      | G-4 2 v6 | ...
+20 | A-4 0 vA | C-3 1 vB | C-5 2 v7 | G-4 3 v9
+21 | ...      | ...      | E-5 2 v6 | ...
+22 | G-4 0 v9 | C-3 1 v9 | G-4 2 v7 | C-6 3 v4
+23 | E-4 0 v9 | ...      | C-5 2 v6 | ...
+24 | D-4 0 vA | G-2 1 vB | D-4 2 v7 | C-5 3 v6
+25 | ...      | ...      | G-4 2 v6 | ...
+26 | G-4 0 vA | G-2 1 v9 | B-4 2 v7 | C-6 3 v4
+27 | ...      | ...      | D-4 2 v6 | ...
+28 | B-4 0 vA | G-2 1 vB | G-4 2 v7 | G-4 3 v9
+29 | ...      | ...      | B-4 2 v6 | ...
+30 | G-4 0 v9 | G-2 1 v9 | D-4 2 v7 | C-6 3 v5
+31 | E-4 0 v8 | ...      | G-4 2 v6 | C-6 3 v4
+
+pat 1 speed=4 rows=32
+00 | E-5 0 vA | A-2 1 vB | E-4 2 v7 | C-5 3 v6
+01 | ...      | ...      | A-4 2 v6 | ...
+02 | D-5 0 vA | A-2 1 v9 | C-5 2 v7 | C-6 3 v4
+03 | ...      | ...      | E-4 2 v6 | ...
+04 | C-5 0 vA | A-2 1 vB | A-4 2 v7 | G-4 3 v9
+05 | ...      | ...      | C-5 2 v6 | ...
+06 | A-4 0 v9 | A-2 1 v9 | E-4 2 v7 | C-6 3 v4
+07 | B-4 0 v9 | ...      | A-4 2 v6 | ...
+08 | C-5 0 vA | F-2 1 vB | F-4 2 v7 | C-5 3 v6
+09 | ...      | ...      | A-4 2 v6 | ...
+10 | A-4 0 v9 | F-2 1 v9 | C-5 2 v7 | C-6 3 v4
+11 | ...      | ...      | F-4 2 v6 | ...
+12 | G-4 0 vA | F-2 1 vB | A-4 2 v7 | G-4 3 v9
+13 | ...      | ...      | C-5 2 v6 | ...
+14 | A-4 0 v9 | F-2 1 v9 | F-4 2 v7 | C-6 3 v4
+15 | ...      | ...      | A-4 2 v6 | ...
+16 | G-4 0 vA | C-3 1 vB | G-4 2 v7 | C-5 3 v6
+17 | ...      | ...      | C-5 2 v6 | ...
+18 | E-4 0 v9 | C-3 1 v9 | E-5 2 v7 | C-6 3 v4
+19 | ...      | ...      | G-4 2 v6 | ...
+20 | C-5 0 vA | C-3 1 vB | C-5 2 v7 | G-4 3 v9
+21 | ...      | ...      | E-5 2 v6 | ...
+22 | B-4 0 v9 | C-3 1 v9 | G-4 2 v7 | C-6 3 v4
+23 | A-4 0 v9 | ...      | C-5 2 v6 | ...
+24 | B-4 0 vA | G-2 1 vB | D-4 2 v7 | C-5 3 v6
+25 | ...      | ...      | G-4 2 v6 | ...
+26 | D-5 0 vA | G-2 1 v9 | B-4 2 v7 | C-6 3 v4
+27 | ...      | ...      | D-4 2 v6 | ...
+28 | B-4 0 vA | G-2 1 vB | G-4 2 v7 | G-4 3 v9
+29 | A-4 0 v9 | ...      | B-4 2 v6 | ...
+30 | G-4 0 v9 | G-2 1 v9 | D-4 2 v7 | G-4 3 v8
+31 | ...      | ...      | G-4 2 v6 | C-6 3 v5
+
+pat 2 speed=4 rows=32
+00 | E-4 4 vA | E-2 1 vC | B-3 2 v7 | C-5 3 v7
+01 | ...      | ...      | ...      | ...
+02 | ...      | E-2 1 vA | E-4 2 v6 | C-6 3 v4
+03 | G-4 4 vA | ...      | ...      | ...
+04 | ...      | G-2 1 vB | B-3 2 v7 | G-4 3 vA
+05 | ...      | ...      | ...      | ...
+06 | A-4 4 vA | E-2 1 vA | G-4 2 v6 | C-6 3 v4
+07 | ...      | ...      | ...      | ...
+08 | B-4 4 vB | A-2 1 vC | E-4 2 v7 | C-5 3 v7
+09 | ...      | ...      | ...      | ...
+10 | A-4 4 v9 | A-2 1 vA | A-4 2 v6 | C-6 3 v4
+11 | G-4 4 v9 | ...      | ...      | ...
+12 | E-4 4 vA | B-2 1 vB | F#4 2 v7 | G-4 3 vA
+13 | ...      | ...      | ...      | ...
+14 | D-4 4 v9 | A-2 1 vA | B-3 2 v6 | C-6 3 v5
+15 | ...      | ...      | ...      | ...
+16 | E-4 4 vA | E-2 1 vC | B-3 2 v7 | C-5 3 v7
+17 | ...      | ...      | ...      | ...
+18 | G-4 4 vA | E-2 1 vA | E-4 2 v6 | C-6 3 v4
+19 | ...      | ...      | ...      | ...
+20 | B-4 4 vB | G-2 1 vB | B-3 2 v7 | G-4 3 vA
+21 | ...      | ...      | ...      | ...
+22 | D-5 4 vA | A-2 1 vA | G-4 2 v6 | C-6 3 v4
+23 | ...      | ...      | ...      | ...
+24 | E-5 4 vB | C-3 1 vC | G-4 2 v7 | C-5 3 v7
+25 | ...      | ...      | ...      | ...
+26 | D-5 4 vA | B-2 1 vB | F#4 2 v6 | C-6 3 v4
+27 | B-4 4 v9 | ...      | ...      | ...
+28 | A-4 4 vA | B-2 1 vC | F#4 2 v7 | G-4 3 vA
+29 | G-4 4 v9 | ...      | ...      | ...
+30 | E-4 4 v9 | D-2 1 vB | B-3 2 v6 | G-4 3 v8
+31 | ...      | ...      | ...      | C-6 3 v5
+
+song 0 title="FM 86.5 VICE SYNTH" speed=4 loop=0
+order 0 1
+
+song 1 title="FM 98.3 LEONIDA BASS" speed=4 loop=0
+order 2
+
+__lua__
+-- =========================================================================
+-- GRAND THEFT VOXEL VI: VICE BLOCKS, LEONIDA
+-- "We got GTA VI on a voxel fantasy console before GTA VI."
+--
+-- Controls:
+--   Title:   Left/Right = Choose Lucia or Jason | A (Z/Space) = Start
+--   On Foot: Arrows/WASD = Move | A = Sprint/Bonk | B (X/E) = Jack Car
+--   Driving: Up = Gas | Down = Brake/Rev | Left/Right = Steer
+--            A = Nitro Boost (or Horn/Radio when slow) | B = Exit Car
+-- =========================================================================
+
+STATE_TITLE  = 0
+STATE_PLAY   = 1
+STATE_WASTED = 2
+STATE_BUSTED = 3
+
+state = STATE_TITLE
+tick = 0
+char_idx = 0 -- 0 = LUCIA, 1 = JASON
+radio_idx = 0 -- 0 = FM 86.5 VICE SYNTH, 1 = FM 98.3 LEONIDA BASS, 2 = RADIO OFF
+radio_toast = 0
+
+local RADIOS = {
+  "FM 86.5  VICE SYNTH",
+  "FM 98.3  LEONIDA BASS",
+  "FM 104.1 GATOR TALK (OFF)",
+}
+
+local TAGLINES = {
+  "WE GOT THIS BEFORE GTA VI",
+  "RELEASE DATE: FALL 2026... MAYBE 2027",
+  "TRAILER 3 STATUS: STILL LOADING",
+  "100% ORGANIC LEONIDA CHAOS",
+}
+
+local JACK_LINES = {
+  "MY LEASE!",
+  "HEY! CALL LEONIDA 911!",
+  "NOT AGAIN!",
+  "MY CRYPTO WALLET!",
+  "I JUST WASHED IT!",
+  "TAKE THE GATOR INSTEAD!",
+}
+
+local CAR_COLORS = { 11, 14, 17, 18, 4, 22, 51, 50, 20 }
+
+-- Road geometry constants
+local ROAD_XS = { 28, 100, 172 }        -- West Blvd, Leonida Ave, Ocean Drive
+local ROAD_YS = { 32, 112, 184, 228 }   -- Gator Cswy, Vice Blvd, Flamingo Way, North Loop
+local ROAD_HALF = 8
+
+-- Landmarks
+local PAYNVOX = { x = 52, y = 204, r = 10 }
+local BANK_ZONE = { x = 78, y = 119, r = 10 }
+local PIER_ZONE = { x = 238, y = 117, r = 10 }
+local CLUB_ZONE = { x = 165, y = 148, r = 11 }
+local HOTEL_ZONE = { x = 165, y = 73, r = 11 }
+local HOSPITAL_POS = { x = 136, y = 186 }
+local PRECINCT_POS = { x = 78, y = 186 }
+
+-- Stunt ramps: {x0, y0, x1, y1, dir_x, dir_y, h, name}
+local RAMPS = {
+  { x0 = 59, y0 = 42, x1 = 69, y1 = 52, dx = 0, dy = 1, h = 7, name = "GATOR KEYS" },
+  { x0 = 59, y0 = 86, x1 = 69, y1 = 96, dx = 0, dy = -1, h = 7, name = "GATOR KEYS" },
+  { x0 = 193, y0 = 64, x1 = 203, y1 = 76, dx = 0, dy = 1, h = 6, name = "OCEAN BEACH" },
+}
+
+-- World colliders, props, entities
+local buildings = {}
+local hydrants = {}
+cars = {}
+local peds = {}
+local gator = { x = 76, y = 68, z = 4, ang = 2.6, dir = 1, bonus_cd = 0 }
+local chopper = { active = false, x = 128, y = 128, z = 38, ang = 0, spot_x = 128, spot_y = 128 }
+local popups = {}
+local banner = { title = "", sub = "", col = 18, timer = 0, big = false }
+local state_timer = 0
+local shake = 0
+local siren_cd = 0
+local best_cash = 0
+local cam = { x = 166, y = 80, z = 12, yaw = -0.34, zoom = 1.85 }
+
+player = {
+  x = 163, y = 74, z = 5,
+  vx = 0, vy = 0, vz = 0,
+  ang = 0, spd = 0,
+  walk = 0,
+  hp = 100,
+  cash = 500,
+  stars = 0,
+  heat_decay = 0,
+  bust_t = 0,
+  in_car = false,
+  car = nil,
+  bonk_cd = 0,
+  stunt_air = 0,
+  stunt_ok = false,
+}
+
+mission = {
+  idx = 1,
+  kind = "jack",
+  title = "GETAWAY RIDE",
+  desc = "JACK A SPORTS CAR [B]",
+  x = 172, y = 74,
+  hold = 0,
+  hold_need = 0,
+  timer = 0,
+  reward = 500,
+}
+
+-- -------------------------------------------------------------------------
+-- Helpers
+-- -------------------------------------------------------------------------
+local function clamp(v, a, b) return v < a and a or (v > b and b or v) end
+local function dist2(ax, ay, bx, by)
+  local dx, dy = ax - bx, ay - by
+  return dx * dx + dy * dy
+end
+local function dist(ax, ay, bx, by) return math.sqrt(dist2(ax, ay, bx, by)) end
+local function ang_diff(a, b) return (a - b + math.pi) % (2 * math.pi) - math.pi end
+local function pick(t) return t[flr(rnd(#t)) + 1] end
+
+local function add_popup(x, y, z, txt, col)
+  table.insert(popups, { x = x, y = y, z = z, txt = txt, col = col or 18, life = 55 })
+  if #popups > 16 then table.remove(popups, 1) end
+end
+
+local function show_banner(title, sub, col, dur, big)
+  banner.title = title
+  banner.sub = sub or ""
+  banner.col = col or 18
+  banner.timer = dur or 85
+  banner.big = big or false
+end
+
+local function add_cash(amt, x, y, z, label)
+  player.cash = math.max(0, player.cash + amt)
+  if player.cash > best_cash then
+    best_cash = player.cash
+    dset("gtav6_best_cash", best_cash)
+  end
+  if x then
+    local sign = amt >= 0 and "+" or "-"
+    local txt = label and (label .. " " .. sign .. "$" .. math.abs(amt)) or (sign .. "$" .. math.abs(amt))
+    add_popup(x, y, (z or 8) + 8, txt, amt >= 0 and 41 or 22)
+  end
+  if amt > 0 then sfx(4) end
+end
+
+local function add_heat(delta)
+  local prev = player.stars
+  player.stars = clamp(player.stars + delta, 0, 5)
+  player.heat_decay = 0
+  if player.stars > prev then
+    sfx(5)
+    add_popup(player.x, player.y, player.z + 12, "WANTED " .. player.stars .. " STAR!", 18)
+  end
+end
+
+local function play_radio(idx)
+  radio_idx = idx % #RADIOS
+  radio_toast = 95
+  if radio_idx == 0 then
+    music(0, 150)
+  elseif radio_idx == 1 then
+    music(1, 150)
+  else
+    music_stop(200)
+  end
+end
+
+local function district_at(x, y)
+  if x >= 182 then return "OCEAN BEACH" end
+  if x >= 110 and y < 188 then return "NEON STRIP" end
+  if x < 98 and y < 106 then return "GATOR KEYS" end
+  if y >= 190 then return "UPTOWN VICE" end
+  return "DOWNTOWN LEONIDA"
+end
+
+-- Check if point is on a road strip
+local function is_road(x, y)
+  if x < 20 or x > 180 or y < 24 or y > 236 then return false end
+  for _, rx in ipairs(ROAD_XS) do
+    if math.abs(x - rx) <= ROAD_HALF then return true end
+  end
+  for _, ry in ipairs(ROAD_YS) do
+    if math.abs(y - ry) <= ROAD_HALF then return true end
+  end
+  return false
+end
+
+-- Check if point is inside the Gator Keys bayou water or deep Atlantic Ocean
+local function is_deep_water(x, y)
+  if x >= 224 then
+    -- Ocean pier is walkable/drivable!
+    if x <= 249 and y >= 110 and y <= 124 then return false end
+    return true
+  end
+  if y <= 21 then return true end
+  -- Gator Keys canal water
+  if x >= 42 and x <= 86 and y >= 53 and y <= 85 then
+    return true
+  end
+  return false
+end
+
+-- Surface height under (x, y)
+local function surface_z(x, y)
+  -- Stunt ramps
+  for _, r in ipairs(RAMPS) do
+    if x >= r.x0 and x <= r.x1 and y >= r.y0 and y <= r.y1 then
+      local frac
+      if r.dy > 0 then
+        frac = (y - r.y0) / math.max(1, r.y1 - r.y0)
+      elseif r.dy < 0 then
+        frac = (r.y1 - y) / math.max(1, r.y1 - r.y0)
+      else
+        frac = 0
+      end
+      return 5 + clamp(frac, 0, 1) * r.h
+    end
+  end
+  -- Ocean Pier
+  if x >= 208 and x <= 249 and y >= 110 and y <= 124 then
+    return 6
+  end
+  -- Roads & Beach
+  if is_road(x, y) or x >= 186 then
+    return 5
+  end
+  -- Pay 'n' Voxel bay floor
+  if x >= 44 and x <= 60 and y >= 195 and y <= 212 then
+    return 5
+  end
+  return 6
+end
+
+local function hits_building(x, y, rad)
+  if x < 18 + rad or x > 250 - rad or y < 22 + rad or y > 238 - rad then
+    return true
+  end
+  for _, b in ipairs(buildings) do
+    if x + rad > b.x0 and x - rad < b.x1 and y + rad > b.y0 and y - rad < b.y1 then
+      return true
+    end
+  end
+  return false
+end
+
+-- -------------------------------------------------------------------------
+-- Procedural Voxel Models (built once in _init)
+-- -------------------------------------------------------------------------
+local function mfill(id, x0, y0, z0, x1, y1, z1, c, f)
+  f = f or 0
+  for z = z0, z1 do
+    for y = y0, y1 do
+      for x = x0, x1 do
+        mpset(id, x, y, z, c, f)
+      end
+    end
+  end
+end
+
+local function build_models()
+  -- 1. Sports Car ("Cheetah-V", 13x7x5, nose = +x, paint index = 11 for pswap)
+  newmodel("sports", 13, 7, 5, 1)
+  -- Wheels & dark underbody
+  mfill("sports", 2, 1, 0, 10, 5, 0, 10)
+  for _, wx in ipairs({ 2, 3, 9, 10 }) do
+    mpset("sports", wx, 0, 0, 10) mpset("sports", wx, 0, 1, 10)
+    mpset("sports", wx, 6, 0, 10) mpset("sports", wx, 6, 1, 10)
+    mpset("sports", wx, 0, 1, 49) mpset("sports", wx, 6, 1, 49)
+  end
+  -- Lower sculpted body
+  mfill("sports", 0, 1, 1, 12, 5, 2, 11)
+  mfill("sports", 1, 0, 1, 11, 6, 1, 11)
+  -- Re-stamp tires on outer sides
+  for _, wx in ipairs({ 2, 3, 9, 10 }) do
+    mpset("sports", wx, 0, 0, 10) mpset("sports", wx, 0, 1, 10)
+    mpset("sports", wx, 6, 0, 10) mpset("sports", wx, 6, 1, 10)
+  end
+  -- Headlights (+x nose) & Taillights (-x rear)
+  mpset("sports", 12, 1, 2, 19) mpset("sports", 12, 5, 2, 19)
+  mpset("sports", 0, 1, 2, 22) mpset("sports", 0, 2, 2, 22)
+  mpset("sports", 0, 4, 2, 22) mpset("sports", 0, 5, 2, 22)
+  -- Cabin & sleek aqua windshield
+  mfill("sports", 3, 1, 3, 8, 5, 3, 15)
+  mfill("sports", 4, 2, 3, 7, 4, 4, 11)
+  mfill("sports", 8, 2, 3, 8, 4, 3, 14)
+  -- Rear wing spoiler
+  mpset("sports", 0, 1, 3, 11) mpset("sports", 0, 5, 3, 11)
+  mfill("sports", 0, 1, 4, 1, 5, 4, 11)
+
+  -- 2. Vice Sedan / Taxi (12x7x6, paint index = 11 for pswap)
+  newmodel("sedan", 12, 7, 6, 1)
+  mfill("sedan", 1, 1, 0, 10, 5, 0, 10)
+  mfill("sedan", 0, 0, 1, 11, 6, 2, 11)
+  for _, wx in ipairs({ 2, 3, 8, 9 }) do
+    mpset("sedan", wx, 0, 0, 10) mpset("sedan", wx, 0, 1, 10)
+    mpset("sedan", wx, 6, 0, 10) mpset("sedan", wx, 6, 1, 10)
+  end
+  mpset("sedan", 11, 1, 2, 19) mpset("sedan", 11, 5, 2, 19)
+  mpset("sedan", 0, 1, 2, 22) mpset("sedan", 0, 5, 2, 22)
+  -- Cabin
+  mfill("sedan", 2, 1, 3, 8, 5, 4, 15)
+  mfill("sedan", 3, 1, 5, 7, 5, 5, 11)
+  mfill("sedan", 4, 2, 3, 6, 4, 4, 10)
+
+  -- 3. Muscle Car (13x7x6, paint index = 11, twin white racing stripes)
+  newmodel("muscle", 13, 7, 6, 1)
+  mfill("muscle", 1, 1, 0, 11, 5, 0, 10)
+  mfill("muscle", 0, 0, 1, 12, 6, 2, 11)
+  for _, wx in ipairs({ 2, 3, 9, 10 }) do
+    mpset("muscle", wx, 0, 0, 10) mpset("muscle", wx, 0, 1, 10)
+    mpset("muscle", wx, 6, 0, 10) mpset("muscle", wx, 6, 1, 10)
+  end
+  -- Twin white stripes
+  for x = 0, 12 do
+    mpset("muscle", x, 2, 2, 4) mpset("muscle", x, 4, 2, 4)
+  end
+  -- Chrome hood blower
+  mfill("muscle", 9, 3, 3, 11, 3, 3, 49)
+  mpset("muscle", 12, 1, 2, 19) mpset("muscle", 12, 5, 2, 19)
+  mpset("muscle", 0, 1, 2, 22) mpset("muscle", 0, 5, 2, 22)
+  -- Cabin
+  mfill("muscle", 2, 1, 3, 7, 5, 4, 15)
+  mfill("muscle", 3, 1, 5, 6, 5, 5, 11)
+  mpset("muscle", 3, 2, 5, 4) mpset("muscle", 4, 2, 5, 4) mpset("muscle", 5, 2, 5, 4) mpset("muscle", 6, 2, 5, 4)
+  mpset("muscle", 3, 4, 5, 4) mpset("muscle", 4, 4, 5, 4) mpset("muscle", 5, 4, 5, 4) mpset("muscle", 6, 4, 5, 4)
+
+  -- 4. VCPD Police Cruiser (13x7x7, 2 frames alternating red/blue lightbar!)
+  newmodel("cop", 13, 7, 7, 2)
+  for f = 0, 1 do
+    mfill("cop", 1, 1, 0, 11, 5, 0, 10, f)
+    -- Black nose & tail, white doors
+    mfill("cop", 0, 0, 1, 12, 6, 2, 25, f)
+    mfill("cop", 4, 0, 1, 8, 6, 2, 4, f)
+    for _, wx in ipairs({ 2, 3, 9, 10 }) do
+      mpset("cop", wx, 0, 0, 10, f) mpset("cop", wx, 0, 1, 10, f)
+      mpset("cop", wx, 6, 0, 10, f) mpset("cop", wx, 6, 1, 10, f)
+    end
+    mpset("cop", 12, 1, 2, 19, f) mpset("cop", 12, 5, 2, 19, f)
+    mpset("cop", 0, 1, 2, 22, f) mpset("cop", 0, 5, 2, 22, f)
+    -- Cabin & white roof
+    mfill("cop", 3, 1, 3, 8, 5, 4, 15, f)
+    mfill("cop", 4, 1, 5, 7, 5, 5, 4, f)
+    -- Flashing lightbar
+    local cL = (f == 0) and 22 or 24
+    local cR = (f == 0) and 24 or 22
+    mpset("cop", 5, 1, 6, cL, f) mpset("cop", 5, 2, 6, cL, f)
+    mpset("cop", 5, 3, 6, 4, f)
+    mpset("cop", 5, 4, 6, cR, f) mpset("cop", 5, 5, 6, cR, f)
+  end
+
+  -- 5. Lucia (5x5x9, 2 walk frames)
+  newmodel("lucia", 5, 5, 9, 2)
+  for f = 0, 1 do
+    local dyL = (f == 0) and 0 or 1
+    local dyR = (f == 0) and 1 or 0
+    -- Jeans
+    mfill("lucia", 1, 2 + dyL - 1, 0, 1, 2 + dyL - 1, 2, 24, f)
+    mfill("lucia", 3, 2 + dyR - 1, 0, 3, 2 + dyR - 1, 2, 24, f)
+    -- Hot pink Vice jacket / top
+    mfill("lucia", 1, 1, 3, 3, 3, 5, 11, f)
+    -- Arms
+    mpset("lucia", 0, 2, 4, 44, f) mpset("lucia", 4, 2, 4, 44, f)
+    mpset("lucia", 0, 2, 5, 11, f) mpset("lucia", 4, 2, 5, 11, f)
+    -- Head & dark hair ponytail
+    mfill("lucia", 1, 1, 6, 3, 3, 7, 44, f)
+    mfill("lucia", 1, 1, 8, 3, 3, 8, 10, f)
+    mfill("lucia", 1, 3, 5, 3, 3, 7, 10, f)
+  end
+
+  -- 6. Jason (5x5x9, 2 walk frames)
+  newmodel("jason", 5, 5, 9, 2)
+  for f = 0, 1 do
+    local dyL = (f == 0) and 0 or 1
+    local dyR = (f == 0) and 1 or 0
+    -- Khaki shorts / legs
+    mfill("jason", 1, 2 + dyL - 1, 0, 1, 2 + dyL - 1, 2, 31, f)
+    mfill("jason", 3, 2 + dyR - 1, 0, 3, 2 + dyR - 1, 2, 31, f)
+    -- Cyan/white Vice tee
+    mfill("jason", 1, 1, 3, 3, 3, 5, 14, f)
+    mpset("jason", 2, 1, 4, 4, f)
+    mpset("jason", 0, 2, 4, 43, f) mpset("jason", 4, 2, 4, 43, f)
+    mpset("jason", 0, 2, 5, 14, f) mpset("jason", 4, 2, 5, 14, f)
+    -- Head & backwards cap
+    mfill("jason", 1, 1, 6, 3, 3, 7, 43, f)
+    mfill("jason", 1, 1, 8, 3, 3, 8, 37, f)
+    mfill("jason", 1, 3, 8, 3, 4, 8, 22, f)
+  end
+
+  -- 7. Pedestrians (5x5x8, 2 walk frames, shirt index 17 for pswap)
+  newmodel("ped", 5, 5, 8, 2)
+  for f = 0, 1 do
+    local dyL = (f == 0) and 0 or 1
+    local dyR = (f == 0) and 1 or 0
+    mfill("ped", 1, 2 + dyL - 1, 0, 1, 2 + dyL - 1, 2, 48, f)
+    mfill("ped", 3, 2 + dyR - 1, 0, 3, 2 + dyR - 1, 2, 48, f)
+    mfill("ped", 1, 1, 3, 3, 3, 5, 17, f)
+    mfill("ped", 1, 1, 6, 3, 3, 7, 43, f)
+    mfill("ped", 1, 1, 7, 3, 3, 7, 37, f)
+  end
+
+  -- 8. Chompy the Leonida Gator (13x5x3, 2 chomping/swishing frames)
+  newmodel("gator", 13, 5, 3, 2)
+  for f = 0, 1 do
+    -- Tail
+    local ty = (f == 0) and 2 or 1
+    mfill("gator", 0, ty, 0, 3, ty, 1, 38, f)
+    -- Body
+    mfill("gator", 3, 1, 0, 8, 3, 1, 38, f)
+    mfill("gator", 4, 2, 2, 8, 2, 2, 34, f)
+    -- Feet
+    mpset("gator", 4, 0, 0, 34, f) mpset("gator", 4, 4, 0, 34, f)
+    mpset("gator", 8, 0, 0, 34, f) mpset("gator", 8, 4, 0, 34, f)
+    -- Snout & yellow eyes
+    mfill("gator", 9, 1, 0, 12, 3, 0, 38, f)
+    mfill("gator", 9, 1, 1, 12, 3, 1, (f == 0) and 38 or 4, f)
+    mpset("gator", 9, 1, 2, 18, f) mpset("gator", 9, 3, 2, 18, f)
+  end
+
+  -- 9. VCPD Helicopter (15x13x6, 2 spinning rotor frames)
+  newmodel("chopper", 15, 13, 6, 2)
+  for f = 0, 1 do
+    -- Skids
+    mfill("chopper", 4, 4, 0, 10, 4, 0, 49, f)
+    mfill("chopper", 4, 8, 0, 10, 8, 0, 49, f)
+    -- Fuselage
+    mfill("chopper", 4, 5, 1, 11, 7, 3, 25, f)
+    mfill("chopper", 9, 5, 2, 12, 7, 3, 14, f)
+    mfill("chopper", 5, 5, 3, 9, 7, 3, 4, f)
+    -- Tail boom & fin
+    mfill("chopper", 0, 6, 2, 4, 6, 2, 25, f)
+    mfill("chopper", 0, 6, 3, 1, 6, 4, 22, f)
+    -- Rotor hub & blades
+    mpset("chopper", 7, 6, 4, 10, f)
+    if f == 0 then
+      mfill("chopper", 1, 6, 5, 13, 6, 5, 5, f)
+      mfill("chopper", 7, 0, 5, 7, 12, 5, 5, f)
+    else
+      for d = -5, 5 do
+        mpset("chopper", 7 + d, 6 + d, 5, 5, f)
+        mpset("chopper", 7 + d, 6 - d, 5, 5, f)
+      end
+    end
+  end
+
+  -- 10. Palm Tree (9x9x18, static map model)
+  newmodel("palm", 9, 9, 18, 1)
+  for z = 0, 13 do
+    local ox = flr(math.sin(z * 0.22) * 1.1)
+    mpset("palm", 4 + ox, 4, z, (z % 2 == 0) and 35 or 36)
+    if z < 4 then mpset("palm", 4 + ox + 1, 4, z, 35) end
+  end
+  -- Crown coconuts
+  mpset("palm", 4, 4, 14, 37) mpset("palm", 5, 4, 14, 37) mpset("palm", 4, 5, 14, 37)
+  -- Arched lush fronds in 8 directions
+  local dirs = { {1,0}, {-1,0}, {0,1}, {0,-1}, {1,1}, {-1,1}, {1,-1}, {-1,-1} }
+  for _, d in ipairs(dirs) do
+    for step = 1, 4 do
+      local fx = 4 + d[1] * step
+      local fy = 4 + d[2] * step
+      local fz = (step <= 2) and 16 or (step == 3 and 15 or 14)
+      if fx >= 0 and fx < 9 and fy >= 0 and fy < 9 then
+        mpset("palm", fx, fy, fz, (step <= 2) and 33 or 32)
+        if step == 2 then mpset("palm", fx, fy, fz + 1, 33) end
+      end
+    end
+  end
+  mfill("palm", 3, 3, 16, 5, 5, 17, 33)
+
+  -- 11. Beach Umbrellas (7x7x6)
+  newmodel("umb_pink", 7, 7, 6, 1)
+  newmodel("umb_cyan", 7, 7, 6, 1)
+  for _, u in ipairs({ { "umb_pink", 11 }, { "umb_cyan", 14 } }) do
+    local id, col = u[1], u[2]
+    mfill(id, 3, 3, 0, 3, 3, 4, 5)
+    for y = 1, 5 do
+      for x = 1, 5 do
+        local r2 = (x - 3) * (x - 3) + (y - 3) * (y - 3)
+        if r2 <= 5 then
+          local c = ((x + y) % 2 == 0) and col or 4
+          mpset(id, x, y, r2 <= 1 and 5 or 4, c)
+        end
+      end
+    end
+  end
+
+  -- 12. Fire Hydrant (3x3x4)
+  newmodel("hydrant", 3, 3, 4, 1)
+  mfill("hydrant", 1, 1, 0, 1, 1, 3, 22)
+  mpset("hydrant", 0, 1, 2, 22) mpset("hydrant", 2, 1, 2, 22)
+  mpset("hydrant", 1, 1, 3, 49)
+end
+
+-- -------------------------------------------------------------------------
+-- World Builder (Map Layer — built once in _init!)
+-- -------------------------------------------------------------------------
+local function add_building(x0, y0, x1, y1, name)
+  table.insert(buildings, { x0 = x0, y0 = y0, x1 = x1, y1 = y1, name = name or "" })
+end
+
+local function build_art_deco(x0, y0, x1, y1, h, wall_c, trim_c, neon_c, roof_c, has_pool, name)
+  add_building(x0, y0, x1, y1, name)
+  local z0 = 5
+  local z1 = z0 + h
+  -- Main structure
+  mbox(x0, y0, z0, x1, y1, z1, wall_c)
+  -- Ground lobby & awning
+  mbox(x0, y0, z0, x1, y1, z0 + 3, trim_c)
+  mbox(x0 - 1, y0 - 1, z0 + 4, x1 + 1, y1 + 1, z0 + 4, neon_c)
+  -- Glowing neon cornice strip near roof
+  mbox(x0 - 1, y0 - 1, z1 - 1, x1 + 1, y1 + 1, z1 - 1, neon_c)
+  -- Roof terrace rim
+  mbox(x0, y0, z1 + 1, x1, y1, z1 + 1, trim_c)
+  mbox(x0 + 1, y0 + 1, z1 + 1, x1 - 1, y1 - 1, z1 + 1, roof_c or 7)
+  -- Stepped Art Deco crown
+  local cx = flr((x0 + x1) / 2)
+  local cy = flr((y0 + y1) / 2)
+  if x1 - x0 >= 14 and y1 - y0 >= 14 then
+    mbox(cx - 4, cy - 4, z1 + 1, cx + 4, cy + 4, z1 + 4, wall_c)
+    mbox(cx - 4, cy - 4, z1 + 4, cx + 4, cy + 4, z1 + 4, neon_c)
+  end
+  -- Windows along all 4 walls
+  for z = z0 + 6, z1 - 3, 4 do
+    for x = x0 + 2, x1 - 2, 4 do
+      local wc = ((x + z) % 3 == 0) and 19 or 16
+      mbox(x, y0, z, x + 1, y0, z + 1, wc)
+      mbox(x, y1, z, x + 1, y1, z + 1, wc)
+    end
+    for y = y0 + 2, y1 - 2, 4 do
+      local wc = ((y + z) % 3 == 0) and 19 or 16
+      mbox(x0, y, z, x0, y + 1, z + 1, wc)
+      mbox(x1, y, z, x1, y + 1, z + 1, wc)
+    end
+  end
+  -- Optional turquoise rooftop pool!
+  if has_pool and (x1 - x0) >= 16 and (y1 - y0) >= 18 then
+    mbox(x0 + 3, y0 + 3, z1 + 1, x1 - 3, y0 + 11, z1 + 1, 14)
+    mbox(x0 + 4, y0 + 4, z1 + 1, x1 - 4, y0 + 10, z1 + 1, 28)
+  end
+end
+
+local function build_lamp(x, y, neon_c)
+  mbox(x, y, 5, x, y, 12, 48)
+  mset(x, y, 13, neon_c or 14)
+  mset(x, y, 14, 4)
+end
+
+local function build_world()
+  buildings = {}
+  hydrants = {}
+  mclear(0)
+
+  -- 1. Base terrain slab (city ground z=0..4, raised sidewalks z=5)
+  mbox(0, 0, 0, 255, 255, 3, 26)      -- Deep Atlantic ocean under everything
+  mbox(0, 22, 0, 218, 255, 4, 30)     -- Island base (sand)
+  mbox(0, 22, 5, 185, 255, 5, 6)      -- Raised concrete sidewalks (z=5)
+
+  -- 2. Atlantic Ocean Beach & Surf (East side x=186..255)
+  mbox(180, 22, 5, 186, 255, 5, 36)   -- Ocean Boardwalk wood promenade
+  mbox(187, 22, 0, 219, 255, 4, 30)   -- Golden beach sand
+  mbox(215, 22, 4, 219, 255, 4, 31)   -- Wet shoreline sand
+  mbox(220, 22, 0, 232, 255, 3, 27)   -- Turquoise shallows
+  mbox(220, 22, 3, 222, 255, 3, 28)   -- Surf zone teal
+  mbox(0, 0, 0, 255, 21, 3, 26)       -- South causeway ocean
+  mbox(0, 18, 3, 219, 21, 3, 27)      -- South seawall shallows
+  mbox(0, 22, 4, 186, 23, 5, 7)       -- South concrete seawall
+
+  -- Wooden Ocean Pier (x=208..249, y=110..124, z=5)
+  mbox(208, 110, 5, 249, 124, 5, 36)
+  mbox(208, 110, 5, 249, 110, 5, 35)
+  mbox(208, 124, 5, 249, 124, 5, 35)
+  for px = 212, 248, 8 do
+    mbox(px, 111, 0, px + 1, 111, 4, 37)
+    mbox(px, 123, 0, px + 1, 123, 4, 37)
+    build_lamp(px, 110, 17)
+    build_lamp(px, 124, 17)
+  end
+  -- Pier Neon Tiki Archway at tip
+  mbox(246, 112, 6, 247, 113, 13, 35)
+  mbox(246, 121, 6, 247, 122, 13, 35)
+  mbox(245, 111, 14, 248, 123, 15, 11)
+  mbox(246, 112, 16, 247, 122, 16, 14)
+
+  -- Lifeguard Tower on Ocean Beach (x=202..209, y=144..151)
+  add_building(202, 144, 209, 151, "LIFEGUARD")
+  mbox(203, 145, 5, 203, 145, 9, 4) mbox(208, 145, 5, 208, 145, 9, 4)
+  mbox(203, 150, 5, 203, 150, 9, 4) mbox(208, 150, 5, 208, 150, 9, 4)
+  mbox(202, 144, 10, 209, 151, 10, 4)
+  mbox(203, 145, 11, 208, 150, 14, 27)
+  mbox(204, 145, 12, 207, 145, 13, 15)
+  mbox(202, 144, 15, 209, 151, 15, 22)
+  mbox(204, 146, 16, 207, 149, 16, 4)
+
+  -- Beach Umbrellas & Towels
+  local umbs = {
+    { 196, 48, "umb_pink", 14 }, { 205, 58, "umb_cyan", 11 },
+    { 198, 92, "umb_cyan", 18 }, { 206, 132, "umb_pink", 51 },
+    { 196, 166, "umb_pink", 17 }, { 206, 182, "umb_cyan", 11 },
+    { 198, 206, "umb_pink", 14 }, { 206, 224, "umb_cyan", 18 },
+  }
+  for _, u in ipairs(umbs) do
+    mmodel(u[3], u[1], u[2], 5, 0)
+    mbox(u[1] - 4, u[2] - 2, 5, u[1] - 2, u[2] + 2, 5, u[4])
+  end
+
+  -- 3. Road Network (Asphalt z=4, clearing z=5 sidewalk)
+  for _, rx in ipairs(ROAD_XS) do
+    mbox(rx - ROAD_HALF, 24, 4, rx + ROAD_HALF, 236, 4, 8)
+    mbox(rx - ROAD_HALF, 24, 5, rx + ROAD_HALF, 236, 5, 0)
+    -- Dashed yellow centerline
+    for y = 26, 232, 8 do
+      if not (math.abs(y - 32) <= 9 or math.abs(y - 112) <= 9 or math.abs(y - 184) <= 9 or math.abs(y - 228) <= 9) then
+        mbox(rx, y, 4, rx, y + 3, 4, 18)
+      end
+    end
+  end
+  for _, ry in ipairs(ROAD_YS) do
+    mbox(20, ry - ROAD_HALF, 4, 180, ry + ROAD_HALF, 4, 8)
+    mbox(20, ry - ROAD_HALF, 5, 180, ry + ROAD_HALF, 5, 0)
+    for x = 22, 176, 8 do
+      if not (math.abs(x - 28) <= 9 or math.abs(x - 100) <= 9 or math.abs(x - 172) <= 9) then
+        mbox(x, ry, 4, x + 3, ry, 4, 18)
+      end
+    end
+  end
+  -- Crosswalk zebra stripes at intersections
+  for _, rx in ipairs(ROAD_XS) do
+    for _, ry in ipairs(ROAD_YS) do
+      for d = -6, 6, 3 do
+        mbox(rx + d, ry - 9, 4, rx + d + 1, ry - 9, 4, 5)
+        mbox(rx + d, ry + 9, 4, rx + d + 1, ry + 9, 4, 5)
+        mbox(rx - 9, ry + d, 4, rx - 9, ry + d + 1, 4, 5)
+        mbox(rx + 9, ry + d, 4, rx + 9, ry + d + 1, 4, 5)
+      end
+    end
+  end
+
+  -- 4. Gator Keys Bayou & Canal (Block SW: x=38..89, y=42..101)
+  mbox(38, 42, 5, 89, 101, 5, 38)    -- Lush marsh grass
+  mbox(42, 53, 0, 86, 85, 3, 39)     -- Deep bayou water
+  mbox(42, 53, 4, 86, 85, 5, 0)      -- Carve water basin
+  mbox(44, 55, 3, 84, 83, 3, 40)     -- Bayou teal surface
+  -- Wooden Gator Dock & Moored Speedboat
+  mbox(42, 62, 4, 51, 72, 4, 35)
+  mbox(44, 65, 4, 54, 69, 5, 4)      -- White speedboat hull
+  mbox(46, 66, 6, 51, 68, 6, 11)     -- Pink speedboat stripe
+  mbox(50, 66, 6, 52, 68, 7, 14)     -- Windshield
+  -- Marsh lily pads
+  for _, lp in ipairs({ {75, 58}, {80, 62}, {72, 78}, {82, 76}, {50, 80} }) do
+    mbox(lp[1], lp[2], 3, lp[1] + 2, lp[2] + 2, 3, 33)
+  end
+
+  -- Stunt Ramps (with bright yellow/black chevron hazard stripes!)
+  for _, r in ipairs(RAMPS) do
+    for y = r.y0, r.y1 do
+      local frac = (r.dy > 0) and ((y - r.y0) / math.max(1, r.y1 - r.y0)) or ((r.y1 - y) / math.max(1, r.y1 - r.y0))
+      local rz = 5 + flr(frac * r.h)
+      mbox(r.x0, y, 4, r.x1, y, rz, 35)
+      local stripe = (y % 2 == 0) and 18 or 10
+      mbox(r.x0, y, rz, r.x0 + 1, y, rz, stripe)
+      mbox(r.x1 - 1, y, rz, r.x1, y, rz, stripe)
+      if y == r.y1 and r.dy > 0 or y == r.y0 and r.dy < 0 then
+        mbox(r.x0, y, rz, r.x1, y, rz, 11) -- Hot pink launch lip!
+      end
+    end
+  end
+
+  -- 5. Iconic Vice Blocks Landmarks!
+  -- SE Block: OCEAN VIEW HOTEL (Classic pastel pink & cyan Art Deco + rooftop pool!)
+  build_art_deco(128, 50, 159, 96, 26, 12, 13, 14, 5, true, "OCEAN VIEW HOTEL")
+  -- Neon Flamingo Plaza & Alley on West side of SE block
+  mbox(111, 50, 5, 126, 96, 5, 13)
+  build_art_deco(112, 52, 124, 68, 16, 19, 4, 11, 6, false, "VICE CAFE")
+
+  -- Mid-East Block: CLUB MALIBU / NEON PALM (Mint green & hot pink Art Deco!)
+  build_art_deco(126, 126, 159, 170, 22, 51, 4, 11, 2, false, "CLUB NEON")
+  build_art_deco(111, 130, 123, 166, 15, 50, 4, 14, 7, false, "PALM ARCADE")
+
+  -- NE Block: OCEAN VIEW HOSPITAL (White + bold Red Cross!)
+  build_art_deco(118, 196, 156, 215, 18, 4, 5, 22, 5, false, "OCEAN VIEW HOSPITAL")
+  -- Giant red cross on roof (z = 24)
+  mbox(135, 200, 25, 139, 211, 25, 22)
+  mbox(131, 204, 25, 143, 207, 25, 22)
+
+  -- Mid-West Block: MAZE VOXEL TOWER (Tall teal skyscraper <= z=46) + LEONIDA BANK!
+  add_building(42, 148, 63, 170, "MAZE VOXEL TOWER")
+  mbox(42, 148, 5, 63, 170, 42, 16)
+  -- Silver ribs & gleaming glass
+  for x = 42, 63, 3 do
+    mbox(x, 148, 5, x, 148, 42, 49)
+    mbox(x, 170, 5, x, 170, 42, 49)
+  end
+  for y = 148, 170, 3 do
+    mbox(42, y, 5, 42, y, 42, 49)
+    mbox(63, y, 5, 63, y, 42, 49)
+  end
+  for z = 11, 39, 7 do
+    mbox(42, 148, z, 63, 170, z, 15)
+  end
+  mbox(41, 147, 42, 64, 171, 43, 14) -- Electric cyan skyscraper crown!
+  mbox(46, 152, 44, 59, 166, 45, 2)  -- Helipad crown
+  mbox(50, 155, 46, 55, 163, 46, 18) -- Gold roof trim
+
+  -- LEONIDA BANK (White/Gold Art Deco bank with front plaza at y=122..126)
+  build_art_deco(68, 128, 87, 152, 20, 5, 4, 18, 7, false, "LEONIDA BANK")
+  -- Bank colonnade pillars facing Vice Blvd
+  for px = 70, 85, 5 do
+    mbox(px, 126, 5, px + 1, 127, 14, 4)
+  end
+  mbox(69, 125, 15, 86, 128, 16, 18) -- Golden bank header!
+
+  -- NW Block: PAY 'N' VOXEL (Open Drive-Through Spray Garage!) + VCPD PRECINCT!
+  -- Garage side walls & roof (bay x=44..60, y=195..214 is OPEN to drive into from South!)
+  add_building(40, 195, 43, 215, "PAY N VOXEL W")
+  add_building(61, 195, 64, 215, "PAY N VOXEL E")
+  add_building(40, 213, 64, 216, "PAY N VOXEL N")
+  mbox(40, 195, 5, 43, 215, 15, 17)  -- Left orange wall
+  mbox(61, 195, 5, 64, 215, 15, 17)  -- Right orange wall
+  mbox(40, 213, 5, 64, 216, 15, 48)  -- Back wall
+  mbox(44, 195, 4, 60, 212, 4, 9)    -- Drive-in concrete floor
+  mbox(44, 195, 5, 60, 212, 5, 0)    -- Clear sidewalk inside bay
+  mbox(39, 194, 15, 65, 216, 17, 14) -- Bright cyan garage canopy roof!
+  mbox(40, 194, 18, 64, 196, 20, 11) -- Hot pink rooftop marquee
+  mbox(48, 195, 21, 56, 195, 22, 18) -- Gold emblem
+
+  -- VCPD Precinct (Blue & White police HQ)
+  build_art_deco(69, 196, 88, 215, 18, 25, 4, 24, 7, false, "VCPD PRECINCT")
+  mbox(73, 200, 24, 84, 211, 24, 48)
+  -- Helipad H on roof
+  mbox(76, 202, 25, 76, 209, 25, 18)
+  mbox(81, 202, 25, 81, 209, 25, 18)
+  mbox(76, 205, 25, 81, 206, 25, 18)
+
+  -- Outer West & North city skyline framing (scenic perimeter buildings)
+  build_art_deco(2, 34, 16, 86, 20, 13, 4, 11, 6, false, "WEST CONDO S")
+  build_art_deco(2, 100, 16, 156, 28, 16, 5, 14, 7, false, "WEST TOWER")
+  build_art_deco(2, 170, 16, 226, 22, 50, 4, 17, 6, false, "WEST LOFT")
+  build_art_deco(28, 240, 76, 253, 24, 19, 4, 11, 6, false, "NORTH HOTEL W")
+  build_art_deco(88, 240, 148, 253, 30, 51, 5, 14, 7, false, "NORTH PLAZA")
+  build_art_deco(156, 240, 184, 253, 18, 12, 4, 18, 6, false, "NORTH BEACH")
+
+  -- 6. Palm Trees along Ocean Drive, Beach, & Gator Keys!
+  local palms = {
+    { 183, 36 }, { 183, 56 }, { 183, 76 }, { 183, 96 },
+    { 183, 134 }, { 183, 154 }, { 183, 174 }, { 183, 204 }, { 183, 224 },
+    { 161, 44 }, { 161, 100 }, { 161, 124 }, { 161, 174 }, { 161, 196 },
+    { 112, 44 }, { 112, 100 }, { 112, 124 }, { 112, 174 },
+    { 40, 46 }, { 85, 46 }, { 40, 95 }, { 86, 95 },
+    { 91, 60 }, { 91, 86 }, { 38, 130 }, { 90, 168 },
+    { 206, 36 }, { 194, 140 }, { 210, 198 },
+  }
+  for _, p in ipairs(palms) do
+    mmodel("palm", p[1], p[2], 5, 0)
+  end
+
+  -- Neon Streetlamps along Ocean Drive & Vice Blvd
+  for y = 44, 224, 24 do
+    build_lamp(162, y, (y % 48 == 0) and 11 or 14)
+    build_lamp(181, y, (y % 48 == 0) and 14 or 11)
+  end
+  for x = 44, 156, 28 do
+    build_lamp(x, 102, 17)
+    build_lamp(x, 121, 14)
+  end
+
+  -- 7. Smashable Fire Hydrants at corners!
+  local hcoords = {
+    { 162, 62 }, { 162, 86 }, { 162, 138 }, { 162, 162 },
+    { 90, 102 }, { 110, 122 }, { 90, 174 }, { 110, 194 },
+    { 38, 102 }, { 38, 122 }, { 38, 174 }, { 66, 194 },
+  }
+  for _, hc in ipairs(hcoords) do
+    table.insert(hydrants, { x = hc[1], y = hc[2], broken = false, geyser = 0 })
+  end
+end
+
+-- -------------------------------------------------------------------------
+-- Entities: Vehicles, Cops & Pedestrians
+-- -------------------------------------------------------------------------
+local function spawn_car(kind, x, y, ang, col, is_cop, parked)
+  local c = {
+    kind = kind,
+    x = x, y = y, z = surface_z(x, y),
+    vx = 0, vy = 0, vz = 0,
+    ang = ang or 0,
+    spd = 0,
+    col = col or pick(CAR_COLORS),
+    is_cop = is_cop or false,
+    parked = parked or false,
+    hp = is_cop and 130 or 100,
+    max_spd = (kind == "sports" and 2.35) or (kind == "muscle" and 2.15) or (is_cop and 2.05) or 1.75,
+    accel = (kind == "sports" and 0.14) or (kind == "muscle" and 0.12) or 0.10,
+    turn_cd = 0,
+    siren = false,
+    stuck_t = 0,
+  }
+  table.insert(cars, c)
+  return c
+end
+
+local function spawn_entities()
+  cars = {}
+  peds = {}
+
+  -- Hero parked Hot-Pink Cheetah-V right outside Ocean View Hotel!
+  spawn_car("sports", 174, 74, math.pi * 0.5, 11, false, true)
+  -- Electric Cyan Muscle Car parked by Club Neon
+  spawn_car("muscle", 174, 146, math.pi * 0.5, 14, false, true)
+  -- Sunset Orange Sports Car parked near Leonida Bank
+  spawn_car("sports", 78, 109, 0, 17, false, true)
+  -- Yellow Taxi cruising Vice Blvd
+  spawn_car("sedan", 132, 115, 0, 18, false, false)
+  -- Mint Sedan on Ocean Drive
+  spawn_car("sedan", 169, 195, -math.pi * 0.5, 51, false, false)
+  -- White Sports Car on Leonida Ave
+  spawn_car("sports", 103, 66, math.pi * 0.5, 4, false, false)
+  -- Purple Muscle Car on Flamingo Way
+  spawn_car("muscle", 66, 187, 0, 20, false, false)
+  -- Coral Sedan on West Blvd
+  spawn_car("sedan", 25, 148, -math.pi * 0.5, 22, false, false)
+
+  -- VCPD Police Cruisers (patrolling Leonida!)
+  spawn_car("cop", 97, 170, -math.pi * 0.5, 25, true, false)
+  spawn_car("cop", 142, 35, 0, 25, true, false)
+  spawn_car("cop", 31, 68, math.pi * 0.5, 25, true, false)
+
+  -- Vice Beach tourists & city pedestrians
+  local pspots = {
+    { 182, 60 }, { 184, 90 }, { 182, 138 }, { 184, 165 },
+    { 196, 114 }, { 202, 158 }, { 161, 66 }, { 161, 152 },
+    { 91, 135 }, { 111, 102 }, { 64, 122 }, { 130, 193 },
+  }
+  local shirt_cols = { 11, 14, 17, 18, 51, 50, 22, 4 }
+  for i, ps in ipairs(pspots) do
+    table.insert(peds, {
+      x = ps[1], y = ps[2], z = surface_z(ps[1], ps[2]),
+      ang = rnd(math.pi * 2),
+      col = shirt_cols[(i % #shirt_cols) + 1],
+      walk = rnd(10),
+      flee_t = 0,
+      turn_t = 20 + flr(rnd(60)),
+    })
+  end
+end
+
+-- -------------------------------------------------------------------------
+-- Mission System ("VICE CAPERS")
+-- -------------------------------------------------------------------------
+local function set_mission(idx)
+  mission.idx = idx
+  mission.hold = 0
+  mission.timer = 0
+  if idx == 1 then
+    mission.kind = "jack"
+    mission.title = "GETAWAY RIDE"
+    mission.desc = "PRESS [B] TO JACK A SPORTS CAR"
+    mission.x, mission.y = 174, 74
+    mission.reward = 500
+  elseif idx == 2 then
+    mission.kind = "hold"
+    mission.title = "LEONIDA BANK JOB"
+    mission.desc = "ROB LEONIDA BANK (HOLD ZONE)"
+    mission.x, mission.y = BANK_ZONE.x, BANK_ZONE.y
+    mission.hold_need = 75 -- 2.5 seconds
+    mission.reward = 2000
+  elseif idx == 3 then
+    mission.kind = "respray"
+    mission.title = "FRESH COAT"
+    mission.desc = "LOSE HEAT AT PAY 'N' VOXEL"
+    mission.x, mission.y = PAYNVOX.x, PAYNVOX.y
+    mission.reward = 1000
+  elseif idx == 4 then
+    mission.kind = "stunt"
+    mission.title = "FLORIDA MAN STUNT"
+    mission.desc = "JUMP THE GATOR KEYS RAMP!"
+    mission.x, mission.y = 64, 48
+    mission.reward = 1500
+  elseif idx == 5 then
+    mission.kind = "reach"
+    mission.title = "SUNSET PIER DROP"
+    mission.desc = "REACH OCEAN PIER BEFORE TIME!"
+    mission.x, mission.y = PIER_ZONE.x, PIER_ZONE.y
+    mission.timer = 35 * 30
+    mission.reward = 2500
+  else
+    -- Endless radiant Vice Capers!
+    local roll = (idx - 6) % 4
+    if roll == 0 then
+      mission.kind = "hold"
+      mission.title = "CLUB NEON HEIST"
+      mission.desc = "RAID CLUB NEON VIP VAULT"
+      mission.x, mission.y = CLUB_ZONE.x, CLUB_ZONE.y
+      mission.hold_need = 75
+      mission.reward = 2200 + idx * 150
+    elseif roll == 1 then
+      mission.kind = "respray"
+      mission.title = "HOT PAINT JOB"
+      mission.desc = "GET A RESPRAY AT PAY 'N' VOXEL"
+      mission.x, mission.y = PAYNVOX.x, PAYNVOX.y
+      mission.reward = 1200 + idx * 100
+    elseif roll == 2 then
+      mission.kind = "stunt"
+      mission.title = "OCEAN AIRTIME"
+      mission.desc = "HIT ANY STUNT RAMP AT SPEED!"
+      mission.x, mission.y = 198, 70
+      mission.reward = 1800 + idx * 150
+    else
+      mission.kind = "reach"
+      mission.title = "VICE EXPRESS"
+      mission.desc = "DELIVER GOODS TO OCEAN VIEW"
+      mission.x, mission.y = HOTEL_ZONE.x, HOTEL_ZONE.y
+      mission.timer = 30 * 30
+      mission.reward = 2500 + idx * 200
+    end
+  end
+end
+
+local function complete_mission()
+  sfx(7)
+  add_cash(mission.reward, player.x, player.y, player.z + 6, "CAPER")
+  show_banner("MISSION PASSED!", "RESPECT +   +$" .. mission.reward, 18, 105, true)
+  set_mission(mission.idx + 1)
+end
+
+-- -------------------------------------------------------------------------
+-- Game Lifecycle Helpers
+-- -------------------------------------------------------------------------
+local function reset_game()
+  player.x, player.y, player.z = 162, 74, 6
+  player.vx, player.vy, player.vz = 0, 0, 0
+  player.ang = 0
+  player.spd = 0
+  player.walk = 0
+  player.hp = 100
+  player.cash = 500
+  player.stars = 0
+  player.heat_decay = 0
+  player.bust_t = 0
+  player.in_car = false
+  player.car = nil
+  player.bonk_cd = 0
+  player.stunt_air = 0
+  player.stunt_ok = false
+  chopper.active = false
+  popups = {}
+  for _, h in ipairs(hydrants) do
+    h.broken = false
+    h.geyser = 0
+  end
+  spawn_entities()
+  set_mission(1)
+  show_banner("VICE BLOCKS, LEONIDA", "STEAL A RIDE & OWN THE STRIP", 11, 90, false)
+  state = STATE_PLAY
+  play_radio(0)
+end
+
+local function trigger_wasted()
+  if state ~= STATE_PLAY then return end
+  state = STATE_WASTED
+  state_timer = 90
+  sfx(10)
+  music_stop(300)
+  shake = 10
+  for i = 1, 24 do
+    particle(player.x + rnd(8) - 4, player.y + rnd(8) - 4, player.z + rnd(8), pick({ 46, 47, 22, 48 }), 1.2)
+  end
+  show_banner("WASTED", "HOSPITAL BILL  -$100", 22, 95, true)
+end
+
+local function trigger_busted()
+  if state ~= STATE_PLAY then return end
+  state = STATE_BUSTED
+  state_timer = 90
+  sfx(10)
+  music_stop(300)
+  show_banner("BUSTED", "VCPD BAIL  -$100", 24, 95, true)
+end
+
+local function respawn_after_fail(was_busted)
+  if player.in_car and player.car then
+    player.car.hp = 100
+    player.in_car = false
+    player.car = nil
+  end
+  local sp = was_busted and PRECINCT_POS or HOSPITAL_POS
+  player.x, player.y = sp.x, sp.y
+  player.z = surface_z(sp.x, sp.y)
+  player.hp = 100
+  player.stars = 0
+  player.bust_t = 0
+  player.cash = math.max(0, player.cash - 100)
+  chopper.active = false
+  -- Park a fresh getaway car nearby so player is never stranded
+  spawn_car("sports", sp.x + 12, sp.y - 6, 0, pick(CAR_COLORS), false, true)
+  if #cars > 14 then table.remove(cars, 1) end
+  state = STATE_PLAY
+  play_radio(radio_idx)
+end
+
+-- -------------------------------------------------------------------------
+-- Physics, Driving, AI & World Interactions
+-- -------------------------------------------------------------------------
+local function enter_or_exit_car()
+  if player.in_car and player.car then
+    local c = player.car
+    c.parked = true
+    local ex = c.x - math.sin(c.ang) * 7
+    local ey = c.y + math.cos(c.ang) * 7
+    if hits_building(ex, ey, 2.5) then
+      ex = c.x + math.sin(c.ang) * 7
+      ey = c.y - math.cos(c.ang) * 7
+    end
+    player.x, player.y, player.z = ex, ey, surface_z(ex, ey)
+    player.in_car = false
+    player.car = nil
+    sfx(0)
+    return
+  end
+
+  -- Find nearest car within 18 voxels
+  local best, best_d2 = nil, 18 * 18
+  for _, c in ipairs(cars) do
+    local d2 = dist2(player.x, player.y, c.x, c.y)
+    if d2 < best_d2 then
+      best, best_d2 = c, d2
+    end
+  end
+  if best then
+    local was_moving = not best.parked
+    best.parked = false
+    player.in_car = true
+    player.car = best
+    player.x, player.y, player.z = best.x, best.y, best.z
+    sfx(0)
+    play_radio(radio_idx)
+    if best.is_cop then
+      add_popup(best.x, best.y, best.z + 10, "STOLE A VCPD CRUISER!", 24)
+      add_heat(2)
+    elseif was_moving then
+      add_popup(best.x, best.y, best.z + 10, pick(JACK_LINES), 18)
+      add_heat(1)
+    else
+      add_popup(best.x, best.y, best.z + 10, "NICE RIDE!", 14)
+    end
+    if mission.kind == "jack" and (best.kind == "sports" or best.kind == "muscle" or best.is_cop) then
+      complete_mission()
+    end
+  end
+end
+
+local function check_hydrants(x, y, rad)
+  for _, h in ipairs(hydrants) do
+    if not h.broken and dist2(x, y, h.x, h.y) < (rad + 2.8) * (rad + 2.8) then
+      h.broken = true
+      h.geyser = 180
+      sfx(3)
+      shake = 3
+      add_cash(50, h.x, h.y, 8, "HYDRANT")
+      if player.stars == 0 and rnd() < 0.45 then add_heat(1) end
+    end
+  end
+end
+
+local function update_player_car()
+  local c = player.car
+  local throttle = (btn(2) and 1 or 0) - (btn(3) and 1 or 0)
+  local steer = (btn(0) and 1 or 0) - (btn(1) and 1 or 0)
+  local nitro = btn(4)
+
+  -- Acceleration & braking
+  if throttle > 0 then
+    c.spd = math.min(c.max_spd * (nitro and 1.38 or 1.0), c.spd + c.accel * (nitro and 1.55 or 1.0))
+  elseif throttle < 0 then
+    if c.spd > 0.15 then
+      c.spd = math.max(0, c.spd - 0.18) -- crisp brake
+    else
+      c.spd = math.max(-0.9, c.spd - 0.08) -- reverse
+    end
+  else
+    c.spd = c.spd * 0.93
+    if math.abs(c.spd) < 0.03 then c.spd = 0 end
+  end
+
+  -- Horn / Radio toggle when tapping A slowly, Nitro boost when moving!
+  if btnp(4) then
+    if math.abs(c.spd) < 0.45 then
+      sfx(1)
+      play_radio(radio_idx + 1)
+    else
+      sfx(2)
+    end
+  end
+
+  -- Nitro exhaust flames
+  if nitro and c.spd > 0.6 then
+    local bx = c.x - math.cos(c.ang) * 6
+    local by = c.y - math.sin(c.ang) * 6
+    particle(bx + rnd(2) - 1, by + rnd(2) - 1, c.z + 1, (tick % 2 == 0) and 11 or 14, 0.35)
+    particle(bx, by, c.z + 1, 46, 0.25)
+  end
+
+  -- Responsive steering
+  if math.abs(c.spd) > 0.08 then
+    local sdir = c.spd >= 0 and 1 or -1
+    local rate = 0.095 * clamp(math.abs(c.spd) / 1.1, 0.45, 1.15)
+    c.ang = c.ang + steer * rate * sdir
+    -- Tire smoke on sharp drift
+    if steer ~= 0 and math.abs(c.spd) > 1.3 and tick % 2 == 0 then
+      local bx = c.x - math.cos(c.ang) * 5
+      local by = c.y - math.sin(c.ang) * 5
+      particle(bx, by, c.z, 5, 0.45)
+    end
+  end
+
+  -- Velocity & axis-separated sliding collision
+  local dx = math.cos(c.ang) * c.spd
+  local dy = math.sin(c.ang) * c.spd
+  local nx, ny = c.x + dx, c.y + dy
+
+  local hit_wall = false
+  if not hits_building(nx, c.y, 4.2) then
+    c.x = nx
+  else
+    hit_wall = true
+    c.spd = c.spd * 0.35
+  end
+  if not hits_building(c.x, ny, 4.2) then
+    c.y = ny
+  else
+    hit_wall = true
+    c.spd = c.spd * 0.35
+  end
+
+  if hit_wall and math.abs(c.spd) > 0.45 then
+    sfx(3)
+    shake = 4
+    c.hp = c.hp - 5
+    particle(c.x, c.y, c.z + 3, 47, 0.4)
+  end
+
+  -- Ramp jumping & vertical physics!
+  local gz = surface_z(c.x, c.y)
+  local prev_z = c.z
+  local in_air = c.z > gz + 0.8
+
+  -- Check if launching off the top lip of a ramp!
+  for _, r in ipairs(RAMPS) do
+    if c.x >= r.x0 - 1 and c.x <= r.x1 + 1 and c.y >= r.y0 - 1 and c.y <= r.y1 + 1 then
+      local dot = math.cos(c.ang) * r.dx + math.sin(c.ang) * r.dy
+      local at_lip = (r.dy > 0 and c.y >= r.y1 - 2.5) or (r.dy < 0 and c.y <= r.y0 + 2.5)
+      if at_lip and dot > 0.45 and c.spd > 1.25 and c.vz <= 0.1 then
+        c.vz = 0.65 + c.spd * 0.32
+        player.stunt_ok = true
+        sfx(9)
+      end
+    end
+  end
+
+  if in_air or c.vz > 0 then
+    c.z = c.z + c.vz
+    c.vz = c.vz - 0.085
+    player.stunt_air = player.stunt_air + 1
+    if c.z <= gz then
+      c.z = gz
+      c.vz = 0
+      if player.stunt_ok and player.stunt_air >= 12 then
+        add_cash(500, c.x, c.y, c.z + 6, "INSANE STUNT!")
+        show_banner("INSANE STUNT BONUS!", "AIRTIME!  +$500", 14, 75, false)
+        if mission.kind == "stunt" then complete_mission() end
+      end
+      player.stunt_air = 0
+      player.stunt_ok = false
+    end
+  else
+    c.z = gz
+    c.vz = 0
+    player.stunt_air = 0
+    player.stunt_ok = false
+  end
+
+  -- Ocean / Bayou water splash bounce (if not airborne!)
+  if c.z <= 5.5 and is_deep_water(c.x, c.y) then
+    for i = 1, 5 do
+      particle(c.x + rnd(4) - 2, c.y + rnd(4) - 2, 4 + rnd(3), 29, 0.5)
+    end
+    -- Push gently back onto shore/bank
+    if c.x >= 224 then c.x = 222 end
+    if c.y <= 21 then c.y = 23 end
+    if c.x >= 42 and c.x <= 86 and c.y >= 53 and c.y <= 85 then
+      c.y = (c.y < 69) and 51 or 87
+    end
+    c.spd = -c.spd * 0.4
+  end
+
+  -- Hydrants
+  check_hydrants(c.x, c.y, 4.5)
+
+  -- Pay 'n' Voxel Drive-In Respray!
+  if dist(c.x, c.y, PAYNVOX.x, PAYNVOX.y) < PAYNVOX.r then
+    if player.stars > 0 or c.hp < 95 or mission.kind == "respray" then
+      c.col = pick(CAR_COLORS)
+      c.hp = 100
+      local had_stars = player.stars > 0
+      player.stars = 0
+      player.bust_t = 0
+      chopper.active = false
+      if player.cash >= 200 and had_stars then player.cash = player.cash - 200 end
+      sfx(8)
+      for i = 1, 20 do
+        particle(c.x + rnd(10) - 5, c.y + rnd(10) - 5, c.z + 2 + rnd(6), pick({ 11, 14, 18, 4, 51 }), 0.9)
+      end
+      show_banner("PAY 'N' VOXEL", "TOTALLY DIFFERENT CAR! HEAT CLEARED!", 14, 85, false)
+      if mission.kind == "respray" then complete_mission() end
+    end
+  end
+
+  -- Smoking / damaged vehicle
+  if c.hp < 35 and tick % 3 == 0 then
+    particle(c.x + math.cos(c.ang) * 4, c.y + math.sin(c.ang) * 4, c.z + 4, (c.hp < 18 and tick % 6 == 0) and 46 or 48, 0.7)
+  end
+  if c.hp <= 0 then
+    trigger_wasted()
+  end
+
+  player.x, player.y, player.z = c.x, c.y, c.z
+  player.ang = c.ang
+  player.spd = c.spd
+end
+
+local function update_player_foot()
+  local ix = (btn(1) and 1 or 0) - (btn(0) and 1 or 0)
+  local iy = (btn(2) and 1 or 0) - (btn(3) and 1 or 0)
+  local sprinting = btn(4)
+
+  if btnp(4) and player.bonk_cd <= 0 then
+    player.bonk_cd = 10
+    check_hydrants(player.x + math.cos(player.ang) * 4, player.y + math.sin(player.ang) * 4, 4.0)
+  end
+  if player.bonk_cd > 0 then player.bonk_cd = player.bonk_cd - 1 end
+
+  if ix ~= 0 or iy ~= 0 then
+    local cy, sy = math.cos(cam.yaw), math.sin(cam.yaw)
+    -- Map screen-space stick/D-pad onto world XY so controls always match view!
+    local wx = ix * cy + iy * sy
+    local wy = -ix * sy + iy * cy
+    local mag = math.sqrt(wx * wx + wy * wy)
+    wx, wy = wx / mag, wy / mag
+    local speed = sprinting and 1.15 or 0.78
+    local nx, ny = player.x + wx * speed, player.y + wy * speed
+
+    if not hits_building(nx, player.y, 2.2) and not is_deep_water(nx, player.y) then
+      player.x = nx
+    end
+    if not hits_building(player.x, ny, 2.2) and not is_deep_water(player.x, ny) then
+      player.y = ny
+    end
+    player.ang = math.atan(wy, wx)
+    player.walk = player.walk + (sprinting and 0.35 or 0.22)
+    player.spd = speed
+  else
+    player.spd = 0
+  end
+  player.z = surface_z(player.x, player.y)
+end
+
+local function update_npc_cars()
+  local cop_near = false
+  local active_cops = 0
+
+  for _, c in ipairs(cars) do
+    if c ~= player.car then
+      if c.is_cop then
+        c.siren = (player.stars > 0)
+        if c.siren then active_cops = active_cops + 1 end
+      end
+
+      if c.parked then
+        c.spd = c.spd * 0.85
+      elseif c.is_cop and player.stars > 0 then
+        -- Aggressive VCPD pursuit!
+        local dx, dy = player.x - c.x, player.y - c.y
+        local d = math.sqrt(dx * dx + dy * dy)
+        local target_ang = math.atan(dy, dx)
+        local diff = ang_diff(target_ang, c.ang)
+        c.ang = c.ang + clamp(diff, -0.10, 0.10)
+        local want_spd = (d > 14) and (1.45 + player.stars * 0.14) or 0.85
+        c.spd = c.spd + (want_spd - c.spd) * 0.12
+
+        local nx = c.x + math.cos(c.ang) * c.spd
+        local ny = c.y + math.sin(c.ang) * c.spd
+        local blocked = false
+        if not hits_building(nx, c.y, 4.2) and not is_deep_water(nx, c.y) then
+          c.x = nx
+        else
+          blocked = true
+        end
+        if not hits_building(c.x, ny, 4.2) and not is_deep_water(c.x, ny) then
+          c.y = ny
+        else
+          blocked = true
+        end
+        if blocked then
+          -- Steer around building corner
+          c.ang = c.ang + 0.32
+          c.stuck_t = c.stuck_t + 1
+          if c.stuck_t > 24 then
+            c.ang = c.ang + math.pi * 0.5
+            c.stuck_t = 0
+          end
+        else
+          c.stuck_t = 0
+        end
+        c.z = surface_z(c.x, c.y)
+
+        if d < 20 then cop_near = true end
+      else
+        -- Calm traffic cruising the road grid!
+        c.spd = 0.72
+        if c.turn_cd > 0 then c.turn_cd = c.turn_cd - 1 end
+        -- Check if near an intersection to pick a random turn
+        if c.turn_cd <= 0 then
+          for _, rx in ipairs(ROAD_XS) do
+            for _, ry in ipairs(ROAD_YS) do
+              if math.abs(c.x - rx) < 4 and math.abs(c.y - ry) < 4 then
+                if rnd() < 0.45 then
+                  local q = flr(rnd(4))
+                  c.ang = q * (math.pi * 0.5)
+                end
+                c.turn_cd = 35
+              end
+            end
+          end
+        end
+        local nx = c.x + math.cos(c.ang) * c.spd
+        local ny = c.y + math.sin(c.ang) * c.spd
+        if hits_building(nx, ny, 4.4) or nx < 22 or nx > 178 or ny < 26 or ny > 234 then
+          c.ang = c.ang + math.pi * 0.5
+        else
+          c.x, c.y = nx, ny
+        end
+        c.z = surface_z(c.x, c.y)
+      end
+
+      -- Vehicle-to-player collision!
+      local pd = dist(c.x, c.y, player.x, player.y)
+      if player.in_car and pd < 8.5 then
+        local push_ang = math.atan(player.y - c.y, player.x - c.x)
+        player.car.x = player.car.x + math.cos(push_ang) * 1.4
+        player.car.y = player.car.y + math.sin(push_ang) * 1.4
+        c.x = c.x - math.cos(push_ang) * 1.4
+        c.y = c.y - math.sin(push_ang) * 1.4
+        if math.abs(player.car.spd) > 0.6 or c.is_cop then
+          sfx(3)
+          shake = 3
+          player.car.hp = player.car.hp - (c.is_cop and 6 or 3)
+          particle((c.x + player.x) * 0.5, (c.y + player.y) * 0.5, c.z + 3, 47, 0.35)
+          if c.is_cop and player.stars == 0 then
+            add_heat(1)
+            add_popup(c.x, c.y, c.z + 10, "WATCH IT! VCPD!", 24)
+          end
+        end
+      elseif not player.in_car and pd < 5.5 and c.spd > 0.4 then
+        local push_ang = math.atan(player.y - c.y, player.x - c.x)
+        player.x = player.x + math.cos(push_ang) * 3.5
+        player.y = player.y + math.sin(push_ang) * 3.5
+        player.hp = player.hp - 12
+        sfx(3)
+        shake = 4
+        if player.hp <= 0 then trigger_wasted() end
+      end
+    end
+  end
+
+  -- Spawn extra VCPD unit if wanted stars >= 3 and fewer than 4 cops
+  if player.stars >= 3 and active_cops < math.min(player.stars + 1, 5) and tick % 120 == 0 then
+    local sx = pick(ROAD_XS)
+    local sy = pick(ROAD_YS)
+    if dist(sx, sy, player.x, player.y) > 70 then
+      spawn_car("cop", sx, sy, 0, 25, true, false)
+    end
+  end
+
+  -- Siren audio pulse & bust check
+  if player.stars > 0 then
+    if siren_cd > 0 then
+      siren_cd = siren_cd - 1
+    else
+      if cop_near then sfx(6) end
+      siren_cd = 26
+    end
+    -- Busted check: cop close AND player nearly stopped
+    if cop_near and math.abs(player.spd) < 0.35 then
+      player.bust_t = player.bust_t + 1
+      if player.bust_t > 68 then
+        trigger_busted()
+      end
+    else
+      player.bust_t = math.max(0, player.bust_t - 2)
+    end
+    -- Evade heat decay when no cop is near
+    if not cop_near then
+      player.heat_decay = player.heat_decay + 1
+      if player.heat_decay > 360 then
+        player.stars = math.max(0, player.stars - 1)
+        player.heat_decay = 0
+        if player.stars == 0 then
+          show_banner("HEAT EVADED!", "VCPD LOST YOUR TRAIL", 41, 65, false)
+        end
+      end
+    else
+      player.heat_decay = 0
+    end
+  else
+    player.bust_t = 0
+  end
+
+  -- VCPD Chopper at 3+ stars!
+  chopper.active = (player.stars >= 3)
+  if chopper.active then
+    local tx = player.x + math.cos(tick * 0.03) * 18
+    local ty = player.y + math.sin(tick * 0.03) * 18
+    chopper.x = chopper.x + (tx - chopper.x) * 0.04
+    chopper.y = chopper.y + (ty - chopper.y) * 0.04
+    chopper.ang = math.atan(player.y - chopper.y, player.x - chopper.x)
+    chopper.spot_x = chopper.spot_x + (player.x - chopper.spot_x) * 0.08
+    chopper.spot_y = chopper.spot_y + (player.y - chopper.spot_y) * 0.08
+  end
+end
+
+local function update_peds_and_gator()
+  for _, p in ipairs(peds) do
+    local d = dist(p.x, p.y, player.x, player.y)
+    if d < 14 and math.abs(player.spd) > 0.7 then
+      p.ang = math.atan(p.y - player.y, p.x - player.x)
+      if p.flee_t <= 0 then
+        add_popup(p.x, p.y, p.z + 9, pick({ "WHOA!", "WATCH IT!", "MY SMOOTHIE!", "LEONIDA!" }), 19)
+      end
+      p.flee_t = 45
+    end
+    local spd = (p.flee_t > 0) and 0.65 or 0.20
+    if p.flee_t > 0 then p.flee_t = p.flee_t - 1 end
+    p.turn_t = p.turn_t - 1
+    if p.turn_t <= 0 then
+      p.ang = p.ang + (rnd(2) - 1) * 1.4
+      p.turn_t = 35 + flr(rnd(65))
+    end
+    local nx = p.x + math.cos(p.ang) * spd
+    local ny = p.y + math.sin(p.ang) * spd
+    if hits_building(nx, ny, 2.0) or is_deep_water(nx, ny) then
+      p.ang = p.ang + math.pi * 0.75
+    else
+      p.x, p.y = nx, ny
+    end
+    p.z = surface_z(p.x, p.y)
+    p.walk = p.walk + spd * 0.5
+  end
+
+  -- Chompy the Leonida Gator patrolling Gator Keys!
+  gator.y = 69 + math.sin(tick * 0.03) * 11
+  gator.x = 76 + math.cos(tick * 0.02) * 5
+  gator.ang = (math.cos(tick * 0.03) >= 0) and (math.pi * 0.5) or (-math.pi * 0.5)
+  if gator.bonus_cd > 0 then gator.bonus_cd = gator.bonus_cd - 1 end
+  if gator.bonus_cd <= 0 and dist(player.x, player.y, gator.x, gator.y) < 20 then
+    gator.bonus_cd = 240
+    sfx(11)
+    add_cash(250, gator.x, gator.y, 10, "FLORIDA MAN!")
+    show_banner("FLORIDA MAN BONUS!", "MET CHOMPY THE GATOR!  +$250", 41, 70, false)
+  end
+end
+
+local function update_mission()
+  if mission.timer > 0 then
+    mission.timer = mission.timer - 1
+    if mission.timer == 0 then
+      show_banner("TIME'S UP!", "NEW CAPER ASSIGNED", 22, 65, false)
+      set_mission(mission.idx + 1)
+      return
+    end
+  end
+
+  if mission.kind == "hold" then
+    if dist(player.x, player.y, mission.x, mission.y) < 13 then
+      if mission.hold == 0 then
+        add_heat(2)
+        add_popup(mission.x, mission.y, 14, "ALARM TRIPPED! HOLD!", 22)
+      end
+      mission.hold = mission.hold + 1
+      if tick % 8 == 0 then sfx(4) end
+      if mission.hold >= mission.hold_need then
+        complete_mission()
+      end
+    else
+      mission.hold = math.max(0, mission.hold - 1)
+    end
+  elseif mission.kind == "reach" then
+    if dist(player.x, player.y, mission.x, mission.y) < 13 then
+      complete_mission()
+    end
+  end
+end
+
+-- -------------------------------------------------------------------------
+-- Tessera Lifecycle: _init, _update, _draw
+-- -------------------------------------------------------------------------
+function _init()
+  best_cash = dget("gtav6_best_cash") or 0
+  sky(53, 52)
+  sun(-0.62, -0.44, 0.60, 1.15)
+  fog(52, 0.00045)
+  build_models()
+  build_world()
+  spawn_entities()
+  state = STATE_TITLE
+  cam.x, cam.y, cam.z, cam.zoom, cam.yaw = 160, 118, 16, 1.38, -0.45
+end
+
+function _update()
+  tick = tick + 1
+  if shake > 0 then shake = shake * 0.82 end
+  if banner.timer > 0 then banner.timer = banner.timer - 1 end
+  if radio_toast > 0 then radio_toast = radio_toast - 1 end
+
+  -- Update floating popups
+  for i = #popups, 1, -1 do
+    popups[i].z = popups[i].z + 0.14
+    popups[i].life = popups[i].life - 1
+    if popups[i].life <= 0 then table.remove(popups, i) end
+  end
+
+  -- Hydrant water geysers!
+  for _, h in ipairs(hydrants) do
+    if h.geyser > 0 then
+      h.geyser = h.geyser - 1
+      if tick % 2 == 0 then
+        particle(h.x + rnd(2) - 1, h.y + rnd(2) - 1, 6 + rnd(10), (tick % 4 == 0) and 14 or 29, 0.45)
+      end
+    end
+  end
+
+  if state == STATE_TITLE then
+    -- Scenic sunset pan over Vice Blocks!
+    cam.x = 148 + math.sin(tick * 0.008) * 34
+    cam.y = 115 + math.cos(tick * 0.006) * 36
+    cam.z = 16
+    cam.zoom = 1.32
+    cam.yaw = -0.40 + math.sin(tick * 0.005) * 0.16
+    update_npc_cars()
+    update_peds_and_gator()
+
+    if btnp(0) or btnp(1) then
+      char_idx = 1 - char_idx
+      sfx(4)
+    end
+    if btnp(5) then
+      local q = quality()
+      quality(q == "hq" and "standard" or "hq")
+      sfx(4)
+    end
+    if btnp(4) then
+      sfx(7)
+      reset_game()
+    end
+    return
+  end
+
+  if state == STATE_WASTED or state == STATE_BUSTED then
+    state_timer = state_timer - 1
+    cam.zoom = cam.zoom + (2.25 - cam.zoom) * 0.04
+    if state_timer <= 0 or (state_timer < 60 and btnp(4)) then
+      respawn_after_fail(state == STATE_BUSTED)
+    end
+    return
+  end
+
+  -- Active Gameplay!
+  if btnp(5) then
+    enter_or_exit_car()
+  end
+
+  if player.in_car and player.car then
+    update_player_car()
+  else
+    update_player_foot()
+  end
+
+  update_npc_cars()
+  update_peds_and_gator()
+  update_mission()
+
+  -- Dynamic look-ahead camera!
+  local look = player.in_car and (player.spd * 12) or 4
+  local tx = clamp(player.x + math.cos(player.ang) * look, 32, 224)
+  local ty = clamp(player.y + math.sin(player.ang) * look, 34, 224)
+  local tz = player.z + 6
+  local target_zoom = player.in_car and clamp(1.78 - math.abs(player.spd) * 0.14, 1.36, 1.78) or 2.02
+  cam.x = cam.x + (tx - cam.x) * 0.14
+  cam.y = cam.y + (ty - cam.y) * 0.14
+  cam.z = cam.z + (tz - cam.z) * 0.12
+  cam.zoom = cam.zoom + (target_zoom - cam.zoom) * 0.08
+  cam.yaw = cam.yaw + (-0.34 - cam.yaw) * 0.08
+end
+
+-- -------------------------------------------------------------------------
+-- Rendering: 3D Dynamic Voxels & 2D Vice City HUD
+-- -------------------------------------------------------------------------
+local function draw_beacon(x, y, col)
+  local r = 5 + math.sin(tick * 0.16) * 1.4
+  local bz = surface_z(x, y)
+  for a = 0, 7 do
+    local ang = a * (math.pi * 0.25) + tick * 0.06
+    local bx = x + math.cos(ang) * r
+    local by = y + math.sin(ang) * r
+    vset(bx, by, bz, col)
+    vset(bx, by, bz + 1, col)
+  end
+  -- Floating bouncing arrow pillar
+  local az = bz + 11 + math.sin(tick * 0.2) * 2.5
+  box(x - 1, y - 1, az, x + 1, y + 1, az + 4, col)
+  vset(x, y, az - 1, 4)
+end
+
+local function draw_minimap()
+  local mx, my, mw, mh = 18, 314, 102, 102
+  -- Frame
+  rectfill(mx - 3, my - 3, mx + mw + 3, my + mh + 3, 1)
+  rect(mx - 3, my - 3, mx + mw + 3, my + mh + 3, 11)
+  rectfill(mx, my, mx + mw, my + mh, 2)
+
+  local function to_mm(wx, wy)
+    return mx + flr((wx / 256) * mw), my + mh - flr((wy / 256) * mh)
+  end
+
+  -- Ocean & Bayou
+  local ox, _ = to_mm(218, 0)
+  rectfill(ox, my, mx + mw, my + mh, 26)
+  local bx0, by1 = to_mm(42, 53)
+  local bx1, by0 = to_mm(86, 85)
+  rectfill(bx0, by0, bx1, by1, 39)
+
+  -- Roads
+  for _, rx in ipairs(ROAD_XS) do
+    local x0, y1 = to_mm(rx, 24)
+    local _, y0 = to_mm(rx, 236)
+    rectfill(x0 - 2, y0, x0 + 2, y1, 7)
+  end
+  for _, ry in ipairs(ROAD_YS) do
+    local x0, y0 = to_mm(20, ry)
+    local x1, _ = to_mm(180, ry)
+    rectfill(x0, y0 - 2, x1, y0 + 2, 7)
+  end
+
+  -- Pay 'n' Voxel icon (Cyan P)
+  local px, py = to_mm(PAYNVOX.x, PAYNVOX.y)
+  rectfill(px - 3, py - 3, px + 3, py + 3, 14)
+
+  -- Mission Objective (Pulsing Gold)
+  local jx, jy = to_mm(mission.x, mission.y)
+  if tick % 16 < 12 then
+    circfill(jx, jy, 4, 18)
+    circfill(jx, jy, 2, 4)
+  end
+
+  -- VCPD Cop Blips
+  for _, c in ipairs(cars) do
+    if c.is_cop and c ~= player.car then
+      local cx, cy = to_mm(c.x, c.y)
+      local cc = (player.stars > 0 and tick % 10 < 5) and 22 or 24
+      rectfill(cx - 2, cy - 2, cx + 2, cy + 2, cc)
+    end
+  end
+
+  -- Player blip
+  local plx, ply = to_mm(player.x, player.y)
+  circfill(plx, ply, 3, 4)
+  circfill(plx, ply, 2, 11)
+
+  -- District label above minimap
+  local dist_name = district_at(player.x, player.y)
+  rectfill(mx - 3, my - 19, mx + mw + 3, my - 5, 1)
+  print(dist_name, mx + 1, my - 16, 14, false, 1)
+end
+
+local function draw_star(cx, cy, filled, flash)
+  local c = filled and (flash and ((tick % 10 < 5) and 22 or 24) or 18) or 3
+  -- Crisp 5-point GTA wanted star
+  rectfill(cx - 1, cy - 7, cx + 1, cy - 4, c)
+  rectfill(cx - 7, cy - 3, cx + 7, cy - 1, c)
+  rectfill(cx - 4, cy, cx + 4, cy + 2, c)
+  rectfill(cx - 5, cy + 3, cx - 2, cy + 6, c)
+  rectfill(cx + 2, cy + 3, cx + 5, cy + 6, c)
+  if filled then
+    rectfill(cx - 1, cy - 2, cx + 1, cy + 1, 4)
+  end
+end
+
+local function draw_title_hud()
+  -- Compact Vice sunset title card
+  rectfill(164, 20, 604, 160, 1)
+  rect(164, 20, 604, 160, 11)
+  rect(166, 22, 602, 158, 14)
+
+  -- Iconic stacked GTA-style typography (left)
+  print("GRAND THEFT", 200, 36, 4, true, 3)
+  print("VOXEL", 224, 66, 12, true, 5)
+
+  -- Giant glowing Vice Sunset "VI" badge (right, pixel-centered!)
+  rectfill(436, 34, 548, 104, 21)
+  rectfill(436, 58, 548, 82, 11)
+  rectfill(436, 82, 548, 104, 17)
+  rect(436, 34, 548, 104, 18)
+  rect(438, 36, 546, 102, 4)
+  print("VI", 461, 51, 1, false, 6)
+  print("VI", 458, 48, 4, false, 6)
+
+  -- Cheeky rotating tagline
+  local tag = TAGLINES[(flr(tick / 90) % #TAGLINES) + 1]
+  local tw = textw(tag)
+  print(tag, 384 - flr(tw / 2), 118, 14, true, 1)
+  local sub = "VICE BLOCKS, LEONIDA - EDITION 2026(ish)"
+  print(sub, 384 - flr(textw(sub) / 2), 136, 19, true, 1)
+
+  -- Character Selector (LUCIA / JASON)
+  rectfill(232, 294, 536, 354, 1)
+  rect(232, 294, 536, 354, 14)
+  print("CHOOSE PROTAGONIST  (LEFT / RIGHT)", 282, 304, 5, false, 1)
+  local l_col = (char_idx == 0) and 11 or 7
+  local j_col = (char_idx == 1) and 14 or 7
+  if char_idx == 0 then rectfill(254, 320, 366, 344, 3) rect(254, 320, 366, 344, 11) end
+  if char_idx == 1 then rectfill(402, 320, 514, 344, 3) rect(402, 320, 514, 344, 14) end
+  print("LUCIA", 280, 325, l_col, true, 2)
+  print("JASON", 428, 325, j_col, true, 2)
+
+  -- Start prompt
+  if tick % 40 < 30 then
+    local msg = "PRESS A (SPACE / Z) TO ENTER LEONIDA"
+    print(msg, 384 - flr(textw(msg) * 1), 372, 18, true, 2)
+  end
+  local qstr = "[B] RENDER: " .. string.upper(quality())
+  if best_cash > 0 then
+    qstr = qstr .. "   |   BEST CASH: $" .. best_cash
+  end
+  print(qstr, 384 - flr(textw(qstr) / 2), 404, 41, true, 1)
+end
+
+local function draw_play_hud()
+  -- 1. Top-Right Classic GTA HUD (Wanted Stars, Cash, HP/Armor)
+  rectfill(572, 12, 754, 96, 1)
+  rect(572, 12, 754, 96, 11)
+  for s = 1, 5 do
+    draw_star(596 + (s - 1) * 32, 28, s <= player.stars, player.stars > 0 and player.bust_t > 0)
+  end
+  local cash_str = string.format("$%08d", player.cash)
+  print(cash_str, 586, 46, 41, true, 2)
+
+  -- Health or Vehicle Armor Bar
+  local bar_lbl = player.in_car and "CAR" or "HP "
+  local pct = player.in_car and clamp(player.car.hp / 100, 0, 1) or clamp(player.hp / 100, 0, 1)
+  local bar_col = player.in_car and (pct < 0.35 and 22 or 14) or 41
+  print(bar_lbl, 586, 74, 5, false, 1)
+  rectfill(614, 73, 742, 83, 2)
+  if pct > 0 then
+    rectfill(615, 74, 615 + flr(126 * pct), 82, bar_col)
+  end
+  rect(614, 73, 742, 83, 6)
+
+  -- 2. Bottom-Left Live Minimap
+  draw_minimap()
+
+  -- 3. Bottom-Right Objective & Context Controls
+  rectfill(454, 356, 754, 418, 1)
+  rect(454, 356, 754, 418, 14)
+  print("CAPER #" .. mission.idx .. ": " .. mission.title, 464, 364, 18, false, 1)
+  print(mission.desc, 464, 378, 4, false, 1)
+  if mission.kind == "hold" and mission.hold > 0 then
+    local p = clamp(mission.hold / mission.hold_need, 0, 1)
+    rectfill(464, 390, 644, 396, 2)
+    rectfill(464, 390, 464 + flr(180 * p), 396, 18)
+  elseif mission.timer > 0 then
+    print(string.format("TIME LEFT: %.1fs", mission.timer / 30), 464, 390, 22, false, 1)
+  else
+    local ctrl = player.in_car and "UP:GAS  A:NITRO/RADIO  B:EXIT" or "MOVE:ARROWS  A:SPRINT  B:JACK CAR"
+    print(ctrl, 464, 401, 15, false, 1)
+  end
+
+  -- 4. Radio Station Toast (Top Center)
+  if radio_toast > 0 then
+    local rtxt = "RADIO: " .. RADIOS[radio_idx + 1]
+    local rw = textw(rtxt)
+    rectfill(384 - flr(rw / 2) - 10, 14, 384 + flr(rw / 2) + 10, 32, 1)
+    rect(384 - flr(rw / 2) - 10, 14, 384 + flr(rw / 2) + 10, 32, 14)
+    print(rtxt, 384 - flr(rw / 2), 19, 14, false, 1)
+  end
+
+  -- 5. Floating "[B] JACK" prompt over nearest car when on foot
+  if not player.in_car then
+    local best, bd2 = nil, 18 * 18
+    for _, c in ipairs(cars) do
+      local d2 = dist2(player.x, player.y, c.x, c.y)
+      if d2 < bd2 then best, bd2 = c, d2 end
+    end
+    if best then
+      local sx, sy, vis = project(best.x, best.y, best.z + 9)
+      if vis then
+        local tag = best.is_cop and "[B] JACK VCPD" or "[B] JACK RIDE"
+        local tw = textw(tag)
+        rectfill(sx - flr(tw / 2) - 4, sy - 6, sx + flr(tw / 2) + 4, sy + 6, 1)
+        print(tag, sx - flr(tw / 2), sy - 3, 18, false, 1)
+      end
+    end
+  end
+
+  -- 6. Busted meter warning
+  if player.bust_t > 10 then
+    local msg = "DON'T STOP! VCPD BOXING YOU IN!"
+    print(msg, 384 - flr(textw(msg) / 2), 108, (tick % 8 < 4) and 22 or 24, true, 1)
+  end
+
+  -- 7. Floating World Popups
+  for _, p in ipairs(popups) do
+    local sx, sy, vis = project(p.x, p.y, p.z)
+    if vis then
+      print(p.txt, sx - flr(textw(p.txt) / 2), sy, p.col, true, 1)
+    end
+  end
+end
+
+local function draw_banner()
+  if banner.timer <= 0 then return end
+  local cy = banner.big and 186 or 68
+  local sc = banner.big and 3 or 2
+  local tw = textw(banner.title) * sc
+  local sw = textw(banner.sub)
+  local hw = math.max(flr(tw / 2), flr(sw / 2)) + 18
+  local hh = banner.big and 34 or 22
+  rectfill(384 - hw, cy - hh, 384 + hw, cy + hh, 1)
+  rect(384 - hw, cy - hh, 384 + hw, cy + hh, banner.col)
+  print(banner.title, 384 - flr(tw / 2), cy - (banner.big and 18 or 12), banner.col, true, sc)
+  if #banner.sub > 0 then
+    print(banner.sub, 384 - flr(sw / 2), cy + (banner.big and 14 or 8), 4, false, 1)
+  end
+end
+
+function _draw()
+  cls()
+
+  -- Camera with screen shake
+  local sx = (shake > 0.2) and (rnd(shake) - shake * 0.5) or 0
+  local sy = (shake > 0.2) and (rnd(shake) - shake * 0.5) or 0
+  camera(cam.x + sx, cam.y + sy, cam.z, cam.zoom, cam.yaw)
+
+  -- 1. Subtle Animated Ocean Surf Foam strips (low-cost dynamic detail)
+  for y = 28, 244, 14 do
+    local wx = 219 + flr(math.sin(tick * 0.08 + y * 0.15) * 1.6)
+    box(wx, y, 4, wx + 1, y + 6, 4, 29)
+  end
+
+  -- 2. Intact Fire Hydrants
+  for _, h in ipairs(hydrants) do
+    if not h.broken then
+      model("hydrant", h.x, h.y, 6, 0)
+    end
+  end
+
+  -- 3. Chompy the Gator!
+  local gf = flr(tick / 10) % 2
+  model("gator", gator.x, gator.y, 4, gator.ang, false, gf)
+
+  -- 4. Mission Beacon & Pay 'n' Voxel Beacon
+  if state == STATE_PLAY then
+    draw_beacon(mission.x, mission.y, 18)
+    if player.stars > 0 then
+      draw_beacon(PAYNVOX.x, PAYNVOX.y, 14)
+    end
+  end
+
+  -- 5. Vehicles!
+  for _, c in ipairs(cars) do
+    if c.is_cop then
+      local cf = c.siren and (flr(tick / 4) % 2) or 0
+      model("cop", c.x, c.y, c.z, c.ang, false, cf)
+    else
+      pswap(11, c.col)
+      model(c.kind, c.x, c.y, c.z, c.ang, false, 0)
+      pswap()
+    end
+  end
+
+  -- 6. Pedestrians
+  for _, p in ipairs(peds) do
+    pswap(17, p.col)
+    model("ped", p.x, p.y, p.z, p.ang, false, flr(p.walk) % 2)
+    pswap()
+  end
+
+  -- 7. Player (when on foot!)
+  if state ~= STATE_TITLE and not player.in_car then
+    local pname = (char_idx == 0) and "lucia" or "jason"
+    model(pname, player.x, player.y, player.z, player.ang - math.pi * 0.5, false, flr(player.walk) % 2)
+  end
+
+  -- 8. VCPD Helicopter + Ground Spotlight at 3+ Stars!
+  if chopper.active then
+    model("chopper", chopper.x, chopper.y, chopper.z, chopper.ang, false, tick % 2)
+    -- Sweeping spotlight ring on street
+    local sz = surface_z(chopper.spot_x, chopper.spot_y)
+    for a = 0, 7 do
+      local ang = a * (math.pi * 0.25)
+      vset(chopper.spot_x + math.cos(ang) * 5, chopper.spot_y + math.sin(ang) * 5, sz, 19)
+    end
+  end
+
+  -- 9. 2D HUD
+  if state == STATE_TITLE then
+    draw_title_hud()
+  else
+    draw_play_hud()
+    draw_banner()
+  end
+end
+`,gr=`tessera cart v1
+__meta__
 id=hatchase
 title=Hat Chase
 author=Stephen Wilson
@@ -15077,7 +17207,7 @@ function draw_end()
   centre(keys("{A}: play again"), y0 + 100, C.blue)
   centre("B: choose a dog", y0 + 110, C.dim)
 end
-`,gr=`tessera cart v1
+`,_r=`tessera cart v1
 __meta__
 title=Hello
 __pal__
@@ -15088,7 +17218,7 @@ function _draw()
   box(120,120,0,135,135,7,10)
   print("hello tessera",8,8,15)
 end
-`,_r=`tessera cart v1
+`,vr=`tessera cart v1
 __meta__
 id=moonlitgarden
 title=Moonlit Garden
@@ -15321,7 +17451,7 @@ function _draw()
     print("Z / A  -  try again",18,80,9)
   end
 end
-`,vr=`tessera cart v1
+`,yr=`tessera cart v1
 __meta__
 id=prismrelay
 title=Prism Relay
@@ -15616,7 +17746,7 @@ function _draw()
     end
   end
 end
-`,yr=`tessera cart v1
+`,br=`tessera cart v1
 __meta__
 title=Relic Shifter
 author=fx / GPT-5.2
@@ -16436,7 +18566,7 @@ function _draw()
     return
   end
 end
-`,br=`tessera cart v1
+`,xr=`tessera cart v1
 __meta__
 title=Turbo Circuit
 author=Antigravity
@@ -17380,7 +19510,7 @@ function _draw()
     print("PRESS A TO RACE AGAIN · B FOR TITLE", 225, 318, 204, true, 1)
   end
 end
-`,xr=`tessera cart v1
+`,Sr=`tessera cart v1
 __meta__
 title=Void Drifter
 author=Antigravity (Gemini)
@@ -18700,7 +20830,7 @@ function _draw()
 
   draw_hud()
 end
-`,Sr=`This image isn't a Tessera cart (or it was re-compressed).`,Cr=[`hatchase`,`hello`,`bench`],wr=Object.fromEntries(Object.entries(Object.assign({"../../carts/bastionsiege.tess":dr,"../../carts/bench.tess":fr,"../../carts/bramblecourt.tess":pr,"../../carts/crypt.tess":mr,"../../carts/hatchase.tess":hr,"../../carts/hello.tess":gr,"../../carts/moonlitgarden.tess":_r,"../../carts/prismrelay.tess":vr,"../../carts/relicshifter.tess":yr,"../../carts/turbocircuit.tess":br,"../../carts/voiddrifter.tess":xr})).map(([e,t])=>[e.split(`/`).pop().replace(/\.tess$/,``),t]).sort(([e],[t])=>(Cr.indexOf(e)+1||99)-(Cr.indexOf(t)+1||99)||e.localeCompare(t)));async function Tr(e){let t;try{t=await createImageBitmap(e,{premultiplyAlpha:`none`,colorSpaceConversion:`none`})}catch{throw Error(Sr)}if(t.width!==256||t.height!==256)throw Error(Sr);let n=document.createElement(`canvas`);n.width=256,n.height=256;let r=n.getContext(`2d`,{willReadFrequently:!0});return r.drawImage(t,0,0),r.getImageData(0,0,256,256).data}async function Er(e){let t;if(_n(e))try{let n=await Sn(e);n.width===256&&n.height===256&&(t=n.rgba)}catch{}return t??=await Tr(new Blob([e])),hn(t)}var Dr=(e,t)=>/\.png$/i.test(e||``)||_n(t);async function Or(e,t=``){return Dr(t,e)?Er(e):new TextDecoder(`utf-8`).decode(e)}async function kr(e){return Or(new Uint8Array(await e.arrayBuffer()),e.name)}async function Ar(e){try{let t=await fetch(e);if(!t.ok)throw Error(`HTTP ${t.status}${t.statusText?` ${t.statusText}`:``}`);return await Or(new Uint8Array(await t.arrayBuffer()),new URL(e,location.href).pathname)}catch(t){throw Error(`Couldn't load cart from ${e}: ${t.message||t}`)}}var jr=new URLSearchParams(location.search),Mr=jr.has(`test`),Nr=tt(location.search),Pr=()=>et(1e3/30/Nr,3*Nr),Fr=e=>document.getElementById(e),Ir=Fr(`screen`),Lr=Fr(`ui`),Rr=Lr.getContext(`2d`);Rr.scale(2,2);var Q={core:null,ready:null,frames:0,loops:0,state:`loading`,history:[],message:``,errorText:``,errorSource:[],soundsDrained:0,readPixel:()=>[0,0,0],rendererStats:null,frameHash(){let e=Q.core?.frame;if(!e)return 0;let t=2166136261;for(let n=0;n<e.length;n++)t=Math.imul(t^e[n],16777619);return t>>>0}};window.__tessera=Q;var $=null;function zr(e){try{typeof window<`u`&&window.parent&&window.parent!==window&&window.parent.postMessage({...e,tessera:!0},`*`)}catch{}}Q.postEmbedMessage=zr;function Br(e){Q.state=e,Q.history.push([e,performance.now()]),document.body.dataset.state=e,zr({type:`tessera:state_change`,state:e,cart:$?.name||null})}var Vr=0;function Hr(){clearTimeout(Vr),Fr(`toast`).classList.remove(`show`)}function Ur(e,t=7e3){Q.message=e;let n=Fr(`toast`);n.replaceChildren(Z(e,{scale:2,color:Kt})),n.setAttribute(`aria-label`,e),n.classList.add(`show`),clearTimeout(Vr),Vr=setTimeout(()=>n.classList.remove(`show`),t)}var Wr={get(e){try{let t=localStorage.getItem(`tessera:${e}`);return t===null?void 0:Number(t)}catch{return}},set(e,t){try{localStorage.setItem(`tessera:${e}`,String(t))}catch{}}};function Gr(){let e=window.devicePixelRatio||1,t=ue(innerWidth*e,innerHeight*e)/e;Lr.style.width=`${768*t}px`,Lr.style.height=`${432*t}px`}addEventListener(`resize`,Gr),Gr();function Kr(){let e=document.createElement(`canvas`);e.width=e.height=32;let t=e.getContext(`2d`);t.fillStyle=`#121821`,t.fillRect(0,0,32,32);for(let e=0;e<4;e++)for(let n=0;n<4;n++){let r=(n*5+e*3+n*e)%7;t.fillStyle=r===0?`rgba(${X[(n+e)%5]},0.22)`:`rgb(${r%2?Ut:Wt.map(e=>e-8)})`,t.fillRect(n*8,e*8,7,7)}document.body.style.setProperty(`--mosaic`,`url(${e.toDataURL()})`)}var qr=e=>String(e||`cart`).toLowerCase().replace(/[^a-z0-9]+/g,`-`).replace(/^-|-$/g,``)||`cart`;function Jr(){try{(document.fullscreenElement?document.exitFullscreen?.():document.documentElement.requestFullscreen?.())?.catch?.(()=>{})}catch{}}var Yr={standard:{renderScale:1,softAO:!1,softShadows:!1},hq:{renderScale:`native`,softAO:!0,softShadows:!0}},Xr=jr.has(`scale`)||jr.has(`softao`)||jr.has(`softshadow`)?`custom`:jr.has(`hq`)?[`0`,`off`,`false`].includes(jr.get(`hq`))?`standard`:`hq`:null;Q.ready=(async()=>{Kr();let e;try{e=Dt(Ir,{preserveDrawingBuffer:Mr,shadows:!jr.has(`noshadow`),clipTop:!jr.has(`noclip`),reuse:!jr.has(`noreuse`),brickSkip:!jr.has(`noskip`),...Xr===`custom`?{renderScale:jr.get(`scale`)??1,softAO:jr.has(`softao`),softShadows:jr.has(`softshadow`)}:Yr[Xr??`standard`]})}catch{let e=`Tessera needs WebGL2, which this browser has turned off or doesn't support.`;return Q.message=e,Fr(`message`).append(Z(e,{scale:3,color:Kt})),Fr(`message`).setAttribute(`aria-label`,e),Br(`nowebgl`),Q}Q.readPixel=(t,n)=>e.readPixel(t,n),Q.rendererStats=e.stats,Q.renderOptions=e.options,Q.readFrame=()=>e.readFrame();let t=ur(Fr(`stats`),{getCore:()=>Q.core,getRenderer:()=>e,onToast:Ur});t.set(jr.has(`stats`));let n=()=>{m.setStats(t.toggle())};Q.statsBox=t;function r(e,n){if(!Q.core)return null;let{inside:r,sx:i,sy:a}=pe(e,n,Ir);if(!r)return null;let o=Q.core.pickVoxel(i,a);return t.setSelectedVoxel(o),t.on||(t.set(!0),m.setStats(!0)),t.setTab(`inspector`),o}Q.handleVoxelPick=r,Q.pickVoxel=(e,n)=>{if(!Q.core)return null;let r=Q.core.pickVoxel(e,n);return t.setSelectedVoxel(r),r},Fr(`pause`).addEventListener(`pointerdown`,e=>{e.target===Fr(`pause`)&&r(e.clientX,e.clientY)}),Ir.addEventListener(`pointerdown`,e=>{t.on&&t.tab===`inspector`&&r(e.clientX,e.clientY)});let i=Ht();jr.has(`muted`)&&i.setMuted(!0);let a=()=>i.unlock();addEventListener(`keydown`,a,{once:!0}),addEventListener(`pointerdown`,a,{once:!0}),jr.has(`embed`)&&(document.body.dataset.embed=`true`);let o=Pt(window,Ir,{touch:!!window.matchMedia?.(`(pointer: coarse)`).matches}),s=Pr(),c=null,l=0,d=null,f=$e({wasmUri:u,storage:Wr,test:Mr}).then(e=>(Q.core=e,e.forcedQuality=Xr,zr({type:`tessera:ready`,version:`1.0.0`}),e)),p=Pn(Fr(`picker`),{carts:wr,onPick:e=>A(e),onFile:e=>j(e)}),m=In(Fr(`pause`),{onAction:e=>F(e)});i.muted&&m.setMuted(!0),m.setStats(t.on);let h=Hn(Fr(`editor`),{onRun:e=>C(e),onBack:()=>w()}),g=Qn(Fr(`model-editor`),{onRun:e=>y(e),onBack:()=>b(),toast:Ur});Q.modelEditor=g;let _=`pause`;function v(){if($){_=Q.state===`error`||Q.state===`picker`?Q.state:`pause`,Br(`model`);try{let e=Ve($.text);g.open(e.models||[],e.palette||null)}catch{g.open([],null)}}}Q.toModelEditor=v;function y(e){if($)try{k(Xe($.text,e),$.name,$.builtin)}catch(e){Ur(`Failed to update cart models: ${e.message}`)}}function b(){_===`error`?E():_===`picker`?M():N()}let x=`pause`;function S({line:e=null,errorLine:t=null}={}){if($){x=Q.state===`error`||Q.state===`picker`?Q.state:`pause`,Br(`edit`);try{let n=Ve($.text),r=e&&n.luaLine?Math.max(1,e-n.luaLine+1):e,i=t&&n.luaLine?Math.max(1,t-n.luaLine+1):t;h.setCode(n.lua,{line:r,errorLine:i,title:`${$.name} (__lua__)`})}catch{h.setCode($.text,{line:e,errorLine:t,title:$.name})}}}function C(e){if($)try{k(Ye($.text,e),$.name,$.builtin)}catch(e){Ur(`Failed to update cart: ${e.message}`)}}function w(){x===`error`?E():x===`picker`?M():N()}let T=0;function E(){T=performance.now(),Br(`error`);let{text:e,source:t}=ar(Rr,Q.core.error,$?.text??``);Q.errorText=e,Q.errorSource=t,zr({type:`tessera:error`,message:e,line:Q.core?.error?.line??null,kind:Q.core?.error?.kind??`runtime`,cart:$?.name||null})}function D(){$&&k($.text,$.name,$.builtin)}function O(e){if(console.error(`tessera: internal error`,e),!(!Q.core||Q.state!==`run`&&Q.state!==`pause`)){Q.core.error={message:`internal error: ${e?.message??e}`,line:null,kind:`internal`};try{E()}catch(e){console.error(`tessera: internal error drawing the error screen`,e),Br(`error`)}}}Lr.addEventListener(`click`,e=>{if(Q.state!==`error`||performance.now()-T<250)return;let t=Lr.getBoundingClientRect(),n=tr((e.clientX-t.left)*384/t.width,(e.clientY-t.top)*216/t.height);if(n===`edit`){let e=Q.core?.error?.line??null;S({line:e,errorLine:e})}else n===`picker`?M():D()});async function k(e,t=`cart`,n=!1){let r=await f;$?.text!==e&&(c=null),$={text:e,name:t,builtin:n},m.clearExport(),Hr();try{let t=r.load(e);i.setMusic(r.music),i.bindMusicState(r.musicState),r.muted=i.muted,t.ok&&r.init()}catch(e){console.error(`tessera: internal error`,e),r.error={message:`internal error: ${e?.message??e}`,line:null,kind:`internal`}}s=Pr(),Q.frames=0,r.error?E():Br(`run`)}function A(e){let t=wr[e];t===void 0?(Ur(`There's no built-in cart called '${e}'.`),M()):k(t,e,!0)}Q.loadCartText=(e,t=`test`)=>k(e,t);async function j(e){try{await k(await kr(e),e.name.replace(/\.tess(\.png)?$|\.png$/i,``))}catch(e){Ur(e.message||String(e)),(Q.state===`boot`||Q.state===`loading`)&&M()}}function M(){$?.builtin&&(Q.state===`run`||Q.state===`pause`)&&p.setShot($.name,e.readFrame()),Br(`picker`),p.focusFirst()}function N(){Br(`pause`),m.show(),m.setMuted(i.muted)}function P(){s=Pr(),Br(`run`),document.activeElement?.blur?.()}function ee(t){c=e.readFrame(),t===`pause`?m.status(`Label picture saved`):Ur(`Label picture saved`,2e3)}async function F(t){if(t===`resume`)P();else if(t===`restart`)D();else if(t===`edit`)S();else if(t===`models`)v();else if(t===`mute`)i.setMuted(!i.muted),Q.core.muted=i.muted,m.setMuted(i.muted),zr({type:`tessera:mute_change`,muted:i.muted});else if(t===`stats`)n();else if(t===`label`)ee(`pause`);else if(t===`picker`)M();else if(t===`export`)try{let t=On(c??e.readFrame(),Q.core.meta),n=await An($.text,t),r=`${qr(Q.core.meta.title||$.name)}.tess.png`;Q.lastExport=n,m.showExport(n,r),m.status(`Picture cart ready (${Math.ceil(n.size/1024)} KiB)`)}catch(e){m.status(e.message||String(e))}}o.onPause(()=>{Q.state===`run`?N():Q.state===`pause`&&P()}),addEventListener(`keydown`,e=>{let t=Q.state;if(e.code===`F3`&&t!==`boot`)e.preventDefault(),e.repeat||n();else if(e.code===`KeyF`&&!e.repeat&&!e.ctrlKey&&!e.metaKey&&t!==`boot`&&t!==`edit`&&t!==`model`)Jr();else if(e.code===`F4`&&(t===`run`||t===`pause`))e.preventDefault(),S();else if(e.code===`F5`&&(t===`run`||t===`pause`))e.preventDefault(),v();else if(t===`boot`)te();else if(t===`run`)e.code===`Escape`||e.code===`Enter`||e.code===`NumpadEnter`?(e.preventDefault(),N()):e.code===`F7`&&(e.preventDefault(),ee(`run`));else if(t===`pause`)e.code===`Escape`?(e.preventDefault(),P()):e.code===`ArrowUp`||e.code===`KeyW`?(e.preventDefault(),m.moveFocus(-1)):e.code===`ArrowDown`||e.code===`KeyS`?(e.preventDefault(),m.moveFocus(1)):[`Enter`,`NumpadEnter`,`Space`,`KeyZ`].includes(e.code)&&(e.preventDefault(),e.repeat||m.activate());else if(t===`error`){if(e.code===`KeyR`)e.preventDefault(),D();else if(e.code===`KeyE`){e.preventDefault();let t=Q.core?.error?.line??null;S({line:t,errorLine:t})}else e.code===`Escape`&&(e.preventDefault(),M())}else t===`picker`?e.code===`ArrowRight`||e.code===`ArrowDown`?(e.preventDefault(),p.moveFocus(1)):(e.code===`ArrowLeft`||e.code===`ArrowUp`)&&(e.preventDefault(),p.moveFocus(-1)):t===`edit`?e.code===`Escape`?(e.preventDefault(),w()):e.code===`Enter`&&(e.ctrlKey||e.metaKey)&&(e.preventDefault(),C(h.getCode())):t===`model`&&(e.code===`Escape`?(e.preventDefault(),b()):e.code===`Enter`&&(e.ctrlKey||e.metaKey)?(e.preventDefault(),y(g.getModels())):e.code===`BracketLeft`?(e.preventDefault(),g.stepZ(-1)):e.code===`BracketRight`?(e.preventDefault(),g.stepZ(1)):e.code===`KeyP`?(e.preventDefault(),g.setTool(`pen`)):e.code===`KeyE`?(e.preventDefault(),g.setTool(`eraser`)):e.code===`KeyI`?(e.preventDefault(),g.setTool(`eyedropper`)):e.code===`KeyB`?(e.preventDefault(),g.setTool(`box`)):e.code===`KeyG`?(e.preventDefault(),g.setTool(`fill`)):e.code===`KeyZ`&&(e.ctrlKey||e.metaKey)?(e.preventDefault(),e.shiftKey?g.redo():g.undo()):e.code===`KeyY`&&(e.ctrlKey||e.metaKey)&&(e.preventDefault(),g.redo()))}),addEventListener(`keyup`,e=>{Q.state===`pause`&&e.code===`Space`&&e.preventDefault()}),addEventListener(`pointerdown`,()=>{Q.state===`boot`&&te()}),addEventListener(`dragover`,e=>{e.preventDefault(),e.dataTransfer&&(e.dataTransfer.dropEffect=`copy`)}),addEventListener(`drop`,e=>{e.preventDefault();let t=e.dataTransfer?.files?.[0];t&&j(t)});function te(){Q.state===`boot`&&(i.unlock(),i.drain(tn),M())}let ne=0,re=0,ie=null,ae=e=>{Q.loops++;let n=performance.now();try{se(e)}catch(e){O(e)}finally{if(re=performance.now()-n,ie){try{t.frame(e,ie)}catch(e){O(e)}ie=null}requestAnimationFrame(ae)}};function oe(n){if(n.forcedQuality!==`custom`&&Object.assign(e.options,Yr[n.quality]??Yr.standard),t.on&&t.selectedVoxel?.hit){let r=t.selectedVoxel,i=z(n.view,r.x,r.y,r.z),a=n.overlay;n.overlay=[...a||[],{op:`rect`,x0:i.minX-1,y0:i.minY-1,x1:i.maxX+1,y1:i.maxY+1,c:7}],e.render(n),n.overlay=a}else e.render(n)}let se=n=>{let r=Q.state;if(r===`boot`)o.pollMenu().any&&te(),Q.state===`boot`&&(d.draw(Rr,n-l),n-l>=1500&&M());else if(r===`picker`){let e=o.pollMenu();e.right||e.down?p.moveFocus(1):(e.left||e.up)&&p.moveFocus(-1),(e.a||e.start)&&p.activate()}else if(r===`run`){let t=Q.core,r=s.advance(n);for(let e=0;e<r&&!t.error;e++)o.poll(t.input),t.stats.input=o.source,t.tick();t.draw(),t.muted!==i.muted&&i.setMuted(t.muted);let a=t.sounds.splice(0);i.drain(a),Q.soundsDrained+=a.length;let c=performance.now();if(oe(t),t.stats.compositeMs+=performance.now()-c,ne){let e=1e3/Math.max(n-ne,.1);t.stats.fps=t.stats.fps?t.stats.fps*.9+e*.1:e}ie=()=>{let n=e.stats,r=t.stats;return{updateMs:r.updateMs,drawMs:r.drawMs,uploadMs:n.volumeUploadMs,gpuMs:n.gpuRenderMs,mapBytes:n.mapUploadBytes,drawBytes:n.drawUploadBytes,gpu:n.gpu,cpuMs:re,marched:n.marchedFrames,reused:n.reusedFrames,shadows:e.options.shadows,canvas:`${Ir.width}×${Ir.height}`}},ne=n,Q.frames++,t.error&&E()}else if(r===`pause`){ne=0,t.resume();let e=o.pollMenu();e.up?m.moveFocus(-1):e.down&&m.moveFocus(1),e.a?m.activate():(e.b||e.start)&&P(),Q.state===`pause`&&oe(Q.core)}else if(r===`error`){let e=o.pollMenu();performance.now()-T>=250&&(e.a?D():(e.b||e.start)&&M())}},ce=(document.getElementById(`tessera-cart`)||document.querySelector(`script[type="text/tessera"]`))?.textContent?.trim()||null,I=jr.get(`cart`);if(jr.has(`dev`)&&typeof EventSource<`u`)try{let e=new EventSource(`/live-reload`);e.onmessage=async e=>{try{let t=JSON.parse(e.data);t.type===`cart`&&t.text&&(await k(t.text,$?.name||`dev`,!1),Ur(`Cart reloaded`,1e3))}catch{}}}catch{}if(addEventListener(`message`,async e=>{let t=e.data;if(t&&typeof t==`object`){if(t.type===`tessera:load`){if(typeof t.cart==`string`){if(/^https?:\/\//i.test(t.cart))try{await k(await Ar(t.cart),t.name||qr(t.cart.split(`/`).pop()))}catch(e){Ur(e.message)}else await k(t.cart,t.name||`custom`)}}else if(t.type===`tessera:pause`)Q.state===`run`&&N();else if(t.type===`tessera:resume`)Q.state===`pause`&&P();else if(t.type===`tessera:reset`)D();else if(t.type===`tessera:mute`){let e=typeof t.muted==`boolean`?t.muted:!i.muted;i.setMuted(e),Q.core&&(Q.core.muted=e),m.setMuted(e),zr({type:`tessera:mute_change`,muted:e})}else if(t.type===`tessera:get_metadata`){let e=null;try{$?.text&&(e=Ve($.text).meta)}catch{}zr({type:`tessera:metadata`,cart:$?.name||null,meta:e})}else if(t.type===`tessera:get_source`){let e=null;try{$?.text&&(e=Ve($.text).lua)}catch{}zr({type:`tessera:source`,name:$?.name||null,text:$?.text||null,lua:e})}}}),ce)Br(`loading`),await k(ce,`cart`);else if(I){if(Br(`loading`),/^https?:\/\//i.test(I))try{await k(await Ar(I),qr(I.split(`/`).pop()))}catch(e){Ur(e.message),M()}else A(I)}else jr.has(`autoplay`)?A(`hatchase`):(d=on(),l=performance.now(),Br(`boot`),navigator.userActivation?.hasBeenActive&&(i.unlock(),i.drain(tn)));return requestAnimationFrame(ae),await f,Q})();</script>
+`,Cr=`This image isn't a Tessera cart (or it was re-compressed).`,wr=[`hatchase`,`hello`,`bench`],Tr=Object.fromEntries(Object.entries(Object.assign({"../../carts/bastionsiege.tess":dr,"../../carts/bench.tess":fr,"../../carts/bramblecourt.tess":pr,"../../carts/crypt.tess":mr,"../../carts/gtavoxel6.tess":hr,"../../carts/hatchase.tess":gr,"../../carts/hello.tess":_r,"../../carts/moonlitgarden.tess":vr,"../../carts/prismrelay.tess":yr,"../../carts/relicshifter.tess":br,"../../carts/turbocircuit.tess":xr,"../../carts/voiddrifter.tess":Sr})).map(([e,t])=>[e.split(`/`).pop().replace(/\.tess$/,``),t]).sort(([e],[t])=>(wr.indexOf(e)+1||99)-(wr.indexOf(t)+1||99)||e.localeCompare(t)));async function Er(e){let t;try{t=await createImageBitmap(e,{premultiplyAlpha:`none`,colorSpaceConversion:`none`})}catch{throw Error(Cr)}if(t.width!==256||t.height!==256)throw Error(Cr);let n=document.createElement(`canvas`);n.width=256,n.height=256;let r=n.getContext(`2d`,{willReadFrequently:!0});return r.drawImage(t,0,0),r.getImageData(0,0,256,256).data}async function Dr(e){let t;if(_n(e))try{let n=await Sn(e);n.width===256&&n.height===256&&(t=n.rgba)}catch{}return t??=await Er(new Blob([e])),hn(t)}var Or=(e,t)=>/\.png$/i.test(e||``)||_n(t);async function kr(e,t=``){return Or(t,e)?Dr(e):new TextDecoder(`utf-8`).decode(e)}async function Ar(e){return kr(new Uint8Array(await e.arrayBuffer()),e.name)}async function jr(e){try{let t=await fetch(e);if(!t.ok)throw Error(`HTTP ${t.status}${t.statusText?` ${t.statusText}`:``}`);return await kr(new Uint8Array(await t.arrayBuffer()),new URL(e,location.href).pathname)}catch(t){throw Error(`Couldn't load cart from ${e}: ${t.message||t}`)}}var Mr=new URLSearchParams(location.search),Nr=Mr.has(`test`),Pr=tt(location.search),Fr=()=>et(1e3/30/Pr,3*Pr),Ir=e=>document.getElementById(e),Lr=Ir(`screen`),Rr=Ir(`ui`),zr=Rr.getContext(`2d`);zr.scale(2,2);var Q={core:null,ready:null,frames:0,loops:0,state:`loading`,history:[],message:``,errorText:``,errorSource:[],soundsDrained:0,readPixel:()=>[0,0,0],rendererStats:null,frameHash(){let e=Q.core?.frame;if(!e)return 0;let t=2166136261;for(let n=0;n<e.length;n++)t=Math.imul(t^e[n],16777619);return t>>>0}};window.__tessera=Q;var $=null;function Br(e){try{typeof window<`u`&&window.parent&&window.parent!==window&&window.parent.postMessage({...e,tessera:!0},`*`)}catch{}}Q.postEmbedMessage=Br;function Vr(e){Q.state=e,Q.history.push([e,performance.now()]),document.body.dataset.state=e,Br({type:`tessera:state_change`,state:e,cart:$?.name||null})}var Hr=0;function Ur(){clearTimeout(Hr),Ir(`toast`).classList.remove(`show`)}function Wr(e,t=7e3){Q.message=e;let n=Ir(`toast`);n.replaceChildren(Z(e,{scale:2,color:Kt})),n.setAttribute(`aria-label`,e),n.classList.add(`show`),clearTimeout(Hr),Hr=setTimeout(()=>n.classList.remove(`show`),t)}var Gr={get(e){try{let t=localStorage.getItem(`tessera:${e}`);return t===null?void 0:Number(t)}catch{return}},set(e,t){try{localStorage.setItem(`tessera:${e}`,String(t))}catch{}}};function Kr(){let e=window.devicePixelRatio||1,t=ue(innerWidth*e,innerHeight*e)/e;Rr.style.width=`${768*t}px`,Rr.style.height=`${432*t}px`}addEventListener(`resize`,Kr),Kr();function qr(){let e=document.createElement(`canvas`);e.width=e.height=32;let t=e.getContext(`2d`);t.fillStyle=`#121821`,t.fillRect(0,0,32,32);for(let e=0;e<4;e++)for(let n=0;n<4;n++){let r=(n*5+e*3+n*e)%7;t.fillStyle=r===0?`rgba(${X[(n+e)%5]},0.22)`:`rgb(${r%2?Ut:Wt.map(e=>e-8)})`,t.fillRect(n*8,e*8,7,7)}document.body.style.setProperty(`--mosaic`,`url(${e.toDataURL()})`)}var Jr=e=>String(e||`cart`).toLowerCase().replace(/[^a-z0-9]+/g,`-`).replace(/^-|-$/g,``)||`cart`;function Yr(){try{(document.fullscreenElement?document.exitFullscreen?.():document.documentElement.requestFullscreen?.())?.catch?.(()=>{})}catch{}}var Xr={standard:{renderScale:1,softAO:!1,softShadows:!1},hq:{renderScale:`native`,softAO:!0,softShadows:!0}},Zr=Mr.has(`scale`)||Mr.has(`softao`)||Mr.has(`softshadow`)?`custom`:Mr.has(`hq`)?[`0`,`off`,`false`].includes(Mr.get(`hq`))?`standard`:`hq`:null;Q.ready=(async()=>{qr();let e;try{e=Dt(Lr,{preserveDrawingBuffer:Nr,shadows:!Mr.has(`noshadow`),clipTop:!Mr.has(`noclip`),reuse:!Mr.has(`noreuse`),brickSkip:!Mr.has(`noskip`),...Zr===`custom`?{renderScale:Mr.get(`scale`)??1,softAO:Mr.has(`softao`),softShadows:Mr.has(`softshadow`)}:Xr[Zr??`standard`]})}catch{let e=`Tessera needs WebGL2, which this browser has turned off or doesn't support.`;return Q.message=e,Ir(`message`).append(Z(e,{scale:3,color:Kt})),Ir(`message`).setAttribute(`aria-label`,e),Vr(`nowebgl`),Q}Q.readPixel=(t,n)=>e.readPixel(t,n),Q.rendererStats=e.stats,Q.renderOptions=e.options,Q.readFrame=()=>e.readFrame();let t=ur(Ir(`stats`),{getCore:()=>Q.core,getRenderer:()=>e,onToast:Wr});t.set(Mr.has(`stats`));let n=()=>{m.setStats(t.toggle())};Q.statsBox=t;function r(e,n){if(!Q.core)return null;let{inside:r,sx:i,sy:a}=pe(e,n,Lr);if(!r)return null;let o=Q.core.pickVoxel(i,a);return t.setSelectedVoxel(o),t.on||(t.set(!0),m.setStats(!0)),t.setTab(`inspector`),o}Q.handleVoxelPick=r,Q.pickVoxel=(e,n)=>{if(!Q.core)return null;let r=Q.core.pickVoxel(e,n);return t.setSelectedVoxel(r),r},Ir(`pause`).addEventListener(`pointerdown`,e=>{e.target===Ir(`pause`)&&r(e.clientX,e.clientY)}),Lr.addEventListener(`pointerdown`,e=>{t.on&&t.tab===`inspector`&&r(e.clientX,e.clientY)});let i=Ht();Mr.has(`muted`)&&i.setMuted(!0);let a=()=>i.unlock();addEventListener(`keydown`,a,{once:!0}),addEventListener(`pointerdown`,a,{once:!0}),Mr.has(`embed`)&&(document.body.dataset.embed=`true`);let o=Pt(window,Lr,{touch:!!window.matchMedia?.(`(pointer: coarse)`).matches}),s=Fr(),c=null,l=0,d=null,f=$e({wasmUri:u,storage:Gr,test:Nr}).then(e=>(Q.core=e,e.forcedQuality=Zr,Br({type:`tessera:ready`,version:`1.0.0`}),e)),p=Pn(Ir(`picker`),{carts:Tr,onPick:e=>A(e),onFile:e=>j(e)}),m=In(Ir(`pause`),{onAction:e=>F(e)});i.muted&&m.setMuted(!0),m.setStats(t.on);let h=Hn(Ir(`editor`),{onRun:e=>C(e),onBack:()=>w()}),g=Qn(Ir(`model-editor`),{onRun:e=>y(e),onBack:()=>b(),toast:Wr});Q.modelEditor=g;let _=`pause`;function v(){if($){_=Q.state===`error`||Q.state===`picker`?Q.state:`pause`,Vr(`model`);try{let e=Ve($.text);g.open(e.models||[],e.palette||null)}catch{g.open([],null)}}}Q.toModelEditor=v;function y(e){if($)try{k(Xe($.text,e),$.name,$.builtin)}catch(e){Wr(`Failed to update cart models: ${e.message}`)}}function b(){_===`error`?E():_===`picker`?M():N()}let x=`pause`;function S({line:e=null,errorLine:t=null}={}){if($){x=Q.state===`error`||Q.state===`picker`?Q.state:`pause`,Vr(`edit`);try{let n=Ve($.text),r=e&&n.luaLine?Math.max(1,e-n.luaLine+1):e,i=t&&n.luaLine?Math.max(1,t-n.luaLine+1):t;h.setCode(n.lua,{line:r,errorLine:i,title:`${$.name} (__lua__)`})}catch{h.setCode($.text,{line:e,errorLine:t,title:$.name})}}}function C(e){if($)try{k(Ye($.text,e),$.name,$.builtin)}catch(e){Wr(`Failed to update cart: ${e.message}`)}}function w(){x===`error`?E():x===`picker`?M():N()}let T=0;function E(){T=performance.now(),Vr(`error`);let{text:e,source:t}=ar(zr,Q.core.error,$?.text??``);Q.errorText=e,Q.errorSource=t,Br({type:`tessera:error`,message:e,line:Q.core?.error?.line??null,kind:Q.core?.error?.kind??`runtime`,cart:$?.name||null})}function D(){$&&k($.text,$.name,$.builtin)}function O(e){if(console.error(`tessera: internal error`,e),!(!Q.core||Q.state!==`run`&&Q.state!==`pause`)){Q.core.error={message:`internal error: ${e?.message??e}`,line:null,kind:`internal`};try{E()}catch(e){console.error(`tessera: internal error drawing the error screen`,e),Vr(`error`)}}}Rr.addEventListener(`click`,e=>{if(Q.state!==`error`||performance.now()-T<250)return;let t=Rr.getBoundingClientRect(),n=tr((e.clientX-t.left)*384/t.width,(e.clientY-t.top)*216/t.height);if(n===`edit`){let e=Q.core?.error?.line??null;S({line:e,errorLine:e})}else n===`picker`?M():D()});async function k(e,t=`cart`,n=!1){let r=await f;$?.text!==e&&(c=null),$={text:e,name:t,builtin:n},m.clearExport(),Ur();try{let t=r.load(e);i.setMusic(r.music),i.bindMusicState(r.musicState),r.muted=i.muted,t.ok&&r.init()}catch(e){console.error(`tessera: internal error`,e),r.error={message:`internal error: ${e?.message??e}`,line:null,kind:`internal`}}s=Fr(),Q.frames=0,r.error?E():Vr(`run`)}function A(e){let t=Tr[e];t===void 0?(Wr(`There's no built-in cart called '${e}'.`),M()):k(t,e,!0)}Q.loadCartText=(e,t=`test`)=>k(e,t);async function j(e){try{await k(await Ar(e),e.name.replace(/\.tess(\.png)?$|\.png$/i,``))}catch(e){Wr(e.message||String(e)),(Q.state===`boot`||Q.state===`loading`)&&M()}}function M(){$?.builtin&&(Q.state===`run`||Q.state===`pause`)&&p.setShot($.name,e.readFrame()),Vr(`picker`),p.focusFirst()}function N(){Vr(`pause`),m.show(),m.setMuted(i.muted)}function P(){s=Fr(),Vr(`run`),document.activeElement?.blur?.()}function ee(t){c=e.readFrame(),t===`pause`?m.status(`Label picture saved`):Wr(`Label picture saved`,2e3)}async function F(t){if(t===`resume`)P();else if(t===`restart`)D();else if(t===`edit`)S();else if(t===`models`)v();else if(t===`mute`)i.setMuted(!i.muted),Q.core.muted=i.muted,m.setMuted(i.muted),Br({type:`tessera:mute_change`,muted:i.muted});else if(t===`stats`)n();else if(t===`label`)ee(`pause`);else if(t===`picker`)M();else if(t===`export`)try{let t=On(c??e.readFrame(),Q.core.meta),n=await An($.text,t),r=`${Jr(Q.core.meta.title||$.name)}.tess.png`;Q.lastExport=n,m.showExport(n,r),m.status(`Picture cart ready (${Math.ceil(n.size/1024)} KiB)`)}catch(e){m.status(e.message||String(e))}}o.onPause(()=>{Q.state===`run`?N():Q.state===`pause`&&P()}),addEventListener(`keydown`,e=>{let t=Q.state;if(e.code===`F3`&&t!==`boot`)e.preventDefault(),e.repeat||n();else if(e.code===`KeyF`&&!e.repeat&&!e.ctrlKey&&!e.metaKey&&t!==`boot`&&t!==`edit`&&t!==`model`)Yr();else if(e.code===`F4`&&(t===`run`||t===`pause`))e.preventDefault(),S();else if(e.code===`F5`&&(t===`run`||t===`pause`))e.preventDefault(),v();else if(t===`boot`)te();else if(t===`run`)e.code===`Escape`||e.code===`Enter`||e.code===`NumpadEnter`?(e.preventDefault(),N()):e.code===`F7`&&(e.preventDefault(),ee(`run`));else if(t===`pause`)e.code===`Escape`?(e.preventDefault(),P()):e.code===`ArrowUp`||e.code===`KeyW`?(e.preventDefault(),m.moveFocus(-1)):e.code===`ArrowDown`||e.code===`KeyS`?(e.preventDefault(),m.moveFocus(1)):[`Enter`,`NumpadEnter`,`Space`,`KeyZ`].includes(e.code)&&(e.preventDefault(),e.repeat||m.activate());else if(t===`error`){if(e.code===`KeyR`)e.preventDefault(),D();else if(e.code===`KeyE`){e.preventDefault();let t=Q.core?.error?.line??null;S({line:t,errorLine:t})}else e.code===`Escape`&&(e.preventDefault(),M())}else t===`picker`?e.code===`ArrowRight`||e.code===`ArrowDown`?(e.preventDefault(),p.moveFocus(1)):(e.code===`ArrowLeft`||e.code===`ArrowUp`)&&(e.preventDefault(),p.moveFocus(-1)):t===`edit`?e.code===`Escape`?(e.preventDefault(),w()):e.code===`Enter`&&(e.ctrlKey||e.metaKey)&&(e.preventDefault(),C(h.getCode())):t===`model`&&(e.code===`Escape`?(e.preventDefault(),b()):e.code===`Enter`&&(e.ctrlKey||e.metaKey)?(e.preventDefault(),y(g.getModels())):e.code===`BracketLeft`?(e.preventDefault(),g.stepZ(-1)):e.code===`BracketRight`?(e.preventDefault(),g.stepZ(1)):e.code===`KeyP`?(e.preventDefault(),g.setTool(`pen`)):e.code===`KeyE`?(e.preventDefault(),g.setTool(`eraser`)):e.code===`KeyI`?(e.preventDefault(),g.setTool(`eyedropper`)):e.code===`KeyB`?(e.preventDefault(),g.setTool(`box`)):e.code===`KeyG`?(e.preventDefault(),g.setTool(`fill`)):e.code===`KeyZ`&&(e.ctrlKey||e.metaKey)?(e.preventDefault(),e.shiftKey?g.redo():g.undo()):e.code===`KeyY`&&(e.ctrlKey||e.metaKey)&&(e.preventDefault(),g.redo()))}),addEventListener(`keyup`,e=>{Q.state===`pause`&&e.code===`Space`&&e.preventDefault()}),addEventListener(`pointerdown`,()=>{Q.state===`boot`&&te()}),addEventListener(`dragover`,e=>{e.preventDefault(),e.dataTransfer&&(e.dataTransfer.dropEffect=`copy`)}),addEventListener(`drop`,e=>{e.preventDefault();let t=e.dataTransfer?.files?.[0];t&&j(t)});function te(){Q.state===`boot`&&(i.unlock(),i.drain(tn),M())}let ne=0,re=0,ie=null,ae=e=>{Q.loops++;let n=performance.now();try{se(e)}catch(e){O(e)}finally{if(re=performance.now()-n,ie){try{t.frame(e,ie)}catch(e){O(e)}ie=null}requestAnimationFrame(ae)}};function oe(n){if(n.forcedQuality!==`custom`&&Object.assign(e.options,Xr[n.quality]??Xr.standard),t.on&&t.selectedVoxel?.hit){let r=t.selectedVoxel,i=z(n.view,r.x,r.y,r.z),a=n.overlay;n.overlay=[...a||[],{op:`rect`,x0:i.minX-1,y0:i.minY-1,x1:i.maxX+1,y1:i.maxY+1,c:7}],e.render(n),n.overlay=a}else e.render(n)}let se=n=>{let r=Q.state;if(r===`boot`)o.pollMenu().any&&te(),Q.state===`boot`&&(d.draw(zr,n-l),n-l>=1500&&M());else if(r===`picker`){let e=o.pollMenu();e.right||e.down?p.moveFocus(1):(e.left||e.up)&&p.moveFocus(-1),(e.a||e.start)&&p.activate()}else if(r===`run`){let t=Q.core,r=s.advance(n);for(let e=0;e<r&&!t.error;e++)o.poll(t.input),t.stats.input=o.source,t.tick();t.draw(),t.muted!==i.muted&&i.setMuted(t.muted);let a=t.sounds.splice(0);i.drain(a),Q.soundsDrained+=a.length;let c=performance.now();if(oe(t),t.stats.compositeMs+=performance.now()-c,ne){let e=1e3/Math.max(n-ne,.1);t.stats.fps=t.stats.fps?t.stats.fps*.9+e*.1:e}ie=()=>{let n=e.stats,r=t.stats;return{updateMs:r.updateMs,drawMs:r.drawMs,uploadMs:n.volumeUploadMs,gpuMs:n.gpuRenderMs,mapBytes:n.mapUploadBytes,drawBytes:n.drawUploadBytes,gpu:n.gpu,cpuMs:re,marched:n.marchedFrames,reused:n.reusedFrames,shadows:e.options.shadows,canvas:`${Lr.width}×${Lr.height}`}},ne=n,Q.frames++,t.error&&E()}else if(r===`pause`){ne=0,t.resume();let e=o.pollMenu();e.up?m.moveFocus(-1):e.down&&m.moveFocus(1),e.a?m.activate():(e.b||e.start)&&P(),Q.state===`pause`&&oe(Q.core)}else if(r===`error`){let e=o.pollMenu();performance.now()-T>=250&&(e.a?D():(e.b||e.start)&&M())}},ce=(document.getElementById(`tessera-cart`)||document.querySelector(`script[type="text/tessera"]`))?.textContent?.trim()||null,I=Mr.get(`cart`);if(Mr.has(`dev`)&&typeof EventSource<`u`)try{let e=new EventSource(`/live-reload`);e.onmessage=async e=>{try{let t=JSON.parse(e.data);t.type===`cart`&&t.text&&(await k(t.text,$?.name||`dev`,!1),Wr(`Cart reloaded`,1e3))}catch{}}}catch{}if(addEventListener(`message`,async e=>{let t=e.data;if(t&&typeof t==`object`){if(t.type===`tessera:load`){if(typeof t.cart==`string`){if(/^https?:\/\//i.test(t.cart))try{await k(await jr(t.cart),t.name||Jr(t.cart.split(`/`).pop()))}catch(e){Wr(e.message)}else await k(t.cart,t.name||`custom`)}}else if(t.type===`tessera:pause`)Q.state===`run`&&N();else if(t.type===`tessera:resume`)Q.state===`pause`&&P();else if(t.type===`tessera:reset`)D();else if(t.type===`tessera:mute`){let e=typeof t.muted==`boolean`?t.muted:!i.muted;i.setMuted(e),Q.core&&(Q.core.muted=e),m.setMuted(e),Br({type:`tessera:mute_change`,muted:e})}else if(t.type===`tessera:get_metadata`){let e=null;try{$?.text&&(e=Ve($.text).meta)}catch{}Br({type:`tessera:metadata`,cart:$?.name||null,meta:e})}else if(t.type===`tessera:get_source`){let e=null;try{$?.text&&(e=Ve($.text).lua)}catch{}Br({type:`tessera:source`,name:$?.name||null,text:$?.text||null,lua:e})}}}),ce)Vr(`loading`),await k(ce,`cart`);else if(I){if(Vr(`loading`),/^https?:\/\//i.test(I))try{await k(await jr(I),Jr(I.split(`/`).pop()))}catch(e){Wr(e.message),M()}else A(I)}else Mr.has(`autoplay`)?A(`hatchase`):(d=on(),l=performance.now(),Vr(`boot`),navigator.userActivation?.hasBeenActive&&(i.unlock(),i.drain(tn)));return requestAnimationFrame(ae),await f,Q})();</script>
   <style rel="stylesheet" crossorigin>:root{--slate:#1b2330;--slate-hi:#2c3a4f;--slate-lo:#121821;--teal:#3fb8af;--amber:#e8a33d;--coral:#e5546b;--sky:#5aa9e6}html,body{background:var(--slate);height:100%;margin:0;overflow:hidden}canvas.px,canvas.label,#ui{image-rendering:pixelated;image-rendering:crisp-edges}#screen{width:100vw;height:100vh;image-rendering:pixelated;display:block}#ui{z-index:5;display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%)}body[data-state=boot] #ui,body[data-state=error] #ui{display:block}body[data-state=boot] #screen,body[data-state=picker] #screen,body[data-state=loading] #screen,body[data-state=edit] #screen,body[data-state=model] #screen{visibility:hidden}body[data-embed=true]{background:#000}body[data-embed=true] #screen{object-fit:contain;width:100%;height:100%}body:not([data-state=run]) [data-touch-controls]{display:none!important}button,a.download{font:inherit;color:inherit;cursor:pointer;background:0 0;border:0;padding:0}button:focus{outline:none}#picker{box-sizing:border-box;z-index:4;background-color:var(--slate);background-image:var(--mosaic);background-size:64px 64px;flex-direction:column;align-items:center;gap:10px;padding:10px 16px;display:none;position:fixed;inset:0;overflow:auto}body[data-state=picker] #picker{display:flex}#picker header{background:var(--slate);border:2px solid var(--slate-hi);flex-direction:column;align-items:center;gap:6px;padding:8px 18px;display:flex}#picker .badge{background:var(--amber);padding:4px 10px;display:inline-block}#picker .cards{flex-wrap:wrap;justify-content:center;gap:20px;display:flex}#picker .card{background:var(--slate-lo);border:2px solid var(--slate-hi);padding:4px;transition:transform 80ms}#picker .card canvas{width:256px;height:256px;display:block}#picker .card:hover,#picker .card:focus-visible,#picker .card:focus{border-color:var(--teal);transform:translateY(-2px)}#picker .actions{background:var(--slate);border:2px solid var(--slate-hi);flex-wrap:wrap;justify-content:center;align-items:center;gap:16px;padding:6px 12px;display:flex}#picker .load{background:var(--slate-lo);border:2px solid var(--amber);padding:7px 12px}#picker .load:hover,#picker .load:focus{background:var(--slate-hi)}#pause{z-index:6;background:#121821c7;justify-content:center;align-items:center;display:none;position:fixed;inset:0}body[data-state=pause] #pause{display:flex}#pause .panel{background:var(--slate);border:2px solid var(--slate-hi);box-shadow:0 0 0 4px var(--slate-lo);border-image:linear-gradient(90deg, var(--teal) 0 20%, var(--amber) 20% 40%, var(--coral) 40% 60%, var(--sky) 60% 80%, var(--teal) 80%) 1;flex-direction:column;align-items:flex-start;gap:10px;padding:18px 22px;display:flex}#pause .menu{flex-direction:column;gap:4px;margin:6px 0;display:flex}#pause .menu button{border-left:4px solid #0000;align-items:center;padding:5px 10px 5px 14px;display:flex}#pause .menu button:focus{border-left-color:var(--amber);background:var(--slate-hi)}#pause a.download{border:2px dashed var(--teal);padding:5px 10px;display:block}#pause a.download[hidden]{display:none}#toast{z-index:8;background:var(--slate-lo);border:2px solid var(--coral);max-width:calc(100vw - 48px);padding:10px 14px;display:none;position:fixed;bottom:18px;left:50%;transform:translate(-50%)}#toast.show{display:block}#toast canvas{max-width:100%;display:block;height:auto!important}#message{z-index:9;background:var(--slate);justify-content:center;align-items:center;padding:2em;display:none;position:fixed;inset:0}body[data-state=nowebgl] #message{display:flex}#stats{z-index:7;pointer-events:auto;color:#fff;border:1px solid var(--slate-hi);box-sizing:border-box;background:#121821eb;border-radius:4px;max-width:calc(100vw - 24px);margin:0;padding:6px 8px;font:12px/1.35 IBM Plex Mono,ui-monospace,Menlo,Consolas,monospace;display:none;position:fixed;top:6px;left:6px;box-shadow:0 4px 16px #00000073}#stats.compact{background:#000000bf;border:none;max-width:calc(100vw - 24px);padding:4px 6px}#stats.expanded{width:380px;max-width:calc(100vw - 24px)}.debugger-header{border-bottom:1px solid var(--slate-hi);-webkit-user-select:none;user-select:none;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;padding-bottom:4px;display:flex}.debugger-title{color:var(--amber);letter-spacing:.5px;font-size:11px;font-weight:600}.debugger-tabs{gap:4px;display:flex}.debugger-tab{border:1px solid var(--slate-hi);background:var(--slate-lo);color:#9fb3c8;cursor:pointer;border-radius:2px;padding:2px 6px;font-size:11px}.debugger-tab:hover{background:var(--slate-hi);color:#fff}.debugger-tab.active{background:var(--teal);color:var(--slate-lo);border-color:var(--teal);font-weight:600}.debugger-controls{gap:4px;display:flex}.debugger-btn{border:1px solid var(--slate-hi);background:var(--slate);color:#cbd5e1;cursor:pointer;border-radius:2px;padding:1px 5px;font-size:11px}.debugger-btn:hover{background:var(--slate-hi);color:#fff}.debugger-body{margin-top:4px}.stats-text{white-space:pre-wrap;font:inherit;color:inherit;margin:0;line-height:1.35}.budget-bar-wrap{border-top:1px solid #ffffff14;margin-top:8px;padding-top:6px}.budget-bar-label{color:#9fb3c8;justify-content:space-between;margin-bottom:3px;font-size:11px;display:flex}.budget-bar{background:var(--slate-lo);border:1px solid var(--slate-hi);border-radius:2px;height:8px;display:flex;overflow:hidden}.budget-seg{height:100%;transition:width .1s}.budget-seg.update{background:var(--sky)}.budget-seg.draw{background:var(--amber)}.budget-seg.upload{background:#a855f7}.budget-seg.gpu{background:var(--coral)}.diag-toggles{color:#cbd5e1;-webkit-user-select:none;user-select:none;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:11px;display:flex}.diag-toggles label{cursor:pointer;align-items:center;gap:4px;display:flex}.inspector-empty{color:#9fb3c8;text-align:center;padding:10px 4px;font-size:11px}.inspector-card{flex-direction:column;gap:5px;margin-top:4px;font-size:11px;display:flex}.inspector-row{justify-content:space-between;align-items:center;display:flex}.inspector-label{color:#9fb3c8}.inspector-val{color:#fff;font-weight:500}.inspector-val.badge{border-radius:2px;padding:1px 5px;font-size:10px}.inspector-val.badge.draw{color:var(--sky);border:1px solid var(--sky);background:#5aa9e633}.inspector-val.badge.map{color:var(--teal);border:1px solid var(--teal);background:#3fb8af33}.inspector-val-color{align-items:center;gap:6px;display:flex}.inspector-swatch{border:1px solid #fff;border-radius:2px;width:14px;height:14px;display:inline-block}.inspector-actions{gap:6px;margin-top:6px;display:flex}.inspector-btn{background:var(--slate);border:1px solid var(--slate-hi);color:#fff;cursor:pointer;text-align:center;border-radius:2px;flex:1;padding:4px 6px;font-size:11px}.inspector-btn:hover{background:var(--slate-hi);border-color:var(--teal)}.repl-log{background:var(--slate-lo);border:1px solid var(--slate-hi);border-radius:2px;flex-direction:column;gap:2px;height:100px;padding:4px;font-size:11px;display:flex;overflow-y:auto}.repl-entry{word-break:break-all}.repl-entry.cmd{color:var(--sky)}.repl-entry.res{color:var(--teal)}.repl-entry.err{color:var(--coral)}.repl-form{align-items:center;gap:4px;margin-top:6px;display:flex}.repl-prompt{color:var(--teal);font-size:12px;font-weight:700}.repl-input{background:var(--slate-lo);border:1px solid var(--slate-hi);color:#fff;font:inherit;border-radius:2px;flex:1;padding:3px 6px;font-size:11px}.repl-input:focus{border-color:var(--teal);outline:none}.globals-section{margin-top:8px}.globals-header{color:var(--amber);justify-content:space-between;align-items:center;margin-bottom:4px;font-size:11px;display:flex}.globals-refresh-btn{border:1px solid var(--slate-hi);background:var(--slate);color:#9fb3c8;cursor:pointer;border-radius:2px;padding:1px 5px;font-size:10px}.globals-refresh-btn:hover{background:var(--slate-hi);color:#fff}.globals-table{border:1px solid var(--slate-hi);background:var(--slate-lo);border-radius:2px;max-height:80px;font-size:11px;overflow-y:auto}.globals-empty{color:#64748b;text-align:center;padding:8px;font-size:11px}.globals-row{cursor:pointer;border-bottom:1px solid #ffffff0d;padding:2px 4px;display:flex}.globals-row:hover{background:var(--slate-hi)}.global-key{color:var(--sky);text-overflow:ellipsis;white-space:nowrap;width:40%;overflow:hidden}.global-type{color:#64748b;width:25%}.global-val{color:var(--amber);text-overflow:ellipsis;white-space:nowrap;width:35%;overflow:hidden}#editor{z-index:6;background:var(--slate);color:#fff;flex-direction:column;font-family:IBM Plex Mono,ui-monospace,Menlo,Consolas,monospace;display:none;position:fixed;inset:0}body[data-state=edit] #editor{display:flex}.editor-header{background:var(--slate-lo);border-bottom:2px solid var(--slate-hi);justify-content:space-between;align-items:center;gap:12px;padding:8px 14px;display:flex}.editor-title{text-align:left;text-overflow:ellipsis;white-space:nowrap;flex:1;overflow:hidden}.editor-status{color:#9fb3c8;margin-right:8px;font-size:13px}.editor-btn{background:var(--slate);border:2px solid var(--slate-hi);border-radius:3px;align-items:center;padding:6px 12px;display:inline-flex}.editor-btn:hover,.editor-btn:focus{background:var(--slate-hi);border-color:var(--amber)}.editor-btn.run{border-color:var(--teal)}.editor-btn.run:hover,.editor-btn.run:focus{background:var(--teal);color:var(--slate-lo)}.editor-main{background:var(--slate-lo);flex:1;display:flex;position:relative;overflow:hidden}.editor-gutter{background:var(--slate);border-right:1px solid var(--slate-hi);text-align:right;-webkit-user-select:none;user-select:none;color:#607289;box-sizing:border-box;width:44px;padding:12px 6px;font-size:14px;line-height:20px;overflow:hidden}.editor-gutter .gutter-line{height:20px}.editor-gutter .gutter-line.is-error{color:var(--coral);background:#e5546b33;font-weight:700}.editor-code{white-space:pre;tab-size:2;box-sizing:border-box;outline:none;flex:1;padding:12px 14px;font-size:14px;line-height:20px;overflow:auto}.token-keyword{color:var(--coral);font-weight:600}.token-builtin{color:var(--sky);font-weight:600}.token-number{color:var(--amber)}.token-string{color:var(--teal)}.token-comment{color:#607289;font-style:italic}.token-operator{color:#d0dbe5}#model-editor{z-index:6;background:var(--slate);color:#fff;-webkit-user-select:none;user-select:none;flex-direction:column;font-family:IBM Plex Mono,ui-monospace,Menlo,Consolas,monospace;display:none;position:fixed;inset:0}body[data-state=model] #model-editor{display:flex}.model-editor-inner{flex-direction:column;width:100%;height:100%;display:flex;position:relative;overflow:hidden}.model-header{background:var(--slate-lo);border-bottom:2px solid var(--slate-hi);align-items:center;gap:10px;padding:8px 14px;display:flex}.model-btn{background:var(--slate);border:2px solid var(--slate-hi);cursor:pointer;border-radius:3px;align-items:center;padding:5px 10px;display:inline-flex}.model-btn:hover,.model-btn:focus{background:var(--slate-hi);border-color:var(--amber)}.model-btn.run{border-color:var(--teal);margin-left:auto}.model-btn.run:hover,.model-btn.run:focus{background:var(--teal);color:var(--slate-lo)}.model-title-wrap{margin-left:6px;font-size:15px;font-weight:700}.model-dims-wrap{color:var(--teal);font-size:13px}.model-pivot-wrap{align-items:center;gap:4px;margin-left:6px;font-size:12px;display:flex}.model-num-input{background:var(--slate);border:1px solid var(--slate-hi);color:#fff;width:44px;font:inherit;text-align:center;border-radius:2px;padding:2px 4px;font-size:12px}.model-num-input:focus{border-color:var(--amber);outline:none}.model-main{background:var(--slate-lo);flex:1;display:flex;position:relative;overflow:hidden}.model-pane{flex-direction:column;flex:1;display:flex;position:relative;overflow:hidden}.model-pane.left-pane{border-right:2px solid var(--slate-hi)}.slice-controls,.preview-3d-header{background:var(--slate);border-bottom:1px solid var(--slate-hi);align-items:center;gap:10px;padding:6px 14px;display:flex}.slice-step-btn,.slice-onion-btn,.preview-reset-btn{background:var(--slate-lo);border:1px solid var(--slate-hi);cursor:pointer;border-radius:3px;align-items:center;padding:3px 8px;display:inline-flex}.slice-step-btn:hover,.slice-onion-btn:hover,.preview-reset-btn:hover{border-color:var(--amber);background:var(--slate-hi)}.slice-onion-btn.active{border-color:var(--teal)}.slice-canvas-wrap,.preview-canvas-wrap{box-sizing:border-box;background:#0c1017;flex:1;justify-content:center;align-items:center;padding:10px;display:flex;overflow:hidden}.slice-canvas{image-rendering:pixelated;image-rendering:crisp-edges;cursor:crosshair;display:block;box-shadow:0 0 16px #0009}.preview-canvas{image-rendering:pixelated;image-rendering:crisp-edges;cursor:grab;display:block;box-shadow:0 0 16px #0009}.preview-canvas:active{cursor:grabbing}.model-bottom{background:var(--slate-lo);border-top:2px solid var(--slate-hi);align-items:center;gap:14px;padding:8px 14px;display:flex;overflow-x:auto}.model-tools{align-items:center;gap:6px;display:flex}.tool-btn{background:var(--slate);border:1px solid var(--slate-hi);cursor:pointer;border-radius:3px;align-items:center;padding:5px 8px;display:inline-flex}.tool-btn:hover,.tool-btn:focus{border-color:var(--amber)}.tool-btn.active{border-color:var(--teal);background:var(--slate-hi)}.model-palette-container{flex:1;align-items:center;gap:8px;display:flex;overflow-x:auto}.model-palette-label{flex-shrink:0}.model-palette-scroll{align-items:center;gap:2px;padding:2px 0;display:flex;overflow-x:auto}.pal-swatch{cursor:pointer;box-sizing:border-box;border:1px solid #00000080;border-radius:2px;flex-shrink:0;width:16px;height:16px;padding:0}.pal-swatch:hover{z-index:1;border-color:#fff;transform:scale(1.15)}.pal-swatch.selected{box-shadow:0 0 4px var(--amber);z-index:2;border:2px solid #fff;transform:scale(1.2)}.model-drawer{background:var(--slate);border-left:2px solid var(--slate-hi);z-index:10;pointer-events:none;visibility:hidden;flex-direction:column;width:280px;transition:transform .2s ease-out,visibility .2s ease-out;display:flex;position:absolute;top:0;bottom:0;right:0;transform:translate(100%);box-shadow:-4px 0 16px #00000080}.model-drawer.open{pointer-events:auto;visibility:visible;transform:translate(0)}.drawer-header{background:var(--slate-lo);border-bottom:1px solid var(--slate-hi);justify-content:space-between;align-items:center;padding:10px 14px;display:flex}.drawer-btn.new{background:var(--slate);border:1px solid var(--teal);cursor:pointer;border-radius:3px;align-items:center;padding:4px 8px;display:inline-flex}.drawer-btn.new:hover{background:var(--teal);color:var(--slate-lo)}.drawer-model-list{flex-direction:column;flex:1;gap:8px;padding:10px;display:flex;overflow-y:auto}.model-card{background:var(--slate-lo);border:1px solid var(--slate-hi);cursor:pointer;border-radius:3px;flex-direction:column;gap:4px;padding:8px 10px;display:flex}.model-card:hover{border-color:var(--amber)}.model-card.active{border-color:var(--teal);background:#222d3d}.card-actions{gap:6px;margin-top:4px;display:flex}.card-btn{background:var(--slate);border:1px solid var(--slate-hi);cursor:pointer;border-radius:2px;padding:2px 6px}.card-btn:hover{border-color:var(--amber)}.card-btn.del:hover{border-color:var(--coral);background:#e5546b33}.drawer-drop-notice{text-align:center;border-top:1px solid var(--slate-hi);background:var(--slate-lo);padding:8px 12px;font-size:11px}
 /*$vite$:1*/</style>
 </head>
