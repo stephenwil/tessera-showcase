@@ -1,13 +1,13 @@
 tessera cart v1
 __meta__
-id=gtavoxel6
-title=Grand Theft Voxel VI
+id=viceblocks
+title=Vice Blocks
 author=Tessera
 version=1.0
 players=1
 quality=standard
-desc=We got GTA VI on a voxel fantasy console before GTA VI. Cruise neon Ocean Drive, jack rides, pull heists, dodge VCPD, jump Gator Keys, and hit Pay 'n' Voxel in Vice Blocks, Leonida.
-tags=open-world,action,driving,parody,synthwave
+desc=Open-world 3D voxel crime caper in Palm Coast. Cruise neon Ocean Drive, jack rides, pull bank heists, dodge VBPD chases, jump Gator Keys, and respray your heat away.
+tags=open-world,action,driving,arcade,synthwave
 __pal__
 1 0d0b1a
 2 1e1838
@@ -201,16 +201,16 @@ pat 2 speed=4 rows=32
 song 0 title="FM 86.5 VICE SYNTH" speed=4 loop=0
 order 0 1
 
-song 1 title="FM 98.3 LEONIDA BASS" speed=4 loop=0
+song 1 title="FM 98.3 PALM BASS" speed=4 loop=0
 order 2
 
 __lua__
 -- =========================================================================
--- GRAND THEFT VOXEL VI: VICE BLOCKS, LEONIDA
--- "We got GTA VI on a voxel fantasy console before GTA VI."
+-- VICE BLOCKS: PALM COAST
+-- Open-world 3D voxel crime caper for the Tessera fantasy console.
 --
 -- Controls:
---   Title:   Left/Right = Choose Lucia or Jason | A (Z/Space) = Start
+--   Title:   Left/Right = Choose Maya or Rico | A (Z/Space) = Start
 --   On Foot: Arrows/WASD = Move | A = Sprint/Bonk | B (X/E) = Jack Car
 --   Driving: Up = Gas | Down = Brake/Rev | Left/Right = Steer
 --            A = Nitro Boost (or Horn/Radio when slow) | B = Exit Car
@@ -223,26 +223,26 @@ STATE_BUSTED = 3
 
 state = STATE_TITLE
 tick = 0
-char_idx = 0 -- 0 = LUCIA, 1 = JASON
-radio_idx = 0 -- 0 = FM 86.5 VICE SYNTH, 1 = FM 98.3 LEONIDA BASS, 2 = RADIO OFF
+char_idx = 0 -- 0 = MAYA, 1 = RICO
+radio_idx = 0 -- 0 = FM 86.5 VICE SYNTH, 1 = FM 98.3 PALM BASS, 2 = RADIO OFF
 radio_toast = 0
 
 local RADIOS = {
   "FM 86.5  VICE SYNTH",
-  "FM 98.3  LEONIDA BASS",
+  "FM 98.3  PALM BASS",
   "FM 104.1 GATOR TALK (OFF)",
 }
 
 local TAGLINES = {
-  "WE GOT THIS BEFORE GTA VI",
-  "RELEASE DATE: FALL 2026... MAYBE 2027",
-  "TRAILER 3 STATUS: STILL LOADING",
-  "100% ORGANIC LEONIDA CHAOS",
+  "NEON STREETS. ZERO RULES.",
+  "PACKED IN ONE 63KB PNG CART",
+  "SUNSET HEAT ON PALM COAST",
+  "100% ORGANIC VOXEL CHAOS",
 }
 
 local JACK_LINES = {
   "MY LEASE!",
-  "HEY! CALL LEONIDA 911!",
+  "HEY! CALL 911!",
   "NOT AGAIN!",
   "MY CRYPTO WALLET!",
   "I JUST WASHED IT!",
@@ -252,12 +252,12 @@ local JACK_LINES = {
 local CAR_COLORS = { 11, 14, 17, 18, 4, 22, 51, 50, 20 }
 
 -- Road geometry constants
-local ROAD_XS = { 28, 100, 172 }        -- West Blvd, Leonida Ave, Ocean Drive
-local ROAD_YS = { 32, 112, 184, 228 }   -- Gator Cswy, Vice Blvd, Flamingo Way, North Loop
+local ROAD_XS = { 28, 100, 172 }        -- West Blvd, Palm Ave, Ocean Drive
+local ROAD_YS = { 32, 112, 184, 228 }   -- Gator Cswy, Sunset Blvd, Flamingo Way, North Loop
 local ROAD_HALF = 8
 
 -- Landmarks
-local PAYNVOX = { x = 52, y = 204, r = 10 }
+local RESPRAY = { x = 52, y = 204, r = 10 }
 local BANK_ZONE = { x = 78, y = 119, r = 10 }
 local PIER_ZONE = { x = 238, y = 117, r = 10 }
 local CLUB_ZONE = { x = 165, y = 148, r = 11 }
@@ -345,7 +345,7 @@ local function add_cash(amt, x, y, z, label)
   player.cash = math.max(0, player.cash + amt)
   if player.cash > best_cash then
     best_cash = player.cash
-    dset("gtav6_best_cash", best_cash)
+    dset("viceblocks_best_cash", best_cash)
   end
   if x then
     local sign = amt >= 0 and "+" or "-"
@@ -382,7 +382,7 @@ local function district_at(x, y)
   if x >= 110 and y < 188 then return "NEON STRIP" end
   if x < 98 and y < 106 then return "GATOR KEYS" end
   if y >= 190 then return "UPTOWN VICE" end
-  return "DOWNTOWN LEONIDA"
+  return "DOWNTOWN PALM"
 end
 
 -- Check if point is on a road strip
@@ -436,7 +436,7 @@ local function surface_z(x, y)
   if is_road(x, y) or x >= 186 then
     return 5
   end
-  -- Pay 'n' Voxel bay floor
+  -- Respray Bay floor
   if x >= 44 and x <= 60 and y >= 195 and y <= 212 then
     return 5
   end
@@ -558,7 +558,7 @@ local function mfill(id, x0, y0, z0, x1, y1, z1, c, f)
 end
 
 local function build_models()
-  -- 1. Sports Car ("Cheetah-V", 13x7x5, nose = +x, paint index = 11 for pswap)
+  -- 1. Sports Car ("Turbo Coupe", 13x7x5, nose = +x, paint index = 11 for pswap)
   newmodel("sports", 13, 7, 5, 1)
   -- Wheels & dark underbody
   mfill("sports", 2, 1, 0, 10, 5, 0, 10)
@@ -624,7 +624,7 @@ local function build_models()
   mpset("muscle", 3, 2, 5, 4) mpset("muscle", 4, 2, 5, 4) mpset("muscle", 5, 2, 5, 4) mpset("muscle", 6, 2, 5, 4)
   mpset("muscle", 3, 4, 5, 4) mpset("muscle", 4, 4, 5, 4) mpset("muscle", 5, 4, 5, 4) mpset("muscle", 6, 4, 5, 4)
 
-  -- 4. VCPD Police Cruiser (13x7x7, 2 frames alternating red/blue lightbar!)
+  -- 4. VBPD Police Cruiser (13x7x7, 2 frames alternating red/blue lightbar!)
   newmodel("cop", 13, 7, 7, 2)
   for f = 0, 1 do
     mfill("cop", 1, 1, 0, 11, 5, 0, 10, f)
@@ -648,42 +648,42 @@ local function build_models()
     mpset("cop", 5, 4, 6, cR, f) mpset("cop", 5, 5, 6, cR, f)
   end
 
-  -- 5. Lucia (5x5x9, 2 walk frames)
-  newmodel("lucia", 5, 5, 9, 2)
+  -- 5. Maya (5x5x9, 2 walk frames)
+  newmodel("maya", 5, 5, 9, 2)
   for f = 0, 1 do
     local dyL = (f == 0) and 0 or 1
     local dyR = (f == 0) and 1 or 0
     -- Jeans
-    mfill("lucia", 1, 2 + dyL - 1, 0, 1, 2 + dyL - 1, 2, 24, f)
-    mfill("lucia", 3, 2 + dyR - 1, 0, 3, 2 + dyR - 1, 2, 24, f)
+    mfill("maya", 1, 2 + dyL - 1, 0, 1, 2 + dyL - 1, 2, 24, f)
+    mfill("maya", 3, 2 + dyR - 1, 0, 3, 2 + dyR - 1, 2, 24, f)
     -- Hot pink Vice jacket / top
-    mfill("lucia", 1, 1, 3, 3, 3, 5, 11, f)
+    mfill("maya", 1, 1, 3, 3, 3, 5, 11, f)
     -- Arms
-    mpset("lucia", 0, 2, 4, 44, f) mpset("lucia", 4, 2, 4, 44, f)
-    mpset("lucia", 0, 2, 5, 11, f) mpset("lucia", 4, 2, 5, 11, f)
+    mpset("maya", 0, 2, 4, 44, f) mpset("maya", 4, 2, 4, 44, f)
+    mpset("maya", 0, 2, 5, 11, f) mpset("maya", 4, 2, 5, 11, f)
     -- Head & dark hair ponytail
-    mfill("lucia", 1, 1, 6, 3, 3, 7, 44, f)
-    mfill("lucia", 1, 1, 8, 3, 3, 8, 10, f)
-    mfill("lucia", 1, 3, 5, 3, 3, 7, 10, f)
+    mfill("maya", 1, 1, 6, 3, 3, 7, 44, f)
+    mfill("maya", 1, 1, 8, 3, 3, 8, 10, f)
+    mfill("maya", 1, 3, 5, 3, 3, 7, 10, f)
   end
 
-  -- 6. Jason (5x5x9, 2 walk frames)
-  newmodel("jason", 5, 5, 9, 2)
+  -- 6. Rico (5x5x9, 2 walk frames)
+  newmodel("rico", 5, 5, 9, 2)
   for f = 0, 1 do
     local dyL = (f == 0) and 0 or 1
     local dyR = (f == 0) and 1 or 0
     -- Khaki shorts / legs
-    mfill("jason", 1, 2 + dyL - 1, 0, 1, 2 + dyL - 1, 2, 31, f)
-    mfill("jason", 3, 2 + dyR - 1, 0, 3, 2 + dyR - 1, 2, 31, f)
+    mfill("rico", 1, 2 + dyL - 1, 0, 1, 2 + dyL - 1, 2, 31, f)
+    mfill("rico", 3, 2 + dyR - 1, 0, 3, 2 + dyR - 1, 2, 31, f)
     -- Cyan/white Vice tee
-    mfill("jason", 1, 1, 3, 3, 3, 5, 14, f)
-    mpset("jason", 2, 1, 4, 4, f)
-    mpset("jason", 0, 2, 4, 43, f) mpset("jason", 4, 2, 4, 43, f)
-    mpset("jason", 0, 2, 5, 14, f) mpset("jason", 4, 2, 5, 14, f)
+    mfill("rico", 1, 1, 3, 3, 3, 5, 14, f)
+    mpset("rico", 2, 1, 4, 4, f)
+    mpset("rico", 0, 2, 4, 43, f) mpset("rico", 4, 2, 4, 43, f)
+    mpset("rico", 0, 2, 5, 14, f) mpset("rico", 4, 2, 5, 14, f)
     -- Head & backwards cap
-    mfill("jason", 1, 1, 6, 3, 3, 7, 43, f)
-    mfill("jason", 1, 1, 8, 3, 3, 8, 37, f)
-    mfill("jason", 1, 3, 8, 3, 4, 8, 22, f)
+    mfill("rico", 1, 1, 6, 3, 3, 7, 43, f)
+    mfill("rico", 1, 1, 8, 3, 3, 8, 37, f)
+    mfill("rico", 1, 3, 8, 3, 4, 8, 22, f)
   end
 
   -- 7. Pedestrians (5x5x8, 2 walk frames, shirt index 17 for pswap)
@@ -698,7 +698,7 @@ local function build_models()
     mfill("ped", 1, 1, 7, 3, 3, 7, 37, f)
   end
 
-  -- 8. Chompy the Leonida Gator (13x5x3, 2 chomping/swishing frames)
+  -- 8. Chompy the Palm Coast Gator (13x5x3, 2 chomping/swishing frames)
   newmodel("gator", 13, 5, 3, 2)
   for f = 0, 1 do
     -- Tail
@@ -716,7 +716,7 @@ local function build_models()
     mpset("gator", 9, 1, 2, 18, f) mpset("gator", 9, 3, 2, 18, f)
   end
 
-  -- 9. VCPD Helicopter (15x13x6, 2 spinning rotor frames)
+  -- 9. VBPD Helicopter (15x13x6, 2 spinning rotor frames)
   newmodel("chopper", 15, 13, 6, 2)
   for f = 0, 1 do
     -- Skids
@@ -965,24 +965,24 @@ local function build_world()
   end
 
   -- 5. Iconic Vice Blocks Landmarks!
-  -- SE Block: OCEAN VIEW HOTEL (Classic pastel pink & cyan Art Deco + rooftop pool!)
-  build_art_deco(128, 50, 159, 96, 26, 12, 13, 14, 5, true, "OCEAN VIEW HOTEL")
+  -- SE Block: PALM VIEW HOTEL (Classic pastel pink & cyan Art Deco + rooftop pool!)
+  build_art_deco(128, 50, 159, 96, 26, 12, 13, 14, 5, true, "PALM VIEW HOTEL")
   -- Neon Flamingo Plaza & Alley on West side of SE block
   mbox(111, 50, 5, 126, 96, 5, 13)
   build_art_deco(112, 52, 124, 68, 16, 19, 4, 11, 6, false, "VICE CAFE")
 
-  -- Mid-East Block: CLUB MALIBU / NEON PALM (Mint green & hot pink Art Deco!)
+  -- Mid-East Block: CLUB NEON (Mint green & hot pink Art Deco!)
   build_art_deco(126, 126, 159, 170, 22, 51, 4, 11, 2, false, "CLUB NEON")
   build_art_deco(111, 130, 123, 166, 15, 50, 4, 14, 7, false, "PALM ARCADE")
 
-  -- NE Block: OCEAN VIEW HOSPITAL (White + bold Red Cross!)
-  build_art_deco(118, 196, 156, 215, 18, 4, 5, 22, 5, false, "OCEAN VIEW HOSPITAL")
+  -- NE Block: PALM VIEW HOSPITAL (White + bold Red Cross!)
+  build_art_deco(118, 196, 156, 215, 18, 4, 5, 22, 5, false, "PALM VIEW HOSPITAL")
   -- Giant red cross on roof (z = 24)
   mbox(135, 200, 25, 139, 211, 25, 22)
   mbox(131, 204, 25, 143, 207, 25, 22)
 
-  -- Mid-West Block: MAZE VOXEL TOWER (Tall teal skyscraper <= z=46) + LEONIDA BANK!
-  add_building(42, 148, 63, 170, "MAZE VOXEL TOWER")
+  -- Mid-West Block: APEX VOXEL TOWER (Tall teal skyscraper <= z=46) + PALM COAST BANK!
+  add_building(42, 148, 63, 170, "APEX VOXEL TOWER")
   mbox(42, 148, 5, 63, 170, 42, 16)
   -- Silver ribs & gleaming glass
   for x = 42, 63, 3 do
@@ -1000,19 +1000,19 @@ local function build_world()
   mbox(46, 152, 44, 59, 166, 45, 2)  -- Helipad crown
   mbox(50, 155, 46, 55, 163, 46, 18) -- Gold roof trim
 
-  -- LEONIDA BANK (White/Gold Art Deco bank with front plaza at y=122..126)
-  build_art_deco(68, 128, 87, 152, 20, 5, 4, 18, 7, false, "LEONIDA BANK")
-  -- Bank colonnade pillars facing Vice Blvd
+  -- PALM COAST BANK (White/Gold Art Deco bank with front plaza at y=122..126)
+  build_art_deco(68, 128, 87, 152, 20, 5, 4, 18, 7, false, "PALM COAST BANK")
+  -- Bank colonnade pillars facing Sunset Blvd
   for px = 70, 85, 5 do
     mbox(px, 126, 5, px + 1, 127, 14, 4)
   end
   mbox(69, 125, 15, 86, 128, 16, 18) -- Golden bank header!
 
-  -- NW Block: PAY 'N' VOXEL (Open Drive-Through Spray Garage!) + VCPD PRECINCT!
+  -- NW Block: RESPRAY BAY (Open Drive-Through Spray Garage!) + VBPD PRECINCT!
   -- Garage side walls & roof (bay x=44..60, y=195..214 is OPEN to drive into from South!)
-  add_building(40, 195, 43, 215, "PAY N VOXEL W")
-  add_building(61, 195, 64, 215, "PAY N VOXEL E")
-  add_building(40, 213, 64, 216, "PAY N VOXEL N")
+  add_building(40, 195, 43, 215, "RESPRAY BAY W")
+  add_building(61, 195, 64, 215, "RESPRAY BAY E")
+  add_building(40, 213, 64, 216, "RESPRAY BAY N")
   mbox(40, 195, 5, 43, 215, 15, 17)  -- Left orange wall
   mbox(61, 195, 5, 64, 215, 15, 17)  -- Right orange wall
   mbox(40, 213, 5, 64, 216, 15, 48)  -- Back wall
@@ -1022,8 +1022,8 @@ local function build_world()
   mbox(40, 194, 18, 64, 196, 20, 11) -- Hot pink rooftop marquee
   mbox(48, 195, 21, 56, 195, 22, 18) -- Gold emblem
 
-  -- VCPD Precinct (Blue & White police HQ)
-  build_art_deco(69, 196, 88, 215, 18, 25, 4, 24, 7, false, "VCPD PRECINCT")
+  -- VBPD Precinct (Blue & White police HQ)
+  build_art_deco(69, 196, 88, 215, 18, 25, 4, 24, 7, false, "VBPD PRECINCT")
   mbox(73, 200, 24, 84, 211, 24, 48)
   -- Helipad H on roof
   mbox(76, 202, 25, 76, 209, 25, 18)
@@ -1101,24 +1101,24 @@ local function spawn_entities()
   cars = {}
   peds = {}
 
-  -- Hero parked Hot-Pink Cheetah-V right outside Ocean View Hotel!
+  -- Hero parked Hot-Pink Turbo Coupe right outside Palm View Hotel!
   spawn_car("sports", 174, 74, math.pi * 0.5, 11, false, true)
   -- Electric Cyan Muscle Car parked by Club Neon
   spawn_car("muscle", 174, 146, math.pi * 0.5, 14, false, true)
-  -- Sunset Orange Sports Car parked near Leonida Bank
+  -- Sunset Orange Sports Car parked near Palm Coast Bank
   spawn_car("sports", 78, 109, 0, 17, false, true)
-  -- Yellow Taxi cruising Vice Blvd
+  -- Yellow Taxi cruising Sunset Blvd
   spawn_car("sedan", 132, 115, 0, 18, false, false)
   -- Mint Sedan on Ocean Drive
   spawn_car("sedan", 169, 195, -math.pi * 0.5, 51, false, false)
-  -- White Sports Car on Leonida Ave
+  -- White Sports Car on Palm Ave
   spawn_car("sports", 103, 66, math.pi * 0.5, 4, false, false)
   -- Purple Muscle Car on Flamingo Way
   spawn_car("muscle", 66, 187, 0, 20, false, false)
   -- Coral Sedan on West Blvd
   spawn_car("sedan", 25, 148, -math.pi * 0.5, 22, false, false)
 
-  -- VCPD Police Cruisers (patrolling Leonida!)
+  -- VBPD Police Cruisers (patrolling Palm Coast!)
   spawn_car("cop", 97, 170, -math.pi * 0.5, 25, true, false)
   spawn_car("cop", 142, 35, 0, 25, true, false)
   spawn_car("cop", 31, 68, math.pi * 0.5, 25, true, false)
@@ -1157,20 +1157,20 @@ local function set_mission(idx)
     mission.reward = 500
   elseif idx == 2 then
     mission.kind = "hold"
-    mission.title = "LEONIDA BANK JOB"
-    mission.desc = "ROB LEONIDA BANK (HOLD ZONE)"
+    mission.title = "PALM COAST BANK JOB"
+    mission.desc = "ROB PALM COAST BANK (HOLD ZONE)"
     mission.x, mission.y = BANK_ZONE.x, BANK_ZONE.y
     mission.hold_need = 75 -- 2.5 seconds
     mission.reward = 2000
   elseif idx == 3 then
     mission.kind = "respray"
     mission.title = "FRESH COAT"
-    mission.desc = "LOSE HEAT AT PAY 'N' VOXEL"
-    mission.x, mission.y = PAYNVOX.x, PAYNVOX.y
+    mission.desc = "LOSE HEAT AT RESPRAY BAY"
+    mission.x, mission.y = RESPRAY.x, RESPRAY.y
     mission.reward = 1000
   elseif idx == 4 then
     mission.kind = "stunt"
-    mission.title = "FLORIDA MAN STUNT"
+    mission.title = "GATOR KEYS JUMP"
     mission.desc = "JUMP THE GATOR KEYS RAMP!"
     mission.x, mission.y = 64, 48
     mission.reward = 1500
@@ -1194,8 +1194,8 @@ local function set_mission(idx)
     elseif roll == 1 then
       mission.kind = "respray"
       mission.title = "HOT PAINT JOB"
-      mission.desc = "GET A RESPRAY AT PAY 'N' VOXEL"
-      mission.x, mission.y = PAYNVOX.x, PAYNVOX.y
+      mission.desc = "GET A RESPRAY AT RESPRAY BAY"
+      mission.x, mission.y = RESPRAY.x, RESPRAY.y
       mission.reward = 1200 + idx * 100
     elseif roll == 2 then
       mission.kind = "stunt"
@@ -1206,7 +1206,7 @@ local function set_mission(idx)
     else
       mission.kind = "reach"
       mission.title = "VICE EXPRESS"
-      mission.desc = "DELIVER GOODS TO OCEAN VIEW"
+      mission.desc = "DELIVER GOODS TO PALM VIEW"
       mission.x, mission.y = HOTEL_ZONE.x, HOTEL_ZONE.y
       mission.timer = 30 * 30
       mission.reward = 2500 + idx * 200
@@ -1217,7 +1217,7 @@ end
 local function complete_mission()
   sfx(7)
   add_cash(mission.reward, player.x, player.y, player.z + 6, "CAPER")
-  show_banner("MISSION PASSED!", "RESPECT +   +$" .. mission.reward, 18, 105, true)
+  show_banner("CAPER COMPLETE!", "REP +   +$" .. mission.reward, 18, 105, true)
   set_mission(mission.idx + 1)
 end
 
@@ -1248,7 +1248,7 @@ local function reset_game()
   end
   spawn_entities()
   set_mission(1)
-  show_banner("VICE BLOCKS, LEONIDA", "STEAL A RIDE & OWN THE STRIP", 11, 90, false)
+  show_banner("VICE BLOCKS, PALM COAST", "STEAL A RIDE & OWN THE STRIP", 11, 90, false)
   state = STATE_PLAY
   play_radio(0)
 end
@@ -1263,7 +1263,7 @@ local function trigger_wasted()
   for i = 1, 24 do
     particle(player.x + rnd(8) - 4, player.y + rnd(8) - 4, player.z + rnd(8), pick({ 46, 47, 22, 48 }), 1.2)
   end
-  show_banner("WASTED", "HOSPITAL BILL  -$100", 22, 95, true)
+  show_banner("WIPED OUT", "HOSPITAL BILL  -$100", 22, 95, true)
 end
 
 local function trigger_busted()
@@ -1272,7 +1272,7 @@ local function trigger_busted()
   state_timer = 90
   sfx(10)
   music_stop(300)
-  show_banner("BUSTED", "VCPD BAIL  -$100", 24, 95, true)
+  show_banner("BUSTED", "VBPD BAIL  -$100", 24, 95, true)
 end
 
 local function respawn_after_fail(was_busted)
@@ -1352,7 +1352,7 @@ local function enter_or_exit_car()
     sfx(0)
     play_radio(radio_idx)
     if best.is_cop then
-      add_popup(best.x, best.y, best.z + 10, "STOLE A VCPD CRUISER!", 24)
+      add_popup(best.x, best.y, best.z + 10, "STOLE A VBPD CRUISER!", 24)
       add_heat(2)
     elseif was_moving then
       add_popup(best.x, best.y, best.z + 10, pick(JACK_LINES), 18)
@@ -1509,8 +1509,8 @@ local function update_player_car()
   -- Hydrants
   check_hydrants(c.x, c.y, 4.5)
 
-  -- Pay 'n' Voxel Drive-In Respray!
-  if dist(c.x, c.y, PAYNVOX.x, PAYNVOX.y) < PAYNVOX.r then
+  -- Respray Bay Drive-In Respray!
+  if dist(c.x, c.y, RESPRAY.x, RESPRAY.y) < RESPRAY.r then
     if player.stars > 0 or c.hp < 95 or mission.kind == "respray" then
       c.col = pick(CAR_COLORS)
       c.hp = 100
@@ -1523,7 +1523,7 @@ local function update_player_car()
       for i = 1, 20 do
         particle(c.x + rnd(10) - 5, c.y + rnd(10) - 5, c.z + 2 + rnd(6), pick({ 11, 14, 18, 4, 51 }), 0.9)
       end
-      show_banner("PAY 'N' VOXEL", "TOTALLY DIFFERENT CAR! HEAT CLEARED!", 14, 85, false)
+      show_banner("RESPRAY BAY", "FRESH PAINT! HEAT CLEARED!", 14, 85, false)
       if mission.kind == "respray" then complete_mission() end
     end
   end
@@ -1587,7 +1587,7 @@ local function update_npc_cars()
       if c.parked then
         c.spd = c.spd * 0.85
       elseif c.is_cop and player.stars > 0 then
-        -- Aggressive VCPD pursuit!
+        -- Aggressive VBPD pursuit!
         local dx, dy = player.x - c.x, player.y - c.y
         local d = math.sqrt(dx * dx + dy * dy)
         local target_ang = math.atan(dy, dx)
@@ -1656,7 +1656,7 @@ local function update_npc_cars()
           particle((c.x + player.x) * 0.5, (c.y + player.y) * 0.5, c.z + 3, 47, 0.35)
           if c.is_cop and player.stars == 0 then
             add_heat(1)
-            add_popup(c.x, c.y, c.z + 10, "WATCH IT! VCPD!", 24)
+            add_popup(c.x, c.y, c.z + 10, "WATCH IT! VBPD!", 24)
           end
         end
       elseif not player.in_car and pd < 5.5 and c.spd > 0.4 then
@@ -1670,7 +1670,7 @@ local function update_npc_cars()
     end
   end
 
-  -- Spawn extra VCPD unit if wanted stars >= 3 and fewer than 4 cops
+  -- Spawn extra VBPD unit if wanted stars >= 3 and fewer than 4 cops
   if player.stars >= 3 and active_cops < math.min(player.stars + 1, 5) and tick % 120 == 0 then
     local sx = pick(ROAD_XS)
     local sy = pick(ROAD_YS)
@@ -1703,7 +1703,7 @@ local function update_npc_cars()
         player.stars = math.max(0, player.stars - 1)
         player.heat_decay = 0
         if player.stars == 0 then
-          show_banner("HEAT EVADED!", "VCPD LOST YOUR TRAIL", 41, 65, false)
+          show_banner("HEAT EVADED!", "VBPD LOST YOUR TRAIL", 41, 65, false)
         end
       end
     else
@@ -1713,7 +1713,7 @@ local function update_npc_cars()
     player.bust_t = 0
   end
 
-  -- VCPD Chopper at 3+ stars!
+  -- VBPD Chopper at 3+ stars!
   chopper.active = (player.stars >= 3)
   if chopper.active then
     local tx = player.x + math.cos(tick * 0.03) * 18
@@ -1732,7 +1732,7 @@ local function update_peds_and_gator()
     if d < 14 and math.abs(player.spd) > 0.7 then
       p.ang = math.atan(p.y - player.y, p.x - player.x)
       if p.flee_t <= 0 then
-        add_popup(p.x, p.y, p.z + 9, pick({ "WHOA!", "WATCH IT!", "MY SMOOTHIE!", "LEONIDA!" }), 19)
+        add_popup(p.x, p.y, p.z + 9, pick({ "WHOA!", "WATCH IT!", "MY SMOOTHIE!", "PALM COAST!" }), 19)
       end
       p.flee_t = 45
     end
@@ -1754,7 +1754,7 @@ local function update_peds_and_gator()
     p.walk = p.walk + spd * 0.5
   end
 
-  -- Chompy the Leonida Gator patrolling Gator Keys!
+  -- Chompy the Palm Coast Gator patrolling Gator Keys!
   gator.y = 69 + math.sin(tick * 0.03) * 11
   gator.x = 76 + math.cos(tick * 0.02) * 5
   gator.ang = (math.cos(tick * 0.03) >= 0) and (math.pi * 0.5) or (-math.pi * 0.5)
@@ -1762,8 +1762,8 @@ local function update_peds_and_gator()
   if gator.bonus_cd <= 0 and dist(player.x, player.y, gator.x, gator.y) < 20 then
     gator.bonus_cd = 240
     sfx(11)
-    add_cash(250, gator.x, gator.y, 10, "FLORIDA MAN!")
-    show_banner("FLORIDA MAN BONUS!", "MET CHOMPY THE GATOR!  +$250", 41, 70, false)
+    add_cash(250, gator.x, gator.y, 10, "SWAMP BONUS!")
+    show_banner("GATOR KEYS BONUS!", "MET CHOMPY THE GATOR!  +$250", 41, 70, false)
   end
 end
 
@@ -1802,7 +1802,7 @@ end
 -- Tessera Lifecycle: _init, _update, _draw
 -- -------------------------------------------------------------------------
 function _init()
-  best_cash = dget("gtav6_best_cash") or 0
+  best_cash = dget("viceblocks_best_cash") or 0
   sky(53, 52)
   sun(-0.62, -0.44, 0.60, 1.15)
   fog(52, 0.00045)
@@ -1900,7 +1900,7 @@ function _update()
 end
 
 -- -------------------------------------------------------------------------
--- Rendering: 3D Dynamic Voxels & 2D Vice City HUD
+-- Rendering: 3D Dynamic Voxels & 2D Vice Blocks HUD
 -- -------------------------------------------------------------------------
 local function draw_beacon(x, y, col)
   local r = 5 + math.sin(tick * 0.16) * 1.4
@@ -1948,8 +1948,8 @@ local function draw_minimap()
     rectfill(x0, y0 - 2, x1, y0 + 2, 7)
   end
 
-  -- Pay 'n' Voxel icon (Cyan P)
-  local px, py = to_mm(PAYNVOX.x, PAYNVOX.y)
+  -- Respray Bay icon (Cyan square)
+  local px, py = to_mm(RESPRAY.x, RESPRAY.y)
   rectfill(px - 3, py - 3, px + 3, py + 3, 14)
 
   -- Mission Objective (Pulsing Gold)
@@ -1959,7 +1959,7 @@ local function draw_minimap()
     circfill(jx, jy, 2, 4)
   end
 
-  -- VCPD Cop Blips
+  -- VBPD Cop Blips
   for _, c in ipairs(cars) do
     if c.is_cop and c ~= player.car then
       local cx, cy = to_mm(c.x, c.y)
@@ -1981,7 +1981,7 @@ end
 
 local function draw_star(cx, cy, filled, flash)
   local c = filled and (flash and ((tick % 10 < 5) and 22 or 24) or 18) or 3
-  -- Crisp 5-point GTA wanted star
+  -- Crisp 5-point wanted star
   rectfill(cx - 1, cy - 7, cx + 1, cy - 4, c)
   rectfill(cx - 7, cy - 3, cx + 7, cy - 1, c)
   rectfill(cx - 4, cy, cx + 4, cy + 2, c)
@@ -1993,45 +1993,46 @@ local function draw_star(cx, cy, filled, flash)
 end
 
 local function draw_title_hud()
-  -- Compact Vice sunset title card
+  -- Compact Vice Blocks sunset title card
   rectfill(164, 20, 604, 160, 1)
   rect(164, 20, 604, 160, 11)
   rect(166, 22, 602, 158, 14)
 
-  -- Iconic stacked GTA-style typography (left)
-  print("GRAND THEFT", 200, 36, 4, true, 3)
-  print("VOXEL", 224, 66, 12, true, 5)
+  -- Glowing 3-band Palm Coast sunset emblem behind title
+  rectfill(188, 34, 580, 56, 21)
+  rectfill(188, 56, 580, 78, 11)
+  rectfill(188, 78, 580, 100, 17)
+  rect(188, 34, 580, 100, 18)
+  rect(190, 36, 578, 98, 4)
 
-  -- Giant glowing Vice Sunset "VI" badge (right, pixel-centered!)
-  rectfill(436, 34, 548, 104, 21)
-  rectfill(436, 58, 548, 82, 11)
-  rectfill(436, 82, 548, 104, 17)
-  rect(436, 34, 548, 104, 18)
-  rect(438, 36, 546, 102, 4)
-  print("VI", 461, 51, 1, false, 6)
-  print("VI", 458, 48, 4, false, 6)
+  -- Bold centered "VICE BLOCKS" typography (max scale = 4, height = 28px)
+  local title_txt = "VICE BLOCKS"
+  local tx = 384 - flr((textw(title_txt) * 4 - 4) / 2)
+  print(title_txt, tx + 3, 56, 1, false, 4)
+  print(title_txt, tx, 53, 4, false, 4)
 
-  -- Cheeky rotating tagline
+  -- Rotating tagline & subtitle
   local tag = TAGLINES[(flr(tick / 90) % #TAGLINES) + 1]
   local tw = textw(tag)
-  print(tag, 384 - flr(tw / 2), 118, 14, true, 1)
-  local sub = "VICE BLOCKS, LEONIDA - EDITION 2026(ish)"
-  print(sub, 384 - flr(textw(sub) / 2), 136, 19, true, 1)
+  print(tag, 384 - flr(tw / 2), 116, 14, true, 1)
+  local sub = "PALM COAST  -  3D VOXEL SANDBOX"
+  print(sub, 384 - flr(textw(sub) / 2), 135, 19, true, 1)
 
-  -- Character Selector (LUCIA / JASON)
+  -- Character Selector (MAYA / RICO)
   rectfill(232, 294, 536, 354, 1)
   rect(232, 294, 536, 354, 14)
-  print("CHOOSE PROTAGONIST  (LEFT / RIGHT)", 282, 304, 5, false, 1)
+  local csel = "CHOOSE DRIVER  (LEFT / RIGHT)"
+  print(csel, 384 - flr(textw(csel) / 2), 304, 5, false, 1)
   local l_col = (char_idx == 0) and 11 or 7
   local j_col = (char_idx == 1) and 14 or 7
   if char_idx == 0 then rectfill(254, 320, 366, 344, 3) rect(254, 320, 366, 344, 11) end
   if char_idx == 1 then rectfill(402, 320, 514, 344, 3) rect(402, 320, 514, 344, 14) end
-  print("LUCIA", 280, 325, l_col, true, 2)
-  print("JASON", 428, 325, j_col, true, 2)
+  print("MAYA", 310 - textw("MAYA"), 325, l_col, true, 2)
+  print("RICO", 458 - textw("RICO"), 325, j_col, true, 2)
 
   -- Start prompt
   if tick % 40 < 30 then
-    local msg = "PRESS A (SPACE / Z) TO ENTER LEONIDA"
+    local msg = "PRESS A (SPACE / Z) TO HIT THE STREETS"
     print(msg, 384 - flr(textw(msg) * 1), 372, 18, true, 2)
   end
   local qstr = "[B] RENDER: " .. string.upper(quality())
@@ -2042,7 +2043,7 @@ local function draw_title_hud()
 end
 
 local function draw_play_hud()
-  -- 1. Top-Right Classic GTA HUD (Wanted Stars, Cash, HP/Armor)
+  -- 1. Top-Right HUD (Wanted Stars, Cash, HP/Armor)
   rectfill(572, 12, 754, 96, 1)
   rect(572, 12, 754, 96, 11)
   for s = 1, 5 do
@@ -2100,7 +2101,7 @@ local function draw_play_hud()
     if best then
       local sx, sy, vis = project(best.x, best.y, best.z + 9)
       if vis then
-        local tag = best.is_cop and "[B] JACK VCPD" or "[B] JACK RIDE"
+        local tag = best.is_cop and "[B] JACK VBPD" or "[B] JACK RIDE"
         local tw = textw(tag)
         rectfill(sx - flr(tw / 2) - 4, sy - 6, sx + flr(tw / 2) + 4, sy + 6, 1)
         print(tag, sx - flr(tw / 2), sy - 3, 18, false, 1)
@@ -2110,7 +2111,7 @@ local function draw_play_hud()
 
   -- 6. Busted meter warning
   if player.bust_t > 10 then
-    local msg = "DON'T STOP! VCPD BOXING YOU IN!"
+    local msg = "DON'T STOP! VBPD BOXING YOU IN!"
     print(msg, 384 - flr(textw(msg) / 2), 108, (tick % 8 < 4) and 22 or 24, true, 1)
   end
 
@@ -2164,11 +2165,11 @@ function _draw()
   local gf = flr(tick / 10) % 2
   model("gator", gator.x, gator.y, 4, gator.ang, false, gf)
 
-  -- 4. Mission Beacon & Pay 'n' Voxel Beacon
+  -- 4. Mission Beacon & Respray Bay Beacon
   if state == STATE_PLAY then
     draw_beacon(mission.x, mission.y, 18)
     if player.stars > 0 then
-      draw_beacon(PAYNVOX.x, PAYNVOX.y, 14)
+      draw_beacon(RESPRAY.x, RESPRAY.y, 14)
     end
   end
 
@@ -2193,11 +2194,11 @@ function _draw()
 
   -- 7. Player (when on foot!)
   if state ~= STATE_TITLE and not player.in_car then
-    local pname = (char_idx == 0) and "lucia" or "jason"
+    local pname = (char_idx == 0) and "maya" or "rico"
     model(pname, player.x, player.y, player.z, player.ang - math.pi * 0.5, false, flr(player.walk) % 2)
   end
 
-  -- 8. VCPD Helicopter + Ground Spotlight at 3+ Stars!
+  -- 8. VBPD Helicopter + Ground Spotlight at 3+ Stars!
   if chopper.active then
     model("chopper", chopper.x, chopper.y, chopper.z, chopper.ang, false, tick % 2)
     -- Sweeping spotlight ring on street

@@ -1,27 +1,27 @@
 [
   {
-    "id": "gtavoxel6",
-    "title": "Grand Theft Voxel VI",
+    "id": "viceblocks",
+    "title": "Vice Blocks",
     "author": "Tessera",
     "version": "1.0",
     "players": 1,
     "genre": "Action & Open World",
     "tags": [
-      "gta",
       "open-world",
       "driving",
-      "parody",
+      "action",
+      "arcade",
       "synthwave"
     ],
-    "description": "We got GTA VI on a voxel fantasy console before GTA VI! Cruise neon Ocean Drive as Lucia or Jason, jack sports cars, pull Leonida bank heists, outrun 5-star VCPD chases, jump Gator Keys, and respray at Pay 'n' Voxel — complete with a multi-station synthwave tracker radio.",
+    "description": "Open-world 3D voxel crime caper in Palm Coast. Cruise neon Ocean Drive as Maya or Rico, jack sports cars, pull Palm Coast Bank heists, outrun 5-star VBPD chases, jump Gator Keys, and respray your heat away — packed into a single 63 KB PNG cart with a multi-station synthwave tracker radio.",
     "featured": true,
     "featuredRank": 1,
-    "cartFile": "carts/gtavoxel6.tess",
-    "pictureFile": "carts/gtavoxel6.tess.png",
+    "cartFile": "carts/viceblocks.tess",
+    "pictureFile": "carts/viceblocks.tess.png",
     "stats": {
-      "codeLines": 2011,
-      "fileSizeBytes": 73729,
-      "pngSizeBytes": 63081,
+      "codeLines": 2012,
+      "fileSizeBytes": 73712,
+      "pngSizeBytes": 62589,
       "modelsCount": 0
     }
   },

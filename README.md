@@ -4,7 +4,7 @@
 
 Welcome to the **Tessera High-Res Cartridge Showcase & Community Store**!
 
-👉 **[Browse & Play Live in Browser (Zero Install)](https://stephenwil.github.io/tessera-showcase/)** · 🌴 **[Play Grand Theft Voxel VI Directly](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/gtavoxel6.tess)**
+👉 **[Browse & Play Live in Browser (Zero Install)](https://stephenwil.github.io/tessera-showcase/)** · 🌴 **[Play Vice Blocks Directly](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/viceblocks.tess)**
 
 ![Tessera Showcase Banner](assets/tessera-banner.png)
 
@@ -24,20 +24,20 @@ Tessera is an original 3D voxel fantasy console:
 
 ## Featured Cartridges in this Showcase
 
-### 🌟 Spotlight: Grand Theft Voxel VI
+### 🌟 Spotlight: Vice Blocks
 
-<a href="https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/gtavoxel6.tess"><img src="carts/gtavoxel6.tess.png" alt="Grand Theft Voxel VI picture cart" width="220" align="right"></a>
+<a href="https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/viceblocks.tess"><img src="carts/viceblocks.tess.png" alt="Vice Blocks picture cart" width="220" align="right"></a>
 
-*We got GTA VI on a voxel fantasy console before GTA VI!* Cruise neon Ocean Drive in Vice Blocks as Lucia or Jason, jack sports cars, pull Leonida bank heists, outrun 5-star VCPD chases + chopper, jump Gator Keys, and respray at Pay 'n' Voxel — complete with a multi-station 4-channel synthwave tracker radio, all packed inside a 61 KiB picture cart.
+Open-world 3D voxel crime caper in Palm Coast! Cruise neon Ocean Drive as Maya or Rico, jack sports cars, pull Palm Coast Bank heists, outrun 5-star VBPD chases + chopper, jump Gator Keys, and respray your heat away — complete with a multi-station 4-channel synthwave tracker radio, all packed inside a 61 KiB picture cart.
 
-- ▶ **[Play Grand Theft Voxel VI in Browser](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/gtavoxel6.tess)**
-- 🖼️ **[Download Picture Cart (`gtavoxel6.tess.png`)](carts/gtavoxel6.tess.png)** · 📄 **[View Source (`gtavoxel6.tess`)](carts/gtavoxel6.tess)**
+- ▶ **[Play Vice Blocks in Browser](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/viceblocks.tess)**
+- 🖼️ **[Download Picture Cart (`viceblocks.tess.png`)](carts/viceblocks.tess.png)** · 📄 **[View Source (`viceblocks.tess`)](carts/viceblocks.tess)**
 
 <br clear="right">
 
 ### All Cartridges
 
-1. **[Grand Theft Voxel VI](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/gtavoxel6.tess)** — Open-world 3D voxel Vice Blocks caper with carjacking, nitro, 5-star VCPD chases, Pay 'n' Voxel, Gator Keys ramps, and synthwave radio.
+1. **[Vice Blocks](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/viceblocks.tess)** — Open-world 3D voxel crime caper in Palm Coast with carjacking, nitro, 5-star VBPD chases, Respray Bay, Gator Keys ramps, and synthwave radio.
 2. **[Lantern Cove](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/lanterncove.tess)** (*Built autonomously via `@stephenwil/tessera-mcp`*) — Cozy twilight 3D voxel harbor where you pilot a lantern-lit tugboat towing drifting paper lanterns to the Beacon Pier, with HQ lighting, 5 custom voxel models, and tracker lullaby.
 3. **[Solaris Temple](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/solaristemple.tess)** (*Remixed autonomously via `@stephenwil/tessera-mcp`*) — Sun-drenched ancient desert sandstone & turquoise oasis optical puzzle with rotating brass-and-crystal mirrors, prism splitters, lunar filters, 5 custom voxel models, and D-Hijaz temple tracker music.
 4. **[Hat Chase](https://stephenwil.github.io/tessera-showcase/tessera.html?cart=carts/hatchase.tess)** (*Stephen Wilson*) — Open-world beach exploration and runaway hat chase across three times of day.
